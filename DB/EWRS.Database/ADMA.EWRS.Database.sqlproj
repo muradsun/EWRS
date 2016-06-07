@@ -114,6 +114,7 @@
     <Build Include="HR\Tables\XXHR_ORG_HIERARCHY_MV.sql" />
     <Build Include="System\Tables\Configurations.sql" />
     <Build Include="Weekly\Tables\TeamModel.sql" />
+    <Build Include="Weekly\Tables\TeamModelSubjects.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="EWRS.Database.refactorlog" />
