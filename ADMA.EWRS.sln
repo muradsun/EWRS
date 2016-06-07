@@ -1,0 +1,117 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{16BD209D-6D17-4A8E-9A2A-D12481E71578}"
+	ProjectSection(SolutionItems) = preProject
+		Externals\ReadMe.txt = Externals\ReadMe.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Learning", "Learning", "{7C4E4B4C-FFB4-409E-96EB-ED24BF764615}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{8EE22652-8FCB-4E53-A403-E65F704DBEB4}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ADMA.EWRS.Database", "DB\EWRS.Database\ADMA.EWRS.Database.sqlproj", "{2CCA67AD-912B-4E7B-B385-0EC18159557C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BFF5A4D4-C3CF-4AF0-9F0E-F46964F2A650}"
+	ProjectSection(SolutionItems) = preProject
+		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ADMA.EWRS.Web.Core", "ADMA.EWRS.Web.Core\ADMA.EWRS.Web.Core.xproj", "{FE4DC553-0E84-495E-A520-73523430265B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADMA.EWRS.Data.Models", "ADMA.EWRS.Data.Models\ADMA.EWRS.Data.Models.csproj", "{E34D8D37-F802-43E4-A49C-CBEC785C69FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADMA.EWRS.Data.Access", "ADMA.EWRS.Data.Access\ADMA.EWRS.Data.Access.csproj", "{D8E54950-F62B-419A-9D1B-1A18D89F5D36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{037CCF05-46CD-4CF3-A543-5113BAEAA718}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADMA.EWRS.Security", "ADMA.EWRS.Security\ADMA.EWRS.Security.csproj", "{32F28344-C4F3-4A33-B29F-B70A6A5DE2C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADMA.EWRS.BizDomain", "ADMA.EWRS.BizDomain\ADMA.EWRS.BizDomain.csproj", "{6CBCD50B-B655-4101-B33C-39E0F6EFEC4F}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Test_ClassLibrary_Core", "Test_ClassLibrary_Core\Test_ClassLibrary_Core.xproj", "{BDD3A2EE-D153-43E3-9B41-8B6F7783321F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_ClassLibrary_NET461", "Test_ClassLibrary_NET461\Test_ClassLibrary_NET461.csproj", "{FE3DF67A-1647-439D-9F81-978175778CF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.AspNetCore.Authentication", "Microsoft.AspNetCore.Authentication", "{08FBB64B-8538-49B7-9E45-27C36D06110B}"
+	ProjectSection(SolutionItems) = preProject
+		Externals\Microsoft.AspNetCore.Authentication\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Authentication.dll = Externals\Microsoft.AspNetCore.Authentication\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Authentication.dll
+		Externals\Microsoft.AspNetCore.Authentication\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Authentication.xml = Externals\Microsoft.AspNetCore.Authentication\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Authentication.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.AspNetCore.Session", "Microsoft.AspNetCore.Session", "{0FB4A0A0-D59F-469B-80AD-ED673D7E4F91}"
+	ProjectSection(SolutionItems) = preProject
+		Externals\Microsoft.AspNetCore.Session\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Session.dll = Externals\Microsoft.AspNetCore.Session\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Session.dll
+		Externals\Microsoft.AspNetCore.Session\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Session.xml = Externals\Microsoft.AspNetCore.Session\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Session.xml
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ADMA.EWRS.Web.Security", "ADMA.EWRS.Web.Security\ADMA.EWRS.Web.Security.xproj", "{2630DA8D-1CDF-41C5-800F-A49C58E9533B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D1F30F5A-76E2-49D2-B6FA-630981C642D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWRS.Test.ALL", "EWRS.Test.ALL\EWRS.Test.ALL.csproj", "{89147BA7-F828-42D0-917B-5C7AA4D23DA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CCA67AD-912B-4E7B-B385-0EC18159557C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CCA67AD-912B-4E7B-B385-0EC18159557C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CCA67AD-912B-4E7B-B385-0EC18159557C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2CCA67AD-912B-4E7B-B385-0EC18159557C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CCA67AD-912B-4E7B-B385-0EC18159557C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CCA67AD-912B-4E7B-B385-0EC18159557C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FE4DC553-0E84-495E-A520-73523430265B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4DC553-0E84-495E-A520-73523430265B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4DC553-0E84-495E-A520-73523430265B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4DC553-0E84-495E-A520-73523430265B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E34D8D37-F802-43E4-A49C-CBEC785C69FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E34D8D37-F802-43E4-A49C-CBEC785C69FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E34D8D37-F802-43E4-A49C-CBEC785C69FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E34D8D37-F802-43E4-A49C-CBEC785C69FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8E54950-F62B-419A-9D1B-1A18D89F5D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8E54950-F62B-419A-9D1B-1A18D89F5D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8E54950-F62B-419A-9D1B-1A18D89F5D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8E54950-F62B-419A-9D1B-1A18D89F5D36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32F28344-C4F3-4A33-B29F-B70A6A5DE2C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32F28344-C4F3-4A33-B29F-B70A6A5DE2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32F28344-C4F3-4A33-B29F-B70A6A5DE2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32F28344-C4F3-4A33-B29F-B70A6A5DE2C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CBCD50B-B655-4101-B33C-39E0F6EFEC4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CBCD50B-B655-4101-B33C-39E0F6EFEC4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CBCD50B-B655-4101-B33C-39E0F6EFEC4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CBCD50B-B655-4101-B33C-39E0F6EFEC4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDD3A2EE-D153-43E3-9B41-8B6F7783321F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDD3A2EE-D153-43E3-9B41-8B6F7783321F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDD3A2EE-D153-43E3-9B41-8B6F7783321F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDD3A2EE-D153-43E3-9B41-8B6F7783321F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE3DF67A-1647-439D-9F81-978175778CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE3DF67A-1647-439D-9F81-978175778CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE3DF67A-1647-439D-9F81-978175778CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE3DF67A-1647-439D-9F81-978175778CF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2630DA8D-1CDF-41C5-800F-A49C58E9533B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2630DA8D-1CDF-41C5-800F-A49C58E9533B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2630DA8D-1CDF-41C5-800F-A49C58E9533B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2630DA8D-1CDF-41C5-800F-A49C58E9533B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89147BA7-F828-42D0-917B-5C7AA4D23DA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89147BA7-F828-42D0-917B-5C7AA4D23DA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89147BA7-F828-42D0-917B-5C7AA4D23DA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89147BA7-F828-42D0-917B-5C7AA4D23DA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2CCA67AD-912B-4E7B-B385-0EC18159557C} = {8EE22652-8FCB-4E53-A403-E65F704DBEB4}
+		{037CCF05-46CD-4CF3-A543-5113BAEAA718} = {7C4E4B4C-FFB4-409E-96EB-ED24BF764615}
+		{BDD3A2EE-D153-43E3-9B41-8B6F7783321F} = {7C4E4B4C-FFB4-409E-96EB-ED24BF764615}
+		{FE3DF67A-1647-439D-9F81-978175778CF6} = {7C4E4B4C-FFB4-409E-96EB-ED24BF764615}
+		{08FBB64B-8538-49B7-9E45-27C36D06110B} = {16BD209D-6D17-4A8E-9A2A-D12481E71578}
+		{0FB4A0A0-D59F-469B-80AD-ED673D7E4F91} = {16BD209D-6D17-4A8E-9A2A-D12481E71578}
+		{89147BA7-F828-42D0-917B-5C7AA4D23DA4} = {D1F30F5A-76E2-49D2-B6FA-630981C642D3}
+	EndGlobalSection
+EndGlobal

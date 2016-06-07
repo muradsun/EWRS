@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "exports": {
+    "Test_ClassLibrary_NET461/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/Test_ClassLibrary_NET461.dll": {}
+      },
+      "runtime": {
+        "../Externals/Microsoft.AspNetCore.Authentication/1.0.0-rc2-final/lib/net451/Microsoft.AspNetCore.Authentication.dll": {},
+        "bin/Debug/Test_ClassLibrary_NET461.dll": {}
+      }
+    }
+  }
+}
