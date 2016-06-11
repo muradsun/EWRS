@@ -79,11 +79,6 @@ namespace ADMA.EWRS.Web.Core
             //        context.Compilation = context.Compilation.AddReferences(myAssemblies);
             //    };
             //});
-
-
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

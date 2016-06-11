@@ -1,0 +1,5 @@
+﻿CREATE VIEW [HR].[BusinessUnitesView]
+AS
+SELECT        BU_NAME, BU_ID, ORGID
+FROM            HR.XXHR_ORG_HIERARCHY_MV
+WHERE        (ORGTYPE = 'BU')
