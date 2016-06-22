@@ -40,6 +40,15 @@
     <link rel="stylesheet" href="~/assets/css/plugins.css">
     <link rel="stylesheet" href="~/assets/css/themes/lyt2-theme-1.css" id="skin_color">
     <!-- end: Packet CSS -->
+    <!-- start: Kendo CSS -->
+    <link rel="stylesheet" href="~/kendo/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="~/kendo/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="~/kendo/styles/kendo.fiori.min.css" />
+    <!--
+        <link rel="stylesheet" href="~/kendo/styles/kendo.default.mobile.min.css" />
+        <link href="~/kendo/styles/kendo.fiori.mobile.min.css" rel="stylesheet" />
+    -->
+    <!-- end: Kendo  CSS -->
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
@@ -71,7 +80,7 @@
                                 <a class="profile-card-photo" href="#"><img alt="" src="~/assets/images/avatar-1.jpg"></a>
                             </div>
                             <div class="media-body">
-                                <span class="media-heading text-white">Peter Clark</span>
+                                <span class="media-heading text-white">@User.Identity.Name</span>
                                 <div class="text-small text-white-transparent">
                                     UI Designer
                                 </div>
@@ -106,483 +115,8 @@
                     <!-- end: USER OPTIONS -->
                     <nav>
                         <!-- start: MAIN NAVIGATION MENU -->
-                        <div class="navbar-title">
-                            <span>Main Navigation</span>
-                        </div>
-                        <ul class="main-navigation-menu">
-                            <li class="active open">
-                                <a href="index.html">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-home"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Dashboard </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-clone"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Page Layouts </span><i class="icon-arrow"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="page_layouts_fixed_header.html"> <span class="title"> Fixed Header </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_layouts_fixed_sidebar.html"> <span class="title"> Fixed Sidebar </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_layouts_fixed_header_sidebar.html"> <span class="title"> Fixed Header &amp; Sidebar </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_layouts_fixed_footer.html"> <span class="title"> Fixed Footer </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_layouts_boxed_page.html"> <span class="title"> Boxed Page </span> </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="layouts.html">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-diamond"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Layouts </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-flask"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> UI Elements </span><i class="icon-arrow"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="ui_elements.html"> <span class="title"> Elements </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_buttons.html"> <span class="title"> Buttons </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_links.html"> <span class="title"> Link Effects </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_icons.html"> <span class="title"> Font Awesome Icons </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_line_icons.html"> <span class="title"> Linear Icons </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_letter_icons.html"> <span class="title"> Letter Icons </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_modals.html"> <span class="title"> Modals </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_toggle.html"> <span class="title"> Toggle </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_tabs_accordions.html"> <span class="title"> Tabs &amp; Accordions </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_panels.html"> <span class="title"> Panels </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_notifications.html"> <span class="title"> Notifications </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_sliders.html"> <span class="title"> Sliders </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_knob.html"> <span class="title"> Knob component </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_treeview.html"> <span class="title"> TreeView </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_media.html"> <span class="title"> Media </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_nestable.html"> <span class="title"> Nestable List </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="ui_typography.html"> <span class="title"> Typography </span> </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-table"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Tables </span><i class="icon-arrow"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="table_basic.html"> <span class="title">Basic Tables</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_responsive.html"> <span class="title">Responsive Tables</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="table_data.html"> <span class="title">Advanced Data Tables</span> </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-pencil"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Forms </span><i class="icon-arrow"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="form_elements.html"> <span class="title">Form Elements</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="form_pickers.html"> <span class="title">Pickers</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="form_text_editor.html"> <span class="title">Text Editor</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="form_wizard.html"> <span class="title">Form Wizard</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="form_validation.html"> <span class="title">Form Validation</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="form_image_cropping.html"> <span class="title">Image Cropping</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="form_multiple_upload.html"> <span class="title">Multiple File Upload</span> </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-user"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Login </span><i class="icon-arrow"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="login_signin.html"> <span class="title"> Login Form </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="login_registration.html"> <span class="title"> Registration Form </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="login_forgot.html"> <span class="title"> Forgot Password Form </span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="login_lockscreen.html"> <span class="title">Lock Screen</span> </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-laptop"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Pages </span><i class="icon-arrow"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="pages_user_profile.html"> <span class="title">User Profile</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="pages_invoice.html"> <span class="title">Invoice</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="pages_timeline.html"> <span class="title">Timeline</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="pages_calendar.html"> <span class="title">Calendar</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="pages_messages.html"> <span class="title">Messages</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="pages_blank_page.html"> <span class="title">Blank Page</span> </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-umbrella"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Utilities </span><i class="icon-arrow"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="utilities_search_result.html"> <span class="title">Search Results</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="utilities_error_404.html"> <span class="title">Error 404</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="utilities_error_500.html"> <span class="title">Error 500</span> </a>
-                                    </li>
-                                    <li>
-                                        <a href="utilities_pricing_table.html"> <span class="title">Pricing Table</span> </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-folder-open"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> 4 Level Menu </span><i class="icon-arrow"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="javascript:;"> <span>Item 1</span> <i class="icon-arrow"></i> </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="javascript:;"> <span>Sample Link 1</span> <i class="icon-arrow"></i> </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="#"> Sample Link 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 2 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 3 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> <span>Sample Link 2</span> <i class="icon-arrow"></i> </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="#"> Sample Link 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 2 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 3 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> <span>Sample Link 3</span> <i class="icon-arrow"></i> </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="#"> Sample Link 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 2 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 3 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> <span>Item 2</span> <i class="icon-arrow"></i> </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="javascript:;"> <span>Sample Link 1</span> <i class="icon-arrow"></i> </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="#"> Sample Link 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 2 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 3 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> <span>Sample Link 2</span> <i class="icon-arrow"></i> </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="#"> Sample Link 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 2 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 3 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> <span>Sample Link 3</span> <i class="icon-arrow"></i> </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="#"> Sample Link 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 2 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 3 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"> <span>Item 3</span> <i class="icon-arrow"></i> </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="javascript:;"> <span>Sample Link 1</span> <i class="icon-arrow"></i> </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="#"> Sample Link 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 2 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 3 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> <span>Sample Link 2</span> <i class="icon-arrow"></i> </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="#"> Sample Link 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 2 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 3 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;"> <span>Sample Link 3</span> <i class="icon-arrow"></i> </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="#"> Sample Link 1 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 2 </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"> Sample Link 3 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="maps.html">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-map-marker"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Maps </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="charts.html">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-pie-chart"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Charts </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
+                        @Html.Partial("_LeftMenu")
                         <!-- end: MAIN NAVIGATION MENU -->
-                        <!-- start: CORE FEATURES -->
-
-                        <div class="navbar-title">
-                            <span>Core Features</span>
-                        </div>
-                        <ul class="folders">
-                            <li>
-                                <a href="landing_page.html">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-gift"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> Landing Page </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://www.cliptheme.com/demo/packet/Html-Admin/LAYOUT-2/RTL/">
-                                    <div class="item-content">
-                                        <div class="item-media">
-                                            <i class="fa fa-exchange"></i>
-                                        </div>
-                                        <div class="item-inner">
-                                            <span class="title"> RTL Version </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- end: CORE FEATURES -->
                     </nav>
                 </div>
             </div>
@@ -748,8 +282,8 @@
                 <div class="wrap-content container" id="container">
                     <!-- start: BREADCRUMB -->
                     <div class="breadcrumb-wrapper">
-                        <h4 class="mainTitle no-margin">Welcome to Packet</h4>
-                        <span class="mainDescription">overview &amp; stats </span>
+                        <h4 class="mainTitle no-margin">Welcome to Corporate Weekly Report System</h4>
+                        <span class="mainDescription">CWRS</span>
                         <ul class="pull-right breadcrumb">
                             <li>
                                 <a href="index.html"><i class="fa fa-home margin-right-5 text-large text-dark"></i>Home</a>
@@ -1375,22 +909,16 @@
     <script src="~/lib/ladda/dist/ladda.min.js"></script>
     <script src="~/lib/ladda/dist/ladda.jquery.min.js"></script>
     <!-- end: MAIN JAVASCRIPTS -->
-    <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-    <script src="~/lib/Chart-js/Chart.min.js"></script>
-    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
     <!-- start: Packet JAVASCRIPTS -->
     <script src="~/assets/js/letter-icons.js"></script>
     <script src="~/assets/js/main.js"></script>
     <!-- end: Packet JAVASCRIPTS -->
-    <!-- start: JavaScript Event Handlers for this page -->
-    <script src="~/assets/js/index.js"></script>
-    <script>
-        jQuery(document).ready(function () {
-            Main.init();
-            Index.init();
-        });
-    </script>
-    <!-- end: JavaScript Event Handlers for this page -->
+    <!-- start: Kendo UI JAVASCRIPTS -->
+    <script src="~/kendo/js/kendo.all.min.js"></script>
+    <!-- end: Kendo UI JAVASCRIPTS -->
+
+
+    @RenderSection("Scripts", false);
 </body>
 
 </html>

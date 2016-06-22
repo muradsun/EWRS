@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ADMA.EWRS.Data.Access.EFConfigurations
 {
-    public class MuradConfiguration : EntityTypeConfiguration<Murad>
+    internal class MuradConfiguration : EntityTypeConfiguration<Murad>
     {
         public MuradConfiguration()
         {

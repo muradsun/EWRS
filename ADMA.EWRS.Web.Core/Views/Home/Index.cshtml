@@ -686,3 +686,19 @@
     </div>
 </div>
 <!-- end: FOURTH SECTION -->
+
+@section Scripts{
+    <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <script src="~/lib/Chart-js/Chart.min.js"></script>
+    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+   
+    <!-- start: JavaScript Event Handlers for this page -->
+    <script src="~/assets/js/index.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            Main.init();
+            Index.init();
+        });
+    </script>
+    <!-- end: JavaScript Event Handlers for this page -->
+}

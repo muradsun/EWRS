@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [Weekly].[Projects] (
     [Project_Id]       INT            IDENTITY (1, 1) NOT NULL,
     [Name]             VARCHAR (500)  NOT NULL,
+    [Description]	nvarchar(1000),
     [PercentComplete]  TINYINT        DEFAULT ((0)) NOT NULL,
     [ProjectStatus_Id] TINYINT        DEFAULT ((1)) NOT NULL,
     [StatusReason]     NVARCHAR (MAX) NULL,

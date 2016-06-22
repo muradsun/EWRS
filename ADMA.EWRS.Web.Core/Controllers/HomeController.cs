@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ADMA.EWRS.Web.Core.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {

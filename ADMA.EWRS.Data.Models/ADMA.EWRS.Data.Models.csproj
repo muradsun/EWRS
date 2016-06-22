@@ -11,6 +11,10 @@
     <AssemblyName>ADMA.EWRS.Data.Models</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,10 +44,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessUnitesView.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Data\SecurityConstants.cs" />
+    <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Delegation.cs" />
+    <Compile Include="Group.cs" />
+    <Compile Include="GroupPermission.cs" />
+    <Compile Include="GroupUser.cs" />
     <Compile Include="Murad.cs" />
+    <Compile Include="Notification.cs" />
+    <Compile Include="NotificationsUser.cs" />
+    <Compile Include="Permission.cs" />
+    <Compile Include="PositionHierarchy.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="MYasin.cs" />
+    <Compile Include="ProjectStatus.cs" />
+    <Compile Include="Repositories\IGroupsRepository.cs" />
+    <Compile Include="Repositories\IMuradRepository.cs" />
+    <Compile Include="Repositories\IPermissionsRepository.cs" />
+    <Compile Include="Repositories\IProjectsRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="ReviewWorkflow.cs" />
+    <Compile Include="ReviewWorkflowInstance.cs" />
+    <Compile Include="ReviewWorkflowsProject.cs" />
+    <Compile Include="Subject.cs" />
+    <Compile Include="SubjectStatus.cs" />
+    <Compile Include="TeamModel.cs" />
+    <Compile Include="TeamModelSubject.cs" />
+    <Compile Include="Template.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="WeeklyInput.cs" />
+    <Compile Include="WeeklyInputHistory.cs" />
+    <Compile Include="OrganizationHierarchy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

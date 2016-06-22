@@ -1,0 +1,49 @@
+{
+  "version": 2,
+  "exports": {
+    "ADMA.EWRS.BizDomain/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/ADMA.EWRS.BizDomain.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/ADMA.EWRS.BizDomain.dll": {}
+      }
+    },
+    "ADMA.EWRS.Security/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/ADMA.EWRS.Security.dll": {}
+      },
+      "runtime": {
+        "../Externals/Microsoft.AspNetCore.Authentication/1.0.0-rc2-final/lib/net451/Microsoft.AspNetCore.Authentication.dll": {},
+        "../Externals/Microsoft.AspNetCore.Session/1.0.0-rc2-final/lib/net451/Microsoft.AspNetCore.Session.dll": {},
+        "bin/Debug/ADMA.EWRS.Security.dll": {}
+      }
+    },
+    "ADMA.EWRS.Data.Access/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/ADMA.EWRS.Data.Access.dll": {}
+      },
+      "runtime": {
+        "../packages/EntityFramework.6.1.3/lib/net45/EntityFramework.SqlServer.dll": {},
+        "../packages/EntityFramework.6.1.3/lib/net45/EntityFramework.dll": {},
+        "bin/Debug/ADMA.EWRS.Data.Access.dll": {}
+      }
+    },
+    "ADMA.EWRS.Data.Models/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/ADMA.EWRS.Data.Models.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/ADMA.EWRS.Data.Models.dll": {}
+      }
+    }
+  }
+}

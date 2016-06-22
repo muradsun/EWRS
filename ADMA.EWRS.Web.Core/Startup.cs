@@ -8,9 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
-using ADMA.EWRS.Web.Security.Policy;
 using ADMA.EWRS.Web.Security.Claims;
 using ADMA.EWRS.Web.Security;
+using ADMA.EWRS.Security.Policy;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace ADMA.EWRS.Web.Core
 {
@@ -44,7 +46,7 @@ namespace ADMA.EWRS.Web.Core
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(PolicyNames.SuperAdministrators,
-                    policy => policy.RequireRole("Administrator"));
+                    policy => policy.RequireRole(Groups.SuperAdministratorsGroupName));
 
                 //options.AddPolicy(PolicyNames.CanEditProject,
                 //    policy =>
@@ -57,8 +59,17 @@ namespace ADMA.EWRS.Web.Core
             });
 
             services.AddSession();
-            services.AddMvc().// Murad Add this for RC2, remove it if release 1.0 after June 
-                AddRazorOptions(options =>
+
+            // Murad Add this for RC2, remove it if release 1.0 after June :: AddRazorOptions
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+
+            }
+            ).AddRazorOptions(options =>
             {
                 var previous = options.CompilationCallback;
                 options.CompilationCallback = context =>
@@ -106,7 +117,7 @@ namespace ADMA.EWRS.Web.Core
             app.UseSession(
                 new SessionOptions()
                 {
-                    CookieName = "ADMA.EWRS.Session",
+                    CookieName = Cookies.SessionsCookieName,
                     IdleTimeout = TimeSpan.FromMinutes(60)
                 });
 
@@ -125,7 +136,7 @@ namespace ADMA.EWRS.Web.Core
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationScheme = ClaimConstants.MiddlewareScheme,
+                AuthenticationScheme = Cookies.AuthenticationCookieName,
                 LoginPath = new PathString("/Account/Login/"),
                 AccessDeniedPath = new PathString("/Account/Forbidden/"),
                 AutomaticAuthenticate = true,

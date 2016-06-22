@@ -11,6 +11,10 @@
     <AssemblyName>ADMA.EWRS.Data.Access</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,15 +53,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EFConfigurations\BusinessUnitesViewMap.cs" />
+    <Compile Include="EFConfigurations\ConfigurationMap.cs" />
     <Compile Include="EFConfigurations\DbConfiguration.cs" />
+    <Compile Include="EFConfigurations\DelegationMap.cs" />
+    <Compile Include="EFConfigurations\EFDbConfiguration.cs" />
+    <Compile Include="EFConfigurations\GroupMap.cs" />
+    <Compile Include="EFConfigurations\GroupPermissionMap.cs" />
+    <Compile Include="EFConfigurations\GroupUserMap.cs" />
     <Compile Include="EFConfigurations\MuradConfiguration.cs" />
+    <Compile Include="EFConfigurations\NotificationMap.cs" />
+    <Compile Include="EFConfigurations\NotificationsUserMap.cs" />
+    <Compile Include="EFConfigurations\OrganizationHierarchyMap.cs" />
+    <Compile Include="EFConfigurations\PermissionMap.cs" />
+    <Compile Include="EFConfigurations\PositionHierarchyMap.cs" />
+    <Compile Include="EFConfigurations\ProjectMap.cs" />
+    <Compile Include="EFConfigurations\ProjectStatusMap.cs" />
+    <Compile Include="EFConfigurations\ReviewWorkflowInstanceMap.cs" />
+    <Compile Include="EFConfigurations\ReviewWorkflowMap.cs" />
+    <Compile Include="EFConfigurations\ReviewWorkflowsProjectMap.cs" />
+    <Compile Include="EFConfigurations\SubjectMap.cs" />
+    <Compile Include="EFConfigurations\SubjectStatusMap.cs" />
+    <Compile Include="EFConfigurations\TeamModelMap.cs" />
+    <Compile Include="EFConfigurations\TeamModelSubjectMap.cs" />
+    <Compile Include="EFConfigurations\TemplateMap.cs" />
+    <Compile Include="EFConfigurations\UserMap.cs" />
+    <Compile Include="EFConfigurations\WeeklyInputHistoryMap.cs" />
+    <Compile Include="EFConfigurations\WeeklyInputMap.cs" />
     <Compile Include="EWRSContext.cs" />
-    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Repositories\PermissionsRepository.cs" />
+    <Compile Include="Repositories\GroupsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IMuradRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\MuradRepository.cs" />
+    <Compile Include="Repositories\ProjectsRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

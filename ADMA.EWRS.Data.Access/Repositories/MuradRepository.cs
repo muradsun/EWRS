@@ -1,14 +1,15 @@
-﻿using ADMA.EWRS.Data.Models;
+﻿//Murad :: Info : Must ADD referance to Entity and Linq to see the extension methods
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
+using ADMA.EWRS.Data.Models.Repositories;
+using ADMA.EWRS.Data.Models;
+
 
 namespace ADMA.EWRS.Data.Access.Repositories
 {
-    public class MuradRepository : Repository<Murad>, IMuradRepository
+    public class MuradRepository : Repository<Murad, EWRSContext>, IMuradRepository
     {
         public MuradRepository(EWRSContext context)
             : base(context)
@@ -18,13 +19,8 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         public IEnumerable<Murad> GetTopMurad(int count)
         {
-            return EwrsContext.Muradies.Take(count).ToList();
+            return null;  //EwrsContext.Muradies.Take(count).ToList();
         }
-
-        public EWRSContext EwrsContext
-        {
-            get { return Context as EWRSContext; }
-        }
-
+       
     }
 }

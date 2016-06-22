@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="navbar-title">
+    <span>Main Navigation</span>
+</div>
+<ul class="main-navigation-menu">
+    <li>
+        <a asp-action="Index" asp-controller="Home">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Dashboard </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:void(0)">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-clone"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Configurations </span><i class="icon-arrow"></i>
+                </div>
+            </div>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a asp-controller="Project" asp-action="Index" > <span class="title"> Projects </span> </a>
+            </li>
+            <li>
+                <a href="page_layouts_fixed_sidebar.html"> <span class="title">Template </span> </a>
+            </li>
+            <li>
+                <a href="page_layouts_fixed_header_sidebar.html"> <span class="title"> Team Module </span> </a>
+            </li>
+            <li>
+                <a href="page_layouts_fixed_footer.html"> <span class="title"> Work Flow </span> </a>
+            </li>
+        </ul>
+    </li>
+
+
+    <li>
+        <a asp-action="Index" asp-controller="Home">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Admins </span>
+                </div>
+            </div>
+        </a>
+    </li>
+
+
+    <li>
+        <a asp-action="Index" asp-controller="Home">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Reports </span>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+
+
+ 

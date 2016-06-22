@@ -7,7 +7,7 @@
     [POST_TITLE_LONG_DESC]    VARCHAR (500) NOT NULL,
     [LOCATION]                VARCHAR (50)  NOT NULL,
     [ENGAGEMENT_TYPE]         VARCHAR (50)  NOT NULL,
-    [GENDER]                  TINYINT       NOT NULL,
+    [GENDER]                  VARCHAR (50)  NOT NULL,
     [EMAIL]                   VARCHAR (250) NOT NULL,
     [OFFICE_TELEPHONE_NUMBER] VARCHAR (50)  NULL,
     [OFFICE_LOCATION]         VARCHAR (50)  NULL,
@@ -17,12 +17,14 @@
     [IsFromHRMS]              BIT           NULL,
     [IsActive]                BIT           NOT NULL,
     [CreatedBy]               VARCHAR (50)  NOT NULL,
-    [CreatedDate]             DATETIME      NOT NULL,
+    [CreatedDate]             DATETIME      CONSTRAINT [DF_Users_CreatedDate] DEFAULT (getdate()) NOT NULL,
     [UpdateBy]                VARCHAR (50)  NULL,
     [UpdatedDate]             DATETIME      NULL,
     [RowVersion]              ROWVERSION    NOT NULL,
     CONSTRAINT [PK__Users__206D9170903413CF] PRIMARY KEY CLUSTERED ([User_Id] ASC)
 );
+
+
 
 
 GO

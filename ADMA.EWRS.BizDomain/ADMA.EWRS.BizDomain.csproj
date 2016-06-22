@@ -11,6 +11,10 @@
     <AssemblyName>ADMA.EWRS.BizDomain</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MuradManager.cs" />
+    <Compile Include="ProjectsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ADMA.EWRS.Data.Access\ADMA.EWRS.Data.Access.csproj">
@@ -51,6 +57,10 @@
     <ProjectReference Include="..\ADMA.EWRS.Data.Models\ADMA.EWRS.Data.Models.csproj">
       <Project>{e34d8d37-f802-43e4-a49c-cbec785c69fc}</Project>
       <Name>ADMA.EWRS.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADMA.EWRS.Security\ADMA.EWRS.Security.csproj">
+      <Project>{32f28344-c4f3-4a33-b29f-b70a6a5de2c2}</Project>
+      <Name>ADMA.EWRS.Security</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

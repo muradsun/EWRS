@@ -131,6 +131,10 @@
     <Folder Include="General\" />
     <Folder Include="General\Functions\" />
     <Folder Include="Security\" />
+    <Folder Include="Scripts" />
+    <Folder Include="Temp" />
+    <Folder Include="Temp\Tables" />
+    <Folder Include="Scripts\Deployment" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="System\Tables\NotificationsUsers.sql">
@@ -236,5 +240,11 @@
     <Build Include="Security\System.sql" />
     <Build Include="Security\Test.sql" />
     <Build Include="Security\Weekly.sql" />
+    <None Include="Scripts\HR_Sync_Job_FInal Script.sql" />
+    <Build Include="Security\Temp.sql" />
+    <Build Include="Temp\Tables\Murad.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Deployment\01 - Add Groups.sql" />
   </ItemGroup>
 </Project>

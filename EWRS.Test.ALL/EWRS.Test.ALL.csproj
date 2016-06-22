@@ -16,6 +16,10 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,13 +49,29 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ADMA.EWRS.BizDomain\ADMA.EWRS.BizDomain.csproj">
+      <Project>{6cbcd50b-b655-4101-b33c-39e0f6efec4f}</Project>
+      <Name>ADMA.EWRS.BizDomain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADMA.EWRS.Data.Access\ADMA.EWRS.Data.Access.csproj">
+      <Project>{d8e54950-f62b-419a-9d1b-1a18d89f5d36}</Project>
+      <Name>ADMA.EWRS.Data.Access</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADMA.EWRS.Data.Models\ADMA.EWRS.Data.Models.csproj">
+      <Project>{e34d8d37-f802-43e4-a49c-cbec785c69fc}</Project>
+      <Name>ADMA.EWRS.Data.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

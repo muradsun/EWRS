@@ -1,0 +1,395 @@
+﻿<!-- start: WIZARD DEMO -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+
+                    <!-- start: WIZARD FORM -->
+                    <form action="#" role="form" class="smart-wizard" id="form">
+                        <div id="wizard" class="swMain">
+                            <!-- start: WIZARD SEPS -->
+                            <ul>
+                                <li>
+                                    <a href="#step-1">
+                                        <div class="stepNumber">
+                                            1
+                                        </div> <span class="stepDesc"><small> Area </small></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#step-2">
+                                        <div class="stepNumber">
+                                            2
+                                        </div> <span class="stepDesc"> <small> Template </small></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#step-3">
+                                        <div class="stepNumber">
+                                            3
+                                        </div> <span class="stepDesc"> <small> Team Modules </small> </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#step-4">
+                                        <div class="stepNumber">
+                                            4
+                                        </div> <span class="stepDesc"> <small> Work Flow </small> </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- end: WIZARD SEPS -->
+                            <!-- start: WIZARD STEP 1 -->
+                            <div id="step-1">
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <legend>
+                                                Project Information
+                                            </legend>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Project Name <span class="symbol required"></span> </label>
+                                                        <input type="text" placeholder="Enter your Project Name" class="form-control" name="firstName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Description <span class="symbol required"></span> </label>
+                                                        <input type="text" placeholder="Enter your Description" class="form-control" name="Description" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Shared <span class="symbol required"></span> </label>
+                                                        <select class="form-control" name="Shared">
+                                                            <option value="">&nbsp;</option>
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AK">Alaska</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="block"> Attachment(s) <span class="symbol required"></span> </label>
+                                                        <input type="text" placeholder="Enter your Attachment" class="form-control" name="Attachment" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Business unit <span class="symbol required"></span> </label>
+                                                        <select class="form-control" name="BusinessUnit">
+                                                            <option value="">&nbsp;</option>
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AK">Alaska</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Division <span class="symbol required"></span> </label>
+                                                        <select class="form-control" name="Division">
+                                                            <option value="">&nbsp;</option>
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AK">Alaska</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Team  <span class="symbol required"></span> </label>
+                                                        <select class="form-control" name="Team">
+                                                            <option value="">&nbsp;</option>
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AK">Alaska</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Section  <span class="symbol required"></span> </label>
+                                                        <select class="form-control" name="Section">
+                                                            <option value="">&nbsp;</option>
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AK">Alaska</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-o next-step btn-wide pull-right">
+                                                Next <i class="fa fa-arrow-circle-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: WIZARD STEP 1 -->
+                            <!-- start: WIZARD STEP 2 -->
+                            <div id="step-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <legend>
+                                                Template
+                                            </legend>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label"> Template Name <span class="symbol required"></span> </label>
+                                                        <input type="text" placeholder="Enter your Template Name" class="form-control" name="TemplateName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset id="TextBoxesGroup">
+                                            <legend>
+                                                Subject(s)
+                                            </legend>
+
+                                        </fieldset>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <button class="btn btn-wide btn-o btn-warning" type="button" id="addButton">
+                                                        ADD More...
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-o back-step btn-wide pull-left">
+                                                <i class="fa fa-circle-arrow-left"></i> Back
+                                            </button>
+                                            <button class="btn btn-primary btn-o next-step btn-wide pull-right">
+                                                Next <i class="fa fa-arrow-circle-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: WIZARD STEP 2 -->
+                            <!-- start: WIZARD STEP 3 -->
+                            <div id="step-3">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <fieldset>
+                                            <legend>
+                                                Team Modules
+                                            </legend>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Enter First Name" class="form-control" name="FName" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Enter Last Name" class="form-control" name="LName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Enter PF#" class="form-control" name="PF" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Enter Ext." class="form-control" name="Ext" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Enter Email" class="form-control" name="Email" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Enter Job Title" class="form-control" name="JobTitle" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="BusinessUnit">
+                                                            <option value="">&nbsp;</option>
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AK">Alaska</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="Division">
+                                                            <option value="">&nbsp;</option>
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AK">Alaska</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="Team">
+                                                            <option value="">&nbsp;</option>
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AK">Alaska</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="Section">
+                                                            <option value="">&nbsp;</option>
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AK">Alaska</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <button class="btn btn-wide btn-o btn-info" type="button">
+                                                            Search
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <button class="btn btn-wide btn-o btn-warning" type="button">
+                                                            Clear
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </fieldset>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-o back-step btn-wide pull-left">
+                                                <i class="fa fa-circle-arrow-left"></i> Back
+                                            </button>
+                                            <button class="btn btn-primary btn-o next-step btn-wide pull-right">
+                                                Next <i class="fa fa-arrow-circle-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: WIZARD STEP 3 -->
+                            <!-- start: WIZARD STEP 4 -->
+                            <div id="step-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="text-center">
+                                            <h1 class=" ti-check block text-primary"></h1>
+                                            <h2 class="StepTitle">Congratulations!</h2>
+                                            <p class="text-large">
+                                                Your tutorial is complete.
+                                            </p>
+                                            <p class="text-small">
+                                                Thank you for your registration. Your transaction has been completed, and a receipt for your purchase has been emailed to you.  You may log into your account to view details of this transaction.
+                                            </p>
+                                            <a class="btn btn-primary btn-o go-first" href="javascript:void(0)"> Back to first step </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end: WIZARD STEP 4 -->
+                        </div>
+                    </form>
+                    <!-- end: WIZARD FORM -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: WIZARD DEMO -->
+<!-- start: Template Area  -->
+<script id="subjects-template" type="text/x-kendo-template">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="text" placeholder="Enter your Subject Title" class="form-control" name="Accomplishments" value='#= SubjectName #' />
+            </div>
+        </div>
+        <div class="col-md-1">
+            <h2 onclick="removeSubject(this);"><i class="fa fa-trash"></i></h2>
+        </div>
+    </div>
+</script>
+<!-- end: Template Area -->
+
+@section Scripts{
+    <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <script src="~/lib/bb-jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+    <!-- start: Packet JAVASCRIPTS -->
+    <script src="~/assets/js/letter-icons.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <!-- end: Packet JAVASCRIPTS -->
+    <!-- start: JavaScript Event Handlers for this page -->
+    <script src="~/assets/js/selectFx/classie.js"></script>
+    <script src="~/assets/js/selectFx/selectFx.js"></script>
+
+    <!-- Mohammed Yasin : Created for wizard -->
+    <!--
+    ***************************************************
+    <script src="~/assets/js/form-wizard.js"></script>
+    ***************************************************
+    -->
+    <script src="~/js/CreateProjectFormWizard.js"></script>
+
+     
+    <!-- end: JavaScript Event Handlers for this page -->
+}

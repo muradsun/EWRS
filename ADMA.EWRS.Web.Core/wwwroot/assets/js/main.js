@@ -308,7 +308,10 @@ var clipSetting = {}, appSetting = {};
 
 		$('input[name="setting-theme"]').change(function() {
 			var selectedTheme = $(this).val();
-			$('#skin_color').attr("href", "assets/css/themes/" + selectedTheme + ".css");
+			$('#skin_color').attr("href", "/assets/css/themes/" + selectedTheme + ".css");
+
+			alert(1);
+
 			appSetting.theme = selectedTheme;
 
 		});
@@ -382,7 +385,11 @@ var clipSetting = {}, appSetting = {};
 		$('#fixed-sidebar').prop('checked', true);
 		$('#closed-sidebar').prop('checked', false);
 		$('#fixed-footer').prop('checked', false);
-		$('#skin_color').attr("href", "assets/css/themes/lyt2-theme-1.css");
+		$('#skin_color').attr("href", "/assets/css/themes/lyt2-theme-1.css");
+
+		var x = $('#skin_color').attr("href");
+		alert(x);
+
 		switcheryHandler();
 		settingsHandler();
 		setTimeout(function() {

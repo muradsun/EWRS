@@ -17,11 +17,16 @@ namespace ADMA.EWRS.BizDomain
 
         public IEnumerable<Murad> GetTopMuradies(int count)
         {
-            using (var unitOfWork = new UnitOfWork(new EWRSContext()))
+            //Transaction support:see http://www.entityframeworktutorial.net/entityframework6/transaction-in-entity-framework.aspx
+            //OR
+            //Use Transaction scope
+
+            using (var unitOfWork = new UnitOfWork())
             {
-                // Example1
+
+                //// Example1
                 var course = unitOfWork.Muradies.GetTopMurad(3);
-                return course.ToList();
+                //return course.ToList();
 
                 //// Example2
                 //var courses = unitOfWork.Courses.GetCoursesWithAuthors(1, 4);
@@ -32,6 +37,8 @@ namespace ADMA.EWRS.BizDomain
                 //unitOfWork.Authors.Remove(author);
                 //unitOfWork.Complete();
             }
+
+            return null;
         }
 
 

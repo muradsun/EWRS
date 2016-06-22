@@ -5,12 +5,20 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using ADMA.EWRS.Data.Models.Repositories;
 
 namespace ADMA.EWRS.Data.Access.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity, TContext> : IRepository<TEntity>
+        where TEntity : class
+        where TContext : class
     {
         protected readonly DbContext Context;
+
+        public TContext DbContext
+        {
+            get { return Context as TContext; }
+        }
 
         public Repository(DbContext context)
         {
