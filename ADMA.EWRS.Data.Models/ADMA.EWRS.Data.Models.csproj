@@ -69,6 +69,8 @@
     <Compile Include="ReviewWorkflow.cs" />
     <Compile Include="ReviewWorkflowInstance.cs" />
     <Compile Include="ReviewWorkflowsProject.cs" />
+    <Compile Include="Security\IClaimsSecurityManager.cs" />
+    <Compile Include="Security\LoggedInUser.cs" />
     <Compile Include="Subject.cs" />
     <Compile Include="SubjectStatus.cs" />
     <Compile Include="TeamModel.cs" />

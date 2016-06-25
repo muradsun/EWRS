@@ -18,7 +18,13 @@ namespace ADMA.EWRS.Web.Core.Controllers
         //private SecurityManager _secManager;
         private ClaimsManager _claimsManager;
 
+        //public AccountController()
+        //{
+
+        //}
+
         public AccountController()
+           : base(true)
         {
             // _secManager = new SecurityManager();
             _claimsManager = new ClaimsManager();

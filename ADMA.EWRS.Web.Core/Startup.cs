@@ -13,6 +13,10 @@ using ADMA.EWRS.Web.Security;
 using ADMA.EWRS.Security.Policy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using ADMA.EWRS.Web.Security.Policy;
+using ADMA.EWRS.Data.Models.Security;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 
 namespace ADMA.EWRS.Web.Core
 {
@@ -29,7 +33,8 @@ namespace ADMA.EWRS.Web.Core
             if (env.IsDevelopment())
             {
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
+                //Murad : TODO : Add it later 
+               //builder.AddApplicationInsightsSettings(developerMode: true);
             }
             Configuration = builder.Build();
         }
@@ -37,7 +42,8 @@ namespace ADMA.EWRS.Web.Core
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        //Murad : When using a third-party DI container, you must change ConfigureServices so that it returns IServiceProvider instead of void.
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
@@ -45,26 +51,19 @@ namespace ADMA.EWRS.Web.Core
             //Murad :: Add Security
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(PolicyNames.SuperAdministrators,
-                    policy => policy.RequireRole(Groups.SuperAdministratorsGroupName));
-
-                //options.AddPolicy(PolicyNames.CanEditProject,
-                //    policy =>
-                //    {
-                //        policy.RequireAuthenticatedUser();
-                //        policy.RequireRole("Administrator");
-                //        policy.Requirements.Add(new ProjectOwnerRequirement());
-                //    }
-                //);
+                PoliciesManager.BuildSystemPolicies(options);
             });
 
             services.AddSession();
+
+
 
             // Murad Add this for RC2, remove it if release 1.0 after June :: AddRazorOptions
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                                  .RequireAuthenticatedUser()
+                                 .RequireRole(Groups.ADMAUserGroupName)
                                  .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
 
@@ -90,6 +89,28 @@ namespace ADMA.EWRS.Web.Core
             //        context.Compilation = context.Compilation.AddReferences(myAssemblies);
             //    };
             //});
+
+
+            //Murad : Replace ASP.NET Core DI with better AutoFac
+            //services.AddScoped<IClaimsSecurityManager, ClaimsSecurityManager>();
+
+            //Murad :: Add IoC i used AutoFac
+            //Check : http://docs.autofac.org/en/latest/integration/aspnetcore.html
+
+            // Add Autofac
+
+            // Create the container builder.
+            var containerBuilder = new Autofac.ContainerBuilder();
+            containerBuilder.RegisterModule<IoC.DefaultModule>();
+
+            //using Autofac.Extensions.DependencyInjection; it is extension method 
+            containerBuilder.Populate(services);
+
+            //build the container
+            var container = containerBuilder.Build();
+
+            // Return the IServiceProvider resolved from the container.
+            return container.Resolve<IServiceProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

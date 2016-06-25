@@ -9,5 +9,7 @@ namespace ADMA.EWRS.Web.Security.Claims
     {
         public const string Issuer = "http://www.adma-opco.com/";
         public const string CompanyClaimType = "http://www.adma-opco.com/identity/claims/Company";
+        public const string AuthenticationType = "EWRSClaimIdentity";
+
     }
 }

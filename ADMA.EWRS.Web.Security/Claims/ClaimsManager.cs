@@ -34,10 +34,7 @@ namespace ADMA.EWRS.Web.Security.Claims
             string pfNo = nameClaim.Split('\\')[1];
 
             using (var unitOfWork = new UnitOfWork())
-            {
-                User user = unitOfWork.Users.Find(u => u.PF_NO == pfNo && u.IsActive == true).FirstOrDefault();
-                return user;
-            }
+                return  unitOfWork.Users.Find(u => u.PF_NO == pfNo && u.IsActive == true).FirstOrDefault();
         }
 
         public ClaimsPrincipal CreateClaimsPrincipal(User userObj)
@@ -48,6 +45,7 @@ namespace ADMA.EWRS.Web.Security.Claims
             claims.Add(new Claim(ClaimTypes.Email, userObj.EMAIL));
             claims.Add(new Claim(ClaimTypes.GivenName, userObj.EMPLOYEE_NAME));
             claims.Add(new Claim(ClaimTypes.Gender, userObj.GENDER));
+            claims.Add(new Claim(ClaimTypes.Role, Groups.ADMAUserGroupName));
 
             using (var unitOfWork = new UnitOfWork())
             {
@@ -63,7 +61,7 @@ namespace ADMA.EWRS.Web.Security.Claims
                     List<Permission> userPerList = unitOfWork.Permissions.GetUserPermissions(userObj.User_Id).ToList();
                     if (userPerList != null && userPerList.Count > 0)
                         foreach (var permission in userPerList)
-                            claims.Add(new Claim(permission.Name, permission.Permission_Id.ToString()));
+                            claims.Add(new Claim("Permission", permission.Name, permission.Permission_Id.ToString()));
                 }
             }
 
@@ -75,7 +73,7 @@ namespace ADMA.EWRS.Web.Security.Claims
             //    claims.Add(new Claim(ClaimTypes.Role, user.Role, ClaimValueTypes.String, Constants.Issuer));
             //}
 
-            var userIdentity = new ClaimsIdentity("EWRSClaimIdentity");
+            var userIdentity = new ClaimsIdentity(ClaimConstants.AuthenticationType);
             //userIdentity.Name = string.Format("{0} ({1})", userObj.EMPLOYEE_NAME, userObj.PF_NO);
             userIdentity.AddClaims(claims);
 

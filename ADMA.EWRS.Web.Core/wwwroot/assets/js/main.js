@@ -385,7 +385,10 @@ var clipSetting = {}, appSetting = {};
 		$('#fixed-sidebar').prop('checked', true);
 		$('#closed-sidebar').prop('checked', false);
 		$('#fixed-footer').prop('checked', false);
-		$('#skin_color').attr("href", "/assets/css/themes/lyt2-theme-1.css");
+		$('#skin_color').attr("href", "~/assets/css/themes/lyt2-theme-1.css");
+
+	    //Murad : Temp
+		alert(1);
 
 		var x = $('#skin_color').attr("href");
 		alert(x);

@@ -10,6 +10,12 @@ namespace ADMA.EWRS.Web.Core.Controllers
 {
     public class ProjectController : BaseController
     {
+        public ProjectController(IServiceProvider provider)
+            : base(provider)
+        {
+                
+        }
+
         // GET: /<controller>/
         public IActionResult Index()
         {
