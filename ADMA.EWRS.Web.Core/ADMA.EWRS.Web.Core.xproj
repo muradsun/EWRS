@@ -6,29 +6,23 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>fe4dc553-0e84-495e-a520-73523430265b</ProjectGuid>
+    <ProjectGuid>734db845-8bc9-4231-ba1a-8d47f1efe72b</ProjectGuid>
     <RootNamespace>ADMA.EWRS.Web.Core</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <SccProjectName>SAK</SccProjectName>
-    <SccProvider>SAK</SccProvider>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccLocalPath>SAK</SccLocalPath>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
-    <ApplicationInsightsResourceId>/subscriptions/bbe3ed37-27ad-42da-90b7-b7ee95d7f2c5/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/ADMA.EWRS.Web.Core</ApplicationInsightsResourceId>
   </PropertyGroup>
   <ItemGroup>
     <DnxInvisibleContent Include="bower.json" />
     <DnxInvisibleContent Include=".bowerrc" />
-    <DnxInvisibleContent Include="package.json" />
-    <DnxInvisibleContent Include=".npmrc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ADMA.EWRS.BizDomain\ADMA.EWRS.BizDomain.csproj" />
     <ProjectReference Include="..\ADMA.EWRS.Data.Models\ADMA.EWRS.Data.Models.csproj" />
+    <ProjectReference Include="..\ADMA.EWRS.Security\ADMA.EWRS.Security.csproj" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DotNet.Web\Microsoft.DotNet.Web.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

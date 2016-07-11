@@ -1,5 +1,4 @@
 ﻿using ADMA.EWRS.Data.Models.Security;
-using Autofac;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using ADMA.EWRS.Data.Models.ViewModel;
 
 namespace ADMA.EWRS.Web.Core.Controllers
 {
@@ -31,6 +31,8 @@ namespace ADMA.EWRS.Web.Core.Controllers
             _claimsSecurityManager = _provider.GetService<IClaimsSecurityManager>();
             _currentUser = _claimsSecurityManager.CurrentUser;
         }
+
+        public PageInfo PageInfoData { get { return ViewBag.PageInfo as PageInfo; } }
 
         //public BaseController()
         //{

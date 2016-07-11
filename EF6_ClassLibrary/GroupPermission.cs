@@ -10,12 +10,15 @@ namespace EF6_ClassLibrary
     public partial class GroupPermission
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int GroupPermissions_Id { get; set; }
 
         public int Group_Id { get; set; }
 
         public int Permission_Id { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string CreatedBy { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

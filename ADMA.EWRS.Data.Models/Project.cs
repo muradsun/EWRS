@@ -15,9 +15,14 @@ namespace ADMA.EWRS.Data.Models
         public int Project_Id { get; set; }
         public string Name { get; set; }
         public byte PercentComplete { get; set; }
-        public byte ProjectStatus_Id { get; set; }
+        public Enums.ProjectStatusEnum ProjectStatus_Id { get; set; }
         public string StatusReason { get; set; }
         public int ORGANIZATION_ID { get; set; }
+
+
+        public int Owner_UserId { get; set; }
+
+
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string UpdateBy { get; set; }

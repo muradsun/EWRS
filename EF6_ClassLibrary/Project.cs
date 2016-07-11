@@ -24,13 +24,18 @@ namespace EF6_ClassLibrary
         [StringLength(500)]
         public string Name { get; set; }
 
+        [StringLength(1000)]
+        public string Description { get; set; }
+
         public byte PercentComplete { get; set; }
 
-        public byte ProjectStatus_Id { get; set; }
+        public int ProjectStatus_Id { get; set; }
 
         public string StatusReason { get; set; }
 
         public int ORGANIZATION_ID { get; set; }
+
+        public int Owner_UserId { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -47,6 +52,8 @@ namespace EF6_ClassLibrary
         [MaxLength(8)]
         [Timestamp]
         public byte[] RowVersion { get; set; }
+
+        public virtual User User { get; set; }
 
         public virtual ProjectStatus ProjectStatus { get; set; }
 

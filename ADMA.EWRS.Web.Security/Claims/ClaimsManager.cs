@@ -63,6 +63,10 @@ namespace ADMA.EWRS.Web.Security.Claims
                         foreach (var permission in userPerList)
                             claims.Add(new Claim("Permission", permission.Name, permission.Permission_Id.ToString()));
                 }
+
+                //Delegated Users List 
+                foreach (Delegation userDelegated  in _secManager.GetUserDelegation(userObj.User_Id))
+                    claims.Add(new Claim(ClaimTypes.Actor, userDelegated.Delegated_UserId.ToString()));
             }
 
 

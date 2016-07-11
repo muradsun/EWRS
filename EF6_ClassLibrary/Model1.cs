@@ -8,12 +8,12 @@ namespace EF6_ClassLibrary
     public partial class Model1 : DbContext
     {
         public Model1()
-            : base("name=Model1")
+            : base("name=Model11")
         {
         }
 
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
-        public virtual DbSet<n> sysdiagrams { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Delegation> Delegations { get; set; }
         public virtual DbSet<GroupPermission> GroupPermissions { get; set; }
@@ -23,6 +23,7 @@ namespace EF6_ClassLibrary
         public virtual DbSet<Configuration> Configurations { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<NotificationsUser> NotificationsUsers { get; set; }
+        public virtual DbSet<Murad> Murads { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectStatus> ProjectStatuses { get; set; }
         public virtual DbSet<ReviewWorkflowInstance> ReviewWorkflowInstances { get; set; }
@@ -37,7 +38,6 @@ namespace EF6_ClassLibrary
         public virtual DbSet<WeeklyInputHistory> WeeklyInputHistories { get; set; }
         public virtual DbSet<POSITION_HIREARCHY> POSITION_HIREARCHY { get; set; }
         public virtual DbSet<XXHR_ORG_HIERARCHY_MV> XXHR_ORG_HIERARCHY_MV { get; set; }
-        public virtual DbSet<BusinessUnitesView> BusinessUnitesViews { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -70,6 +70,10 @@ namespace EF6_ClassLibrary
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
+                .Property(e => e.GENDER)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
                 .Property(e => e.EMAIL)
                 .IsUnicode(false);
 
@@ -98,10 +102,21 @@ namespace EF6_ClassLibrary
                 .IsFixedLength();
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Groups)
+                .HasMany(e => e.Delegations)
                 .WithRequired(e => e.User)
-                .HasForeignKey(e => e.Owner_UserId)
+                .HasForeignKey(e => e.User_Id)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Delegations1)
+                .WithRequired(e => e.User1)
+                .HasForeignKey(e => e.Delegated_UserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Groups)
+                .WithOptional(e => e.User)
+                .HasForeignKey(e => e.Owner_UserId);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.GroupUsers)
@@ -111,6 +126,12 @@ namespace EF6_ClassLibrary
             modelBuilder.Entity<User>()
                 .HasMany(e => e.NotificationsUsers)
                 .WithRequired(e => e.User)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Projects)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.Owner_UserId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
@@ -124,6 +145,18 @@ namespace EF6_ClassLibrary
                 .HasForeignKey(e => e.Owner_UserId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Delegation>()
+                .Property(e => e.UpdateBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Delegation>()
+                .Property(e => e.RowVersion)
+                .IsFixedLength();
+
+            modelBuilder.Entity<GroupPermission>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
             modelBuilder.Entity<GroupPermission>()
                 .Property(e => e.UpdateBy)
                 .IsUnicode(false);
@@ -133,7 +166,7 @@ namespace EF6_ClassLibrary
                 .IsFixedLength();
 
             modelBuilder.Entity<Group>()
-                .Property(e => e.Name)
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Group>()
@@ -155,12 +188,20 @@ namespace EF6_ClassLibrary
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<GroupUser>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GroupUser>()
                 .Property(e => e.UpdateBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<GroupUser>()
                 .Property(e => e.RowVersion)
                 .IsFixedLength();
+
+            modelBuilder.Entity<Permission>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Permission>()
                 .Property(e => e.UpdateBy)
@@ -211,6 +252,10 @@ namespace EF6_ClassLibrary
             modelBuilder.Entity<NotificationsUser>()
                 .Property(e => e.RowVersion)
                 .IsFixedLength();
+
+            modelBuilder.Entity<Murad>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Project>()
                 .Property(e => e.Name)
@@ -432,10 +477,6 @@ namespace EF6_ClassLibrary
                 .HasPrecision(15, 0);
 
             modelBuilder.Entity<XXHR_ORG_HIERARCHY_MV>()
-                .Property(e => e.ORGID)
-                .HasPrecision(15, 0);
-
-            modelBuilder.Entity<BusinessUnitesView>()
                 .Property(e => e.ORGID)
                 .HasPrecision(15, 0);
         }

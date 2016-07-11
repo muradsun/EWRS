@@ -30,11 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Authentication">
-      <HintPath>..\Externals\Microsoft.AspNetCore.Authentication\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Authentication.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.Authentication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Microsoft.AspNetCore.Authentication\1.0.0\lib\net451\Microsoft.AspNetCore.Authentication.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNetCore.Session">
-      <HintPath>..\Externals\Microsoft.AspNetCore.Session\1.0.0-rc2-final\lib\net451\Microsoft.AspNetCore.Session.dll</HintPath>
+    <Reference Include="Microsoft.AspNetCore.Session, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Microsoft.AspNetCore.Session\1.0.0\lib\net451\Microsoft.AspNetCore.Session.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

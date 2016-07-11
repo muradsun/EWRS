@@ -1,5 +1,6 @@
 ﻿using ADMA.EWRS.Data.Access;
 using ADMA.EWRS.Data.Models;
+using ADMA.EWRS.Data.Models.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,20 @@ using System.Threading.Tasks;
 
 namespace ADMA.EWRS.BizDomain
 {
-    public class ProjectsManager
+    public class ProjectsManager : BaseManager
     {
-        public ProjectsManager()
+
+
+        public ProjectsManager(IServiceProvider _provider)
+            : base(_provider)
         {
 
+        }
+
+        public List<Project> GetProjects(int Owner_UserId, List<int> Delegated_UsersList)
+        {
+            using (var unitOfWork = new UnitOfWork())
+                return unitOfWork.Projects.GetAllProjects(Owner_UserId, Delegated_UsersList).ToList();
         }
 
         public IEnumerable<Project> ProcessTopNRecordes(int count)
@@ -23,12 +33,10 @@ namespace ADMA.EWRS.BizDomain
                 IEnumerable<Project> x = unitOfWork.Projects.GetTopNProjects(count);
                 foreach (var item in x)
                 {
-
                     item.CreatedBy = "MYassin";
-
                 }
 
-                return x; 
+                return x;
 
 
 

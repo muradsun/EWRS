@@ -46,8 +46,6 @@ namespace ADMA.EWRS.Web.Core
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
-
             //Murad :: Add Security
             services.AddAuthorization(options =>
             {
@@ -55,8 +53,6 @@ namespace ADMA.EWRS.Web.Core
             });
 
             services.AddSession();
-
-
 
             // Murad Add this for RC2, remove it if release 1.0 after June :: AddRazorOptions
             services.AddMvc(config =>
@@ -67,7 +63,13 @@ namespace ADMA.EWRS.Web.Core
                                  .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
 
-            }
+                //Murad :: Info : https://damienbod.com/2015/09/15/asp-net-5-action-filters/
+                config.Filters.Add(new Filters.AppFilter());
+
+
+            });
+            /*
+             * Murad :: BUG Fixed 
             ).AddRazorOptions(options =>
             {
                 var previous = options.CompilationCallback;
@@ -77,6 +79,7 @@ namespace ADMA.EWRS.Web.Core
                     context.Compilation = context.Compilation.AddReferences(Microsoft.CodeAnalysis.MetadataReference.CreateFromFile(typeof(ADMA.EWRS.Data.Models.Murad).Assembly.Location));
                 };
             });
+            */
 
             //var myAssemblies = AppDomain.CurrentDomain.GetAssemblies().Select(x => Microsoft.CodeAnalysis.MetadataReference.CreateFromFile(x.Location)).ToList();
             //services.Configure((Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions options) =>
@@ -93,12 +96,12 @@ namespace ADMA.EWRS.Web.Core
 
             //Murad : Replace ASP.NET Core DI with better AutoFac
             //services.AddScoped<IClaimsSecurityManager, ClaimsSecurityManager>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //Murad :: Add IoC i used AutoFac
             //Check : http://docs.autofac.org/en/latest/integration/aspnetcore.html
 
             // Add Autofac
-
             // Create the container builder.
             var containerBuilder = new Autofac.ContainerBuilder();
             containerBuilder.RegisterModule<IoC.DefaultModule>();
@@ -119,8 +122,6 @@ namespace ADMA.EWRS.Web.Core
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -131,7 +132,6 @@ namespace ADMA.EWRS.Web.Core
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseApplicationInsightsExceptionTelemetry();
             app.UseStaticFiles();
 
             //Murad :: Replace in future with Cache Manager 

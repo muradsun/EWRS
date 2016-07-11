@@ -6,7 +6,7 @@ namespace EF6_ClassLibrary
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class n
+    public partial class sysdiagram
     {
         [Required]
         [StringLength(128)]

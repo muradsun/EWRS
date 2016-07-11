@@ -12,6 +12,7 @@ namespace ADMA.EWRS.Data.Models
             this.NotificationsUsers = new List<NotificationsUser>();
             this.ReviewWorkflows = new List<ReviewWorkflow>();
             this.TeamModels = new List<TeamModel>();
+            this.Delegations = new List<Delegation>();
         }
 
         public int User_Id { get; set; }
@@ -41,5 +42,7 @@ namespace ADMA.EWRS.Data.Models
         public virtual ICollection<NotificationsUser> NotificationsUsers { get; set; }
         public virtual ICollection<ReviewWorkflow> ReviewWorkflows { get; set; }
         public virtual ICollection<TeamModel> TeamModels { get; set; }
+        public virtual ICollection<Delegation> Delegations { get; set; }
+
     }
 }

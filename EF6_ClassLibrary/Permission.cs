@@ -16,12 +16,15 @@ namespace EF6_ClassLibrary
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Permission_Id { get; set; }
 
         [Required]
         [StringLength(500)]
         public string Name { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string CreatedBy { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

@@ -1,0 +1,5 @@
+﻿MS Bower.Jason versions
+//"bootstrap": "3.3.6",
+//"jquery": "2.2.0",
+//"jquery-validation": "1.14.0",
+//"jquery-validation-unobtrusive": "3.2.6"

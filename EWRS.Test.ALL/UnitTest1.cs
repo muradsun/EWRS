@@ -12,9 +12,9 @@ namespace EWRS.Test.ALL
         [TestMethod]
         public void TestProcessTopNRecordes()
         {
-            int count = 2;
-            ProjectsManager pMan = new ProjectsManager();
-            var x = pMan.ProcessTopNRecordes(count);
+            //int count = 2;
+            //ProjectsManager pMan = new ProjectsManager();
+            //var x = pMan.ProcessTopNRecordes(count);
 
         }
     }

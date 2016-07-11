@@ -11,7 +11,7 @@ namespace ADMA.EWRS.Data.Access.EFConfigurations
         public EFDbConfiguration()
         {
             this.SetDatabaseInitializer<EWRSContext>(null); //Murad disable migration to now 
-
+            
             //Murad :: TODO : ASP.NET Core 1 RC2 -> Note: This API is now obsolete.
             //this.SetDefaultConnectionFactory(new System.Data.Entity.Infrastructure.SqlConnectionFactory());
 

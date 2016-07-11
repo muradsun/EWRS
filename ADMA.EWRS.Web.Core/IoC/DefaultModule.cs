@@ -1,6 +1,7 @@
 ﻿using ADMA.EWRS.Data.Models.Security;
 using ADMA.EWRS.Web.Security.Claims;
 using Autofac;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace ADMA.EWRS.Web.Core.IoC
             //For Core : http://docs.autofac.org/en/latest/integration/aspnetcore.html#id3
 
             //Murad : how it is working :: http://docs.autofac.org/en/latest/faq/per-request-scope.html
+            //builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
 
             //IClaimsSecurityManager, ClaimsSecurityManager
             builder.RegisterType<ClaimsSecurityManager>().As<IClaimsSecurityManager>().InstancePerLifetimeScope();

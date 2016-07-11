@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ADMA.EWRS.Data.Models.Security;
 using Microsoft.AspNetCore.Mvc;
+using ADMA.EWRS.Data.Models.ViewModel;
 
 namespace ADMA.EWRS.Web.Core.Controllers
 {
@@ -12,11 +13,15 @@ namespace ADMA.EWRS.Web.Core.Controllers
         public HomeController(IServiceProvider provider)
             : base(provider)
         {
-
+          
         }
 
         public IActionResult Index()
         {
+            PageInfoData.Title = "Welcome to Corporate Weekly Report System";
+            PageInfoData.Description = "Version 1.0";
+            //PageInfoData.Breadcrumb.Add(new Breadcrumb { Text = @"<i class='fa fa - leanpub margin-right-5 text-large text-dark'></i> Dashboard", Link = null });
+            PageInfoData.Breadcrumbs.Add(new Breadcrumb { Text = "Project List", Link = null });
             return View();
         }
 

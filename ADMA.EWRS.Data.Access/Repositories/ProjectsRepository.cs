@@ -17,9 +17,18 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         }
 
+        public IEnumerable<Project> GetAllProjects(int Owner_UserId, List<int> Delegated_UsersList)
+        {
+            return DbContext.Projects.Where(
+                p =>
+                    p.Owner_UserId == Owner_UserId ||
+                   Delegated_UsersList.Contains(p.Owner_UserId)
+             );
+        }
+
         public IEnumerable<Project> GetTopNProjects(int count)
         {
-            return DbContext.Projects.Take(count); 
+            return DbContext.Projects.Take(count);
 
         }
 

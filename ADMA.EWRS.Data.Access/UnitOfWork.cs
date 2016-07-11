@@ -17,20 +17,25 @@ namespace ADMA.EWRS.Data.Access
         {
             _context = new ADMA.EWRS.Data.Access.EWRSContext();
 
-            //Murad :: TODO : Replace with Murad Db Logger...
-            _context.Database.Log = Console.Write;
+            //Murad :: TODO : Replace with Murad Db Logger... check formatter
+#if DEBUG
+            _context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+#endif
 
             Muradies = new MuradRepository(_context);
             Users = new UserRepository(_context);
             Projects = new ProjectsRepository(_context);
             Groups = new GroupsRepository(_context);
             Permissions = new PermissionsRepository(_context);
+            Delegations = new DelegationsRepository(_context);
         }
 
         public IMuradRepository Muradies { get; private set; }
         public IUserRepository Users { get; private set; }
         public IProjectsRepository Projects { get; private set; }
         public IGroupsRepository Groups { get; private set; }
+        public IDelegationsRepository Delegations { get; private set; }
+
         public IPermissionsRepository Permissions { get; private set; }
 
         public int Save()

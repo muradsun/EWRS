@@ -1,0 +1,5 @@
+﻿We recommend you name the view file Default.cshtml and use the Views/Shared/Components/<view_component_name>/<view_name> path. 
+The PriorityList view component used in this sample uses Views/Shared/Components/PriorityList/Default.cshtml for the view component view.
+
+
+View component classes can be contained in any folder in the project.

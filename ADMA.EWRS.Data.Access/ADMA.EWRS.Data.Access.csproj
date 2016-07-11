@@ -81,6 +81,7 @@
     <Compile Include="EFConfigurations\WeeklyInputHistoryMap.cs" />
     <Compile Include="EFConfigurations\WeeklyInputMap.cs" />
     <Compile Include="EWRSContext.cs" />
+    <Compile Include="Repositories\DelegationsRepository.cs" />
     <Compile Include="Repositories\PermissionsRepository.cs" />
     <Compile Include="Repositories\GroupsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

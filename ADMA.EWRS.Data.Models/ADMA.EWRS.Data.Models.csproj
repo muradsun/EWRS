@@ -49,6 +49,7 @@
     <Compile Include="Data\SecurityConstants.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Delegation.cs" />
+    <Compile Include="Enums\ProjectStatus.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="GroupPermission.cs" />
     <Compile Include="GroupUser.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Project.cs" />
     <Compile Include="MYasin.cs" />
     <Compile Include="ProjectStatus.cs" />
+    <Compile Include="Repositories\IDelegationsRepository.cs" />
     <Compile Include="Repositories\IGroupsRepository.cs" />
     <Compile Include="Repositories\IMuradRepository.cs" />
     <Compile Include="Repositories\IPermissionsRepository.cs" />
@@ -77,14 +79,14 @@
     <Compile Include="TeamModelSubject.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="ViewModel\Breadcrumb.cs" />
+    <Compile Include="ViewModel\PageInfo.cs" />
     <Compile Include="WeeklyInput.cs" />
     <Compile Include="WeeklyInputHistory.cs" />
     <Compile Include="OrganizationHierarchy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -135,6 +135,7 @@
     <Folder Include="Temp" />
     <Folder Include="Temp\Tables" />
     <Folder Include="Scripts\Deployment" />
+    <Folder Include="Compares" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="System\Tables\NotificationsUsers.sql">
@@ -243,8 +244,10 @@
     <None Include="Scripts\HR_Sync_Job_FInal Script.sql" />
     <Build Include="Security\Temp.sql" />
     <Build Include="Temp\Tables\Murad.sql" />
+    <None Include="Scripts\Deployment\02 - Project Statuses.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Deployment\01 - Add Groups.sql" />
+    <None Include="Compares\MuradHomeCompare.scmp" />
   </ItemGroup>
 </Project>

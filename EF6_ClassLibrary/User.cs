@@ -12,9 +12,12 @@ namespace EF6_ClassLibrary
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            Delegations = new HashSet<Delegation>();
+            Delegations1 = new HashSet<Delegation>();
             Groups = new HashSet<Group>();
             GroupUsers = new HashSet<GroupUser>();
             NotificationsUsers = new HashSet<NotificationsUser>();
+            Projects = new HashSet<Project>();
             ReviewWorkflows = new HashSet<ReviewWorkflow>();
             ReviewWorkflows1 = new HashSet<ReviewWorkflow>();
             TeamModels = new HashSet<TeamModel>();
@@ -51,7 +54,9 @@ namespace EF6_ClassLibrary
         [StringLength(50)]
         public string ENGAGEMENT_TYPE { get; set; }
 
-        public byte GENDER { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string GENDER { get; set; }
 
         [Required]
         [StringLength(250)]
@@ -92,6 +97,12 @@ namespace EF6_ClassLibrary
         public byte[] RowVersion { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Delegation> Delegations { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Delegation> Delegations1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Group> Groups { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -99,6 +110,9 @@ namespace EF6_ClassLibrary
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotificationsUser> NotificationsUsers { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReviewWorkflow> ReviewWorkflows { get; set; }

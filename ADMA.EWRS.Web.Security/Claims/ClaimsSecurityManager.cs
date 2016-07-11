@@ -16,10 +16,10 @@ namespace ADMA.EWRS.Web.Security.Claims
         //private readonly IHttpContextAccessor _contextAccessor;
         private LoggedInUser _user;
 
-        public ClaimsSecurityManager(ClaimsPrincipal user)
-        {
-            SetClaimsSecurityManager(user);
-        }
+        //public ClaimsSecurityManager(ClaimsPrincipal user)
+        //{
+        //    SetClaimsSecurityManager(user);
+        //}
 
         public ClaimsSecurityManager(IHttpContextAccessor contextAccessor)
         {
@@ -38,8 +38,9 @@ namespace ADMA.EWRS.Web.Security.Claims
 
             List<string> permissionSet = identity.Claims.Where(q => q.Type == "Permission").Select(q => q.Value).ToList();
             List<string> groupSet = identity.Claims.Where(q => q.Type == ClaimTypes.Role).Select(q => q.Value).ToList();
+            List<int> delegationSet = identity.Claims.Where(q => q.Type == ClaimTypes.Actor).Select(q => int.Parse(q.Value)).ToList<int>();
 
-            _user = new LoggedInUser(identity.Name, email, givenName, gender, permissionSet, groupSet);
+            _user = new LoggedInUser(int.Parse(identity.Name), email, givenName, gender, permissionSet, groupSet, delegationSet);
         }
 
         public LoggedInUser CurrentUser

@@ -33,7 +33,10 @@ namespace ADMA.EWRS.BizDomain
                     return _unitOfWork.Groups.IsUserPartOfSuperAdminsGroup(userObj.User_Id);
         }
 
-
+        public List<Delegation> GetUserDelegation(int userId)
+        {
+            return _unitOfWork.Delegations.GetUserDelegation(userId).ToList();
+        }
 
     }
 }

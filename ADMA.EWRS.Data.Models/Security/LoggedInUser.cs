@@ -8,16 +8,17 @@ namespace ADMA.EWRS.Data.Models.Security
 {
     public class LoggedInUser
     {
-        string _userId;
+        int _userId;
         string _eMail;
         string _givenName;
         string _gender;
         List<string> _permissionsSet;
         List<string> _groupSet;
+        List<int> _delegationSet;
 
 
-        public LoggedInUser(string userId, string eMail, string givenName, string gender,
-                              List<string> permissionsSet, List<string> groupSet)
+        public LoggedInUser(int userId, string eMail, string givenName, string gender,
+                              List<string> permissionsSet, List<string> groupSet, List<int> delegationSet)
         {
             _userId = userId;
             _eMail = eMail;
@@ -25,13 +26,16 @@ namespace ADMA.EWRS.Data.Models.Security
             _gender = gender;
             _permissionsSet = permissionsSet;
             _groupSet = groupSet;
+            _delegationSet = delegationSet;
         }
 
-        public string UserId { get { return _userId; } }
+        public int UserId { get { return _userId; } }
         public string EMail { get { return _eMail; } }
         public string GivenName { get { return _givenName; } }
         public string Gender { get { return _gender; } }
         public List<string> PermissionsSet { get { return _permissionsSet; } }
         public List<string> GroupSet { get { return _groupSet; } }
+        public List<int> DelegationSet { get { return _delegationSet; } }
+
     }
 }

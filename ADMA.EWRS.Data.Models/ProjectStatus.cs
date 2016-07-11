@@ -10,7 +10,7 @@ namespace ADMA.EWRS.Data.Models
             this.Projects = new List<Project>();
         }
 
-        public byte ProjectStatus_Id { get; set; }
+        public Enums.ProjectStatusEnum ProjectStatus_Id { get; set; }
         public string Status { get; set; }
         public byte[] RowVersion { get; set; }
         public virtual ICollection<Project> Projects { get; set; }

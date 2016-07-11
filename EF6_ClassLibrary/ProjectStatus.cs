@@ -16,8 +16,8 @@ namespace EF6_ClassLibrary
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public byte ProjectStatus_Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ProjectStatus_Id { get; set; }
 
         [Required]
         [StringLength(50)]

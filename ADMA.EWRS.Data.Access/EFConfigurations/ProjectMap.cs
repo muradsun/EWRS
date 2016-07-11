@@ -35,7 +35,7 @@ namespace ADMA.EWRS.Data.Access.EFConfigurations
             this.Property(t => t.Project_Id).HasColumnName("Project_Id");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.PercentComplete).HasColumnName("PercentComplete");
-            this.Property(t => t.ProjectStatus_Id).HasColumnName("ProjectStatus_Id");
+            this.Property(t => t.ProjectStatus_Id).HasColumnType("int").HasColumnName("ProjectStatus_Id");
             this.Property(t => t.StatusReason).HasColumnName("StatusReason");
             this.Property(t => t.ORGANIZATION_ID).HasColumnName("ORGANIZATION_ID");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");

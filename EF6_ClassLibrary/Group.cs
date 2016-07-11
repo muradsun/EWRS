@@ -19,15 +19,19 @@ namespace EF6_ClassLibrary
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Group_Id { get; set; }
 
         [Required]
+        [StringLength(255)]
         public string Name { get; set; }
 
         public bool IsSystemGoup { get; set; }
 
-        public int Owner_UserId { get; set; }
+        public int? Owner_UserId { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string CreatedBy { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

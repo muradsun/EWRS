@@ -31,8 +31,10 @@ namespace ADMA.EWRS.Web.Core.Controllers
         }
 
         // GET: /<controller>/
+        [AllowAnonymous]
         public IActionResult Forbidden()
         {
+            @ViewBag.Title = "Forbidden";
             return View();
         }
 
@@ -53,7 +55,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
                 //RedirectResult
                 //RedirectToRouteResult
 
-                return Unauthorized(); //Murad :: See -> https://docs.asp.net/en/latest/migration/rc1-to-rc2.html?highlight=httpstatuscoderesult
+                return RedirectToAction("Forbidden"); //Murad :: See -> https://docs.asp.net/en/latest/migration/rc1-to-rc2.html?highlight=httpstatuscoderesult
             }
             else
             {
@@ -66,7 +68,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
                     ADMA.EWRS.Web.Security.Cookies.AuthenticationCookieName, userPrincipal,
                     new AuthenticationProperties
                     {
-                        ExpiresUtc = DateTime.UtcNow.AddDays(7),
+                        ExpiresUtc = DateTime.UtcNow.AddDays(1),
                         IsPersistent = true,
                         AllowRefresh = false
                     });

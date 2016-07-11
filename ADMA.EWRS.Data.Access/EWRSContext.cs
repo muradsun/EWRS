@@ -9,13 +9,13 @@ namespace ADMA.EWRS.Data.Access
     public class EWRSContext : DbContext
     {
         const string _connectionString = @"Data Source=MURAD-LP\SQL2K16;Initial Catalog=EWRSD;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-       
+
         public EWRSContext()
             : base(_connectionString)
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
- 		public virtual DbSet<Murad> Muradies { get; set; }
+        public virtual DbSet<Murad> Muradies { get; set; }
         public DbSet<PositionHierarchy> PositionHierarchy { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<OrganizationHierarchy> OrganizationHierarchy { get; set; }
@@ -43,6 +43,13 @@ namespace ADMA.EWRS.Data.Access
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //Murad :: TODO : Replace with Murad Db Logger... check formatter
+#if DEBUG
+            Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+#endif
+
+
+            //Murad :: Fluent API configuration goes here
             modelBuilder.Configurations.Add(new PositionHierarchyMap());
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new OrganizationHierarchyMap());
@@ -67,7 +74,7 @@ namespace ADMA.EWRS.Data.Access
             modelBuilder.Configurations.Add(new WeeklyInputMap());
             modelBuilder.Configurations.Add(new WeeklyInputHistoryMap());
             modelBuilder.Configurations.Add(new BusinessUnitesViewMap());
-			modelBuilder.Configurations.Add(new MuradConfiguration());
+            modelBuilder.Configurations.Add(new MuradConfiguration());
         }
 
 
