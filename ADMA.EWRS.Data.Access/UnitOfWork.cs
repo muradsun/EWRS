@@ -28,6 +28,8 @@ namespace ADMA.EWRS.Data.Access
             Groups = new GroupsRepository(_context);
             Permissions = new PermissionsRepository(_context);
             Delegations = new DelegationsRepository(_context);
+            OrganizationHierarchies = new OrganizationHierarchiesRepository(_context);
+
         }
 
         public IMuradRepository Muradies { get; private set; }
@@ -37,6 +39,8 @@ namespace ADMA.EWRS.Data.Access
         public IDelegationsRepository Delegations { get; private set; }
 
         public IPermissionsRepository Permissions { get; private set; }
+        public IOrganizationHierarchiesRepository OrganizationHierarchies { get; private set; }
+
 
         public int Save()
         {

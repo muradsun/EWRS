@@ -17,6 +17,9 @@ namespace ADMA.EWRS.Data.Access.EFConfigurations
                 .IsRequired()
                 .HasMaxLength(500);
 
+            this.Property(t => t.Description)
+                .HasMaxLength(1000);
+
             this.Property(t => t.CreatedBy)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -34,10 +37,12 @@ namespace ADMA.EWRS.Data.Access.EFConfigurations
             this.ToTable("Projects", "Weekly");
             this.Property(t => t.Project_Id).HasColumnName("Project_Id");
             this.Property(t => t.Name).HasColumnName("Name");
+            this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.PercentComplete).HasColumnName("PercentComplete");
-            this.Property(t => t.ProjectStatus_Id).HasColumnType("int").HasColumnName("ProjectStatus_Id");
+            this.Property(t => t.ProjectStatus_Id).HasColumnName("ProjectStatus_Id");
             this.Property(t => t.StatusReason).HasColumnName("StatusReason");
             this.Property(t => t.ORGANIZATION_ID).HasColumnName("ORGANIZATION_ID");
+            this.Property(t => t.Owner_UserId).HasColumnName("Owner_UserId");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
             this.Property(t => t.UpdateBy).HasColumnName("UpdateBy");
@@ -45,6 +50,9 @@ namespace ADMA.EWRS.Data.Access.EFConfigurations
             this.Property(t => t.RowVersion).HasColumnName("RowVersion");
 
             // Relationships
+            this.HasRequired(t => t.User)
+                .WithMany(t => t.Projects)
+                .HasForeignKey(d => d.Owner_UserId);
             this.HasRequired(t => t.ProjectStatus)
                 .WithMany(t => t.Projects)
                 .HasForeignKey(d => d.ProjectStatus_Id);

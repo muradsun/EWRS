@@ -7,12 +7,15 @@ namespace ADMA.EWRS.Data.Models
     {
         public User()
         {
+            //this.Delegations = new List<Delegation>();
+            //this.Delegations1 = new List<Delegation>();
             this.Groups = new List<Group>();
             this.GroupUsers = new List<GroupUser>();
             this.NotificationsUsers = new List<NotificationsUser>();
+            this.Projects = new List<Project>();
             this.ReviewWorkflows = new List<ReviewWorkflow>();
+            this.ReviewWorkflows1 = new List<ReviewWorkflow>();
             this.TeamModels = new List<TeamModel>();
-            this.Delegations = new List<Delegation>();
         }
 
         public int User_Id { get; set; }
@@ -23,7 +26,7 @@ namespace ADMA.EWRS.Data.Models
         public string POST_TITLE_LONG_DESC { get; set; }
         public string LOCATION { get; set; }
         public string ENGAGEMENT_TYPE { get; set; }
-        public string  GENDER { get; set; }
+        public string GENDER { get; set; }
         public string EMAIL { get; set; }
         public string OFFICE_TELEPHONE_NUMBER { get; set; }
         public string OFFICE_LOCATION { get; set; }
@@ -37,12 +40,14 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
+        //public virtual ICollection<Delegation> Delegations { get; set; }
+        //public virtual ICollection<Delegation> Delegations1 { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<GroupUser> GroupUsers { get; set; }
         public virtual ICollection<NotificationsUser> NotificationsUsers { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<ReviewWorkflow> ReviewWorkflows { get; set; }
+        public virtual ICollection<ReviewWorkflow> ReviewWorkflows1 { get; set; }
         public virtual ICollection<TeamModel> TeamModels { get; set; }
-        public virtual ICollection<Delegation> Delegations { get; set; }
-
     }
 }

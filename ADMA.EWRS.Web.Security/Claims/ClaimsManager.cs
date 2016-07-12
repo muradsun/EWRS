@@ -34,7 +34,7 @@ namespace ADMA.EWRS.Web.Security.Claims
             string pfNo = nameClaim.Split('\\')[1];
 
             using (var unitOfWork = new UnitOfWork())
-                return  unitOfWork.Users.Find(u => u.PF_NO == pfNo && u.IsActive == true).FirstOrDefault();
+                return unitOfWork.Users.Find(u => u.PF_NO == pfNo && u.IsActive == true).FirstOrDefault();
         }
 
         public ClaimsPrincipal CreateClaimsPrincipal(User userObj)
@@ -46,6 +46,7 @@ namespace ADMA.EWRS.Web.Security.Claims
             claims.Add(new Claim(ClaimTypes.GivenName, userObj.EMPLOYEE_NAME));
             claims.Add(new Claim(ClaimTypes.Gender, userObj.GENDER));
             claims.Add(new Claim(ClaimTypes.Role, Groups.ADMAUserGroupName));
+            claims.Add(new Claim("ORGANIZATION_ID", userObj.ORGANIZATION_ID.ToString()));
 
             using (var unitOfWork = new UnitOfWork())
             {
@@ -65,7 +66,7 @@ namespace ADMA.EWRS.Web.Security.Claims
                 }
 
                 //Delegated Users List 
-                foreach (Delegation userDelegated  in _secManager.GetUserDelegation(userObj.User_Id))
+                foreach (Delegation userDelegated in _secManager.GetUserDelegation(userObj.User_Id))
                     claims.Add(new Claim(ClaimTypes.Actor, userDelegated.Delegated_UserId.ToString()));
             }
 

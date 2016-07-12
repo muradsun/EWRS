@@ -35,12 +35,15 @@ namespace ADMA.EWRS.Web.Security.Claims
             string email = identity.Claims.Where(q => q.Type == ClaimTypes.Email).Select(q => q.Value).FirstOrDefault();
             string givenName = identity.Claims.Where(q => q.Type == ClaimTypes.GivenName).Select(q => q.Value).FirstOrDefault();
             string gender = identity.Claims.Where(q => q.Type == ClaimTypes.Gender).Select(q => q.Value).FirstOrDefault();
+            int ORGANIZATION_ID = int.Parse(identity.Claims.Where(q => q.Type == "ORGANIZATION_ID").Select(q => q.Value).FirstOrDefault());
 
             List<string> permissionSet = identity.Claims.Where(q => q.Type == "Permission").Select(q => q.Value).ToList();
             List<string> groupSet = identity.Claims.Where(q => q.Type == ClaimTypes.Role).Select(q => q.Value).ToList();
             List<int> delegationSet = identity.Claims.Where(q => q.Type == ClaimTypes.Actor).Select(q => int.Parse(q.Value)).ToList<int>();
 
-            _user = new LoggedInUser(int.Parse(identity.Name), email, givenName, gender, permissionSet, groupSet, delegationSet);
+            //ORGANIZATION_ID
+
+            _user = new LoggedInUser(int.Parse(identity.Name), email, givenName, gender, permissionSet, groupSet, delegationSet, ORGANIZATION_ID);
         }
 
         public LoggedInUser CurrentUser

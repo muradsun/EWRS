@@ -9,17 +9,17 @@ namespace ADMA.EWRS.Data.Models
     public partial class OrganizationHierarchy
     {
         public string ORGNAME { get; set; }
-        public decimal ORGID { get; set; }
+        public int ORGID { get; set; }
         public string ORGTYPE { get; set; }
         public string BU_NAME { get; set; }
-        public string BU_ID { get; set; }
+        public int BU_ID { get; set; }
         public string DIV_NAME { get; set; }
-        public string DIV_ID { get; set; }
+        public Nullable<int> DIV_ID { get; set; }
         public string DEP_NAME { get; set; }
-        public string DEP_ID { get; set; }
+        public Nullable<int> DEP_ID { get; set; }
         public string TEAM_NAME { get; set; }
-        public string TEAM_ID { get; set; }
+        public Nullable<int> TEAM_ID { get; set; }
         public string SECTION_NAME { get; set; }
-        public string SECTION_ID { get; set; }
+        public Nullable<int> SECTION_ID { get; set; }
     }
 }

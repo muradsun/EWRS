@@ -26,32 +26,32 @@ namespace ADMA.EWRS.Data.Access.EFConfigurations
             this.Property(t => t.BU_NAME)
                 .HasMaxLength(4000);
 
-            this.Property(t => t.BU_ID)
-                .HasMaxLength(4000);
+            //this.Property(t => t.BU_ID)
+            //    .HasMaxLength(4000);
 
             this.Property(t => t.DIV_NAME)
                 .HasMaxLength(4000);
 
-            this.Property(t => t.DIV_ID)
-                .HasMaxLength(4000);
+            //this.Property(t => t.DIV_ID)
+            //    .HasMaxLength(4000);
 
             this.Property(t => t.DEP_NAME)
                 .HasMaxLength(4000);
 
-            this.Property(t => t.DEP_ID)
-                .HasMaxLength(4000);
+            //this.Property(t => t.DEP_ID)
+            //    .HasMaxLength(4000);
 
             this.Property(t => t.TEAM_NAME)
                 .HasMaxLength(4000);
 
-            this.Property(t => t.TEAM_ID)
-                .HasMaxLength(4000);
+            //this.Property(t => t.TEAM_ID)
+            //    .HasMaxLength(4000);
 
             this.Property(t => t.SECTION_NAME)
                 .HasMaxLength(4000);
 
-            this.Property(t => t.SECTION_ID)
-                .HasMaxLength(4000);
+            //this.Property(t => t.SECTION_ID)
+            //    .HasMaxLength(4000);
 
             // Table & Column Mappings
             this.ToTable("XXHR_ORG_HIERARCHY_MV", "HR");

@@ -46,11 +46,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
 
         }
 
-        public IActionResult ProjectInfoWizardStep(int projectId)
-        {
-
-            return View();
-        }
+    
 
     }
 }

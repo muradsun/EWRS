@@ -25,38 +25,11 @@ namespace ADMA.EWRS.BizDomain
                 return unitOfWork.Projects.GetAllProjects(Owner_UserId, Delegated_UsersList).ToList();
         }
 
-        public IEnumerable<Project> ProcessTopNRecordes(int count)
+        public Project GetProject(int projectId)
         {
             using (var unitOfWork = new UnitOfWork())
-            {
-
-                IEnumerable<Project> x = unitOfWork.Projects.GetTopNProjects(count);
-                foreach (var item in x)
-                {
-                    item.CreatedBy = "MYassin";
-                }
-
-                return x;
-
-
-
-                //// Example1
-                //var course = unitOfWork.Muradies.GetTopMurad(3);
-                //return course.ToList();
-
-                //// Example2
-                //var courses = unitOfWork.Courses.GetCoursesWithAuthors(1, 4);
-
-                //// Example3
-                //var author = unitOfWork.Authors.GetAuthorWithCourses(1);
-                //unitOfWork.Courses.RemoveRange(author.Courses);
-                //unitOfWork.Authors.Remove(author);
-                //unitOfWork.Complete();
-            }
+                return unitOfWork.Projects.Find(p => p.Project_Id == projectId).FirstOrDefault();
         }
-
-
-
 
     }
 }
