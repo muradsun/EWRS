@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="~/lib/slick.js/slick/slick-theme.css">
     <!-- end: MAIN CSS -->
     <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
+    @RenderSection("CssStyle", false)
     <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
     <!-- start: Packet CSS -->
     <link rel="stylesheet" href="~/assets/css/styles.css">
@@ -218,20 +219,20 @@
                         <!-- start: LANGUAGE SWITCHER -->
                         @*
                             Murad :: Not Used : only one language*@
-                        <li class="dropdown" >
-                            <a href class="dropdown-toggle" data-toggle="dropdown" > <i class="fa fa-gear"></i> </a>
+                        <li class="dropdown">
+                            <a href class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-gear"></i> </a>
                             @*<a href class="dropdown-toggle" data-toggle="dropdown"> <i class="flag-icon flag-icon-us"></i> English </a>
-                            <ul role="menu" class="dropdown-menu dropdown-light fadeInUpShort">
-                                <li>
-                                    <a href="#" class="menu-toggler"> Deutsch </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="menu-toggler"> English </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="menu-toggler"> Italiano </a>
-                                </li>
-                            </ul>*@
+                                <ul role="menu" class="dropdown-menu dropdown-light fadeInUpShort">
+                                    <li>
+                                        <a href="#" class="menu-toggler"> Deutsch </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="menu-toggler"> English </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="menu-toggler"> Italiano </a>
+                                    </li>
+                                </ul>*@
                         </li>
                         <!-- end: LANGUAGE SWITCHER -->
                     </ul>
@@ -243,10 +244,10 @@
                     <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
                 </div>
                 <button class="sidebar-mobile-toggler dropdown-off-sidebar btn hidden-md hidden-lg" data-toggle-class="app-offsidebar-open" data-toggle-target="#app" data-toggle-click-outside="#off-sidebar">
-                    &nbsp; 
+                    &nbsp;
                 </button>
                 <button class="dropdown-off-sidebar btn hidden-sm hidden-xs" data-toggle-class="app-offsidebar-open" data-toggle-target="#app" data-toggle-click-outside="#off-sidebar">
-                    &nbsp; 
+                    &nbsp;
                 </button>
                 <!-- end: NAVBAR COLLAPSE -->
             </header>

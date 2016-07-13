@@ -45,7 +45,7 @@
                                 @await Component.InvokeAsync("ProjectInfoWizardStep", new { projectId = 0 })
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-o next-step btn-wide pull-right">
-                                        Next <i class="fa fa-arrow-circle-right"></i>
+                                        Save & Move Next <i class="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </div>
                             </div>
@@ -266,10 +266,16 @@
 </script>
 <!-- end: Template Area -->
 
+@section CssStyle{
+    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css">
+}
+
 @section Scripts{
     <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
     <script src="~/lib/bb-jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
+
     <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
     <!-- start: Packet JAVASCRIPTS -->
     <script src="~/assets/js/letter-icons.js"></script>
@@ -279,12 +285,13 @@
     <script src="~/assets/js/selectFx/classie.js"></script>
     <script src="~/assets/js/selectFx/selectFx.js"></script>
 
-    <!-- Mohammed Yasin : Created for wizard -->
+    <!--Murad : Created for wizard -->
     <!--
     ***************************************************
     <script src="~/assets/js/form-wizard.js"></script>
     ***************************************************
     -->
+    <script src="~/js/CreateProjectUI-Notifications.js"></script>
     <script src="~/js/CreateProjectFormWizard.js"></script>
 
 

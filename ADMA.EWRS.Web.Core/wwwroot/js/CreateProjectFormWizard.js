@@ -6,47 +6,47 @@ var FormWizard = function () {
     var initWizard = function () {
         // function to initiate Wizard Form
         wizardContent.smartWizard({
-            selected: 0,
+            // Check this: jquery.smartWizard.js https://github.com/mstratman/jQuery-Smart-Wizard/blob/master/README.md
+            selected: 0, // Selected Step, 0 = first step   
             keyNavigation: false,
-            onLeaveStep: leaveAStepCallback,
-            onShowStep: onShowStep,
+            onLeaveStep: leaveAStepCallback, // triggers when leaving a step
+            onShowStep: onShowStep // triggers when showing a step
+            //onFinish: null,  // triggers when Finish button is clicked
+            //includeFinishButton: true,   // Add the finish button
+            //reverseButtonsOrder: false //shows buttons ordered as: prev, next and finish    
         });
         var numberOfSteps = 0;
         initValidator();
-    };
-
+    }; //end initWizard
 
     var initValidator = function () {
+        //Modify default settings for validation. See : https://jqueryvalidation.org/jQuery.validator.setDefaults
         $.validator.setDefaults({
             errorElement: "span", // contain the error msg in a span tag
             errorClass: 'help-block',
             ignore: ':hidden',
             rules: {
-                firstName: {
+                Name: {
                     minlength: 3,
                     required: true
-                },
-                //Description: {
-                //    minlength: 2,
+                }
+                //,
+                //email: {
+                //    required: true,
+                //    email: true
+                //},
+                //password: {
+                //    minlength: 6,
                 //    required: true
                 //},
-                email: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    minlength: 6,
-                    required: true
-                },
-                password2: {
-                    required: true,
-                    minlength: 5,
-                    equalTo: "#password"
-                }
+                //password2: {
+                //    required: true,
+                //    minlength: 5,
+                //    equalTo: "#password"
+                //}
             },
             messages: {
-                firstName: "First Name is required",
-                lastName: "Last Name is required"
+                Name: "Project Name is required, minimum 3 characters"
             },
             highlight: function (element) {
                 $(element).closest('.help-block').removeClass('valid');
@@ -65,6 +65,7 @@ var FormWizard = function () {
             }
         });
     };
+
     var displayConfirm = function () {
         $('.display-value', form).each(function () {
             var input = $('[name="' + $(this).attr("data-display") + '"]', form);
@@ -80,6 +81,7 @@ var FormWizard = function () {
             }
         });
     };
+
     var onShowStep = function (obj, context) {
         if (context.toStep == numberOfSteps) {
             $('.anchor').children("li:nth-child(" + context.toStep + ")").children("a").removeClass('wait');
@@ -102,10 +104,19 @@ var FormWizard = function () {
             onFinish(obj, context);
         });
     };
+
     var leaveAStepCallback = function (obj, context) {
-        return validateSteps(context.fromStep, context.toStep);
+        var isValidStep = validateSteps(context.fromStep, context.toStep);
+
+        if (isValidStep & context.fromStep == 1 & context.toStep == 2)
+            SaveProjectInfoWizardStep();
+
+
+
+        return isValidStep;
         // return false to stay on step and true to continue navigation
     };
+
     var onFinish = function (obj, context) {
         if (validateAllSteps()) {
             alert('form submit function');
@@ -113,10 +124,9 @@ var FormWizard = function () {
             //wizardForm.submit();
         }
     };
+
     var validateSteps = function (stepnumber, nextstep) {
         var isStepValid = false;
-
-
         if (numberOfSteps >= nextstep && nextstep > stepnumber) {
 
             // cache the form element selector
@@ -137,14 +147,17 @@ var FormWizard = function () {
             return true;
         }
     };
+
     var validateAllSteps = function () {
         var isStepValid = true;
         // all step validation logic
         return isStepValid;
     };
+
     return {
         init: function () {
             initWizard();
+           
         }
     };
 }();
@@ -159,6 +172,7 @@ jQuery(document).ready(function () {
     Main.init();
 
     FormWizard.init();
+    UINotifications.init();
 
     //Load Template
     var subjectsArray = [
@@ -180,6 +194,6 @@ jQuery(document).ready(function () {
 });
 
 function removeSubject(itemClicked) {
-    if(window.confirm("Are you sure wallah ?"))
+    if (window.confirm("Are you sure wallah ?"))
         $(itemClicked).closest('.row').detach();
 }

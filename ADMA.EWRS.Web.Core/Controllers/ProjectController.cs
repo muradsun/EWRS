@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ADMA.EWRS.Data.Models.ViewModel;
 using ADMA.EWRS.BizDomain;
+using Newtonsoft.Json;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -46,7 +47,17 @@ namespace ADMA.EWRS.Web.Core.Controllers
 
         }
 
-    
+
+        /// <summary>
+        /// Save the first step in Project Configuration Wizard
+        /// </summary>
+        /// <param name="projectInfoWizardStepView"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult SaveProjectWizardStep([FromBody] ProjectInfoWizardStepView projectInfoWizardStepView)
+        {
+            return Json(new { Ok = true });
+        }
 
     }
 }
