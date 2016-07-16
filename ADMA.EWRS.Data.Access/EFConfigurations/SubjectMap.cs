@@ -45,6 +45,7 @@ namespace ADMA.EWRS.Data.Access.EFConfigurations
             this.Property(t => t.UpdatedDate).HasColumnName("UpdatedDate");
             this.Property(t => t.RowVersion).HasColumnName("RowVersion");
             this.Property(t => t.Project_Id).HasColumnName("Project_Id");
+            this.Property(t => t.SequenceNo).HasColumnName("SequenceNo").IsRequired();
 
             // Relationships
             this.HasRequired(t => t.SubjectStatus)

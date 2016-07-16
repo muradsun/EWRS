@@ -40,14 +40,14 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        //public virtual ICollection<Delegation> Delegations { get; set; }
-        //public virtual ICollection<Delegation> Delegations1 { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<GroupUser> GroupUsers { get; set; }
-        public virtual ICollection<NotificationsUser> NotificationsUsers { get; set; }
-        public virtual ICollection<Project> Projects { get; set; }
-        public virtual ICollection<ReviewWorkflow> ReviewWorkflows { get; set; }
-        public virtual ICollection<ReviewWorkflow> ReviewWorkflows1 { get; set; }
-        public virtual ICollection<TeamModel> TeamModels { get; set; }
+        //public  ICollection<Delegation> Delegations { get; set; }
+        //public  ICollection<Delegation> Delegations1 { get; set; }
+        public  ICollection<Group> Groups { get; set; }
+        public  ICollection<GroupUser> GroupUsers { get; set; }
+        public  ICollection<NotificationsUser> NotificationsUsers { get; set; }
+        public  ICollection<Project> Projects { get; set; }
+        public  ICollection<ReviewWorkflow> ReviewWorkflows { get; set; }
+        public  ICollection<ReviewWorkflow> ReviewWorkflows1 { get; set; }
+        public  ICollection<TeamModel> TeamModels { get; set; }
     }
 }

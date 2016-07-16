@@ -1,0 +1,177 @@
+﻿@{
+}
+@model TemplateWizardStepView
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="padding-30">
+            <h2 class="StepTitle">Create a Template <span class="text-large block">to manage everything you do with your project subjects and millstones</span></h2>
+            <p>
+                Through this template you can control your project gaining benefits including:
+            </p>
+            <p class="text-small">
+                <ul class="no-margin">
+                    <li>
+                        Access to exclusive releases and limited products.
+                    </li>
+                    <li>
+                        ng-Clip services, benefits and promotions.
+                    </li>
+                </ul>
+            </p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <fieldset>
+            <legend>
+                Template
+            </legend>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label"> Template Name <span class="symbol required"></span> </label>
+                        <input type="text" placeholder="Enter Template Name" class="form-control" name="TemplateName" asp-for="Name" style="width:100%" id="TemplateName" />
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        @{
+            int x = 1;
+        }
+        <fieldset id="TextBoxesGroup">
+            <legend>
+                Subject(s)
+            </legend>
+
+            <div class="dd" id="nestable">
+                <ol class="dd-list">
+                    @foreach (SubjectWizardStepView item in Model.Subjects)
+                    {
+                        <li class="dd-item" data-id="@x">
+                            <div class="row">
+                                <div class="col-md-1 dd-handle">
+                                    <i class="fa fa-sort"></i>
+                                    @{
+                                        x += 1;
+                                    }
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="Enter Subject Title" class="form-control" value="@item.Name" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2 s-stepElm">
+                                            <div class="checkbox clip-check check-primary">
+                                                <input id="chkMandatory_@x" type="checkbox" checked="checked" asp-for="@item.IsMandatory">
+                                                <label for="chkMandatory_@x"> <b>Is Mandatory</b> </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 s-stepElm" style="text-align:right; padding-right:0;">
+                                            <b> Due Date:</b>
+                                        </div>
+                                        <div class="col-md-8 s-stepElm" style="text-align:left; padding-left:0; padding-top: 0;">
+                                            <input class="datepicker" style="width: 98%" asp-for="@item.DueDate" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <h2 onclick="removeSubject(this);" class="btn btn-o btn-Toolbar btn-danger"> <i class="fa fa-trash"></i></h2>
+                                </div>
+                            </div>
+                            <hr class="hr-flat" />
+                        </li>
+                     }
+                </ol>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 onclick="addSubject(this);" class="btn btn-o btn-Toolbar btn-success"> <i class="fa fa-plus-square"></i> <b>Add Subject</b></h2>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<!-- start: Template Area  -->
+<script id="subjects-template" type="text/x-kendo-template">
+    <li class="dd-item" data-id="#= SequenceNo #">
+        <div class="row">
+            <div class="col-md-1 dd-handle">
+                <i class="fa fa-sort"></i>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" placeholder="Enter Subject Title" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 s-stepElm">
+                        <div class="checkbox clip-check check-primary">
+                            <input id="chkMandatory_#= SequenceNo #" type="checkbox" checked="checked">
+                            <label for="chkMandatory_#= SequenceNo #"> <b>Is Mandatory</b> </label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-2 s-stepElm" style="text-align:right; padding-right:0;">
+                        <b> Due Date:</b>
+                    </div>
+                    <div class="col-md-8 s-stepElm" style="text-align:left; padding-left:0; padding-top: 0;">
+                        <input class="datepicker" style="width: 98%" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <h2 onclick="removeSubject(this);" class="btn btn-o btn-Toolbar btn-danger"> <i class="fa fa-trash"></i></h2>
+            </div>
+        </div>
+        <hr class="hr-flat" />
+    </li>
+
+
+
+    
+</script>
+<!-- end: Template Area -->
+
+<script type="text/javascript">
+    //function SaveProjectInfoWizardStep() {
+    //    var pData = CollectStepInfo();
+    //    $.ajax({
+    //        url: "/Project/SaveProjectWizardStep",
+    //        success: function (result) {
+    //            UINotifications.ShowToast("success", "Your Projet [ " + pData.Name + " ] Saved Successfuly.", "Saved Successfuly");
+    //        },
+    //        cache: false,
+    //        error: function (xhr, status, error) {
+    //            UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
+    //        },
+    //        type: "POST",
+    //        data: JSON.stringify(pData),
+    //        contentType: "application/json"
+    //    });
+
+    //}
+
+    //function CollectStepInfo() {
+    //    var projectInfoWizardStepView = {};
+    //    projectInfoWizardStepView.Project_Id = 0;
+    //    projectInfoWizardStepView.Name = $("#txtName").val();
+    //    projectInfoWizardStepView.Description = $("#txtDescription").val();
+    //    projectInfoWizardStepView.ORGANIZATION_ID = $("#hdnORGANIZATION_ID").val();
+    //    projectInfoWizardStepView.OrganizationHierarchyTree = null;
+
+    //    return projectInfoWizardStepView;
+    //}
+
+    $(document).ready(function () {
+        $(".datepicker").kendoDatePicker({
+            format: "dd-MMMM-yyyy"
+        });
+    });
+
+</script>

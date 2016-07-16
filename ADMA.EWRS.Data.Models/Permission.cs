@@ -16,6 +16,6 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public virtual ICollection<GroupPermission> GroupPermissions { get; set; }
+        public  ICollection<GroupPermission> GroupPermissions { get; set; }
     }
 }

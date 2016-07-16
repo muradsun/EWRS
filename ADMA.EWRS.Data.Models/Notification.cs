@@ -15,6 +15,6 @@ namespace ADMA.EWRS.Data.Models
         public string Message { get; set; }
         public Nullable<int> xRef_PK { get; set; }
         public byte[] RowVersion { get; set; }
-        public virtual ICollection<NotificationsUser> NotificationsUsers { get; set; }
+        public  ICollection<NotificationsUser> NotificationsUsers { get; set; }
     }
 }

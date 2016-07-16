@@ -25,10 +25,11 @@ namespace ADMA.EWRS.Data.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
         public int Project_Id { get; set; }
-        public virtual SubjectStatus SubjectStatus { get; set; }
-        public virtual Template Template { get; set; }
-        public virtual ICollection<TeamModelSubject> TeamModelSubjects { get; set; }
-        public virtual ICollection<WeeklyInput> WeeklyInputs { get; set; }
-        public virtual ICollection<WeeklyInputHistory> WeeklyInputHistories { get; set; }
+        public  SubjectStatus SubjectStatus { get; set; }
+        public  Template Template { get; set; }
+        public  ICollection<TeamModelSubject> TeamModelSubjects { get; set; }
+        public  ICollection<WeeklyInput> WeeklyInputs { get; set; }
+        public  ICollection<WeeklyInputHistory> WeeklyInputHistories { get; set; }
+        public byte SequenceNo { get; set; }
     }
 }

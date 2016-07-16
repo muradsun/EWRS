@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <fieldset style="min-height:335px;">
+        <fieldset style="min-height:300px;">
             <legend>
                 <i class="fa fa-info-circle"></i> &nbsp; Project Information
             </legend>
@@ -21,14 +21,14 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label> Description </label>
-                        <textarea type="text" placeholder="Enter Project Description" class="form-control" name="Description" rows="10" asp-for="Description" id="txtDescription"></textarea>
+                        <textarea type="text" placeholder="Enter Project Description" class="form-control" name="Description" rows="7" asp-for="Description" id="txtDescription"></textarea>
                     </div>
                 </div>
             </div>
         </fieldset>
     </div>
     <div class="col-md-6">
-        <fieldset style="min-height:335px;">
+        <fieldset style="min-height:300px;">
             <legend>
                 Project Organization Scope
             </legend>
@@ -36,13 +36,13 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <input type="hidden" name="ORGANIZATION_ID" asp-for="ORGANIZATION_ID" id="hdnORGANIZATION_ID" />
-                        <table class="table table-condensed" id="sample-table-4" cellpadding="10" cellspacing="20">
+                        <table class="table table-striped" cellpadding="10" cellspacing="20">
                             <thead>
                                 <tr>
                                     <th>Organization</th>
                                     <th>Organization Name</th>
                                     @*<th class="hidden-xs"</th>*@
-                                    <th>User Organization</th>
+                                    <th>Project Organization</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,7 +53,7 @@
                                         <td>  @item.OrganizationName </td>
                                         @if (item.IsTargetOrganization)
                                         {
-                                            <td><span class="label label-sm label-success"> @item.IsTargetOrganization</span></td>
+                                            <td><span class="label label-sm label-success">Under</span></td>
                                         }
                                         else
                                         {

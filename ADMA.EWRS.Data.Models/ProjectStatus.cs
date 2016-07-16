@@ -13,6 +13,6 @@ namespace ADMA.EWRS.Data.Models
         public Enums.ProjectStatusEnum ProjectStatus_Id { get; set; }
         public string Status { get; set; }
         public byte[] RowVersion { get; set; }
-        public virtual ICollection<Project> Projects { get; set; }
+        public  ICollection<Project> Projects { get; set; }
     }
 }

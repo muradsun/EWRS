@@ -18085,3 +18085,21 @@ figure.effect-goliath {
     text-align: center;
     color: #5B9BD1 !important;
 }
+
+.btn-Toolbar {
+    min-height: 30px;
+    font-size: 15px;
+}
+
+.hr-flat {
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0), #58748B, rgba(0, 0, 0, 0));
+    border: 0 none;
+    height: 3px;
+    margin: 12px 0;
+}
+
+.s-stepElm {
+    height: 50px;
+    color: black;
+    padding-top: 10px;
+}

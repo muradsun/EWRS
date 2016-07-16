@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace ADMA.EWRS.BizDomain
 {
+
+    /// <summary>
+    /// Manage the Project and the project related item such as Templates and Team Model
+    /// </summary>
     public class ProjectsManager : BaseManager
     {
-
-
         public ProjectsManager(IServiceProvider _provider)
             : base(_provider)
         {
@@ -30,6 +32,35 @@ namespace ADMA.EWRS.BizDomain
             using (var unitOfWork = new UnitOfWork())
                 return unitOfWork.Projects.Find(p => p.Project_Id == projectId).FirstOrDefault();
         }
+
+        public Template GetTemplateOrDefualt(int projectId)
+        {
+            if (projectId == 0)
+                return GetDefualtTemplate();
+            else
+                using (var unitOfWork = new UnitOfWork())
+                    return unitOfWork.Templates.GetTemplate(projectId);
+
+        }
+
+
+        #region Private Members 
+
+        private Template GetDefualtTemplate()
+        {
+            return new Template()
+            {
+                Name = "Default Template",
+                Subjects = new List<Subject>() {
+                    new Subject() { Name = "Progress", IsMandatory= true, DueDate = null },
+                    new Subject() { Name = "Planning", IsMandatory= true, DueDate = null  },
+                    new Subject() { Name = "Problems", IsMandatory= true, DueDate = null  },
+                }
+
+            };
+        }
+
+        #endregion
 
     }
 }

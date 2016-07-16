@@ -21,9 +21,9 @@ namespace ADMA.EWRS.Data.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
         public int Owner_UserId { get; set; }
-        public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
-        public virtual Group Group { get; set; }
-        public virtual ICollection<ReviewWorkflowsProject> ReviewWorkflowsProjects { get; set; }
+        public  User User { get; set; }
+        public  User User1 { get; set; }
+        public  Group Group { get; set; }
+        public  ICollection<ReviewWorkflowsProject> ReviewWorkflowsProjects { get; set; }
     }
 }

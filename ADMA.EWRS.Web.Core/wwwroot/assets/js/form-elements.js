@@ -107,8 +107,8 @@ var FormElements = function() {"use strict";
 			touchSpinHandler();
 			autosizeHandler();
 			select2Handler();
-			datePickerHandler();
-			timePickerHandler();
+			//datePickerHandler();
+			//timePickerHandler();
 		}
 	};
 }();

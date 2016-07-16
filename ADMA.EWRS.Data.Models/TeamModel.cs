@@ -22,9 +22,9 @@ namespace ADMA.EWRS.Data.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
         public string Name { get; set; }
-        public virtual User User { get; set; }
-        public virtual Group Group { get; set; }
-        public virtual Project Project { get; set; }
-        public virtual ICollection<TeamModelSubject> TeamModelSubjects { get; set; }
+        public  User User { get; set; }
+        public  Group Group { get; set; }
+        public  Project Project { get; set; }
+        public  ICollection<TeamModelSubject> TeamModelSubjects { get; set; }
     }
 }

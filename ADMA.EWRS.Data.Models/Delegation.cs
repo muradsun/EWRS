@@ -11,8 +11,8 @@ namespace ADMA.EWRS.Data.Models
         public System.DateTime FromDate { get; set; }
         public System.DateTime ToDate { get; set; }
 
-        //public virtual User User { get; set; }
-        //public virtual User Delegated_User { get; set; }
+        //public  User User { get; set; }
+        //public  User Delegated_User { get; set; }
 
 
         public System.DateTime CreatedDate { get; set; }

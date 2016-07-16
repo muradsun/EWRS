@@ -21,8 +21,8 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public virtual ICollection<ReviewWorkflowInstance> ReviewWorkflowInstances { get; set; }
-        public virtual Subject Subject { get; set; }
-        public virtual ICollection<WeeklyInputHistory> WeeklyInputHistories { get; set; }
+        public  ICollection<ReviewWorkflowInstance> ReviewWorkflowInstances { get; set; }
+        public  Subject Subject { get; set; }
+        public  ICollection<WeeklyInputHistory> WeeklyInputHistories { get; set; }
     }
 }

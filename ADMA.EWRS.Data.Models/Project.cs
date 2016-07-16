@@ -25,10 +25,10 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public virtual User User { get; set; }
-        public virtual ProjectStatus ProjectStatus { get; set; }
-        public virtual ICollection<ReviewWorkflowsProject> ReviewWorkflowsProjects { get; set; }
-        public virtual ICollection<TeamModel> TeamModels { get; set; }
-        public virtual ICollection<Template> Templates { get; set; }
+        public  User User { get; set; }
+        public  ProjectStatus ProjectStatus { get; set; }
+        public  ICollection<ReviewWorkflowsProject> ReviewWorkflowsProjects { get; set; }
+        public  ICollection<TeamModel> TeamModels { get; set; }
+        public  ICollection<Template> Templates { get; set; }
     }
 }

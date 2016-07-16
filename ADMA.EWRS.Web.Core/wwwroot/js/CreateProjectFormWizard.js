@@ -29,12 +29,12 @@ var FormWizard = function () {
                 Name: {
                     minlength: 3,
                     required: true
-                }
-                //,
-                //email: {
-                //    required: true,
-                //    email: true
-                //},
+                },
+                TemplateName: {
+                    minlength: 3,
+                    required: true
+                    //,email: true
+                },
                 //password: {
                 //    minlength: 6,
                 //    required: true
@@ -46,7 +46,8 @@ var FormWizard = function () {
                 //}
             },
             messages: {
-                Name: "Project Name is required, minimum 3 characters"
+                Name: "Project Name is required, minimum 3 characters",
+                TemplateName: "Project Name is required, minimum 3 characters"
             },
             highlight: function (element) {
                 $(element).closest('.help-block').removeClass('valid');
@@ -157,13 +158,10 @@ var FormWizard = function () {
     return {
         init: function () {
             initWizard();
-           
+
         }
     };
 }();
-
-
-
 
 //MYasin
 //Adding the Add new row button logic
@@ -173,27 +171,28 @@ jQuery(document).ready(function () {
 
     FormWizard.init();
     UINotifications.init();
+    UINestable.init();
 
-    //Load Template
-    var subjectsArray = [
-        { SubjectName: "Progress" },
-        { SubjectName: "Planning" },
-        { SubjectName: "Problems" }
-    ];
+    ////Load Template
+    //var subjectsArray = [
+    //    { SubjectName: "Progress" },
+    //    { SubjectName: "Planning" },
+    //    { SubjectName: "Problems" }
+    //];
 
-    var scriptTemplate = kendo.template($("#subjects-template").html());
-    $.each(subjectsArray, function (index, value) {
-        //alert(index + ": " + value);
-        $("#TextBoxesGroup").append(scriptTemplate(value));
-    });
+    //var scriptTemplate = kendo.template($("#subjects-template").html());
+    //$.each(subjectsArray, function (index, value) {
+    //    //alert(index + ": " + value);
+    //    $("#TextBoxesGroup").append(scriptTemplate(value));
+    //});
 
-    $("#addButton").click(function () {
-        var data = { SubjectName: " << New Subject >> " };
-        $("#TextBoxesGroup").append(scriptTemplate(data));
-    });
+    //$("#addButton").click(function () {
+    //    var data = { SubjectName: " << New Subject >> " };
+    //    $("#TextBoxesGroup").append(scriptTemplate(data));
+    //});
 });
 
-function removeSubject(itemClicked) {
-    if (window.confirm("Are you sure wallah ?"))
-        $(itemClicked).closest('.row').detach();
-}
+//function removeSubject(itemClicked) {
+//    if (window.confirm("Are you sure wallah ?"))
+//        $(itemClicked).closest('.row').detach();
+//}

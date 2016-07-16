@@ -51,56 +51,22 @@
                             </div>
                             <!-- end: WIZARD STEP 1 -->
                             <!-- start: WIZARD STEP 2 -->
-                            <div id="step-2">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <fieldset>
-                                            <legend>
-                                                Template
-                                            </legend>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label"> Template Name <span class="symbol required"></span> </label>
-                                                        <input type="text" placeholder="Enter your Template Name" class="form-control" name="TemplateName" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset id="TextBoxesGroup">
-                                            <legend>
-                                                Subject(s)
-                                            </legend>
-
-                                        </fieldset>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <button class="btn btn-wide btn-o btn-warning" type="button" id="addButton">
-                                                        ADD More...
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <button class="btn btn-primary btn-o back-step btn-wide pull-left">
-                                                <i class="fa fa-circle-arrow-left"></i> Back
-                                            </button>
-                                            <button class="btn btn-primary btn-o next-step btn-wide pull-right">
-                                                Next <i class="fa fa-arrow-circle-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                            <div id="step-2" style="display:none;">
+                                @await Component.InvokeAsync("TemplateWizardStep", new { projectId = 0 })
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-o back-step btn-wide pull-left">
+                                        <i class="fa fa-circle-arrow-left"></i> Back
+                                    </button>
+                                    <button class="btn btn-primary btn-o next-step btn-wide pull-right">
+                                        Save & Move Next <i class="fa fa-arrow-circle-right"></i>
+                                    </button>
                                 </div>
+
+
                             </div>
                             <!-- end: WIZARD STEP 2 -->
                             <!-- start: WIZARD STEP 3 -->
-                            <div id="step-3">
+                            <div id="step-3" style="display:none;">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <fieldset>
@@ -224,7 +190,7 @@
                             </div>
                             <!-- end: WIZARD STEP 3 -->
                             <!-- start: WIZARD STEP 4 -->
-                            <div id="step-4">
+                            <div id="step-4" style="display:none;">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="text-center">
@@ -251,23 +217,15 @@
     </div>
 </div>
 <!-- end: WIZARD DEMO -->
-<!-- start: Template Area  -->
-<script id="subjects-template" type="text/x-kendo-template">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <input type="text" placeholder="Enter your Subject Title" class="form-control" name="Accomplishments" value='#= SubjectName #' />
-            </div>
-        </div>
-        <div class="col-md-1">
-            <h2 onclick="removeSubject(this);"><i class="fa fa-trash"></i></h2>
-        </div>
-    </div>
-</script>
-<!-- end: Template Area -->
+
 
 @section CssStyle{
     <link rel="stylesheet" href="~/lib/toastr/toastr.min.css">
+    <link href="~/lib/nestable-fork/dist/jquery.nestable.min.css" rel="stylesheet" media="screen">
+    @*Override JQuery Nestable*@
+    <link href="~/css/_nestable.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" media="screen">
+    <link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" media="screen">
 }
 
 @section Scripts{
@@ -275,7 +233,7 @@
     <script src="~/lib/bb-jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
     <script src="~/lib/toastr/toastr.min.js"></script>
-
+    <script src="~/lib/nestable-fork/dist/jquery.nestable.min.js"></script>
     <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
     <!-- start: Packet JAVASCRIPTS -->
     <script src="~/assets/js/letter-icons.js"></script>
@@ -291,8 +249,9 @@
     <script src="~/assets/js/form-wizard.js"></script>
     ***************************************************
     -->
-    <script src="~/js/CreateProjectUI-Notifications.js"></script>
     <script src="~/js/CreateProjectFormWizard.js"></script>
+    <script src="~/js/CreateProjectUI-Notifications.js"></script>
+    <script src="~/js/CreateProjectUI-nestable.js"></script>
 
 
     <!-- end: JavaScript Event Handlers for this page -->

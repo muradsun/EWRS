@@ -13,6 +13,6 @@ namespace ADMA.EWRS.Data.Models
         public byte SubjectStatus_Id { get; set; }
         public string Status { get; set; }
         public byte[] RowVersion { get; set; }
-        public virtual ICollection<Subject> Subjects { get; set; }
+        public  ICollection<Subject> Subjects { get; set; }
     }
 }

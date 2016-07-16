@@ -12,7 +12,7 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public virtual User User { get; set; }
-        public virtual Group Group { get; set; }
+        public  User User { get; set; }
+        public  Group Group { get; set; }
     }
 }

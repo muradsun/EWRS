@@ -13,7 +13,7 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public virtual Subject Subject { get; set; }
-        public virtual TeamModel TeamModel { get; set; }
+        public  Subject Subject { get; set; }
+        public  TeamModel TeamModel { get; set; }
     }
 }
