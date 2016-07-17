@@ -52,9 +52,9 @@ namespace ADMA.EWRS.BizDomain
             {
                 Name = "Default Template",
                 Subjects = new List<Subject>() {
-                    new Subject() { Name = "Progress", IsMandatory= true, DueDate = null },
-                    new Subject() { Name = "Planning", IsMandatory= true, DueDate = null  },
-                    new Subject() { Name = "Problems", IsMandatory= true, DueDate = null  },
+                    new Subject() { Name = "Progress", IsMandatory= true, DueDate = null , SequenceNo = 1},
+                    new Subject() { Name = "Planning", IsMandatory= true, DueDate = null , SequenceNo = 2},
+                    new Subject() { Name = "Problems", IsMandatory= true, DueDate = null , SequenceNo = 3}
                 }
 
             };

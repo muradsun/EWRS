@@ -26,7 +26,6 @@
             <legend>
                 Template
             </legend>
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -36,9 +35,6 @@
                 </div>
             </div>
         </fieldset>
-        @{
-            int x = 1;
-        }
         <fieldset id="TextBoxesGroup">
             <legend>
                 Subject(s)
@@ -48,26 +44,24 @@
                 <ol class="dd-list">
                     @foreach (SubjectWizardStepView item in Model.Subjects)
                     {
-                        <li class="dd-item" data-id="@x">
+                        <li class="dd-item">
                             <div class="row">
                                 <div class="col-md-1 dd-handle">
                                     <i class="fa fa-sort"></i>
-                                    @{
-                                        x += 1;
-                                    }
                                 </div>
                                 <div class="col-md-10">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <input type="text" placeholder="Enter Subject Title" class="form-control" value="@item.Name" />
+                                            <input type="hidden" value="@item.SequenceNo" name="SequenceNo" id="hdnSequenceNo" />
+                                            @item.SequenceNo
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2 s-stepElm">
                                             <div class="checkbox clip-check check-primary">
-                                                <input id="chkMandatory_@x" type="checkbox" checked="checked" asp-for="@item.IsMandatory">
-                                                <label for="chkMandatory_@x"> <b>Is Mandatory</b> </label>
-
+                                                <input id="chkMandatory_@item.SequenceNo" type="checkbox" checked="checked" asp-for="@item.IsMandatory">
+                                                <label for="chkMandatory_@item.SequenceNo"> <b>Is Mandatory</b> </label>
                                             </div>
                                         </div>
                                         <div class="col-md-2 s-stepElm" style="text-align:right; padding-right:0;">
@@ -84,7 +78,7 @@
                             </div>
                             <hr class="hr-flat" />
                         </li>
-                     }
+                    }
                 </ol>
             </div>
             <div class="row">
@@ -98,7 +92,7 @@
 
 <!-- start: Template Area  -->
 <script id="subjects-template" type="text/x-kendo-template">
-    <li class="dd-item" data-id="#= SequenceNo #">
+    <li class="dd-item">
         <div class="row">
             <div class="col-md-1 dd-handle">
                 <i class="fa fa-sort"></i>
@@ -106,22 +100,23 @@
             <div class="col-md-10">
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="text" placeholder="Enter Subject Title" class="form-control" />
+                        <input type="text" placeholder="Enter Subject Title" class="form-control" value="#= Name #" />
+                        <input type="hidden" value="#= SequenceNo #" name="SequenceNo" id="hdnSequenceNo" />
+                        #= SequenceNo #
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2 s-stepElm">
                         <div class="checkbox clip-check check-primary">
-                            <input id="chkMandatory_#= SequenceNo #" type="checkbox" checked="checked">
+                            <input id="chkMandatory_#= SequenceNo #" type="checkbox" checked="checked" asp-for="#= IsMandatory #">
                             <label for="chkMandatory_#= SequenceNo #"> <b>Is Mandatory</b> </label>
-
                         </div>
                     </div>
                     <div class="col-md-2 s-stepElm" style="text-align:right; padding-right:0;">
                         <b> Due Date:</b>
                     </div>
                     <div class="col-md-8 s-stepElm" style="text-align:left; padding-left:0; padding-top: 0;">
-                        <input class="datepicker" style="width: 98%" />
+                        <input class="datepicker" style="width: 98%" asp-for="#= DueDate #" />
                     </div>
                 </div>
             </div>
@@ -131,10 +126,6 @@
         </div>
         <hr class="hr-flat" />
     </li>
-
-
-
-    
 </script>
 <!-- end: Template Area -->
 

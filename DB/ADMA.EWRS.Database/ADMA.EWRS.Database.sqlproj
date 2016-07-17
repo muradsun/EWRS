@@ -249,5 +249,6 @@
   <ItemGroup>
     <None Include="Scripts\Deployment\01 - Add Groups.sql" />
     <None Include="Compares\MuradHomeCompare.scmp" />
+    <None Include="Scripts\HR_EMP_INFO_V_Data_Script.zip" />
   </ItemGroup>
 </Project>
