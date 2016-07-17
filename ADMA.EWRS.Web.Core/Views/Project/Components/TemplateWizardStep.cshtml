@@ -52,9 +52,12 @@
                                 <div class="col-md-10">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Enter Subject Title" class="form-control" value="@item.Name" />
+                                            <div class="form-group">
+                                                <label class="control-label"> Subject Name <span class="symbol required"></span> </label>
+                                                <input type="text" placeholder="Enter Subject Title" class="form-control txtSubject" value="@item.Name" />
+                                                <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
+                                            </div>
                                             <input type="hidden" value="@item.SequenceNo" name="SequenceNo" id="hdnSequenceNo" />
-                                            @item.SequenceNo
                                         </div>
                                     </div>
                                     <div class="row">
@@ -67,8 +70,8 @@
                                         <div class="col-md-2 s-stepElm" style="text-align:right; padding-right:0;">
                                             <b> Due Date:</b>
                                         </div>
-                                        <div class="col-md-8 s-stepElm" style="text-align:left; padding-left:0; padding-top: 0;">
-                                            <input class="datepicker" style="width: 98%" asp-for="@item.DueDate" />
+                                        <div class="col-md-8 s-stepElm" style="text-align:left; padding-left:5px; padding-top: 0;">
+                                            <input class="datepickerElm" style="width: 100%" asp-for="@item.DueDate" />
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +86,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2 onclick="addSubject(this);" class="btn btn-o btn-Toolbar btn-success"> <i class="fa fa-plus-square"></i> <b>Add Subject</b></h2>
+                    <span class="btn btn-o btn-Toolbar btn-success" id="btnstep2AddSubj"> <i class="fa fa-plus-square"></i> <b>Add Subject</b></span>
                 </div>
             </div>
         </fieldset>
@@ -100,23 +103,26 @@
             <div class="col-md-10">
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="text" placeholder="Enter Subject Title" class="form-control" value="#= Name #" />
+                        <div class="form-group">
+                            <label class="control-label"> Subject Name <span class="symbol required"></span> </label>
+                            <input type="text" placeholder="Enter Subject Title" class="form-control txtSubject" value="#= Name #" />
+                            <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
+                        </div>
                         <input type="hidden" value="#= SequenceNo #" name="SequenceNo" id="hdnSequenceNo" />
-                        #= SequenceNo #
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2 s-stepElm">
                         <div class="checkbox clip-check check-primary">
-                            <input id="chkMandatory_#= SequenceNo #" type="checkbox" checked="checked" asp-for="#= IsMandatory #">
+                            <input id="chkMandatory_#= SequenceNo #" type="checkbox" checked="checked">
                             <label for="chkMandatory_#= SequenceNo #"> <b>Is Mandatory</b> </label>
                         </div>
                     </div>
                     <div class="col-md-2 s-stepElm" style="text-align:right; padding-right:0;">
                         <b> Due Date:</b>
                     </div>
-                    <div class="col-md-8 s-stepElm" style="text-align:left; padding-left:0; padding-top: 0;">
-                        <input class="datepicker" style="width: 98%" asp-for="#= DueDate #" />
+                    <div class="col-md-8 s-stepElm" style="text-align:left; padding-left:5px; padding-top: 0;">
+                        <input class="datepickerElmNew" style="width: 100%" asp-for="#= DueDate #" />
                     </div>
                 </div>
             </div>
@@ -130,23 +136,59 @@
 <!-- end: Template Area -->
 
 <script type="text/javascript">
-    //function SaveProjectInfoWizardStep() {
-    //    var pData = CollectStepInfo();
-    //    $.ajax({
-    //        url: "/Project/SaveProjectWizardStep",
-    //        success: function (result) {
-    //            UINotifications.ShowToast("success", "Your Projet [ " + pData.Name + " ] Saved Successfuly.", "Saved Successfuly");
-    //        },
-    //        cache: false,
-    //        error: function (xhr, status, error) {
-    //            UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
-    //        },
-    //        type: "POST",
-    //        data: JSON.stringify(pData),
-    //        contentType: "application/json"
-    //    });
+    function validateForm() {
+        var wizardForm = $('#form');
+        var valElm = null;
+        var isValidForm = true;
 
-    //}
+        if (wizardForm.valid()) {
+            if ($(".txtSubject").length < 1) {
+                alert("At least one subject is required");
+                return false;
+            }
+
+            $(".txtSubject").each(function (index) {
+                valElm = $(this);
+                if (valElm.val().trim() == "") {
+                    isValidForm = isValidForm && false;
+                    valElm.closest(".form-group").addClass("has-error");
+                    valElm.closest(".form-group").find(".has-error-H").addClass("has-error-S");
+                } else {
+                    isValidForm = isValidForm && true;
+                    valElm.closest(".form-group").removeClass("has-error").addClass("has-success");
+                    valElm.closest(".form-group").find(".has-error-H").removeClass("has-error-S");
+                }
+            });
+        }
+        return isValidForm;
+    }
+
+
+    function SaveTemplateWizardStep() {
+
+        if (!validateForm())
+            return false;
+
+
+
+        //    var pData = CollectStepInfo();
+        //    $.ajax({
+        //        url: "/Project/SaveProjectWizardStep",
+        //        success: function (result) {
+        //            UINotifications.ShowToast("success", "Your Projet [ " + pData.Name + " ] Saved Successfuly.", "Saved Successfuly");
+        //        },
+        //        cache: false,
+        //        error: function (xhr, status, error) {
+        //            UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
+        //        },
+        //        type: "POST",
+        //        data: JSON.stringify(pData),
+        //        contentType: "application/json"
+        //    });
+
+        return true;
+
+    }
 
     //function CollectStepInfo() {
     //    var projectInfoWizardStepView = {};
@@ -159,10 +201,64 @@
     //    return projectInfoWizardStepView;
     //}
 
+    function GetDefualtSubjectWizardStepView() {
+        var subjectWizardStepView = {};
+        subjectWizardStepView.Template_Id = "";
+        subjectWizardStepView.Subject_Id = 0;
+        subjectWizardStepView.Name = "";
+        subjectWizardStepView.IsMandatory = true;
+        subjectWizardStepView.SequenceNo = 0;
+        subjectWizardStepView.DueDate = null;
+
+        return subjectWizardStepView;
+    }
+
+    function removeSubject(ctrl) {
+        if (window.confirm("Are you sure you want to delete this subject ?"))
+            $(ctrl).closest('.dd-item').detach();
+    }
+
+    function bindDatePicker(isNew) {
+        if (isNew == false)
+            $(".datepickerElm").kendoDatePicker({ format: "dd-MMMM-yyyy" });
+        else {
+            $(".datepickerElmNew").kendoDatePicker({ format: "dd-MMMM-yyyy" });
+            $(".datepickerElmNew").removeClass("datepickerElmNew").addClass("datepickerElm");
+        }
+
+
+        //.kendoDatePicker({
+        //    format: "dd-MMMM-yyyy"
+        //});
+    }
+
     $(document).ready(function () {
-        $(".datepicker").kendoDatePicker({
-            format: "dd-MMMM-yyyy"
+        bindDatePicker(false);
+
+        $("#btnstep2AddSubj").click(function () {
+            //Calculate Max Seq
+            var maxSeq = 0;
+            var subSeq = 0;
+            var x = $(".dd-item input[type=checkbox]").each(function (index) {
+                subSeq = $(this).attr('id').split("_")[1];
+                if (maxSeq < subSeq)
+                    maxSeq = parseInt(subSeq);
+            });
+            maxSeq += 1;
+
+            //Get JSON Defualt Object
+            var subObj = GetDefualtSubjectWizardStepView();
+            subObj.SequenceNo = maxSeq;
+
+            //bind JSON to template
+            var scriptTemplate = kendo.template($("#subjects-template").html());
+            $(".dd-list").append(scriptTemplate(subObj));
+
+            //Bind DataPiacker
+            bindDatePicker(true);
+
         });
+
     });
 
 </script>

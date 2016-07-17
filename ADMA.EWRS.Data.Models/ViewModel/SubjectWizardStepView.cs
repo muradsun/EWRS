@@ -15,5 +15,6 @@ namespace ADMA.EWRS.Data.Models.ViewModel
         public Nullable<System.DateTime> DueDate { get; set; }
         public bool IsMandatory { get; set; }
         public int SequenceNo { get; set; }
+
     }
 }

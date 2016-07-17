@@ -35,6 +35,11 @@ var FormWizard = function () {
                     required: true
                     //,email: true
                 },
+                txtSubject: {
+                    minlength: 3,
+                    required: true
+                    //,email: true
+                }
                 //password: {
                 //    minlength: 6,
                 //    required: true
@@ -47,7 +52,8 @@ var FormWizard = function () {
             },
             messages: {
                 Name: "Project Name is required, minimum 3 characters",
-                TemplateName: "Project Name is required, minimum 3 characters"
+                TemplateName: "Project Name is required, minimum 3 characters",
+                txtSubject: "Subject Name is required, minimum 3 characters"
             },
             highlight: function (element) {
                 $(element).closest('.help-block').removeClass('valid');
@@ -110,8 +116,11 @@ var FormWizard = function () {
         var isValidStep = validateSteps(context.fromStep, context.toStep);
 
         if (isValidStep & context.fromStep == 1 & context.toStep == 2)
-            SaveProjectInfoWizardStep();
+            return SaveProjectInfoWizardStep();
 
+
+        if (isValidStep & context.fromStep == 2 & context.toStep == 3)
+            return SaveTemplateWizardStep();
 
 
         return isValidStep;
@@ -173,12 +182,6 @@ jQuery(document).ready(function () {
     UINotifications.init();
     UINestable.init();
 
-    ////Load Template
-    //var subjectsArray = [
-    //    { SubjectName: "Progress" },
-    //    { SubjectName: "Planning" },
-    //    { SubjectName: "Problems" }
-    //];
 
     //var scriptTemplate = kendo.template($("#subjects-template").html());
     //$.each(subjectsArray, function (index, value) {

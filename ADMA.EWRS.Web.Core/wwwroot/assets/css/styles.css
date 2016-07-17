@@ -18101,5 +18101,16 @@ figure.effect-goliath {
 .s-stepElm {
     height: 50px;
     color: black;
-    padding-top: 10px;
+    padding-top: 10px !important;
+}
+
+.has-error-H {
+    color: #a94442;
+    display: none;
+}
+
+
+.has-error-S {
+    color: #a94442;
+    display: inline;
 }
