@@ -61,131 +61,18 @@
                                         Save & Move Next <i class="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </div>
-
-
                             </div>
                             <!-- end: WIZARD STEP 2 -->
                             <!-- start: WIZARD STEP 3 -->
                             <div id="step-3" style="display:none;">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <fieldset>
-                                            <legend>
-                                                Team Modules
-                                            </legend>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" placeholder="Enter First Name" class="form-control" name="FName" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" placeholder="Enter Last Name" class="form-control" name="LName" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" placeholder="Enter PF#" class="form-control" name="PF" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" placeholder="Enter Ext." class="form-control" name="Ext" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" placeholder="Enter Email" class="form-control" name="Email" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <input type="text" placeholder="Enter Job Title" class="form-control" name="JobTitle" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <select class="form-control" name="BusinessUnit">
-                                                            <option value="">&nbsp;</option>
-                                                            <option value="AL">Alabama</option>
-                                                            <option value="AK">Alaska</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <select class="form-control" name="Division">
-                                                            <option value="">&nbsp;</option>
-                                                            <option value="AL">Alabama</option>
-                                                            <option value="AK">Alaska</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <select class="form-control" name="Team">
-                                                            <option value="">&nbsp;</option>
-                                                            <option value="AL">Alabama</option>
-                                                            <option value="AK">Alaska</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <select class="form-control" name="Section">
-                                                            <option value="">&nbsp;</option>
-                                                            <option value="AL">Alabama</option>
-                                                            <option value="AK">Alaska</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <button class="btn btn-wide btn-o btn-info" type="button">
-                                                            Search
-                                                        </button>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <button class="btn btn-wide btn-o btn-warning" type="button">
-                                                            Clear
-                                                        </button>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </fieldset>
-                                        <div class="form-group">
-                                            <button class="btn btn-primary btn-o back-step btn-wide pull-left">
-                                                <i class="fa fa-circle-arrow-left"></i> Back
-                                            </button>
-                                            <button class="btn btn-primary btn-o next-step btn-wide pull-right">
-                                                Next <i class="fa fa-arrow-circle-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                @await Component.InvokeAsync("TeamModelWizardStep", new { projectId = 0 })
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-o back-step btn-wide pull-left">
+                                        <i class="fa fa-circle-arrow-left"></i> Back
+                                    </button>
+                                    <button class="btn btn-primary btn-o next-step btn-wide pull-right">
+                                        Next <i class="fa fa-arrow-circle-right"></i>
+                                    </button>
                                 </div>
                             </div>
                             <!-- end: WIZARD STEP 3 -->
@@ -226,6 +113,7 @@
     <link href="~/css/_nestable.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" media="screen">
     <link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" media="screen">
+
 }
 
 @section Scripts{
@@ -234,6 +122,8 @@
     <script src="~/lib/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
     <script src="~/lib/toastr/toastr.min.js"></script>
     <script src="~/lib/nestable-fork/dist/jquery.nestable.min.js"></script>
+    @*<script src="~/lib/mixitup/build/jquery.mixitup.min.js"></script>*@
+
     <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
     <!-- start: Packet JAVASCRIPTS -->
     <script src="~/assets/js/letter-icons.js"></script>
@@ -242,6 +132,7 @@
     <!-- start: JavaScript Event Handlers for this page -->
     <script src="~/assets/js/selectFx/classie.js"></script>
     <script src="~/assets/js/selectFx/selectFx.js"></script>
+    <script src="~/lib/mixitup/src/jquery.mixitup.js"></script>
 
     <!--Murad : Created for wizard -->
     <!--
@@ -253,6 +144,13 @@
     <script src="~/js/CreateProjectUI-Notifications.js"></script>
     <script src="~/js/CreateProjectUI-nestable.js"></script>
 
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var wizardContent = $('#wizard');
+            wizardContent.smartWizard("goToStep", 3);
+        });
+    </script>
     <!-- end: JavaScript Event Handlers for this page -->
+
 }
+

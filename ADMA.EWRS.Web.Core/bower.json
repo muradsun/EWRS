@@ -8,7 +8,8 @@
     "lib",
     "test",
     "tests",
-    "Murad"
+    "Murad",
+    "Gruntfile.js"
   ],
   "dependencies": {
     "jquery": "~2.1.3",
@@ -63,7 +64,8 @@
     "font-awesome": "~4.5.0",
     "themify-icons": "~0.1.0",
     "flag-icon-css": "~0.8.5",
-    "bootstrap-rtl": "~3.3.4"
+    "bootstrap-rtl": "~3.3.4",
+    "mixitup": "2.1.11"
   },
   "resolutions": {
     "jquery": ">=1.6"

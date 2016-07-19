@@ -1,0 +1,145 @@
+﻿@{
+}
+@model TeamModeWizardStepView
+
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="padding-30">
+            <h2 class="StepTitle">Create a Team Model <span class="text-large block">to manage everything you do with your project subjects and millstones</span></h2>
+            <p>
+                Through this template you can control your project gaining benefits including:
+            </p>
+            <p class="text-small">
+                <ul class="no-margin">
+                    <li>
+                        Access to exclusive releases and limited products.
+                    </li>
+                    <li>
+                        ng-Clip services, benefits and promotions.
+                    </li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <fieldset>
+            <legend>
+                Team Modules
+            </legend>
+
+
+            <style>
+                #Container .mix {
+                    display: none;
+                }
+            </style>
+
+            <div class="row">
+                <button type="button" class="filter" data-filter=".category-1">Category 1</button><br />
+                <button type="button" class="filter" data-filter=".category-2">Category 2</button><br />
+
+                <button type="button" class="sort" data-sort="my-order:asc">Ascending Order</button><br />
+                <button type="button" class="sort" data-sort="my-order:desc">Descending Order</button><br />
+            </div>
+
+            <div class="row">
+                <div id="Container">
+                    <div class="mix category-1 col-sm-6 col-md-3" data-my-order="1">
+                        <div class="thumbnail">
+                            <img alt="" src="/assets/images/lion-565818_640.jpg">
+                            <div class="caption">
+                                <h3>Thumbnail label</h3>
+                                <p>
+                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                                </p>
+                                <p>
+                                    <a class="btn btn-o btn-danger" href="#"> Button </a>
+                                    <a class="btn btn-o btn-primary" href="#"> Button </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mix category-1 col-sm-6 col-md-3" data-my-order="2">
+                        <div class="thumbnail">
+                            <img alt="" src="/assets/images/lion-565818_640.jpg">
+                            <div class="caption">
+                                <h3>Thumbnail label</h3>
+                                <p>
+                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                                </p>
+                                <p>
+                                    <a class="btn btn-o btn-danger" href="#"> Button </a>
+                                    <a class="btn btn-o btn-primary" href="#"> Button </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mix category-2 col-sm-6 col-md-3" data-my-order="3">
+                        <div class="thumbnail">
+                            <img alt="" src="/assets/images/lion-565818_640.jpg">
+                            <div class="caption">
+                                <h3>Thumbnail label</h3>
+                                <p>
+                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                                </p>
+                                <p>
+                                    <a class="btn btn-o btn-danger" href="#"> Button </a>
+                                    <a class="btn btn-o btn-primary" href="#"> Button </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mix category-2 col-sm-6 col-md-3" data-my-order="4">
+                        <div class="thumbnail">
+                            <img alt="" src="/assets/images/lion-565818_640.jpg">
+                            <div class="caption">
+                                <h3>Thumbnail label</h3>
+                                <p>
+                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                                </p>
+                                <p>
+                                    <a class="btn btn-o btn-danger" href="#"> Button </a>
+                                    <a class="btn btn-o btn-primary" href="#"> Button </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </fieldset>
+    </div>
+</div>
+
+<!-- start: Template Area  -->
+<!-- end: Template Area -->
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#Container').mixItUp({
+            animation: {
+                enable: false
+            },
+            layout: {
+                display: 'inline'
+            },
+            callbacks: {
+                onMixLoad: function () {
+                    $(this).mixItUp('setOptions', {
+                        animation: {
+                            enable: true
+                        },
+                    });
+                }
+            }
+        });
+
+    });
+</script>

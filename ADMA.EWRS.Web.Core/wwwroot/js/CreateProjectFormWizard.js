@@ -35,10 +35,17 @@ var FormWizard = function () {
                     required: true
                     //,email: true
                 },
-                txtSubject: {
+                txtSubject_1: {
                     minlength: 3,
                     required: true
-                    //,email: true
+                },
+                txtSubject_2: {
+                    minlength: 3,
+                    required: true
+                },
+                txtSubject_3: {
+                    minlength: 3,
+                    required: true
                 }
                 //password: {
                 //    minlength: 6,

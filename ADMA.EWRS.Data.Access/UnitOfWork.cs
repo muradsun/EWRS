@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ADMA.EWRS.Data.Access.Repositories;
 using ADMA.EWRS.Data.Models.Data;
 using ADMA.EWRS.Data.Models.Repositories;
+using ADMA.EWRS.Data.Models;
 
 namespace ADMA.EWRS.Data.Access
 {
@@ -30,6 +31,7 @@ namespace ADMA.EWRS.Data.Access
             Delegations = new DelegationsRepository(_context);
             OrganizationHierarchies = new OrganizationHierarchiesRepository(_context);
             Templates = new TemplateRepository(_context);
+            TeamModel = new TeamModelRepository(_context);
         }
 
         public IMuradRepository Muradies { get; private set; }
@@ -40,6 +42,7 @@ namespace ADMA.EWRS.Data.Access
         public IPermissionsRepository Permissions { get; private set; }
         public IOrganizationHierarchiesRepository OrganizationHierarchies { get; private set; }
         public ITemplatesRepository Templates { get; private set; }
+        public ITeamModelsRepository TeamModel { get; private set; }
 
         public int Save()
         {

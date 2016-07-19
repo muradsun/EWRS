@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label class="control-label"> Template Name <span class="symbol required"></span> </label>
+                        <label> Template Name <span class="symbol required"></span> </label>
                         <input type="text" placeholder="Enter Template Name" class="form-control" name="TemplateName" asp-for="Name" style="width:100%" id="TemplateName" />
                     </div>
                 </div>
@@ -53,8 +53,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="control-label"> Subject Name <span class="symbol required"></span> </label>
-                                                <input type="text" placeholder="Enter Subject Title" class="form-control txtSubject" value="@item.Name" />
+                                                <label> Subject Name <span class="symbol required"></span> </label>
+                                                <input id="txtSubject_@item.SequenceNo" type="text" placeholder="Enter Subject Title" class="form-control txtSubject" value="@item.Name" />
                                                 <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
                                             </div>
                                             <input type="hidden" value="@item.SequenceNo" name="SequenceNo" id="hdnSequenceNo" />
@@ -104,7 +104,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="control-label"> Subject Name <span class="symbol required"></span> </label>
+                            <label> Subject Name <span class="symbol required"></span> </label>
                             <input type="text" placeholder="Enter Subject Title" class="form-control txtSubject" value="#= Name #" />
                             <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
                         </div>
@@ -149,7 +149,7 @@
 
             $(".txtSubject").each(function (index) {
                 valElm = $(this);
-                if (valElm.val().trim() == "") {
+                if (valElm.val().trim() == "" || $.trim(valElm.val()).length < 3) {
                     isValidForm = isValidForm && false;
                     valElm.closest(".form-group").addClass("has-error");
                     valElm.closest(".form-group").find(".has-error-H").addClass("has-error-S");
@@ -258,6 +258,19 @@
             bindDatePicker(true);
 
         });
+
+        $(".txtSubject").focusout(function () {
+            //$(".txtSubject").each(function (index) {
+            //    valElm = $(this);
+            //    if (valElm.val().trim() == "" || valElm.val().trim().length <= 3) {
+            //        valElm.closest(".form-group").addClass("has-error");
+            //        valElm.closest(".form-group").find(".has-error-H").addClass("has-error-S");
+            //    } else {
+            //        valElm.closest(".form-group").removeClass("has-error").addClass("has-success");
+            //        valElm.closest(".form-group").find(".has-error-H").removeClass("has-error-S");
+            //    }
+            //});
+        })
 
     });
 
