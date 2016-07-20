@@ -5790,6 +5790,10 @@ a.text-white {
         color: #ffffff !important;
     }
 
+.text-black {
+    color: black !important;
+}
+
 .text-dark {
     color: #5b5b60 !important;
 }
@@ -18113,4 +18117,27 @@ figure.effect-goliath {
 .has-error-S {
     color: #a94442;
     display: inline;
+}
+
+
+.thumbnail-card {
+    background-color: #ffffff;
+}
+
+.thumbnail-updater{
+    background-color:#5cb85c;
+    color:white
+}
+
+.thumbnail-viewer{
+    background-color:#5bc0de;
+}
+
+.img-card {
+    width: 75px;
+}
+
+.no-space {
+    padding: 0;
+    margin:0;
 }

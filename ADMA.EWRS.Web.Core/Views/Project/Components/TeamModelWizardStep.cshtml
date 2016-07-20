@@ -30,82 +30,139 @@
                 Team Modules
             </legend>
 
-
             <style>
                 #Container .mix {
                     display: none;
                 }
             </style>
 
-            <div class="row">
-                <button type="button" class="filter" data-filter=".category-1">Category 1</button><br />
-                <button type="button" class="filter" data-filter=".category-2">Category 2</button><br />
-
-                <button type="button" class="sort" data-sort="my-order:asc">Ascending Order</button><br />
-                <button type="button" class="sort" data-sort="my-order:desc">Descending Order</button><br />
+            <div class="row height-50 text-right">
+                <button class="btn btn-success btn-scroll btn-scroll-left ti-user" type="button">
+                    <span><i class="fa fa-user-plus"></i> Add </span>
+                </button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">
+                        Sort
+                    </button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#" class="sort" data-sort="my-order:asc">Ascending Order </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sort" data-sort="my-order:desc"> Descending Order </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">
+                        Filter
+                    </button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#" class="filter" data-filter="all"> ALL </a>
+                        </li>
+                        <li>
+                            <a href="#" class="filter" data-filter=".updater"> Updater </a>
+                        </li>
+                        <li>
+                            <a href="#" class="filter" data-filter=".viewer"> Viewer </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="row">
                 <div id="Container">
-                    <div class="mix category-1 col-sm-6 col-md-3" data-my-order="1">
+                    <div class="mix viewer col-sm-6 col-md-3" data-my-order="1">
+                        <!-- start: Card style="background-color:#5bc0de" style="background-color:#5cb85c" -->
                         <div class="thumbnail">
-                            <img alt="" src="/assets/images/lion-565818_640.jpg">
-                            <div class="caption">
-                                <h3>Thumbnail label</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-o btn-danger" href="#"> Button </a>
-                                    <a class="btn btn-o btn-primary" href="#"> Button </a>
-                                </p>
+                            <div class="row">
+                                <div class="col-md-3 no-space text-right">
+                                    <button type="button" class="btn btn-red">
+                                        <i class="fa fa-user-times"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-6 " align="center">
+                                    <img class="img-responsive img-card" alt="" src="/images/form/User_female.png">
+                                </div>
+                                <div class="col-md-3 no-space text-left">
+                                    @*<span class="label label-success"> Updater </span>*@
+                                </div>
+                            </div>
+                            <div class="padding-20 height-180 thumbnail-card">
+                                <h4 class="thumbnail-updater">Murad Mahmoud</h4>
+                                <div class="form-group">
+                                    <select class="cs-select cs-skin-slide" onselect="alert(1)">
+                                        <option value="Updater" data-class="fa fa-dropbox">Updater</option>
+                                        <option value="Viewer" data-class="fa fa-github">Viewer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="radio clip-radio radio-primary no-space ">
+                                        <input name="vertical" id="radio3" type="radio" value="radio3" checked="checked">
+                                        <label for="radio3"> Project Level</label>
+                                    </div>
+                                    <div class="radio clip-radio radio-primary no-space ">
+                                        <input name="vertical" id="radio4" type="radio" value="radio4">
+                                        <label for="radio4">
+                                            <span class="cl-effect-3 links block margin-top-10">
+                                                <a href="#" class="uppercase text-dark text-uppercase text-bold text-extra-small">
+                                                    Specific Subject
+                                                    <i class="padding-left-5 fa fa-angle-right"></i>
+                                                </a>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <!-- end: Card -->
                     </div>
-                    <div class="mix category-1 col-sm-6 col-md-3" data-my-order="2">
-                        <div class="thumbnail">
-                            <img alt="" src="/assets/images/lion-565818_640.jpg">
-                            <div class="caption">
-                                <h3>Thumbnail label</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-o btn-danger" href="#"> Button </a>
-                                    <a class="btn btn-o btn-primary" href="#"> Button </a>
-                                </p>
+                    <div class="mix updater col-sm-6 col-md-3" data-my-order="2">
+                        <!-- start: Card -->
+                        <div class="thumbnail thumbnail-viewer">
+                            <img class="img-responsive img-card" alt="" src="/images/form/User_female.png">
+                            <div class="padding-20 height-180 thumbnail-card">
+
+                                <h4>Murad Mahmoud</h4>
+                                <div class="form-group">
+                                    <select class="cs-select cs-skin-slide" onselect="alert(1)">
+                                        <option value="Updater" data-class="fa fa-dropbox">Updater</option>
+                                        <option value="Viewer" data-class="fa fa-github">Viewer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="radio clip-radio radio-primary no-space ">
+                                        <input name="vertical" id="radio3" type="radio" value="radio3" checked="checked">
+                                        <label for="radio3"> Project Level</label>
+                                    </div>
+                                    <div class="radio clip-radio radio-primary no-space ">
+                                        <input name="vertical" id="radio4" type="radio" value="radio4">
+                                        <label for="radio4">
+                                            <span class="cl-effect-3 links block margin-top-10">
+                                                <a href="#" class="uppercase text-dark text-uppercase text-bold text-extra-small">
+                                                    Specific Subject
+                                                    <i class="padding-left-5 fa fa-angle-right"></i>
+                                                </a>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <!-- end: Card -->
                     </div>
-                    <div class="mix category-2 col-sm-6 col-md-3" data-my-order="3">
-                        <div class="thumbnail">
-                            <img alt="" src="/assets/images/lion-565818_640.jpg">
-                            <div class="caption">
-                                <h3>Thumbnail label</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-o btn-danger" href="#"> Button </a>
-                                    <a class="btn btn-o btn-primary" href="#"> Button </a>
-                                </p>
-                            </div>
-                        </div>
+                    <div class="mix viewer col-sm-6 col-md-3" data-my-order="3">
+
                     </div>
-                    <div class="mix category-2 col-sm-6 col-md-3" data-my-order="4">
-                        <div class="thumbnail">
-                            <img alt="" src="/assets/images/lion-565818_640.jpg">
-                            <div class="caption">
-                                <h3>Thumbnail label</h3>
-                                <p>
-                                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-o btn-danger" href="#"> Button </a>
-                                    <a class="btn btn-o btn-primary" href="#"> Button </a>
-                                </p>
-                            </div>
-                        </div>
+                    <div class="mix viewer col-sm-6 col-md-3" data-my-order="4">
+
                     </div>
                 </div>
             </div>
