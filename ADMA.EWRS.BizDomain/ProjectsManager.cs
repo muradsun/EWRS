@@ -43,13 +43,13 @@ namespace ADMA.EWRS.BizDomain
 
         }
 
-        public TeamModel GetTeamModelOrDefualt(int projectId)
+        public List<TeamModel> GetTeamModelOrDefualt(int projectId)
         {
             if (projectId == 0)
-                return new TeamModel();
+                return new List<TeamModel>();
             else
                 using (var unitOfWork = new UnitOfWork())
-                    return unitOfWork.TeamModel.GetTeamModel(projectId);
+                    return unitOfWork.TeamModel.GetTeamModel(projectId).ToList();
         }
 
 

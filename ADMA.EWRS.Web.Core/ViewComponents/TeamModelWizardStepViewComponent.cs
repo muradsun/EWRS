@@ -28,15 +28,19 @@ namespace ADMA.EWRS.Web.Core.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(int projectId)
         {
-            TeamModel team = _pm.GetTeamModelOrDefualt(projectId);
-            return View("~/Views/Project/Components/TeamModelWizardStep.cshtml", new TeamModeWizardStepView()
-            {
-                Group_Id = team.Group_Id,
-                User_Id = team.User_Id,
-                IsUpdater = team.IsUpdater,
-                Project_Id = team.Project_Id,
-                TeamModel_Id = team.TeamModel_Id
-            });
+            List<TeamModel> team = _pm.GetTeamModelOrDefualt(projectId);
+            uint seq = 0;
+            return View("~/Views/Project/Components/TeamModelWizardStep.cshtml",
+                    team.Select(t => new TeamModeWizardStepView()
+                    {
+                        Group_Id = t.Group_Id,
+                        User_Id = t.User_Id,
+                        IsUpdater = t.IsUpdater,
+                        Project_Id = t.Project_Id,
+                        TeamModel_Id = t.TeamModel_Id,
+                        SequenceNo = ++seq
+                    }).ToList<TeamModeWizardStepView>()
+                );
         }
 
         //private Task<List<Project>> GetItemsAsync(int maxPriority, bool isDone)

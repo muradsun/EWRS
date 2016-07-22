@@ -18124,13 +18124,40 @@ figure.effect-goliath {
     background-color: #ffffff;
 }
 
-.thumbnail-updater{
-    background-color:#5cb85c;
-    color:white
+.thumbnail-updater {
+    background-color: #7bc6a0;
+     animation-name: color_change_to_updater;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
 }
 
-.thumbnail-viewer{
-    background-color:#5bc0de;
+.thumbnail-viewer {
+    background-color: #579ed8;
+    animation-name: color_change_to_viewer;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+}
+
+@keyframes color_change_to_viewer {
+    from {
+        background-color: #7bc6a0;
+    }
+
+    to {
+        background-color: #579ed8;
+    }
+}
+
+@keyframes color_change_to_updater {
+    from {
+        background-color:  #579ed8;
+    }
+
+    to {
+        background-color:#7bc6a0;
+    }
 }
 
 .img-card {
@@ -18139,5 +18166,5 @@ figure.effect-goliath {
 
 .no-space {
     padding: 0;
-    margin:0;
+    margin: 0;
 }

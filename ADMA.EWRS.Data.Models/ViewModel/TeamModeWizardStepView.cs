@@ -14,5 +14,6 @@ namespace ADMA.EWRS.Data.Models.ViewModel
         public Nullable<int> Group_Id { get; set; }
         public int Project_Id { get; set; }
         public bool IsUpdater { get; set; }
+        public uint  SequenceNo { get; set; }
     }
 }

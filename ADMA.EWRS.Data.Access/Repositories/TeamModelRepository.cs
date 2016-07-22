@@ -17,14 +17,10 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         }
 
-        public TeamModel GetTeamModel(int projectId)
+        public ICollection<TeamModel >GetTeamModel(int projectId)
         {
-            return DbContext.TeamModels.Where(t => t.Project_Id == projectId).FirstOrDefault();
+            return DbContext.TeamModels.Where(t => t.Project_Id == projectId).ToList();
         }
-
-      
-
-     
 
     }
 }

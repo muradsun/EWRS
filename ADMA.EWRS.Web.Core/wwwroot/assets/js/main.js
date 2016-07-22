@@ -499,7 +499,14 @@ var Main = function () {
     };
     var customSelectHandler = function () {
         [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-            new SelectFx(el);
+            new SelectFx(el, {
+                stickyPlaceholder: false,
+                onChange: function (val) {
+                    if (typeof (selectChange) == "function")
+                        selectChange(el, val);
+                }
+            });
+
         });
     };
     // Window Resize Function

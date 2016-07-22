@@ -1,6 +1,6 @@
 ﻿@{
 }
-@model TeamModeWizardStepView
+@model List<TeamModeWizardStepView>
 
 
 
@@ -23,7 +23,6 @@
             </p>
         </div>
     </div>
-
     <div class="col-md-9">
         <fieldset>
             <legend>
@@ -35,9 +34,8 @@
                     display: none;
                 }
             </style>
-
             <div class="row height-50 text-right">
-                <button class="btn btn-success btn-scroll btn-scroll-left ti-user" type="button">
+                <button class="btn btn-success btn-scroll btn-scroll-left ti-user" type="button" onclick="showAddDlg();">
                     <span><i class="fa fa-user-plus"></i> Add </span>
                 </button>
                 <div class="btn-group">
@@ -76,12 +74,46 @@
                     </ul>
                 </div>
             </div>
-
             <div class="row">
                 <div id="Container">
                     <div class="mix viewer col-sm-6 col-md-3" data-my-order="1">
-                        <!-- start: Card style="background-color:#5bc0de" style="background-color:#5cb85c" -->
-                        <div class="thumbnail">
+                        <div class="thumbnail thumbnail-viewer">
+                            <div class="row">
+                                <div class="col-md-3 no-space text-right">
+                                    <button type="button" class="btn btn-red" onclick="deleteTM(this);">
+                                        <i class="fa fa-user-times"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-6 " align="center">
+                                    <img class="img-responsive img-card" alt="" src="/images/form/User_female.png">
+                                </div>
+                            </div>
+                            <div class="padding-20 height-200 thumbnail-card">
+                                <h4>Murad Mahmoud Ali Text ddd s</h4>
+                                <div class="form-group">
+                                    <select class="cs-select cs-skin-slide" onselect="alert(1)" id="xx" onchange="alert(99)" onclick="alert(100)">
+                                        <option value="Updater" data-class="fa fa-pencil-square-o">Updater</option>
+                                        <option value="Viewer" data-class="ti-eye" selected="selected">Viewer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="radio clip-radio radio-primary no-space">
+                                        <input name="vertical_1" id="radio_1" type="radio" value="radio3" checked="checked" class="radioElm">
+                                        <label for="radio_1"> Project Level</label>
+                                    </div>
+                                    <div class="radio clip-radio radio-primary no-space">
+                                        <input name="vertical_1" id="radio_2" type="radio" value="radio4" class="radioElm">
+                                        <label data-TMSubjects="" for="radio_2" class="cl-effect-3 links block margin-top-10 uppercase text-dark text-uppercase text-bold text-extra-small" onclick="loadSubj4TeamModel(this);" aria-describedby="popover303618" data-original-title="" data-toggle="popover" data-placement="top" data-html="true">
+                                            Specific Subject
+                                            <i class="padding-left-5 fa fa-angle-right"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mix updater col-sm-6 col-md-3" data-my-order="2">
+                        <div class="thumbnail thumbnail-viewer">
                             <div class="row">
                                 <div class="col-md-3 no-space text-right">
                                     <button type="button" class="btn btn-red">
@@ -91,45 +123,8 @@
                                 <div class="col-md-6 " align="center">
                                     <img class="img-responsive img-card" alt="" src="/images/form/User_female.png">
                                 </div>
-                                <div class="col-md-3 no-space text-left">
-                                    @*<span class="label label-success"> Updater </span>*@
-                                </div>
                             </div>
-                            <div class="padding-20 height-180 thumbnail-card">
-                                <h4 class="thumbnail-updater">Murad Mahmoud</h4>
-                                <div class="form-group">
-                                    <select class="cs-select cs-skin-slide" onselect="alert(1)">
-                                        <option value="Updater" data-class="fa fa-dropbox">Updater</option>
-                                        <option value="Viewer" data-class="fa fa-github">Viewer</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <div class="radio clip-radio radio-primary no-space ">
-                                        <input name="vertical" id="radio3" type="radio" value="radio3" checked="checked">
-                                        <label for="radio3"> Project Level</label>
-                                    </div>
-                                    <div class="radio clip-radio radio-primary no-space ">
-                                        <input name="vertical" id="radio4" type="radio" value="radio4">
-                                        <label for="radio4">
-                                            <span class="cl-effect-3 links block margin-top-10">
-                                                <a href="#" class="uppercase text-dark text-uppercase text-bold text-extra-small">
-                                                    Specific Subject
-                                                    <i class="padding-left-5 fa fa-angle-right"></i>
-                                                </a>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end: Card -->
-                    </div>
-                    <div class="mix updater col-sm-6 col-md-3" data-my-order="2">
-                        <!-- start: Card -->
-                        <div class="thumbnail thumbnail-viewer">
-                            <img class="img-responsive img-card" alt="" src="/images/form/User_female.png">
-                            <div class="padding-20 height-180 thumbnail-card">
-
+                            <div class="padding-20 height-200 thumbnail-card">
                                 <h4>Murad Mahmoud</h4>
                                 <div class="form-group">
                                     <select class="cs-select cs-skin-slide" onselect="alert(1)">
@@ -139,12 +134,12 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="radio clip-radio radio-primary no-space ">
-                                        <input name="vertical" id="radio3" type="radio" value="radio3" checked="checked">
-                                        <label for="radio3"> Project Level</label>
+                                        <input name="vertical_3" id="radio_3" type="radio" value="radio3" checked="checked">
+                                        <label for="radio_3"> Project Level</label>
                                     </div>
                                     <div class="radio clip-radio radio-primary no-space ">
-                                        <input name="vertical" id="radio4" type="radio" value="radio4">
-                                        <label for="radio4">
+                                        <input name="vertical_3" id="radio_4" type="radio" value="radio4">
+                                        <label for="radio_4">
                                             <span class="cl-effect-3 links block margin-top-10">
                                                 <a href="#" class="uppercase text-dark text-uppercase text-bold text-extra-small">
                                                     Specific Subject
@@ -156,30 +151,82 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end: Card -->
-                    </div>
-                    <div class="mix viewer col-sm-6 col-md-3" data-my-order="3">
-
-                    </div>
-                    <div class="mix viewer col-sm-6 col-md-3" data-my-order="4">
-
                     </div>
                 </div>
             </div>
-
-
 
         </fieldset>
     </div>
 </div>
 
 <!-- start: Template Area  -->
+<script id="team-template" type="text/x-kendo-template">
+    <div class="mix viewer col-sm-6 col-md-3" data-my-order="1">
+        <div class="thumbnail thumbnail-updater">
+            <div class="row">
+                <div class="col-md-3 no-space text-right">
+                    <button type="button" class="btn btn-red">
+                        <i class="fa fa-user-times"></i>
+                    </button>
+                </div>
+                <div class="col-md-6 " align="center">
+                    <img class="img-responsive img-card" alt="" src="/images/form/User_female.png">
+                </div>
+            </div>
+            <div class="padding-20 height-200 thumbnail-card">
+                <h4>Murad Mahmoud</h4>
+                <div class="form-group">
+                    <select class="cs-select cs-skin-slide" onselect="alert(1)">
+                        <option value="Updater" data-class="fa fa-dropbox">Updater</option>
+                        <option value="Viewer" data-class="fa fa-github">Viewer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="radio clip-radio radio-primary no-space ">
+                        <input name="vertical" id="radio3" type="radio" value="radio3" checked="checked">
+                        <label for="radio3"> Project Level</label>
+                    </div>
+                    <div class="radio clip-radio radio-primary no-space ">
+                        <input name="vertical" id="radio4" type="radio" value="radio4">
+                        <label for="radio4">
+                            <span class="cl-effect-3 links block margin-top-10">
+                                <a href="#" class="uppercase text-dark text-uppercase text-bold text-extra-small">
+                                    Specific Subject
+                                    <i class="padding-left-5 fa fa-angle-right"></i>
+                                </a>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="teamS-template" type="text/x-kendo-template">
+    <div style="width:350px">
+        <h3>Project Subjects</h3>
+        <div class="checkbox clip-check check-success">
+            <input id="checkbox61" type="checkbox" value="1">
+            <label for="checkbox61"> Checkbox 1 </label>
+        </div>
+        <div class="checkbox clip-check check-success">
+            <input id="checkbox71" type="checkbox" value="1">
+            <label for="checkbox71"> Checkbox 2 </label>
+        </div>
+        <div class="checkbox clip-check check-success">
+            <input id="checkbox81" type="checkbox" value="1">
+            <label for="checkbox81"> Checkbox 3 </label>
+        </div>
+    </div>
+</script>
+<div id="window">
+    @Html.Partial("~/Views/Shared/_SearchUserGroup.cshtml")
+</div>
 <!-- end: Template Area -->
 
 
 <script type="text/javascript">
     $(document).ready(function () {
-
         $('#Container').mixItUp({
             animation: {
                 enable: false
@@ -198,5 +245,58 @@
             }
         });
 
+        var windowOptions = {
+            width: "1024px",
+            height: "500px",
+            title: "Search for User/Groups",
+            visible: false,
+            actions: [
+                        "Maximize",
+                        "Close"
+            ],
+            modal: true
+        };
+        $("#window").kendoWindow(windowOptions);
     });
+
+    //Change Event delegation
+    function selectChange(eld, val) {
+        var xElm = $(eld).closest('.thumbnail');
+        if (val == "Updater")
+            xElm.removeClass("thumbnail-viewer").addClass("thumbnail-updater");
+        else
+            xElm.removeClass("thumbnail-updater").addClass("thumbnail-viewer");
+    }
+
+    function deleteTM(itemClicked) {
+        if (window.confirm("Are you sure you want to delete this Team Model item?")) {
+            var xElm = $(itemClicked).closest('.mix');
+            xElm.fadeOut('slow');
+            setTimeout(function () { xElm.detach(); }, 1000);
+        }
+    }
+
+    var activeElm = null;
+    function loadSubj4TeamModel(elm) {
+        var jElm = $(elm);
+        activeElm = jElm;
+        //var rElm = jElm.closest(".radio").find("input");
+
+        //bind JSON to template
+        var scriptTemplate = kendo.template($("#teamS-template").html());
+        var subjHTML = scriptTemplate({});
+
+        jElm.attr("data-content", subjHTML);
+    }
+
+    function tmSubjectSelect() {
+        //data-TMSubjects
+
+    }
+
+
+    function showAddDlg() {
+        $("#window").data("kendoWindow").center();
+        $("#window").data("kendoWindow").open();
+    }
 </script>

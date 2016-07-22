@@ -56,7 +56,7 @@
 		// when opening the select element, the default placeholder (if any) is shown
 		stickyPlaceholder : true,
 		// callback when changing the value
-		onChange : function( val ) { return false; }
+		onChange : function( val ) { return true; }
 	}
 
 	/**
