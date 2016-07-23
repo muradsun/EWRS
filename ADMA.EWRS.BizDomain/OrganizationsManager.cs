@@ -16,7 +16,7 @@ namespace ADMA.EWRS.BizDomain
 
         }
 
-        public List<OrganizationHierarchyView> ResolveOrganizationHierarchy(int OrganizationID)
+        public ICollection<OrganizationHierarchyView> ResolveOrganizationHierarchy(int OrganizationID)
         {
             using (var unitOfWork = new UnitOfWork())
             {

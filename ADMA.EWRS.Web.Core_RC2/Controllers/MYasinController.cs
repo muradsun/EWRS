@@ -31,14 +31,5 @@ namespace ADMA.EWRS.Web.Core.Controllers
             return View();
         }
 
-
-        public IActionResult TopN()
-        {
-            ProjectsManager pMan = new ProjectsManager();
-            var x = pMan.ProcessTopNRecordes(2); 
-
-            return View();
-        }
-
     }
 }

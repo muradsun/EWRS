@@ -1,42 +1,19 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-    <script src="../wwwroot/lib/jquery/dist/jquery.min.js"></script>
-    <script src="../wwwroot/lib/mixitup/build/jquery.mixitup.min.js"></script>
-</head>
-<body>
-
-    <style>
-        #Container .mix {
-            display: none;
-        }
-    </style>
-
-    <div class="row">
-        <button type="button" class="filter" data-filter=".category-1">Category 1</button><br />
-        <button type="button" class="filter" data-filter=".category-2">Category 2</button><br />
-
-        <button type="button" class="sort" data-sort="my-order:asc">Ascending Order</button><br />
-        <button type="button" class="sort" data-sort="my-order:desc">Descending Order</button><br />
-    </div>
-
-    <div class="row">
-        <div id="Container">
-            <div class="mix category-1" data-my-order="1"> Item 1 - cat 1 </div>
-            <div class="mix category-1" data-my-order="2"> Item 2 - cat 1 </div>
-            <div class="mix category-2" data-my-order="3"> Item 3 - cat 2</div>
-            <div class="mix category-2" data-my-order="4"> Item 4 - cat 2</div>
+﻿<div class="tabbable">
+    <ul class="nav nav-tabs" id="myTab1">
+        <li>
+            <a aria-expanded="false" href="#tabUsers" data-toggle="tab"> Search Users </a>
+        </li>
+        <li class="active">
+            <a aria-expanded="true" href="#tabGroups" data-toggle="tab"> Search Groups </a>
+        </li>
+        
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade" id="tabUsers">
+            Hi man 
+        </div>
+        <div class="tab-pane fade active in" id="tabGroups">
+           Hi 2
         </div>
     </div>
-
-    <script type="text/javascript">
-
-        $(function () {
-            $('#Container').mixItUp();
-        });
-
-    </script>
-</body>
-</html>
+</div>

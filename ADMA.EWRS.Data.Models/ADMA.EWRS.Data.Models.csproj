@@ -84,6 +84,7 @@
     <Compile Include="Template.cs" />
     <Compile Include="User.cs" />
     <Compile Include="ViewModel\Breadcrumb.cs" />
+    <Compile Include="ViewModel\OrganizationHierarchyView.cs" />
     <Compile Include="ViewModel\PageInfo.cs" />
     <Compile Include="ViewModel\SubjectWizardStepView.cs" />
     <Compile Include="ViewModel\TeamModeWizardStepView.cs" />

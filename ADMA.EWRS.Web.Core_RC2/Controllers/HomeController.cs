@@ -21,7 +21,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
             PageInfoData.Title = "Welcome to Corporate Weekly Report System";
             PageInfoData.Description = "Version 1.0";
             //PageInfoData.Breadcrumb.Add(new Breadcrumb { Text = @"<i class='fa fa - leanpub margin-right-5 text-large text-dark'></i> Dashboard", Link = null });
-            PageInfoData.Breadcrumb.Add(new Breadcrumb { Text = "Dashboard", Link = null });
+            PageInfoData.Breadcrumbs.Add(new Breadcrumb { Text = "Dashboard", Link = null });
             return View();
         }
 

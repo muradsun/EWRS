@@ -52,6 +52,11 @@ namespace ADMA.EWRS.BizDomain
                     return unitOfWork.TeamModel.GetTeamModel(projectId).ToList();
         }
 
+        public List<OrganizationHierarchy> SearchOrganizationHierarchy(string orgName)
+        {
+            using (var unitOfWork = new UnitOfWork())
+                return unitOfWork.OrganizationHierarchies.Find(o => o.ORGNAME.Contains(orgName)).ToList(); 
+        }
 
         #region Private Members 
 

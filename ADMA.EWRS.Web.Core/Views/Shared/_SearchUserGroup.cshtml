@@ -4,77 +4,79 @@
     <legend>
         Search Criteria
     </legend>
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                @*<label> First Name </label>*@
-                <input name="firstName" class="form-control input-sm" type="text" placeholder="Enter your First Name">
+    <div class="tabbable">
+        <ul class="nav nav-tabs active in">
+            <li class="active">
+                <a href="#tabUsers" data-toggle="tab"> Search  Users </a>
+            </li>
+            <li>
+                <a aria-expanded="true" href="#tabGroups" data-toggle="tab"> Search Groups</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tabUsers">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            @*<label> First Name </label>*@
+                            <input name="firstName" class="form-control input-sm" type="text" placeholder="Enter First Name">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input name="lastName" class="form-control input-sm" type="text" placeholder="Enter Last Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter PF#" class="form-control input-sm" name="PF" />
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter Ext." class="form-control input-sm" name="Ext" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter Email" class="form-control input-sm" name="Email" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input id="autocOH" placeholder="Enter Organization Name" class="form-control input-sm" name="autocOH" />
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-5">
-            <div class="form-group">
-                <input name="lastName" class="form-control input-sm" type="text" placeholder="Enter your Last Name">
+            <div class="tab-pane fade" id="tabGroups">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label> Group Name </label>
+                            <input name="firstName" class="form-control input-sm" type="text" placeholder="Enter Group Name">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <input type="text" placeholder="Enter PF#" class="form-control input-sm" name="PF" />
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="form-group">
-                <input type="text" placeholder="Enter Ext." class="form-control input-sm" name="Ext" />
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-group">
-                <input type="text" placeholder="Enter Email" class="form-control input-sm" name="Email" />
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="form-group">
-                <input id="customers" style="width: 100%;" />
-
-                <script>
-                $(document).ready(function() {
-                    var autocomplete = $("#customers").kendoAutoComplete({
-                        minLength: 1,
-                        dataTextField: "ContactName",
-                        headerTemplate: '<div class="dropdown-header k-widget k-header">' +
-                                '<span>Photo</span>' +
-                                '<span>Contact info</span>' +
-                            '</div>',
-                        template: '<span class="k-state-default" style="background-image: url(\'../content/web/Customers/#:data.CustomerID#.jpg\')"></span>' +
-                                  '<span class="k-state-default"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>',
-                        dataSource: {
-                            transport: {
-                                read:{
-                                    dataType: "jsonp",
-                                    url: "//demos.telerik.com/kendo-ui/service/Customers"
-                                }
-                            }
-                        },
-                        height: 400
-                    }).data("kendoAutoComplete");
-                });
-                </script>
-
-
-            </div>
-        </div>
-    </div>
-
+    <a class="btn btn-primary" href="#" style="float:right">  <i class="fa fa-search"></i> Search </a>
 </fieldset>
 
 <fieldset>
     <legend>
         Search Results
     </legend>
-    <table class="table table-striped table-hover" id="sample-table-3">
+    <table class="table table-striped" id="sample-table-3">
         <thead>
             <tr>
                 <th class="center">Photo</th>
@@ -249,3 +251,73 @@
         </tbody>
     </table>
 </fieldset>
+
+<style type="text/css">
+    .k-autocomplete {
+        width: 100%;
+    }
+
+    .k-itemx {
+        background-color: #ffceac !important;
+        padding: 5px !important;
+        padding-left: 0 !important;
+        font-weight: bolder;
+        width: 100%;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        var dataSource = new kendo.data.DataSource({
+            serverFiltering: true,
+            transport: {
+                type: "json",
+                serverFiltering: true,
+                read: {
+                    url: "/Project/SearchOrganizationHierarchy"
+                },
+                parameterMap: function (data, action) {
+                    var newParams = {
+                        filter: data.filter.filters[0].value
+                    };
+                    return newParams;
+                }
+            }
+        });
+
+        var autocomplete = $("#autocOH").kendoAutoComplete({
+            minLength: 3,
+            dataTextField: "orgname",
+            dataSource: dataSource,
+            headerTemplate: '',
+            template: kendo.template($("#UserGroups-template").html())
+
+        }).data("kendoAutoComplete");
+    });
+</script>
+
+@*
+          JASON obejct
+    {
+        "orgid": 12462,
+        "orgname": "DAS CORPORATE SERVICES DEPARTMENT",
+        "bU_NAME": "SENIOR MANAGEMENT",
+        "diV_NAME": "DAS ISLAND ASSET",
+        "deP_NAME": "DAS CORPORATE SERVICES DEPARTMENT",
+        "teaM_NAME": null,
+        "sectioN_NAME": null
+      },*@
+
+
+<script id="UserGroups-template" type="text/x-kendo-template">
+    <div>
+        <div class="k-itemx">
+            ${ data.orgname }
+        </div>
+        <span><b>BU</b>  ${ data.bU_NAME }</span>  <br />
+        <span><b>Div</b>  ${ data.diV_NAME }</span>  <br />
+        <span><b>Div</b>  ${ data.deP_NAME }</span>  <br />
+        <span><b>Div</b>  ${ data.teaM_NAME }</span>  <br />
+        <span><b>Div</b>  ${ data.sectioN_NAME }</span>  <br />
+    </div>
+
+</script>

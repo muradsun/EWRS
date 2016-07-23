@@ -42,7 +42,6 @@ namespace ADMA.EWRS.Web.Core.Controllers
                     new Breadcrumb { Text = "Projects List", Link = "/Project" },
                     new Breadcrumb { Text = "Project Wizard", Link = null },
                 });
-
             return View();
 
         }
@@ -57,6 +56,28 @@ namespace ADMA.EWRS.Web.Core.Controllers
         public IActionResult SaveProjectWizardStep([FromBody] ProjectInfoWizardStepView projectInfoWizardStepView)
         {
             return Json(new { Ok = true });
+        }
+
+
+        public JsonResult SearchOrganizationHierarchy(string filter)
+        {
+            var orgList = pm.SearchOrganizationHierarchy(filter);
+            var data = orgList.Select(o => new OrganizationHierarchyAutoCompleteView()
+            {
+                ORGID = o.ORGID,
+                ORGNAME = o.ORGNAME,
+
+                BU_NAME = o.BU_NAME,
+                DIV_NAME = o.DIV_NAME,
+                DEP_NAME = o.DEP_NAME,
+                TEAM_NAME = o.TEAM_NAME,
+                SECTION_NAME = o.SECTION_NAME
+            });
+
+            return Json(data, new JsonSerializerSettings() {
+                ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver() //Murad : TODO :: CHnage this to lower 
+            });
+
         }
 
     }
