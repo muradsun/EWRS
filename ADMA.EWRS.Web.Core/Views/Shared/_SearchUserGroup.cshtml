@@ -19,36 +19,36 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             @*<label> First Name </label>*@
-                            <input name="firstName" class="form-control input-sm" type="text" placeholder="Enter First Name">
+                            <input name="firstName" class="form-control input-sm" type="text" placeholder="Enter First Name" id="txtfirstName" />
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <input name="lastName" class="form-control input-sm" type="text" placeholder="Enter Last Name">
+                            <input name="lastName" class="form-control input-sm" type="text" placeholder="Enter Last Name" id="txtlastName" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
-                            <input type="text" placeholder="Enter PF#" class="form-control input-sm" name="PF" />
+                            <input type="text" placeholder="Enter PF#" class="form-control input-sm" name="PF" id="txtPF" />
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <input type="text" placeholder="Enter Ext." class="form-control input-sm" name="Ext" />
+                            <input type="text" placeholder="Enter Title" class="form-control input-sm" name="Title" id="txtTitle" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
-                            <input type="text" placeholder="Enter Email" class="form-control input-sm" name="Email" />
+                            <input type="text" placeholder="Enter Email" class="form-control input-sm" name="Email" id="txtEmail" />
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="form-group">
-                            <input id="autocOH" placeholder="Enter Organization Name" class="form-control input-sm" name="autocOH" />
+                            <input id="autocOH" placeholder="Enter Organization Name" class="form-control input-sm" name="autocOH" style="border-color: #aeacb4 !important;box-sizing: content-box;" />
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
 
         </div>
     </div>
-    <a class="btn btn-primary" href="#" style="float:right">  <i class="fa fa-search"></i> Search </a>
+    <a class="btn btn-primary" href="#" style="float:right" id="btnSearch">  <i class="fa fa-search"></i> Search </a>
 </fieldset>
 
 <fieldset>
@@ -89,165 +89,45 @@
         </thead>
         <tbody>
             <tr>
-                <td class="center"><img class="img-rounded" alt="image" src="assets/images/avatar-1.jpg"></td>
-                <td>Peter Clark</td>
-                <td class="hidden-xs">UI Designer</td>
-                <td class="hidden-xs"><a href="#" target="_blank" rel="nofollow"> peter@example.com </a></td>
-                <td class="hidden-xs">(641)-734-4763</td>
-                <td class="center">
-                    <div class="visible-md visible-lg hidden-sm hidden-xs">
-                        <a title="" class="btn btn-transparent btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip" data-placement="top"><i class="fa fa-pencil"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Share" data-toggle="tooltip" data-placement="top"><i class="fa fa-share"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Remove" data-toggle="tooltip" data-placement="top"><i class="fa fa-times fa fa-white"></i></a>
-                    </div>
-                    <div class="visible-xs visible-sm hidden-md hidden-lg">
-                        <div class="btn-group dropdown ">
-                            <button class="btn btn-primary btn-o btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right dropdown-light" role="menu">
-                                <li>
-                                    <a href="#"> Edit </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Share </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Remove </a>
-                                </li>
-                            </ul>
-                        </div>
+                <td colspan="6">
+                    <div class="no-items-found" style="padding:1%">
+                        <i class="fa fa-info-circle"></i> Start your Search
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td class="center"><img class="img-rounded" alt="image" src="assets/images/avatar-2.jpg"></td>
-                <td>Nicole Bell</td>
-                <td class="hidden-xs">Content Designer</td>
-                <td class="hidden-xs"><a href="#" target="_blank" rel="nofollow"> nicole@example.com </a></td>
-                <td class="hidden-xs">(741)-034-4573</td>
-                <td class="center">
-                    <div class="visible-md visible-lg hidden-sm hidden-xs">
-                        <a title="" class="btn btn-transparent btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip" data-placement="top"><i class="fa fa-pencil"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Share" data-toggle="tooltip" data-placement="top"><i class="fa fa-share"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Remove" data-toggle="tooltip" data-placement="top"><i class="fa fa-times fa fa-white"></i></a>
-                    </div>
-                    <div class="visible-xs visible-sm hidden-md hidden-lg">
-                        <div class="btn-group dropdown ">
-                            <button class="btn btn-primary btn-o btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right dropdown-light" role="menu">
-                                <li>
-                                    <a href="#"> Edit </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Share </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Remove </a>
-                                </li>
-                            </ul>
+            @*<tr>
+                    <td class="center"><img class="img-rounded" alt="image" src="assets/images/avatar-1.jpg"></td>
+                    <td>Peter Clark</td>
+                    <td class="hidden-xs">UI Designer</td>
+                    <td class="hidden-xs"><a href="#" target="_blank" rel="nofollow"> peter@example.com </a></td>
+                    <td class="hidden-xs">(641)-734-4763</td>
+                    <td class="center">
+                        <div class="visible-md visible-lg hidden-sm hidden-xs">
+                            <a title="" class="btn btn-transparent btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip" data-placement="top"><i class="fa fa-pencil"></i></a>
+                            <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Share" data-toggle="tooltip" data-placement="top"><i class="fa fa-share"></i></a>
+                            <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Remove" data-toggle="tooltip" data-placement="top"><i class="fa fa-times fa fa-white"></i></a>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="center"><img class="img-rounded" alt="image" src="assets/images/avatar-3.jpg"></td>
-                <td>Steven Thompson</td>
-                <td class="hidden-xs">Visual Designer</td>
-                <td class="hidden-xs"><a href="#" target="_blank" rel="nofollow"> steven@example.com </a></td>
-                <td class="hidden-xs">(471)-543-4073</td>
-                <td class="center">
-                    <div class="visible-md visible-lg hidden-sm hidden-xs">
-                        <a title="" class="btn btn-transparent btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip" data-placement="top"><i class="fa fa-pencil"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Share" data-toggle="tooltip" data-placement="top"><i class="fa fa-share"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Remove" data-toggle="tooltip" data-placement="top"><i class="fa fa-times fa fa-white"></i></a>
-                    </div>
-                    <div class="visible-xs visible-sm hidden-md hidden-lg">
-                        <div class="btn-group dropdown ">
-                            <button class="btn btn-primary btn-o btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right dropdown-light" role="menu">
-                                <li>
-                                    <a href="#"> Edit </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Share </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Remove </a>
-                                </li>
-                            </ul>
+                        <div class="visible-xs visible-sm hidden-md hidden-lg">
+                            <div class="btn-group dropdown ">
+                                <button class="btn btn-primary btn-o btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                                    <i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right dropdown-light" role="menu">
+                                    <li>
+                                        <a href="#"> Edit </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"> Share </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"> Remove </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="center"><img class="img-rounded" alt="image" src="assets/images/avatar-4.jpg"></td>
-                <td>Ella Patterson</td>
-                <td class="hidden-xs">Web Editor</td>
-                <td class="hidden-xs"><a href="#" target="_blank" rel="nofollow"> ella@example.com </a></td>
-                <td class="hidden-xs">(799)-994-9999</td>
-                <td class="center">
-                    <div class="visible-md visible-lg hidden-sm hidden-xs">
-                        <a title="" class="btn btn-transparent btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip" data-placement="top"><i class="fa fa-pencil"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Share" data-toggle="tooltip" data-placement="top"><i class="fa fa-share"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Remove" data-toggle="tooltip" data-placement="top"><i class="fa fa-times fa fa-white"></i></a>
-                    </div>
-                    <div class="visible-xs visible-sm hidden-md hidden-lg">
-                        <div class="btn-group dropdown ">
-                            <button class="btn btn-primary btn-o btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right dropdown-light" role="menu">
-                                <li>
-                                    <a href="#"> Edit </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Share </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Remove </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="center"><img class="img-rounded" alt="image" src="assets/images/avatar-5.jpg"></td>
-                <td>Kenneth Ross</td>
-                <td class="hidden-xs">Senior Designer</td>
-                <td class="hidden-xs"><a href="#" target="_blank" rel="nofollow"> kenneth@example.com </a></td>
-                <td class="hidden-xs">(111)-114-1173</td>
-                <td class="center">
-                    <div class="visible-md visible-lg hidden-sm hidden-xs">
-                        <a title="" class="btn btn-transparent btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip" data-placement="top"><i class="fa fa-pencil"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Share" data-toggle="tooltip" data-placement="top"><i class="fa fa-share"></i></a>
-                        <a title="" class="btn btn-transparent btn-xs tooltips" href="#" data-original-title="Remove" data-toggle="tooltip" data-placement="top"><i class="fa fa-times fa fa-white"></i></a>
-                    </div>
-                    <div class="visible-xs visible-sm hidden-md hidden-lg">
-                        <div class="btn-group dropdown ">
-                            <button class="btn btn-primary btn-o btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-                                <i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu pull-right dropdown-light" role="menu">
-                                <li>
-                                    <a href="#"> Edit </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Share </a>
-                                </li>
-                                <li>
-                                    <a href="#"> Remove </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                </tr>*@
+
         </tbody>
     </table>
 </fieldset>
@@ -255,10 +135,20 @@
 <style type="text/css">
     .k-autocomplete {
         width: 100%;
+        appearance: none;
+        background-color: #FFFFFF !important;
+        background-image: none !important;
+        border: 1px solid #c8c7cc;
+        border-radius: 0;
+        color: #5b5b60 !important;
+        font-family: inherit !important;
+        font-size: 14px !important;
+        padding: 5px 4px !important;
+        box-shadow: none !important;
     }
 
     .k-itemx {
-        background-color: #ffceac !important;
+        background-color: #e8f5ff !important;
         padding: 5px !important;
         padding-left: 0 !important;
         font-weight: bolder;
@@ -266,6 +156,7 @@
     }
 </style>
 <script>
+    var selectedOrgid = 0;
     $(document).ready(function () {
         var dataSource = new kendo.data.DataSource({
             serverFiltering: true,
@@ -289,10 +180,60 @@
             dataTextField: "orgname",
             dataSource: dataSource,
             headerTemplate: '',
-            template: kendo.template($("#UserGroups-template").html())
+            template: kendo.template($("#UserGroups-template").html()),
+            select: function (ev) {
+                var dataItem = this.dataItem(ev.item.index());
+                selectedOrgid = dataItem.orgid;
+            }
 
         }).data("kendoAutoComplete");
+
+        $("#btnSearch").click(function () {
+            var hrefText = $(".tabbable ul li.active a").attr("href");
+            if (hrefText == "#tabUsers") {
+                debugger;
+                //Collect Data
+                var dataForm = collectUserSearchData();
+                $.ajax({
+                    url: "/Account/SearchUsers",
+                    success: function (result) {
+                        UINotifications.ShowToast("success", "Your Projet [ Text ] Saved Successfuly.", "Saved Successfuly");
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    error: function (xhr, status, error) {
+                        UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
+                    },
+                    type: "POST",
+                    data: JSON.stringify(dataForm),
+                    contentType: "application/json"
+                });
+            }
+            else
+                if (hrefText == "#tabGroups") {
+
+                }
+                else {
+                    alert('PLease Select a User or Groups Tab')
+                }
+        });
     });
+
+    function collectUserSearchData() {
+        //Collect Organization Data
+        var autocomplete = $("#autocOH").data("kendoAutoComplete");
+        if ($.trim(autocomplete.value()) == "")
+            selectedOrgid = 0;
+
+        return usersSearchRequestView = {
+            PFNo: $("#txtPF").val(),
+            FirstName: $("#txtfirstName").val(),
+            FamilyName: $("#txtlastName").val(),
+            Title: $("#txtTitle").val(),
+            Email: $("#txtEmail").val(),
+            OrganizationId: selectedOrgid
+        };
+    }
 </script>
 
 @*
@@ -315,9 +256,9 @@
         </div>
         <span><b>BU</b>  ${ data.bU_NAME }</span>  <br />
         <span><b>Div</b>  ${ data.diV_NAME }</span>  <br />
-        <span><b>Div</b>  ${ data.deP_NAME }</span>  <br />
-        <span><b>Div</b>  ${ data.teaM_NAME }</span>  <br />
-        <span><b>Div</b>  ${ data.sectioN_NAME }</span>  <br />
+        <span><b>Dep</b>  ${ data.deP_NAME }</span>  <br />
+        <span><b>Team</b>  ${ data.teaM_NAME }</span>  <br />
+        <span><b>Sec</b>  ${ data.sectioN_NAME }</span>  <br />
     </div>
 
 </script>

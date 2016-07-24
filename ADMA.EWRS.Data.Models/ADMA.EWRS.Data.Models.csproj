@@ -90,6 +90,7 @@
     <Compile Include="ViewModel\TeamModeWizardStepView.cs" />
     <Compile Include="ViewModel\TemplateWizardStepView.cs" />
     <Compile Include="ViewModel\ProjectInfoWizardStepView.cs" />
+    <Compile Include="ViewModel\UsersSearchRequestView.cs" />
     <Compile Include="WeeklyInput.cs" />
     <Compile Include="WeeklyInputHistory.cs" />
     <Compile Include="OrganizationHierarchy.cs" />

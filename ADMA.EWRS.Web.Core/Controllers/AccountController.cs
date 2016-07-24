@@ -8,6 +8,7 @@ using ADMA.EWRS.Data.Models;
 using ADMA.EWRS.Web.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
+using ADMA.EWRS.Data.Models.ViewModel;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,7 +16,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
 {
     public class AccountController : BaseController
     {
-        //private SecurityManager _secManager;
+        private SecurityManager _secManager;
         private ClaimsManager _claimsManager;
 
         //public AccountController()
@@ -26,7 +27,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
         public AccountController()
            : base(true)
         {
-            // _secManager = new SecurityManager();
+            _secManager = new SecurityManager();
             _claimsManager = new ClaimsManager();
         }
 
@@ -75,6 +76,13 @@ namespace ADMA.EWRS.Web.Core.Controllers
 
                 return RedirectToLocal(returnUrl);
             }
+        }
+
+        [HttpPost]
+        public JsonResult SearchUsers([FromBody] UsersSearchRequestView usersSearchRequestView)
+        {
+            List<User> searchUsers = _secManager.SearchUsers(usersSearchRequestView);
+            return Json(usersSearchRequestView);
         }
 
     }

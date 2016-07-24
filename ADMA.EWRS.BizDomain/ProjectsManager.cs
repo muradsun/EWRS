@@ -54,8 +54,9 @@ namespace ADMA.EWRS.BizDomain
 
         public List<OrganizationHierarchy> SearchOrganizationHierarchy(string orgName)
         {
+            var escapOrgTypes = new List<string>(new string[] { "TC", "BG", null });
             using (var unitOfWork = new UnitOfWork())
-                return unitOfWork.OrganizationHierarchies.Find(o => o.ORGNAME.Contains(orgName)).ToList(); 
+                return unitOfWork.OrganizationHierarchies.Find(o => o.ORGNAME.Contains(orgName) && ! escapOrgTypes.Contains(o.ORGTYPE) ).ToList();
         }
 
         #region Private Members 
