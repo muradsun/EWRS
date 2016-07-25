@@ -1,6 +1,7 @@
 ﻿using ADMA.EWRS.Data.Access;
 using ADMA.EWRS.Data.Models;
 using ADMA.EWRS.Data.Models.Security;
+using ADMA.EWRS.Data.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,12 @@ namespace ADMA.EWRS.BizDomain
             var escapOrgTypes = new List<string>(new string[] { "TC", "BG", null });
             using (var unitOfWork = new UnitOfWork())
                 return unitOfWork.OrganizationHierarchies.Find(o => o.ORGNAME.Contains(orgName) && ! escapOrgTypes.Contains(o.ORGTYPE) ).ToList();
+        }
+
+        public static OrganizationHierarchy GetOrganizationHierarchy(int orgId)
+        {
+            using (var unitOfWork = new UnitOfWork())
+                return unitOfWork.OrganizationHierarchies.Find(o => o.ORGID == orgId).FirstOrDefault();
         }
 
         #region Private Members 

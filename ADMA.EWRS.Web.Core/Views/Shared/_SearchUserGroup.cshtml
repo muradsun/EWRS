@@ -79,12 +79,12 @@
     <table class="table table-striped" id="sample-table-3">
         <thead>
             <tr>
+                <th></th>
                 <th class="center">Photo</th>
                 <th>Full Name</th>
-                <th class="hidden-xs">Role</th>
+                <th class="hidden-xs">PF No.</th>
                 <th class="hidden-xs">Email</th>
                 <th class="hidden-xs">Phone</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -127,9 +127,14 @@
                         </div>
                     </td>
                 </tr>*@
-
         </tbody>
     </table>
+    <div class="row">
+        <div id="page-content-2" class="well">
+            Page 1
+        </div>
+        <ul id="pagination-UsersGroups" class="pagination-sm"></ul>
+    </div>
 </fieldset>
 
 <style type="text/css">
@@ -197,7 +202,11 @@
                 $.ajax({
                     url: "/Account/SearchUsers",
                     success: function (result) {
-                        UINotifications.ShowToast("success", "Your Projet [ Text ] Saved Successfuly.", "Saved Successfuly");
+                        //UsersRow-template
+                        var htmlDataTemplate = kendo.template($("#UsersRow-template").html());
+                        var htmlData = htmlDataTemplate(result);
+                        $(".table tbody").html(htmlData);
+                        //UINotifications.ShowToast("success", "Your Projet [ Text ] Saved Successfuly.", "Saved Successfuly");
                     },
                     cache: false,
                     dataType: 'json',
@@ -260,5 +269,19 @@
         <span><b>Team</b>  ${ data.teaM_NAME }</span>  <br />
         <span><b>Sec</b>  ${ data.sectioN_NAME }</span>  <br />
     </div>
-
+</script>
+<script id="UsersRow-template" type="text/x-kendo-template">
+    # for (var i = 0; i < data.length; i++) { #
+        <tr>
+            <td class="center">
+                <
+                ${ data[i].user_Id }
+            </td>
+            <td class="center"><img class="img-rounded" alt="image" src="/assets/images/avatar-1.jpg"></td>
+            <td>${ data[i].employeeName } (${ data[i].pfNo })</td>
+            <td class="hidden-xs">${ data[i].organizationHierarchyText }</td>
+            <td class="hidden-xs"><a href="mailto:${ data[i].email }" target="_blank" rel="nofollow"> ${ data[i].email } </a></td>
+            <td class="hidden-xs">  ${ data[i].title }  </td>
+        </tr>
+        # } #
 </script>

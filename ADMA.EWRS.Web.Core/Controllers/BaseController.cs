@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ADMA.EWRS.Data.Models.ViewModel;
+using Newtonsoft.Json;
 
 namespace ADMA.EWRS.Web.Core.Controllers
 {
@@ -49,6 +50,14 @@ namespace ADMA.EWRS.Web.Core.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        internal JsonResult GetJason(object data)
+        {
+            return Json(data, new JsonSerializerSettings()
+            {
+                ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver() //Murad : TODO :: Change this to lower 
+            });
         }
     }
 }

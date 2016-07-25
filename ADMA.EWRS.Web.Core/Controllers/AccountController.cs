@@ -82,7 +82,18 @@ namespace ADMA.EWRS.Web.Core.Controllers
         public JsonResult SearchUsers([FromBody] UsersSearchRequestView usersSearchRequestView)
         {
             List<User> searchUsers = _secManager.SearchUsers(usersSearchRequestView);
-            return Json(usersSearchRequestView);
+            List<UsersSearchResponseView> response = searchUsers.Select(u => new UsersSearchResponseView()
+            {
+                Email = u.EMAIL,
+                EmployeeName = u.EMPLOYEE_NAME,
+                PFNo = u.PF_NO,
+                Title = u.POST_TITLE_LONG_DESC,
+                User_Id = u.User_Id,
+                OrganizationId = u.ORGANIZATION_ID,
+                OrganizationHierarchyText = ProjectsManager.GetOrganizationHierarchy(u.ORGANIZATION_ID).TransformToHTMLString()
+            }).ToList();
+
+            return GetJason(response);
         }
 
     }
