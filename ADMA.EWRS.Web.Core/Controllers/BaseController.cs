@@ -26,11 +26,22 @@ namespace ADMA.EWRS.Web.Core.Controllers
 
         }
 
-        public BaseController(IServiceProvider provider)
+        public BaseController(IServiceProvider provider, bool isLogingRequest = false)
         {
             _provider = provider;
+            if (isLogingRequest == false)
+            {
+                _claimsSecurityManager = _provider.GetService<IClaimsSecurityManager>();
+                _currentUser = _claimsSecurityManager.CurrentUser;
+            }
+        }
+
+        internal void RebuildClaims()
+        {
             _claimsSecurityManager = _provider.GetService<IClaimsSecurityManager>();
             _currentUser = _claimsSecurityManager.CurrentUser;
+
+
         }
 
         public PageInfo PageInfoData { get { return ViewBag.PageInfo as PageInfo; } }

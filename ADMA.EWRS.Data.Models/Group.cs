@@ -11,6 +11,7 @@ namespace ADMA.EWRS.Data.Models
             this.GroupUsers = new List<GroupUser>();
             this.ReviewWorkflows = new List<ReviewWorkflow>();
             this.TeamModels = new List<TeamModel>();
+            //this.Users = new List<User>();
         }
 
         public int Group_Id { get; set; }
@@ -21,10 +22,11 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public  User User { get; set; }
-        public  ICollection<GroupPermission> GroupPermissions { get; set; }
-        public  ICollection<GroupUser> GroupUsers { get; set; }
-        public  ICollection<ReviewWorkflow> ReviewWorkflows { get; set; }
-        public  ICollection<TeamModel> TeamModels { get; set; }
+        public User User { get; set; }
+        public ICollection<GroupPermission> GroupPermissions { get; set; }
+        public ICollection<GroupUser> GroupUsers { get; set; }
+        public ICollection<ReviewWorkflow> ReviewWorkflows { get; set; }
+        public ICollection<TeamModel> TeamModels { get; set; }
+        //public ICollection<User> Users { get; private set; }
     }
 }

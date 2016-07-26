@@ -220,7 +220,6 @@
     </div>
 </script>
 <div id="window">
-    @Html.Partial("~/Views/Shared/_SearchUserGroup.cshtml")
 </div>
 <!-- end: Template Area -->
 
@@ -250,6 +249,7 @@
             height: "500px",
             title: "Search for User/Groups",
             visible: false,
+            content: "/Account/SearchUsersGroups",
             actions: [
                         "Maximize",
                         "Close"

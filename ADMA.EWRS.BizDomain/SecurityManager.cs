@@ -47,14 +47,22 @@ namespace ADMA.EWRS.BizDomain
             using (var unitOfWork = new UnitOfWork())
             {
                 return unitOfWork.Users.Find(u =>
-                   (usersSearchRequestView.FirstName.Trim() == "" || u.FIRST_NAME == usersSearchRequestView.FirstName) &&
-                   (usersSearchRequestView.FamilyName.Trim() == "" || u.FAMILY_NAME == usersSearchRequestView.FamilyName) &&
-                    (usersSearchRequestView.Email.Trim() == "" || u.EMAIL == usersSearchRequestView.Email) &&
-                    (usersSearchRequestView.PFNo.Trim() == "" || u.PF_NO == usersSearchRequestView.PFNo) &&
-                    (usersSearchRequestView.Title.Trim() == "" || u.POST_TITLE_LONG_DESC == usersSearchRequestView.Title) &&
+                   (usersSearchRequestView.FirstName.Trim() == "" || u.FIRST_NAME.Contains(usersSearchRequestView.FirstName)) &&
+                   (usersSearchRequestView.FamilyName.Trim() == "" || u.FAMILY_NAME.Contains(usersSearchRequestView.FamilyName)) &&
+                    (usersSearchRequestView.Email.Trim() == "" || u.EMAIL.Contains(usersSearchRequestView.Email)) &&
+                    (usersSearchRequestView.PFNo.Trim() == "" || u.PF_NO.Contains(usersSearchRequestView.PFNo)) &&
+                    (usersSearchRequestView.Title.Trim() == "" || u.POST_TITLE_LONG_DESC.Contains(usersSearchRequestView.Title)) &&
                     (usersSearchRequestView.OrganizationId == 0 || u.ORGANIZATION_ID == usersSearchRequestView.OrganizationId)
                 ).Skip((Page - 1) * RecordsPerPage).Take(RecordsPerPage).ToList();
             }
+        }
+
+        public List<ADMA.EWRS.Data.Models.Group> SearchGroups(string groupName, int owner_UserId)
+        {
+            int page = 1;
+            int recordsPerPage = 10;
+            using (var unitOfWork = new UnitOfWork())
+                return unitOfWork.Groups.SearchGroups(groupName, owner_UserId, page, recordsPerPage);
         }
 
     }

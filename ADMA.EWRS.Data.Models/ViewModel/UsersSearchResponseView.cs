@@ -14,6 +14,7 @@ namespace ADMA.EWRS.Data.Models.ViewModel
         public string Title { get; set; }
         public string Email { get; set; }
         public int OrganizationId { get; set; }
-        public string OrganizationHierarchyText { get; set; }
+        public OrganizationHierarchyAutoCompleteView OrganizationHierarchyText { get; set; }
+        public string Gender { get; set; }
     }
 }

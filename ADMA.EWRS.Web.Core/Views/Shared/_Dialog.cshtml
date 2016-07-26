@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
+<!-- Template Name: Enterprise Weekly Report System (EWRS) version 1.0| Author: ADMA-OPCO -->
+<!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="en"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- start: HEAD -->
+<head>
+    <title>EWRS Dialog</title>
+    <!-- start: META -->
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- end: META -->
+    <!-- start: GOOGLE FONTS -->
+    @*<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />*@
+    <!-- end: GOOGLE FONTS -->
+    <!-- start: MAIN CSS -->
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/lib/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/lib/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/lib/perfect-scrollbar/css/perfect-scrollbar.min.css">
+    <link rel="stylesheet" href="/lib/switchery/dist/switchery.min.css">
+    <link rel="stylesheet" href="/lib/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="/lib/ladda/dist/ladda-themeless.min.css">
+    <link rel="stylesheet" href="/lib/slick.js/slick/slick.css">
+    <link rel="stylesheet" href="/lib/slick.js/slick/slick-theme.css">
+    <!-- end: MAIN CSS -->
+    <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
+    @RenderSection("CssStyle", false)
+    <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
+    <!-- start: Packet CSS -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/plugins.css">
+    <link rel="stylesheet" href="/assets/css/themes/lyt2-theme-1.css" id="skin_color">
+    <!-- end: Packet CSS -->
+    <!-- start: Kendo CSS -->
+    <link rel="stylesheet" href="/kendo/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="/kendo/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="/kendo/styles/kendo.fiori.min.css" />
+    <!--
+        <link rel="stylesheet" href="/kendo/styles/kendo.default.mobile.min.css" />
+        <link href="/kendo/styles/kendo.fiori.mobile.min.css" rel="stylesheet" />
+    -->
+    <!-- end: Kendo  CSS -->
+    <!-- Favorite Icon -->
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<!-- end: HEAD -->
+<body style="background-color:white !important;">
+    <div id="app" class="lyt-2">
+        @RenderBody()
+    </div>
+
+    <!-- start: MAIN JAVASCRIPTS -->
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/lib/components-modernizr/modernizr.js"></script>
+    <script src="/lib/js-cookie/src/js.cookie.js"></script>
+    <script src="/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/lib/jquery-fullscreen/jquery.fullscreen-min.js"></script>
+    <script src="/lib/switchery/dist/switchery.min.js"></script>
+    <script src="/lib/jquery.knobe/dist/jquery.knob.min.js"></script>
+    <script src="/lib/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+    <script src="/lib/slick.js/slick/slick.min.js"></script>
+    <script src="/lib/jquery-numerator/jquery-numerator.js"></script>
+    <script src="/lib/ladda/dist/spin.min.js"></script>
+    <script src="/lib/ladda/dist/ladda.min.js"></script>
+    <script src="/lib/ladda/dist/ladda.jquery.min.js"></script>
+    <!-- end: MAIN JAVASCRIPTS -->
+    <!-- start: Packet JAVASCRIPTS -->
+    <script src="/assets/js/letter-icons.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <!-- end: Packet JAVASCRIPTS -->
+    <!-- start: Kendo UI JAVASCRIPTS -->
+    <script src="/kendo/js/kendo.all.min.js"></script>
+    <!-- end: Kendo UI JAVASCRIPTS -->
+
+    <script></script>
+
+    @RenderSection("Scripts", false);
+</body>
+</html>

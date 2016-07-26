@@ -24,8 +24,10 @@ namespace ADMA.EWRS.Web.Core.Controllers
 
         //}
 
-        public AccountController()
-           : base(true)
+        //public AccountController()
+        //   : base(true)
+        public AccountController(IServiceProvider provider)
+            : base(provider, true)
         {
             _secManager = new SecurityManager();
             _claimsManager = new ClaimsManager();
@@ -90,10 +92,32 @@ namespace ADMA.EWRS.Web.Core.Controllers
                 Title = u.POST_TITLE_LONG_DESC,
                 User_Id = u.User_Id,
                 OrganizationId = u.ORGANIZATION_ID,
-                OrganizationHierarchyText = ProjectsManager.GetOrganizationHierarchy(u.ORGANIZATION_ID).TransformToHTMLString()
+                OrganizationHierarchyText = ProjectsManager.GetOrganizationHierarchy(u.ORGANIZATION_ID).TransformToAutoCompleteView(),
+                Gender = u.GENDER
             }).ToList();
 
             return GetJason(response);
+        }
+
+        [HttpPost]
+        public JsonResult SearchGroups(string groupName)
+        {
+            base.RebuildClaims();
+
+            List<ADMA.EWRS.Data.Models.Group> searchUsers = _secManager.SearchGroups(groupName, CurrentUser.UserId);
+            List<GroupsSearchResponseView> response = searchUsers.Select(g => new GroupsSearchResponseView()
+            {
+                Group_Id = g.Group_Id,
+                Name = g.Name,
+                Users = g.GroupUsers.Select(u => u.User.EMPLOYEE_NAME).ToList<string>()
+            }).ToList();
+
+            return GetJason(response);
+        }
+
+        public IActionResult SearchUsersGroups()
+        {
+            return View();
         }
 
     }
