@@ -14,6 +14,8 @@ namespace ADMA.EWRS.Data.Models.ViewModel
         public string Title { get; set; }
         public string Email { get; set; }
         public int OrganizationId { get; set; }
+        public int PageIndex { get; set; }
+
 
     }
 }

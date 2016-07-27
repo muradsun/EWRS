@@ -306,18 +306,15 @@
         <div id="off-sidebar" class="sidebar">
             <div class="sidebar-wrapper">
                 <ul class="nav nav-tabs nav-justified">
-                    <li class="active">
+                    @*<li>
                         <a href="#off-users" aria-controls="off-users" role="tab" data-toggle="tab"> <i class="ti-comments"></i> </a>
-                    </li>
-                    <li>
-                        <a href="#off-favorites" aria-controls="off-favorites" role="tab" data-toggle="tab"> <i class="ti-heart"></i> </a>
-                    </li>
-                    <li>
+                    </li>*@
+                    <li class="active">
                         <a href="#off-settings" aria-controls="off-settings" role="tab" data-toggle="tab"> <i class="ti-settings"></i> </a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="off-users">
+                    @*<div role="tabpanel" class="tab-pane" id="off-users">
                         <div id="users" active-class="chat-open">
                             <div class="users-list">
                                 <div class="sidebar-content perfect-scrollbar">
@@ -652,73 +649,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="off-favorites">
-                        <div class="users-list">
-                            <div class="sidebar-content perfect-scrollbar">
-                                <h5 class="sidebar-title">Favorites</h5>
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <a href="#">
-                                            <img alt="..." src="/assets/images/avatar-7.jpg" class="media-object">
-                                            <div class="media-body">
-                                                <h4 class="media-heading">Nicole Bell</h4>
-                                                <span> Content Designer </span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#">
-                                            <div class="user-label">
-                                                <span class="label label-success">3</span>
-                                            </div> <img alt="..." src="/assets/images/avatar-6.jpg" class="media-object">
-                                            <div class="media-body">
-                                                <h4 class="media-heading">Steven Thompson</h4>
-                                                <span> Visual Designer </span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#">
-                                            <img alt="..." src="/assets/images/avatar-10.jpg" class="media-object">
-                                            <div class="media-body">
-                                                <h4 class="media-heading">Ella Patterson</h4>
-                                                <span> Web Editor </span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#">
-                                            <img alt="..." src="/assets/images/avatar-2.jpg" class="media-object">
-                                            <div class="media-body">
-                                                <h4 class="media-heading">Kenneth Ross</h4>
-                                                <span> Senior Designer </span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#">
-                                            <img alt="..." src="/assets/images/avatar-4.jpg" class="media-object">
-                                            <div class="media-body">
-                                                <h4 class="media-heading">Ella Patterson</h4>
-                                                <span> Web Editor </span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="media">
-                                        <a href="#">
-                                            <img alt="..." src="/assets/images/avatar-5.jpg" class="media-object">
-                                            <div class="media-body">
-                                                <h4 class="media-heading">Kenneth Ross</h4>
-                                                <span> Senior Designer </span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="off-settings">
+                    </div>*@
+                    <div role="tabpanel" class="tab-pane active" id="off-settings">
                         <div class="sidebar-content perfect-scrollbar">
                             <h5 class="sidebar-title">General Settings</h5>
                             <ul class="media-list">
@@ -885,21 +817,21 @@
     </div>
 
     @*<environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>*@
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>*@
 
 
     <!-- start: MAIN JAVASCRIPTS -->

@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseManager.cs" />
+    <Compile Include="Configurations\ConfigurationsManager.cs" />
+    <Compile Include="Configurations\Instance.cs" />
     <Compile Include="MuradManager.cs" />
     <Compile Include="OrganizationsManager.cs" />
     <Compile Include="SharedManager.cs" />

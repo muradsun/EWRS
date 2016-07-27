@@ -141,7 +141,8 @@
         var valElm = null;
         var isValidForm = true;
 
-        if (wizardForm.valid()) {
+        //Murad :: TODO fix this referance
+        //if (wizardForm.valid()) {
             if ($(".txtSubject").length < 1) {
                 alert("At least one subject is required");
                 return false;
@@ -159,7 +160,7 @@
                     valElm.closest(".form-group").find(".has-error-H").removeClass("has-error-S");
                 }
             });
-        }
+       //}
         return isValidForm;
     }
 

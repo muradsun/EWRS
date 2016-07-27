@@ -9,6 +9,7 @@ using ADMA.EWRS.Web.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
 using ADMA.EWRS.Data.Models.ViewModel;
+using ADMA.EWRS.Data.Models.ModelView;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -83,7 +84,8 @@ namespace ADMA.EWRS.Web.Core.Controllers
         [HttpPost]
         public JsonResult SearchUsers([FromBody] UsersSearchRequestView usersSearchRequestView)
         {
-            List<User> searchUsers = _secManager.SearchUsers(usersSearchRequestView);
+            int recordsCount = 0;
+            List<User> searchUsers = _secManager.SearchUsers(usersSearchRequestView, usersSearchRequestView.PageIndex,ref recordsCount);
             List<UsersSearchResponseView> response = searchUsers.Select(u => new UsersSearchResponseView()
             {
                 Email = u.EMAIL,
@@ -93,26 +95,29 @@ namespace ADMA.EWRS.Web.Core.Controllers
                 User_Id = u.User_Id,
                 OrganizationId = u.ORGANIZATION_ID,
                 OrganizationHierarchyText = ProjectsManager.GetOrganizationHierarchy(u.ORGANIZATION_ID).TransformToAutoCompleteView(),
-                Gender = u.GENDER
+                Gender = u.GENDER,
             }).ToList();
 
-            return GetJason(response);
+            var responseView = new DataPagingResponseView() { Data = response, Count = recordsCount };
+            return GetJason(responseView);
         }
 
         [HttpPost]
-        public JsonResult SearchGroups(string groupName)
+        public JsonResult SearchGroups([FromBody] GroupsSearchRequestView groupsSearchRequestView)
         {
             base.RebuildClaims();
+            int recordsCount = 0;
 
-            List<ADMA.EWRS.Data.Models.Group> searchUsers = _secManager.SearchGroups(groupName, CurrentUser.UserId);
+            List<ADMA.EWRS.Data.Models.Group> searchUsers = _secManager.SearchGroups(groupsSearchRequestView.Name, CurrentUser.UserId, groupsSearchRequestView.PageIndex, ref recordsCount);
             List<GroupsSearchResponseView> response = searchUsers.Select(g => new GroupsSearchResponseView()
             {
                 Group_Id = g.Group_Id,
                 Name = g.Name,
-                Users = g.GroupUsers.Select(u => u.User.EMPLOYEE_NAME).ToList<string>()
+                Users = g.GroupUsers.Select(u => u.User.EMPLOYEE_NAME).ToList<string>(),
             }).ToList();
 
-            return GetJason(response);
+            var responseView = new DataPagingResponseView() { Data = response, Count = recordsCount };
+            return GetJason(responseView);
         }
 
         public IActionResult SearchUsersGroups()

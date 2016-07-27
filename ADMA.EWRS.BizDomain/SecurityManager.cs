@@ -39,30 +39,16 @@ namespace ADMA.EWRS.BizDomain
             return _unitOfWork.Delegations.GetUserDelegation(userId).ToList();
         }
 
-        public List<User> SearchUsers(UsersSearchRequestView usersSearchRequestView)
+        public List<User> SearchUsers(UsersSearchRequestView usersSearchRequestView, int pageIndex, ref int recordsCount)
         {
-            int Page = 1;
-            int RecordsPerPage = 10;
-
             using (var unitOfWork = new UnitOfWork())
-            {
-                return unitOfWork.Users.Find(u =>
-                   (usersSearchRequestView.FirstName.Trim() == "" || u.FIRST_NAME.Contains(usersSearchRequestView.FirstName)) &&
-                   (usersSearchRequestView.FamilyName.Trim() == "" || u.FAMILY_NAME.Contains(usersSearchRequestView.FamilyName)) &&
-                    (usersSearchRequestView.Email.Trim() == "" || u.EMAIL.Contains(usersSearchRequestView.Email)) &&
-                    (usersSearchRequestView.PFNo.Trim() == "" || u.PF_NO.Contains(usersSearchRequestView.PFNo)) &&
-                    (usersSearchRequestView.Title.Trim() == "" || u.POST_TITLE_LONG_DESC.Contains(usersSearchRequestView.Title)) &&
-                    (usersSearchRequestView.OrganizationId == 0 || u.ORGANIZATION_ID == usersSearchRequestView.OrganizationId)
-                ).Skip((Page - 1) * RecordsPerPage).Take(RecordsPerPage).ToList();
-            }
+                return unitOfWork.Users.SearchUsers(usersSearchRequestView, pageIndex, Configurations.Instance.RecordsPerPage, ref recordsCount);
         }
 
-        public List<ADMA.EWRS.Data.Models.Group> SearchGroups(string groupName, int owner_UserId)
+        public List<ADMA.EWRS.Data.Models.Group> SearchGroups(string groupName, int owner_UserId, int pageIndex, ref int recordsCount)
         {
-            int page = 1;
-            int recordsPerPage = 10;
             using (var unitOfWork = new UnitOfWork())
-                return unitOfWork.Groups.SearchGroups(groupName, owner_UserId, page, recordsPerPage);
+                return unitOfWork.Groups.SearchGroups(groupName, owner_UserId, pageIndex, Configurations.Instance.RecordsPerPage, ref recordsCount);
         }
 
     }

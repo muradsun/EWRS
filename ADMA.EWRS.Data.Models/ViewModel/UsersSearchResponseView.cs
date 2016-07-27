@@ -16,5 +16,9 @@ namespace ADMA.EWRS.Data.Models.ViewModel
         public int OrganizationId { get; set; }
         public OrganizationHierarchyAutoCompleteView OrganizationHierarchyText { get; set; }
         public string Gender { get; set; }
+
+        public int PageNumber { get; set; }
+        public int Count { get; set; }
+
     }
 }

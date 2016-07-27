@@ -117,11 +117,10 @@ var FormWizard = function () {
     var validateSteps = function (stepnumber, nextstep) {
         var isStepValid = false;
         
-        
         if (numberOfSteps >= nextstep && nextstep > stepnumber) {
-        	
+        	debugger;
             // cache the form element selector
-            if (wizardForm.valid()) { // validate the form
+            //if (wizardForm.valid()) { // validate the form
                 wizardForm.validate().focusInvalid();
                 for (var i=stepnumber; i<=nextstep; i++){
         		$('.anchor').children("li:nth-child(" + i + ")").not("li:nth-child(" + nextstep + ")").children("a").removeClass('wait').addClass('done').children('.stepNumber').addClass('animated tada');
@@ -129,7 +128,7 @@ var FormWizard = function () {
                 //focus the invalid fields
                 isStepValid = true;
                 return true;
-            };
+            //};
         } else if (nextstep < stepnumber) {
         	for (i=nextstep; i<=stepnumber; i++){
         		$('.anchor').children("li:nth-child(" + i + ")").children("a").addClass('wait').children('.stepNumber').removeClass('animated tada');

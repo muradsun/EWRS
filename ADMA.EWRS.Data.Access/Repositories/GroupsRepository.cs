@@ -26,16 +26,18 @@ namespace ADMA.EWRS.Data.Access.Repositories
                                                           );
         }
 
-        public List<ADMA.EWRS.Data.Models.Group> SearchGroups(string groupName, int Owner_UserId, int pageNumber, int recordsPerPage)
+        public List<ADMA.EWRS.Data.Models.Group> SearchGroups(string groupName, int Owner_UserId, int pageNumber, int recordsPerPage, ref int recordsCount)
         {
-            groupName = "Murad";
-            return DbContext.Groups.Include("GroupUsers").Include("GroupUsers.User").Where(g =>
+            var q = DbContext.Groups.Include("GroupUsers").Include("GroupUsers.User").Where(g =>
 
-                           (groupName == "" || g.Name.Contains(groupName)) &&
-                           g.IsSystemGoup == false &&
-                           g.Owner_UserId == Owner_UserId
+                            (groupName == "" || g.Name.Contains(groupName)) &&
+                            g.IsSystemGoup == false &&
+                            g.Owner_UserId == Owner_UserId
 
-                        ).OrderBy(g => g.Group_Id).Skip((pageNumber - 1) * recordsPerPage).Take(recordsPerPage).ToList();
+                        ).OrderBy(g => g.Group_Id);
+
+            recordsCount = q.Count();
+            return q.Skip((pageNumber - 1) * recordsPerPage).Take(recordsPerPage).ToList();
         }
 
 

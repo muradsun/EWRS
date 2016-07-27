@@ -11,7 +11,7 @@ namespace ADMA.EWRS.Data.Models.Repositories
     {
 
         bool IsUserPartOfSuperAdminsGroup(int userId);
-        List<ADMA.EWRS.Data.Models.Group> SearchGroups(string groupName, int Owner_UserId, int pageNumber, int recordsPerPage);
+        List<ADMA.EWRS.Data.Models.Group> SearchGroups(string groupName, int Owner_UserId, int pageNumber, int recordsPerPage, ref int pageCounts);
 
     }
 }

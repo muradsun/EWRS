@@ -53,6 +53,7 @@
     <Compile Include="Group.cs" />
     <Compile Include="GroupPermission.cs" />
     <Compile Include="GroupUser.cs" />
+    <Compile Include="ModelView\PagingResponseView.cs" />
     <Compile Include="Repositories\ITeamModelsRepository.cs" />
     <Compile Include="ModelView\OrganizationHierarchyView.cs" />
     <Compile Include="Murad.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Template.cs" />
     <Compile Include="User.cs" />
     <Compile Include="ViewModel\Breadcrumb.cs" />
+    <Compile Include="ViewModel\GroupsSearchRequestView.cs" />
     <Compile Include="ViewModel\OrganizationHierarchyView.cs" />
     <Compile Include="ViewModel\PageInfo.cs" />
     <Compile Include="ViewModel\SubjectWizardStepView.cs" />

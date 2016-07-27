@@ -77,17 +77,6 @@
         Search Results
     </legend>
     <table class="table table-striped" id="tblUserGroupsResults">
-        <thead>
-            <tr>
-                <th>User Id</th>
-                <th class="center">Photo</th>
-                <th>Full Name</th>
-                <th class="hidden-xs">Title</th>
-                <th class="hidden-xs">Email</th>
-                <th class="hidden-xs">Organization Tree</th>
-
-            </tr>
-        </thead>
         <tbody>
             <tr>
                 <td colspan="6">
@@ -98,9 +87,9 @@
             </tr>
         </tbody>
     </table>
-    <div class="row">
+    <div class="row text-right" style="padding-right:1%" align="right">
         <input type="hidden" name="hdnPageIndex" value="1" id="hdnPageIndex" />
-        <ul id="pagination-UsersGroups" class="pagination-sm"></ul>
+        <ul id="pagination-UsersGroups" class="pagination-sm  text-right"></ul>
     </div>
 </fieldset>
 
@@ -156,24 +145,25 @@
                 var dataItem = this.dataItem(ev.item.index());
                 selectedOrgid = dataItem.orgid;
             }
-
         }).data("kendoAutoComplete");
 
         $("#btnSearch").click(function () {
             var hrefText = $(".tabbable ul li.active a").attr("href");
             if (hrefText == "#tabUsers") {
                 //Search Users
-                var dataForm = collectUserSearchData();
+                var dataForm = collectUserSearchData(true);
                 $.ajax({
                     url: "/Account/SearchUsers",
                     success: function (result) {
-                        if (result != null && result.length > 0) {
+                        if (result != null && result.count > 0) {
+                            loadPagination(result.count);
                             var htmlDataTemplate = kendo.template($("#UsersRow-template").html());
-                            var htmlData = htmlDataTemplate(result);
-                            $("#tblUserGroupsResults tbody").html(htmlData);
+                            var htmlData = htmlDataTemplate(result.data);
+                            $("#tblUserGroupsResults").html(htmlData);
                             //UINotifications.ShowToast("success", "Your Projet [ Text ] Saved Successfuly.", "Saved Successfuly");
                         } else {
-                            $("#tblUserGroupsResults tbody").html(kendo.template($("#UserGroupsNoResults-template").html()));
+                            loadPagination(0);
+                            $("#tblUserGroupsResults").html(kendo.template($("#UserGroupsNoResults-template").html()));
                         }
                     },
                     cache: false,
@@ -189,27 +179,30 @@
             else
                 if (hrefText == "#tabGroups") {
                     //Search Groups
-                    debugger;
-                    var dataForm = { groupName: $("#txtGroupName").val() }
+                    var dataForm = collectUserSearchData(false);
+
                     $.ajax({
                         url: "/Account/SearchGroups",
                         success: function (result) {
-                            if (result != null && result.length > 0) {
-                                //var htmlDataTemplate = kendo.template($("#UsersRow-template").html());
-                                //var htmlData = htmlDataTemplate(result);
-                                //$("#tblUserGroupsResults tbody").html(htmlData);
+                            if (result != null && result.count > 0) {
+                                loadPagination(result.count);
+                                var htmlDataTemplate = kendo.template($("#GroupsRow-template").html());
+                                var htmlData = htmlDataTemplate(result.data);
+                                $("#tblUserGroupsResults").html(htmlData);
                                 ////UINotifications.ShowToast("success", "Your Projet [ Text ] Saved Successfuly.", "Saved Successfuly");
                             } else {
-                                $("#tblUserGroupsResults tbody").html(kendo.template($("#UserGroupsNoResults-template").html()));
+                                loadPagination(0);
+                                $("#tblUserGroupsResults").html(kendo.template($("#UserGroupsNoResults-template").html()));
                             }
                         },
                         cache: false,
                         dataType: 'json',
+                        data: JSON.stringify(dataForm),
                         error: function (xhr, status, error) {
                             UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
                         },
                         type: "POST",
-                        data: JSON.stringify(dataForm),
+                        //data: JSON.stringify(dataForm),
                         contentType: "application/json"
                     });
 
@@ -220,42 +213,85 @@
         });
     });
 
-    function collectUserSearchData() {
-        //Collect Organization Data
-        var autocomplete = $("#autocOH").data("kendoAutoComplete");
-        if ($.trim(autocomplete.value()) == "")
-            selectedOrgid = 0;
+    function collectUserSearchData(isUser) {
+        if (isUser) {
+            //Collect User Data
+            var autocomplete = $("#autocOH").data("kendoAutoComplete");
+            if ($.trim(autocomplete.value()) == "")
+                selectedOrgid = 0;
 
-        return usersSearchRequestView = {
-            PFNo: $("#txtPF").val(),
-            FirstName: $("#txtfirstName").val(),
-            FamilyName: $("#txtlastName").val(),
-            Title: $("#txtTitle").val(),
-            Email: $("#txtEmail").val(),
-            OrganizationId: selectedOrgid
-        };
+            return usersSearchRequestView = {
+                PFNo: $("#txtPF").val(),
+                FirstName: $("#txtfirstName").val(),
+                FamilyName: $("#txtlastName").val(),
+                Title: $("#txtTitle").val(),
+                Email: $("#txtEmail").val(),
+                OrganizationId: selectedOrgid,
+                PageIndex: $("#hdnPageIndex").val(),
+            };
+        }
+        else {
+            //Collect Groups Data
+            return GroupsSearchRequestView = {
+                Name: $("#txtGroupName").val(),
+                PageIndex: $("#hdnPageIndex").val()
+            };
+        }
+    }
+
+    function loadPagination(totalRecourds) {
+        $("#hdnPageIndex").val(1);
+
+        if (totalRecourds <= 10)
+            $("#pagination-UsersGroups").hide();
+        else {
+            var recordsPerPage = @ADMA.EWRS.BizDomain.Configurations.Instance.RecordsPerPage;
+            var totalPages = ((totalRecourds-1) / recordsPerPage)+1;
+
+            $("#pagination-UsersGroups").show();
+            $("#pagination-UsersGroups").twbsPagination({
+                totalPages: totalPages,
+                visiblePages: 10,
+                href: '#page={{number}}',
+                onPageClick: function (event, page) {
+                    $("#hdnPageIndex").val(page);
+                }
+            });
+        }
     }
 </script>
 
 @*
-    Json obejct
+        //-----------------------------
+        Users Json Object
+        //--------------------------
+        {
+            "user_Id":122,
+            "pfNo":"040244",
+            "employeeName":"ALI EISSA ABDUL KADER AL-AMERI",
+            "title":"FREIGHT SUPERVISOR:26908",
+            "email":"aameri2@adma.ae",
+            "organizationId":12356,
+            "organizationHierarchyText":{
+                "orgid":12356,
+                "orgname":"MATERIALS HANDLING SECTION",
+                "bU_NAME":"ADMINISTRATIVE SERVICES BUSINESS UNIT",
+                "diV_NAME":"COMMERCIAL DIVISION",
+                "deP_NAME":"WAREHOUSE DEPARTMENT",
+                "teaM_NAME":"MUSAFFAH WAREHOUSE TEAM",
+                "sectioN_NAME":"MATERIALS HANDLING SECTION"
+            },
+            "gender":"Male OR    Female"},
+
+     //-----------------------------
+        Groups Json Object
+        //--------------------------
     {
-        "user_Id":122,
-        "pfNo":"040244",
-        "employeeName":"ALI EISSA ABDUL KADER AL-AMERI",
-        "title":"FREIGHT SUPERVISOR:26908",
-        "email":"aameri2@adma.ae",
-        "organizationId":12356,
-        "organizationHierarchyText":{
-            "orgid":12356,
-            "orgname":"MATERIALS HANDLING SECTION",
-            "bU_NAME":"ADMINISTRATIVE SERVICES BUSINESS UNIT",
-            "diV_NAME":"COMMERCIAL DIVISION",
-            "deP_NAME":"WAREHOUSE DEPARTMENT",
-            "teaM_NAME":"MUSAFFAH WAREHOUSE TEAM",
-            "sectioN_NAME":"MATERIALS HANDLING SECTION"
-        },
-        "gender":"Male OR    Female"},
+        group_Id,
+        name,
+        users List<string>,
+    }
+
 *@
 
 <!-- start: Templates -->
@@ -272,38 +308,51 @@
     </div>
 </script>
 <script id="UsersRow-template" type="text/x-kendo-template">
-    # for (var i = 0; i < data.length; i++) { #
-    <tr>
-        <td class="center">
-            <div class="checkbox clip-check check-primary check-md">
-                <input id="chkUser_${ data[i].user_Id }" type="checkbox" value="${ data[i].user_Id }">
-                <label for="chkUser_${ data[i].user_Id }"> ${ data[i].user_Id } </label>
-            </div>
-        </td>
-        <td class="center">
-            # if( data[i].gender == "Male" ) {#
-            @*<img class="img-rounded" src="~/images/form/User_female.png" />*@
-            <img class="img-rounded img-grid" src="/images/form/User_male.png" />
-            @*<img class="img-rounded img-grid" src="~/images/form/User-Group.png" />*@
-            # }  else { #
-            <img class="img-rounded img-grid" src="/images/form/User_female.png" />
-            # } #
-        </td>
-        <td>${ data[i].employeeName } <b>(${ data[i].pfNo })</b></td>
-        <td class="hidden-xs">  ${ data[i].title }  </td>
-        <td class="hidden-xs"><a href="mailto:${ data[i].email }" target="_blank" rel="nofollow"> ${ data[i].email } </a></td>
-        <td class="hidden-xs">
-            Org Name:  ${ data[i].organizationHierarchyText.orgname } <br />
-            <hr />
-            BU: ${ data[i].organizationHierarchyText.bU_NAME } <br />
-            Div: ${ data[i].organizationHierarchyText.diV_NAME } <br />
-            Dep: ${ data[i].organizationHierarchyText.deP_NAME } <br />
-            Team: ${ data[i].organizationHierarchyText.teaM_NAME } <br />
-            Sec: ${ data[i].organizationHierarchyText.sectioN_NAME } <br />
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th class="center">Photo</th>
+            <th>Full Name</th>
+            <th class="hidden-xs">Title</th>
+            <th class="hidden-xs">Email</th>
+            <th class="hidden-xs">Organization Tree</th>
 
-        </td>
-    </tr>
-    # } #
+        </tr>
+    </thead>
+    <tbody>
+        # for (var i = 0; i < data.length; i++) { #
+        <tr>
+            <td class="center">
+                <div class="checkbox clip-check check-primary check-md">
+                    <input id="chkUser_${ data[i].user_Id }" type="checkbox" value="${ data[i].user_Id }">
+                    <label for="chkUser_${ data[i].user_Id }"> ${ data[i].user_Id } </label>
+                </div>
+            </td>
+            <td class="center">
+                # if( data[i].gender == "Male" ) {#
+                @*<img class="img-rounded" src="~/images/form/User_female.png" />*@
+                <img class="img-rounded img-grid" src="/images/form/User_male.png" />
+                @*<img class="img-rounded img-grid" src="~/images/form/User-Group.png" />*@
+                # }  else { #
+                <img class="img-rounded img-grid" src="/images/form/User_female.png" />
+                # } #
+            </td>
+            <td>${ data[i].employeeName } <b>(${ data[i].pfNo })</b></td>
+            <td class="hidden-xs">  ${ data[i].title }  </td>
+            <td class="hidden-xs"><a href="mailto:${ data[i].email }" target="_blank" rel="nofollow"> ${ data[i].email } </a></td>
+            <td class="hidden-xs">
+                Org Name:  ${ data[i].organizationHierarchyText.orgname } <br />
+                <hr />
+                BU: ${ data[i].organizationHierarchyText.bU_NAME } <br />
+                Div: ${ data[i].organizationHierarchyText.diV_NAME } <br />
+                Dep: ${ data[i].organizationHierarchyText.deP_NAME } <br />
+                Team: ${ data[i].organizationHierarchyText.teaM_NAME } <br />
+                Sec: ${ data[i].organizationHierarchyText.sectioN_NAME } <br />
+
+            </td>
+        </tr>
+        # } #
+    </tbody>
 </script>
 <script id="UserGroupsNoResults-template" type="text/x-kendo-template">
     <tr>
@@ -313,6 +362,46 @@
             </div>
         </td>
     </tr>
+</script>
+<script id="GroupsRow-template" type="text/x-kendo-template">
+    <thead>
+        <tr>
+            <th style="width:1%">Group Id</th>
+            <th class="center" style="width:2%">Photo</th>
+            <th>Group Name</th>
+            <th class="hidden-xs">Group Members</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        # for (var i = 0; i < data.length; i++) { #
+        <tr>
+            <td class="center">
+                <div class="checkbox clip-check check-primary check-md">
+                    <input id="chkUser_${ data[i].group_Id }" type="checkbox" value="${ data[i].group_Id }">
+                    <label for="chkUser_${ data[i].group_Id }"> ${ data[i].group_Id } </label>
+                </div>
+            </td>
+            <td class="center">
+                <img src="/images/form/User-Group.png" class="img-rounded img-grid" />
+            </td>
+            <td>${ data[i].name }</td>
+            <td class="hidden-xs">
+                <ul>
+                    # for (var iu = 0; iu < data[i].users.length; iu++) { #
+                    <li>
+                        ${ data[i].users[iu] }
+                    </li>
+
+                    # } #
+                </ul>
+
+                @*Sec: ${ data[i].organizationHierarchyText.sectioN_NAME } <br />*@
+
+            </td>
+        </tr>
+        # } #
+    <tbody>
 </script>
 <!-- end: Templates -->
 
