@@ -188,7 +188,6 @@ jQuery(document).ready(function () {
     FormWizard.init();
     UINotifications.init();
     UINestable.init();
-    UIElements.init();
 
     //var scriptTemplate = kendo.template($("#subjects-template").html());
     //$.each(subjectsArray, function (index, value) {
