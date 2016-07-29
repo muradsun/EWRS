@@ -30,7 +30,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label> Template Name <span class="symbol required"></span> </label>
-                        <input type="text" placeholder="Enter Template Name" class="form-control" name="TemplateName" asp-for="Name" style="width:100%" id="TemplateName" />
+                        <input type="text" placeholder="Enter Template Name" class="form-control" name="TemplateName" asp-for="Name" style="width:100%" id="txtTemplateName" />
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <ol class="dd-list">
                     @foreach (SubjectWizardStepView item in Model.Subjects)
                     {
-                        <li class="dd-item">
+                        <li class="dd-item" data-id="@item.SequenceNo">
                             <div class="row">
                                 <div class="col-md-1 dd-handle">
                                     <i class="fa fa-sort"></i>
@@ -57,7 +57,7 @@
                                                 <input id="txtSubject_@item.SequenceNo" type="text" placeholder="Enter Subject Title" class="form-control txtSubject" value="@item.Name" />
                                                 <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
                                             </div>
-                                            <input type="hidden" value="@item.SequenceNo" name="SequenceNo" id="hdnSequenceNo" />
+                                            <input type="hidden" value="@item.SequenceNo" id="hdnSequenceNo_@item.SequenceNo" />
                                         </div>
                                     </div>
                                     <div class="row">
@@ -95,7 +95,7 @@
 
 <!-- start: Template Area  -->
 <script id="subjects-template" type="text/x-kendo-template">
-    <li class="dd-item">
+    <li class="dd-item" data-id="#= SequenceNo #">
         <div class="row">
             <div class="col-md-1 dd-handle">
                 <i class="fa fa-sort"></i>
@@ -105,16 +105,16 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label> Subject Name <span class="symbol required"></span> </label>
-                            <input type="text" placeholder="Enter Subject Title" class="form-control txtSubject" value="#= Name #" />
+                            <input id="txtSubject_#= SequenceNo #" type="text" placeholder="Enter Subject Title" class="form-control txtSubject" value="#= Name #" />
                             <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
                         </div>
-                        <input type="hidden" value="#= SequenceNo #" name="SequenceNo" id="hdnSequenceNo" />
+                        <input type="hidden" value="#= SequenceNo #" id="hdnSequenceNo_#= SequenceNo #" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2 s-stepElm">
                         <div class="checkbox clip-check check-primary">
-                            <input id="chkMandatory_#= SequenceNo #" type="checkbox" checked="checked">
+                            <input id="chkMandatory_#= SequenceNo #" type="checkbox" checked="checked" asp-for="#= IsMandatory #">
                             <label for="chkMandatory_#= SequenceNo #"> <b>Is Mandatory</b> </label>
                         </div>
                     </div>
@@ -137,30 +137,27 @@
 
 <script type="text/javascript">
     function validateForm() {
-        var wizardForm = $('#form');
         var valElm = null;
         var isValidForm = true;
 
         //Murad :: TODO fix this referance
-        //if (wizardForm.valid()) {
-            if ($(".txtSubject").length < 1) {
-                alert("At least one subject is required");
-                return false;
-            }
+        if ($(".txtSubject").length < 1) {
+            alert("At least one subject is required");
+            return false;
+        }
 
-            $(".txtSubject").each(function (index) {
-                valElm = $(this);
-                if (valElm.val().trim() == "" || $.trim(valElm.val()).length < 3) {
-                    isValidForm = isValidForm && false;
-                    valElm.closest(".form-group").addClass("has-error");
-                    valElm.closest(".form-group").find(".has-error-H").addClass("has-error-S");
-                } else {
-                    isValidForm = isValidForm && true;
-                    valElm.closest(".form-group").removeClass("has-error").addClass("has-success");
-                    valElm.closest(".form-group").find(".has-error-H").removeClass("has-error-S");
-                }
-            });
-       //}
+        $(".txtSubject").each(function (index) {
+            valElm = $(this);
+            if (valElm.val().trim() == "" || $.trim(valElm.val()).length < 3) {
+                isValidForm = isValidForm && false;
+                valElm.closest(".form-group").addClass("has-error");
+                valElm.closest(".form-group").find(".has-error-H").addClass("has-error-S");
+            } else {
+                isValidForm = isValidForm && true;
+                valElm.closest(".form-group").removeClass("has-error").addClass("has-success");
+                valElm.closest(".form-group").find(".has-error-H").removeClass("has-error-S");
+            }
+        });
         return isValidForm;
     }
 
@@ -169,43 +166,65 @@
         if (!validateForm())
             return false;
 
-        //    var pData = CollectStepInfo();
-        //    $.ajax({
-        //        url: "/Project/SaveProjectWizardStep",
-        //        success: function (result) {
-        //            UINotifications.ShowToast("success", "Your Projet [ " + pData.Name + " ] Saved Successfuly.", "Saved Successfuly");
-        //        },
-        //        cache: false,
-        //        error: function (xhr, status, error) {
-        //            UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
-        //        },
-        //        type: "POST",
-        //        data: JSON.stringify(pData),
-        //        contentType: "application/json"
-        //    });
+        var pData = CollectTempStepInfo();
+        $.ajax({
+            url: "/Project/SaveTemplateWizardStep",
+            success: function (result) {
+                UINotifications.ShowToast("success", "Your Projet [ " + pData.Name + " ] Saved Successfuly.", "Saved Successfuly");
+            },
+            cache: false,
+            error: function (xhr, status, error) {
+                UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
+            },
+            type: "POST",
+            data: JSON.stringify(pData),
+            contentType: "application/json"
+        });
 
         return true;
 
     }
 
-    //function CollectStepInfo() {
-    //    var projectInfoWizardStepView = {};
-    //    projectInfoWizardStepView.Project_Id = 0;
-    //    projectInfoWizardStepView.Name = $("#txtName").val();
-    //    projectInfoWizardStepView.Description = $("#txtDescription").val();
-    //    projectInfoWizardStepView.ORGANIZATION_ID = $("#hdnORGANIZATION_ID").val();
-    //    projectInfoWizardStepView.OrganizationHierarchyTree = null;
+    function CollectTempStepInfo() {
+        var subjElm = null;
+        var seqNo = 0;
+        var chkMandatory = null;
+        var dueDate = null;
 
-    //    return projectInfoWizardStepView;
-    //}
+        var templateWizardStepView = {};
+        templateWizardStepView.Template_Id = 0;
+        templateWizardStepView.Project_Id = 0;
+        templateWizardStepView.Name = $("#txtTemplateName").val();
+        templateWizardStepView.Subjects = [];
 
-    function GetDefualtSubjectWizardStepView() {
+        $(".txtSubject").each(function (index) {
+            debugger;
+            subjElm = $(this);
+            seqNo = subjElm.attr("id").split("_")[1];
+            //$("[id^=chkMandatory]").
+            chkMandatory = $("#chkMandatory_" + seqNo);
+            dueDate = subjElm.parentsUntil(".dd-item");
+            dueDate = $(dueDate[dueDate.length - 1]).find(".datepickerElm");
+
+            templateWizardStepView.Subjects[index] = {};
+            templateWizardStepView.Subjects[index].Template_Id = 0;
+            templateWizardStepView.Subjects[index].Subject_Id = 0;
+            templateWizardStepView.Subjects[index].Name = subjElm.val();
+            templateWizardStepView.Subjects[index].DueDate = $(dueDate[1]).val();
+            templateWizardStepView.Subjects[index].IsMandatory = chkMandatory.is(':checked');
+            templateWizardStepView.Subjects[index].SequenceNo = $("#hdnSequenceNo_" + seqNo).val();
+        });
+
+        return templateWizardStepView;
+    }
+
+    function GetDefualtSubjectWizardStepView(maxSeq) {
         var subjectWizardStepView = {};
         subjectWizardStepView.Template_Id = "";
         subjectWizardStepView.Subject_Id = 0;
         subjectWizardStepView.Name = "";
         subjectWizardStepView.IsMandatory = true;
-        subjectWizardStepView.SequenceNo = 0;
+        subjectWizardStepView.SequenceNo = maxSeq;
         subjectWizardStepView.DueDate = null;
 
         return subjectWizardStepView;
@@ -223,11 +242,6 @@
             $(".datepickerElmNew").kendoDatePicker({ format: "dd-MMMM-yyyy" });
             $(".datepickerElmNew").removeClass("datepickerElmNew").addClass("datepickerElm");
         }
-
-
-        //.kendoDatePicker({
-        //    format: "dd-MMMM-yyyy"
-        //});
     }
 
     $(document).ready(function () {
@@ -245,8 +259,7 @@
             maxSeq += 1;
 
             //Get JSON Defualt Object
-            var subObj = GetDefualtSubjectWizardStepView();
-            subObj.SequenceNo = maxSeq;
+            var subObj = GetDefualtSubjectWizardStepView(maxSeq);
 
             //bind JSON to template
             var scriptTemplate = kendo.template($("#subjects-template").html());

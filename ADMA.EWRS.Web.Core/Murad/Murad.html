@@ -1,19 +1,116 @@
-﻿<div class="tabbable">
-    <ul class="nav nav-tabs" id="myTab1">
-        <li>
-            <a aria-expanded="false" href="#tabUsers" data-toggle="tab"> Search Users </a>
+﻿<div class="dd" id="nestable">
+    <ol class="dd-list">
+        <li class="dd-item">
+            <div class="row">
+                <div class="col-md-1 dd-handle">
+                    <i class="fa fa-sort"></i>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label> Subject Name <span class="symbol required" aria-required="true"></span> </label>
+                                <input class="form-control txtSubject" id="txtSubject_2" type="text" placeholder="Enter Subject Title" value="Planning">
+                                <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
+                            </div>
+                            <input name="SequenceNo" id="hdnSequenceNo" type="hidden" value="2">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 s-stepElm">
+                            <div class="checkbox clip-check check-primary">
+                                <input name="item.IsMandatory" id="chkMandatory_2" type="checkbox" checked="checked" value="true">
+                                <label for="chkMandatory_2"> <b>Is Mandatory</b> </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 s-stepElm" style="text-align: right; padding-right: 0px;">
+                            <b> Due Date:</b>
+                        </div>
+                        <div class="col-md-8 s-stepElm" style="text-align: left; padding-top: 0px; padding-left: 5px;">
+                            <span class="k-widget k-datepicker k-header datepickerElm" style="width: 100%;"><span class="k-picker-wrap k-state-default"><input name="item.DueDate" class="datepickerElm k-input" id="item_DueDate" role="combobox" aria-disabled="false" aria-expanded="false" aria-readonly="false" aria-owns="item_DueDate_dateview" style="width: 100%;" type="text" value="" data-role="datepicker"><span class="k-select" role="button" aria-controls="item_DueDate_dateview" unselectable="on"><span class="k-icon k-i-calendar" unselectable="on">select</span></span></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <h2 class="btn btn-o btn-Toolbar btn-danger" onclick="removeSubject(this);"> <i class="fa fa-trash"></i></h2>
+                </div>
+            </div>
+            <hr class="hr-flat">
         </li>
-        <li class="active">
-            <a aria-expanded="true" href="#tabGroups" data-toggle="tab"> Search Groups </a>
+        <li class="dd-item">
+            <div class="row">
+                <div class="col-md-1 dd-handle">
+                    <i class="fa fa-sort"></i>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label> Subject Name <span class="symbol required" aria-required="true"></span> </label>
+                                <input class="form-control txtSubject" id="txtSubject_1" type="text" placeholder="Enter Subject Title" value="Progress">
+                                <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
+                            </div>
+                            <input name="SequenceNo" id="hdnSequenceNo" type="hidden" value="1">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 s-stepElm">
+                            <div class="checkbox clip-check check-primary">
+                                <input name="item.IsMandatory" id="chkMandatory_1" type="checkbox" checked="checked" value="true" data-val-required="The IsMandatory field is required." data-val="true">
+                                <label for="chkMandatory_1"> <b>Is Mandatory</b> </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 s-stepElm" style="text-align: right; padding-right: 0px;">
+                            <b> Due Date:</b>
+                        </div>
+                        <div class="col-md-8 s-stepElm" style="text-align: left; padding-top: 0px; padding-left: 5px;">
+                            <span class="k-widget k-datepicker k-header datepickerElm" style="width: 100%;"><span class="k-picker-wrap k-state-default"><input name="item.DueDate" class="datepickerElm k-input" id="item_DueDate" role="combobox" aria-disabled="false" aria-expanded="false" aria-readonly="false" aria-owns="item_DueDate_dateview" style="width: 100%;" type="text" value="" data-role="datepicker"><span class="k-select" role="button" aria-controls="item_DueDate_dateview" unselectable="on"><span class="k-icon k-i-calendar" unselectable="on">select</span></span></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <h2 class="btn btn-o btn-Toolbar btn-danger" onclick="removeSubject(this);"> <i class="fa fa-trash"></i></h2>
+                </div>
+            </div>
+            <hr class="hr-flat">
         </li>
-        
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane fade" id="tabUsers">
-            Hi man 
-        </div>
-        <div class="tab-pane fade active in" id="tabGroups">
-           Hi 2
-        </div>
-    </div>
+
+        <li class="dd-item">
+            <div class="row">
+                <div class="col-md-1 dd-handle">
+                    <i class="fa fa-sort"></i>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label> Subject Name <span class="symbol required" aria-required="true"></span> </label>
+                                <input class="form-control txtSubject" id="txtSubject_3" type="text" placeholder="Enter Subject Title" value="Problems">
+                                <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
+                            </div>
+                            <input name="SequenceNo" id="hdnSequenceNo" type="hidden" value="3">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 s-stepElm">
+                            <div class="checkbox clip-check check-primary">
+                                <input name="item.IsMandatory" id="chkMandatory_3" type="checkbox" checked="checked" value="true">
+                                <label for="chkMandatory_3"> <b>Is Mandatory</b> </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 s-stepElm" style="text-align: right; padding-right: 0px;">
+                            <b> Due Date:</b>
+                        </div>
+                        <div class="col-md-8 s-stepElm" style="text-align: left; padding-top: 0px; padding-left: 5px;">
+                            <span class="k-widget k-datepicker k-header datepickerElm" style="width: 100%;"><span class="k-picker-wrap k-state-default"><input name="item.DueDate" class="datepickerElm k-input" id="item_DueDate" role="combobox" aria-disabled="false" aria-expanded="false" aria-readonly="false" aria-owns="item_DueDate_dateview" style="width: 100%;" type="text" value="" data-role="datepicker"><span class="k-select" role="button" aria-controls="item_DueDate_dateview" unselectable="on"><span class="k-icon k-i-calendar" unselectable="on">select</span></span></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <h2 class="btn btn-o btn-Toolbar btn-danger" onclick="removeSubject(this);"> <i class="fa fa-trash"></i></h2>
+                </div>
+            </div>
+            <hr class="hr-flat">
+        </li>
+    </ol>
 </div>

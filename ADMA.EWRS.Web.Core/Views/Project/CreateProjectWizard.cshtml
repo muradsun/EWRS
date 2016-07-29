@@ -65,7 +65,8 @@
                             <!-- end: WIZARD STEP 2 -->
                             <!-- start: WIZARD STEP 3 -->
                             <div id="step-3" style="display:none;">
-                                @await Component.InvokeAsync("TeamModelWizardStep", new { projectId = 0 })
+                                Hi 3
+                                @*@await Component.InvokeAsync("TeamModelWizardStep", new { projectId = 0 })*@
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-o back-step btn-wide pull-left">
                                         <i class="fa fa-circle-arrow-left"></i> Back
@@ -148,11 +149,13 @@
     <script src="~/js/CreateProjectUI-nestable.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            //var wizardContent = $('#wizard');
-            //wizardContent.smartWizard("goToStep", 3);
-        });
+        jQuery(document).ready(function () {
+            Main.init();
 
+            FormWizard.init();
+            UINotifications.init();
+            UINestable.init();
+        });
     </script>
     <!-- end: JavaScript Event Handlers for this page -->
 

@@ -121,15 +121,6 @@ var FormWizard = function () {
 
     var leaveAStepCallback = function (obj, context) {
         var isValidStep = validateSteps(context.fromStep, context.toStep);
-
-        if (isValidStep & context.fromStep == 1 & context.toStep == 2)
-            return SaveProjectInfoWizardStep();
-
-
-        if (isValidStep & context.fromStep == 2 & context.toStep == 3)
-            return SaveTemplateWizardStep();
-
-
         return isValidStep;
         // return false to stay on step and true to continue navigation
     };
@@ -145,7 +136,6 @@ var FormWizard = function () {
     var validateSteps = function (stepnumber, nextstep) {
         var isStepValid = false;
         if (numberOfSteps >= nextstep && nextstep > stepnumber) {
-
             // cache the form element selector
             if (wizardForm.valid()) { // validate the form
                 wizardForm.validate().focusInvalid();
@@ -154,6 +144,15 @@ var FormWizard = function () {
                 }
                 //focus the invalid fields
                 isStepValid = true;
+
+                if (isStepValid & stepnumber == 1 & nextstep == 2)
+                    return SaveProjectInfoWizardStep();
+
+
+                if (isStepValid & stepnumber == 2 & nextstep == 3)
+                    return SaveTemplateWizardStep();
+
+
                 return true;
             };
         } else if (nextstep < stepnumber) {
@@ -179,29 +178,3 @@ var FormWizard = function () {
     };
 }();
 
-//MYasin
-//Adding the Add new row button logic
-
-jQuery(document).ready(function () {
-    Main.init();
-
-    FormWizard.init();
-    UINotifications.init();
-    UINestable.init();
-
-    //var scriptTemplate = kendo.template($("#subjects-template").html());
-    //$.each(subjectsArray, function (index, value) {
-    //    //alert(index + ": " + value);
-    //    $("#TextBoxesGroup").append(scriptTemplate(value));
-    //});
-
-    //$("#addButton").click(function () {
-    //    var data = { SubjectName: " << New Subject >> " };
-    //    $("#TextBoxesGroup").append(scriptTemplate(data));
-    //});
-});
-
-//function removeSubject(itemClicked) {
-//    if (window.confirm("Are you sure wallah ?"))
-//        $(itemClicked).closest('.row').detach();
-//}

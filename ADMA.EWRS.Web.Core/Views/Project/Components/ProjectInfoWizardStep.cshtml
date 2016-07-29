@@ -70,8 +70,9 @@
     </div>
 </div>
 <script type="text/javascript">
+    //Validate and Save, return false if want to stay at step
     function SaveProjectInfoWizardStep() {
-        var pData = CollectStepInfo();
+        var pData = CollectProjInfoStepInfo();
         $.ajax({
             url: "/Project/SaveProjectWizardStep",
             success: function (result) {
@@ -89,7 +90,7 @@
         return true;
     }
 
-    function CollectStepInfo() {
+    function CollectProjInfoStepInfo() {
         var projectInfoWizardStepView = {};
         projectInfoWizardStepView.Project_Id = 0;
         projectInfoWizardStepView.Name = $("#txtName").val();

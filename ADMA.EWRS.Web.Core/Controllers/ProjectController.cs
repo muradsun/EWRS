@@ -46,19 +46,6 @@ namespace ADMA.EWRS.Web.Core.Controllers
 
         }
 
-
-        /// <summary>
-        /// Save the first step in Project Configuration Wizard
-        /// </summary>
-        /// <param name="projectInfoWizardStepView"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public IActionResult SaveProjectWizardStep([FromBody] ProjectInfoWizardStepView projectInfoWizardStepView)
-        {
-            return Json(new { Ok = true });
-        }
-
-
         public JsonResult SearchOrganizationHierarchy(string filter)
         {
             var orgList = pm.SearchOrganizationHierarchy(filter);
@@ -74,11 +61,31 @@ namespace ADMA.EWRS.Web.Core.Controllers
                 SECTION_NAME = o.SECTION_NAME
             });
 
-            return Json(data, new JsonSerializerSettings() {
+            return Json(data, new JsonSerializerSettings()
+            {
                 ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver() //Murad : TODO :: CHnage this to lower 
             });
 
         }
+
+        /// <summary>
+        /// Save the first step in Project Configuration Wizard
+        /// </summary>
+        /// <param name="projectInfoWizardStepView"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult SaveProjectWizardStep([FromBody] ProjectInfoWizardStepView projectInfoWizardStepView)
+        {
+            return Json(new { Ok = true });
+        }
+
+        [HttpPost]
+        public IActionResult SaveTemplateWizardStep([FromBody] TemplateWizardStepView templateWizardStepView)
+        {
+            return Json(new { Ok = true });
+        }
+
+
 
     }
 }
