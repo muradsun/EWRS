@@ -118,7 +118,6 @@ var FormWizard = function () {
         var isStepValid = false;
         
         if (numberOfSteps >= nextstep && nextstep > stepnumber) {
-        	debugger;
             // cache the form element selector
             //if (wizardForm.valid()) { // validate the form
                 wizardForm.validate().focusInvalid();

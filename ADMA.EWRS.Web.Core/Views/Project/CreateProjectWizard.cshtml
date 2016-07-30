@@ -65,14 +65,13 @@
                             <!-- end: WIZARD STEP 2 -->
                             <!-- start: WIZARD STEP 3 -->
                             <div id="step-3" style="display:none;">
-                                Hi 3
-                                @*@await Component.InvokeAsync("TeamModelWizardStep", new { projectId = 0 })*@
+                                @await Component.InvokeAsync("TeamModelWizardStep", new { projectId = 0 })
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-o back-step btn-wide pull-left">
                                         <i class="fa fa-circle-arrow-left"></i> Back
                                     </button>
                                     <button class="btn btn-primary btn-o next-step btn-wide pull-right">
-                                        Next <i class="fa fa-arrow-circle-right"></i>
+                                        Save & Move Next <i class="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </div>
                             </div>
@@ -147,6 +146,7 @@
     <script src="~/js/CreateProjectFormWizard.js"></script>
     <script src="~/js/CreateProjectUI-Notifications.js"></script>
     <script src="~/js/CreateProjectUI-nestable.js"></script>
+    <!-- end: JavaScript Event Handlers for this page -->
 
     <script type="text/javascript">
         jQuery(document).ready(function () {
@@ -155,9 +155,11 @@
             FormWizard.init();
             UINotifications.init();
             UINestable.init();
+
+            //Murad Teamp
+            var wizardContent = $('#wizard');
+            wizardContent.smartWizard("goToStep", 3);
         });
     </script>
-    <!-- end: JavaScript Event Handlers for this page -->
-
 }
 

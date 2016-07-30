@@ -18134,6 +18134,11 @@ figure.effect-goliath {
     background-color: #ffffff;
 }
 
+    .thumbnail-card h4 {
+        height: 40px;
+    }
+
+
 .thumbnail-updater {
     background-color: #7bc6a0;
     animation-name: color_change_to_updater;

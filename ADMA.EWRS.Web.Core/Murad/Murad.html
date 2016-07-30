@@ -1,116 +1,115 @@
-﻿<div class="dd" id="nestable">
-    <ol class="dd-list">
-        <li class="dd-item">
-            <div class="row">
-                <div class="col-md-1 dd-handle">
-                    <i class="fa fa-sort"></i>
+﻿<div class="mix viewer col-sm-6 col-md-3" data-my-order="1">
+    <div class="thumbnail thumbnail-viewer">
+        <div class="row">
+            <div class="col-md-3 no-space text-right">
+                <button type="button" class="btn btn-red" onclick="deleteTM(this);">
+                    <i class="fa fa-user-times"></i>
+                </button>
+            </div>
+            <div class="col-md-6 " align="center">
+                <img class="img-responsive img-card" alt="" src="/images/form/User_female.png">
+            </div>
+        </div>
+        <div class="padding-20 height-200 thumbnail-card">
+            <h4>Murad Mahmoud Ali Text ddd s</h4>
+            <div class="form-group">
+                <select class="cs-select cs-skin-slide" onselect="alert(1)" id="xx" onchange="alert(99)" onclick="alert(100)">
+                    <option value="Updater" data-class="fa fa-pencil-square-o">Updater</option>
+                    <option value="Viewer" data-class="ti-eye" selected="selected">Viewer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="radio clip-radio radio-primary no-space">
+                    <input name="vertical_1" id="radio_1" type="radio" value="radio3" checked="checked" class="radioElm">
+                    <label for="radio_1"> Project Level</label>
                 </div>
-                <div class="col-md-10">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label> Subject Name <span class="symbol required" aria-required="true"></span> </label>
-                                <input class="form-control txtSubject" id="txtSubject_2" type="text" placeholder="Enter Subject Title" value="Planning">
-                                <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
-                            </div>
-                            <input name="SequenceNo" id="hdnSequenceNo" type="hidden" value="2">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2 s-stepElm">
-                            <div class="checkbox clip-check check-primary">
-                                <input name="item.IsMandatory" id="chkMandatory_2" type="checkbox" checked="checked" value="true">
-                                <label for="chkMandatory_2"> <b>Is Mandatory</b> </label>
-                            </div>
-                        </div>
-                        <div class="col-md-2 s-stepElm" style="text-align: right; padding-right: 0px;">
-                            <b> Due Date:</b>
-                        </div>
-                        <div class="col-md-8 s-stepElm" style="text-align: left; padding-top: 0px; padding-left: 5px;">
-                            <span class="k-widget k-datepicker k-header datepickerElm" style="width: 100%;"><span class="k-picker-wrap k-state-default"><input name="item.DueDate" class="datepickerElm k-input" id="item_DueDate" role="combobox" aria-disabled="false" aria-expanded="false" aria-readonly="false" aria-owns="item_DueDate_dateview" style="width: 100%;" type="text" value="" data-role="datepicker"><span class="k-select" role="button" aria-controls="item_DueDate_dateview" unselectable="on"><span class="k-icon k-i-calendar" unselectable="on">select</span></span></span></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <h2 class="btn btn-o btn-Toolbar btn-danger" onclick="removeSubject(this);"> <i class="fa fa-trash"></i></h2>
+                <div class="radio clip-radio radio-primary no-space">
+                    <input name="vertical_1" id="radio_2" type="radio" value="radio4" class="radioElm">
+                    <label data-TMSubjects="" for="radio_2" class="cl-effect-3 links block margin-top-10 uppercase text-dark text-uppercase text-bold text-extra-small" onclick="loadSubj4TeamModel(this);" aria-describedby="popover303618" data-original-title="" data-toggle="popover" data-placement="top" data-html="true">
+                        Specific Subject
+                        <i class="padding-left-5 fa fa-angle-right"></i>
+                    </label>
                 </div>
             </div>
-            <hr class="hr-flat">
-        </li>
-        <li class="dd-item">
-            <div class="row">
-                <div class="col-md-1 dd-handle">
-                    <i class="fa fa-sort"></i>
+        </div>
+    </div>
+</div>
+<div class="mix updater col-sm-6 col-md-3" data-my-order="2">
+    <div class="thumbnail thumbnail-viewer">
+        <div class="row">
+            <div class="col-md-3 no-space text-right">
+                <button type="button" class="btn btn-red">
+                    <i class="fa fa-user-times"></i>
+                </button>
+            </div>
+            <div class="col-md-6 " align="center">
+                <img class="img-responsive img-card" alt="" src="/images/form/User_female.png">
+            </div>
+        </div>
+        <div class="padding-20 height-200 thumbnail-card">
+            <h4>Murad Mahmoud</h4>
+            <div class="form-group">
+                <select class="cs-select cs-skin-slide">
+                    <option value="Updater" data-class="fa fa-dropbox">Updater</option>
+                    <option value="Viewer" data-class="fa fa-github">Viewer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="radio clip-radio radio-primary no-space ">
+                    <input name="vertical_3" id="radio_3" type="radio" value="radio3" checked="checked">
+                    <label for="radio_3"> Project Level</label>
                 </div>
-                <div class="col-md-10">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label> Subject Name <span class="symbol required" aria-required="true"></span> </label>
-                                <input class="form-control txtSubject" id="txtSubject_1" type="text" placeholder="Enter Subject Title" value="Progress">
-                                <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
-                            </div>
-                            <input name="SequenceNo" id="hdnSequenceNo" type="hidden" value="1">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2 s-stepElm">
-                            <div class="checkbox clip-check check-primary">
-                                <input name="item.IsMandatory" id="chkMandatory_1" type="checkbox" checked="checked" value="true" data-val-required="The IsMandatory field is required." data-val="true">
-                                <label for="chkMandatory_1"> <b>Is Mandatory</b> </label>
-                            </div>
-                        </div>
-                        <div class="col-md-2 s-stepElm" style="text-align: right; padding-right: 0px;">
-                            <b> Due Date:</b>
-                        </div>
-                        <div class="col-md-8 s-stepElm" style="text-align: left; padding-top: 0px; padding-left: 5px;">
-                            <span class="k-widget k-datepicker k-header datepickerElm" style="width: 100%;"><span class="k-picker-wrap k-state-default"><input name="item.DueDate" class="datepickerElm k-input" id="item_DueDate" role="combobox" aria-disabled="false" aria-expanded="false" aria-readonly="false" aria-owns="item_DueDate_dateview" style="width: 100%;" type="text" value="" data-role="datepicker"><span class="k-select" role="button" aria-controls="item_DueDate_dateview" unselectable="on"><span class="k-icon k-i-calendar" unselectable="on">select</span></span></span></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <h2 class="btn btn-o btn-Toolbar btn-danger" onclick="removeSubject(this);"> <i class="fa fa-trash"></i></h2>
+                <div class="radio clip-radio radio-primary no-space ">
+                    <input name="vertical_3" id="radio_4" type="radio" value="radio4">
+                    <label for="radio_4">
+                        <span class="cl-effect-3 links block margin-top-10">
+                            <a href="#" class="uppercase text-dark text-uppercase text-bold text-extra-small">
+                                Specific Subject
+                                <i class="padding-left-5 fa fa-angle-right"></i>
+                            </a>
+                        </span>
+                    </label>
                 </div>
             </div>
-            <hr class="hr-flat">
-        </li>
+        </div>
+    </div>
+</div>
 
-        <li class="dd-item">
-            <div class="row">
-                <div class="col-md-1 dd-handle">
-                    <i class="fa fa-sort"></i>
+================================
+
+<div class="mix #= typeText # col-sm-6 col-md-3" data-my-order="#= SequenceNo #">
+    <div class="thumbnail thumbnail-#= typeText #">
+        <div class="row">
+            <div class="col-md-3 no-space text-right">
+                <button type="button" class="btn btn-red" onclick="deleteTM(this);">
+                    <i class="fa fa-user-times"></i>
+                </button>
+            </div>
+            <div class="col-md-6 " align="center">
+                <img class="img-responsive img-card" alt="" src="/images/form/#= IconText #.png">
+            </div>
+        </div>
+        <div class="padding-20 height-200 thumbnail-card">
+            <h4>#= Name #</h4>
+            <div class="form-group">
+                <select class="cs-select cs-skin-slide">
+                    <option value="Updater" data-class="fa fa-pencil-square-o">Updater</option>
+                    <option value="Viewer" data-class="ti-eye" selected="selected">Viewer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="radio clip-radio radio-primary no-space">
+                    <input name="vertical_1" id="radio_1" type="radio" value="radio3" checked="checked" class="radioElm">
+                    <label for="radio_1"> Project Level</label>
                 </div>
-                <div class="col-md-10">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label> Subject Name <span class="symbol required" aria-required="true"></span> </label>
-                                <input class="form-control txtSubject" id="txtSubject_3" type="text" placeholder="Enter Subject Title" value="Problems">
-                                <span class="has-error-H">Subject Name is required, minimum 3 characters</span>
-                            </div>
-                            <input name="SequenceNo" id="hdnSequenceNo" type="hidden" value="3">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2 s-stepElm">
-                            <div class="checkbox clip-check check-primary">
-                                <input name="item.IsMandatory" id="chkMandatory_3" type="checkbox" checked="checked" value="true">
-                                <label for="chkMandatory_3"> <b>Is Mandatory</b> </label>
-                            </div>
-                        </div>
-                        <div class="col-md-2 s-stepElm" style="text-align: right; padding-right: 0px;">
-                            <b> Due Date:</b>
-                        </div>
-                        <div class="col-md-8 s-stepElm" style="text-align: left; padding-top: 0px; padding-left: 5px;">
-                            <span class="k-widget k-datepicker k-header datepickerElm" style="width: 100%;"><span class="k-picker-wrap k-state-default"><input name="item.DueDate" class="datepickerElm k-input" id="item_DueDate" role="combobox" aria-disabled="false" aria-expanded="false" aria-readonly="false" aria-owns="item_DueDate_dateview" style="width: 100%;" type="text" value="" data-role="datepicker"><span class="k-select" role="button" aria-controls="item_DueDate_dateview" unselectable="on"><span class="k-icon k-i-calendar" unselectable="on">select</span></span></span></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <h2 class="btn btn-o btn-Toolbar btn-danger" onclick="removeSubject(this);"> <i class="fa fa-trash"></i></h2>
+                <div class="radio clip-radio radio-primary no-space">
+                    <input name="vertical_1" id="radio_2" type="radio" value="radio4" class="radioElm">
+                    <label data-TMSubjects="" for="radio_2" class="cl-effect-3 links block margin-top-10 uppercase text-dark text-uppercase text-bold text-extra-small" onclick="loadSubj4TeamModel(this);" aria-describedby="popover303618" data-original-title="" data-toggle="popover" data-placement="top" data-html="true">
+                        Specific Subject
+                        <i class="padding-left-5 fa fa-angle-right"></i>
+                    </label>
                 </div>
             </div>
-            <hr class="hr-flat">
-        </li>
-    </ol>
+        </div>
+    </div>
 </div>

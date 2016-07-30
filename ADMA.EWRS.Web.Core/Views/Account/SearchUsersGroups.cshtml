@@ -76,6 +76,9 @@
     <legend>
         Search Results
     </legend>
+    <button class="btn btn-success btn-scroll btn-scroll-left ti-user" type="button" id="btnAdd" style="float:right; display:none">
+        <span><i class="fa fa-user-plus"></i> Add </span>
+    </button>
     <table class="table table-striped" id="tblUserGroupsResults">
         <tbody>
             <tr>
@@ -92,174 +95,6 @@
         <ul id="pagination-UsersGroups" class="pagination-sm  text-right"></ul>
     </div>
 </fieldset>
-
-<style type="text/css">
-    .k-autocomplete {
-        width: 100%;
-        appearance: none;
-        background-color: #FFFFFF !important;
-        background-image: none !important;
-        border: 1px solid #c8c7cc;
-        border-radius: 0;
-        color: #5b5b60 !important;
-        font-family: inherit !important;
-        font-size: 14px !important;
-        padding: 5px 4px !important;
-        box-shadow: none !important;
-    }
-
-    .k-itemx {
-        background-color: #e8f5ff !important;
-        padding: 5px !important;
-        padding-left: 0 !important;
-        font-weight: bolder;
-        width: 100%;
-    }
-</style>
-<script type="text/javascript">
-    var selectedOrgid = 0;
-    $(document).ready(function () {
-        var dataSource = new kendo.data.DataSource({
-            serverFiltering: true,
-            transport: {
-                type: "json",
-                serverFiltering: true,
-                read: {
-                    url: "/Project/SearchOrganizationHierarchy"
-                },
-                parameterMap: function (data, action) {
-                    var newParams = {
-                        filter: data.filter.filters[0].value
-                    };
-                    return newParams;
-                }
-            }
-        });
-        var autocomplete = $("#autocOH").kendoAutoComplete({
-            minLength: 3,
-            dataTextField: "orgname",
-            dataSource: dataSource,
-            headerTemplate: '',
-            template: kendo.template($("#UserGroups-template").html()),
-            select: function (ev) {
-                var dataItem = this.dataItem(ev.item.index());
-                selectedOrgid = dataItem.orgid;
-            }
-        }).data("kendoAutoComplete");
-
-        $("#btnSearch").click(function () {
-            var hrefText = $(".tabbable ul li.active a").attr("href");
-            if (hrefText == "#tabUsers") {
-                //Search Users
-                var dataForm = collectUserSearchData(true);
-                $.ajax({
-                    url: "/Account/SearchUsers",
-                    success: function (result) {
-                        if (result != null && result.count > 0) {
-                            loadPagination(result.count);
-                            var htmlDataTemplate = kendo.template($("#UsersRow-template").html());
-                            var htmlData = htmlDataTemplate(result.data);
-                            $("#tblUserGroupsResults").html(htmlData);
-                            //UINotifications.ShowToast("success", "Your Projet [ Text ] Saved Successfuly.", "Saved Successfuly");
-                        } else {
-                            loadPagination(0);
-                            $("#tblUserGroupsResults").html(kendo.template($("#UserGroupsNoResults-template").html()));
-                        }
-                    },
-                    cache: false,
-                    dataType: 'json',
-                    error: function (xhr, status, error) {
-                        UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
-                    },
-                    type: "POST",
-                    data: JSON.stringify(dataForm),
-                    contentType: "application/json"
-                });
-            }
-            else
-                if (hrefText == "#tabGroups") {
-                    //Search Groups
-                    var dataForm = collectUserSearchData(false);
-
-                    $.ajax({
-                        url: "/Account/SearchGroups",
-                        success: function (result) {
-                            if (result != null && result.count > 0) {
-                                loadPagination(result.count);
-                                var htmlDataTemplate = kendo.template($("#GroupsRow-template").html());
-                                var htmlData = htmlDataTemplate(result.data);
-                                $("#tblUserGroupsResults").html(htmlData);
-                                ////UINotifications.ShowToast("success", "Your Projet [ Text ] Saved Successfuly.", "Saved Successfuly");
-                            } else {
-                                loadPagination(0);
-                                $("#tblUserGroupsResults").html(kendo.template($("#UserGroupsNoResults-template").html()));
-                            }
-                        },
-                        cache: false,
-                        dataType: 'json',
-                        data: JSON.stringify(dataForm),
-                        error: function (xhr, status, error) {
-                            UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
-                        },
-                        type: "POST",
-                        //data: JSON.stringify(dataForm),
-                        contentType: "application/json"
-                    });
-
-                }
-                else {
-                    alert('PLease Select a User or Groups Tab')
-                }
-        });
-    });
-
-    function collectUserSearchData(isUser) {
-        if (isUser) {
-            //Collect User Data
-            var autocomplete = $("#autocOH").data("kendoAutoComplete");
-            if ($.trim(autocomplete.value()) == "")
-                selectedOrgid = 0;
-
-            return usersSearchRequestView = {
-                PFNo: $("#txtPF").val(),
-                FirstName: $("#txtfirstName").val(),
-                FamilyName: $("#txtlastName").val(),
-                Title: $("#txtTitle").val(),
-                Email: $("#txtEmail").val(),
-                OrganizationId: selectedOrgid,
-                PageIndex: $("#hdnPageIndex").val(),
-            };
-        }
-        else {
-            //Collect Groups Data
-            return GroupsSearchRequestView = {
-                Name: $("#txtGroupName").val(),
-                PageIndex: $("#hdnPageIndex").val()
-            };
-        }
-    }
-
-    function loadPagination(totalRecourds) {
-        $("#hdnPageIndex").val(1);
-
-        if (totalRecourds <= 10)
-            $("#pagination-UsersGroups").hide();
-        else {
-            var recordsPerPage = @ADMA.EWRS.BizDomain.Configurations.Instance.RecordsPerPage;
-            var totalPages = ((totalRecourds-1) / recordsPerPage)+1;
-
-            $("#pagination-UsersGroups").show();
-            $("#pagination-UsersGroups").twbsPagination({
-                totalPages: totalPages,
-                visiblePages: 10,
-                href: '#page={{number}}',
-                onPageClick: function (event, page) {
-                    $("#hdnPageIndex").val(page);
-                }
-            });
-        }
-    }
-</script>
 
 @*
         //-----------------------------
@@ -295,7 +130,7 @@
 *@
 
 <!-- start: Templates -->
-<script id="UserGroups-template" type="text/x-kendo-template">
+<script id="OrgAutocomplete-template" type="text/x-kendo-template">
     <div>
         <div class="k-itemx">
             ${ data.orgname }
@@ -307,12 +142,22 @@
         <span><b>Sec</b>  ${ data.sectioN_NAME }</span>  <br />
     </div>
 </script>
+<script id="UserGroupsNoResults-template" type="text/x-kendo-template">
+    <tr>
+        <td colspan="6">
+            <div class="no-items-found" style="padding:1%;">
+                No Results Found <i class="fa fa-frown-o"></i>
+            </div>
+        </td>
+    </tr>
+</script>
 <script id="UsersRow-template" type="text/x-kendo-template">
     <thead>
         <tr>
             <th>User Id</th>
             <th class="center">Photo</th>
             <th>Full Name</th>
+            <th>PF No.</th>
             <th class="hidden-xs">Title</th>
             <th class="hidden-xs">Email</th>
             <th class="hidden-xs">Organization Tree</th>
@@ -337,7 +182,8 @@
                 <img class="img-rounded img-grid" src="/images/form/User_female.png" />
                 # } #
             </td>
-            <td>${ data[i].employeeName } <b>(${ data[i].pfNo })</b></td>
+            <td>${ data[i].employeeName } </td>
+            <td><b>${ data[i].pfNo }</b></td>
             <td class="hidden-xs">  ${ data[i].title }  </td>
             <td class="hidden-xs"><a href="mailto:${ data[i].email }" target="_blank" rel="nofollow"> ${ data[i].email } </a></td>
             <td class="hidden-xs">
@@ -354,15 +200,6 @@
         # } #
     </tbody>
 </script>
-<script id="UserGroupsNoResults-template" type="text/x-kendo-template">
-    <tr>
-        <td colspan="6">
-            <div class="no-items-found" style="padding:1%;">
-                No Results Found <i class="fa fa-frown-o"></i>
-            </div>
-        </td>
-    </tr>
-</script>
 <script id="GroupsRow-template" type="text/x-kendo-template">
     <thead>
         <tr>
@@ -378,8 +215,8 @@
         <tr>
             <td class="center">
                 <div class="checkbox clip-check check-primary check-md">
-                    <input id="chkUser_${ data[i].group_Id }" type="checkbox" value="${ data[i].group_Id }">
-                    <label for="chkUser_${ data[i].group_Id }"> ${ data[i].group_Id } </label>
+                    <input id="chkGroup_${ data[i].group_Id }" type="checkbox" value="${ data[i].group_Id }">
+                    <label for="chkGroup_${ data[i].group_Id }"> ${ data[i].group_Id } </label>
                 </div>
             </td>
             <td class="center">
@@ -405,6 +242,8 @@
 </script>
 <!-- end: Templates -->
 
+
+
 @section CssStyle{
     <link rel="stylesheet" href="/lib/toastr/toastr.min.css">
     <link href="/lib/nestable-fork/dist/jquery.nestable.min.css" rel="stylesheet" media="screen">
@@ -428,4 +267,206 @@
     <script src="/js/CreateProjectUI-elements.js"></script>
     <script src="/js/CreateProjectUI-Notifications.js"></script>
     <!-- end: JavaScript Event Handlers for this page -->
+
+    <script type="text/javascript">
+        var selectedOrgid = 0;
+        $(document).ready(function () {
+            var dataSource = new kendo.data.DataSource({
+                serverFiltering: true,
+                transport: {
+                    type: "json",
+                    serverFiltering: true,
+                    read: {
+                        url: "/Project/SearchOrganizationHierarchy"
+                    },
+                    parameterMap: function (data, action) {
+                        var newParams = {
+                            filter: data.filter.filters[0].value
+                        };
+                        return newParams;
+                    }
+                }
+            });
+            var autocomplete = $("#autocOH").kendoAutoComplete({
+                minLength: 3,
+                dataTextField: "orgname",
+                dataSource: dataSource,
+                headerTemplate: '',
+                template: kendo.template($("#OrgAutocomplete-template").html()),
+                select: function (ev) {
+                    var dataItem = this.dataItem(ev.item.index());
+                    selectedOrgid = dataItem.orgid;
+                }
+            }).data("kendoAutoComplete");
+            $("#btnSearch").click(function () {
+                var hrefText = $(".tabbable ul li.active a").attr("href");
+                if (hrefText == "#tabUsers") {
+                    //Search Users
+                    var dataForm = collectUserSearchData(true);
+                    $.ajax({
+                        url: "/Account/SearchUsers",
+                        success: function (result) {
+                            if (result != null && result.count > 0) {
+                                loadPagination(result.count);
+                                $("#btnAdd").show();
+                                var htmlDataTemplate = kendo.template($("#UsersRow-template").html());
+                                var htmlData = htmlDataTemplate(result.data);
+                                $("#tblUserGroupsResults").html(htmlData);
+                                //UINotifications.ShowToast("success", "Your Projet [ Text ] Saved Successfuly.", "Saved Successfuly");
+                            } else {
+                                loadPagination(0);
+                                $("#btnAdd").hide();
+                                $("#tblUserGroupsResults").html(kendo.template($("#UserGroupsNoResults-template").html()));
+                            }
+                        },
+                        cache: false,
+                        dataType: 'json',
+                        error: function (xhr, status, error) {
+                            UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
+                        },
+                        type: "POST",
+                        data: JSON.stringify(dataForm),
+                        contentType: "application/json"
+                    });
+                }
+                else
+                    if (hrefText == "#tabGroups") {
+                        //Search Groups
+                        var dataForm = collectUserSearchData(false);
+
+                        $.ajax({
+                            url: "/Account/SearchGroups",
+                            success: function (result) {
+                                if (result != null && result.count > 0) {
+                                    loadPagination(result.count);
+                                    $("#btnAdd").show();
+                                    var htmlDataTemplate = kendo.template($("#GroupsRow-template").html());
+                                    var htmlData = htmlDataTemplate(result.data);
+                                    $("#tblUserGroupsResults").html(htmlData);
+                                    ////UINotifications.ShowToast("success", "Your Projet [ Text ] Saved Successfuly.", "Saved Successfuly");
+                                } else {
+                                    loadPagination(0);
+                                    $("#btnAdd").hide();
+                                    $("#tblUserGroupsResults").html(kendo.template($("#UserGroupsNoResults-template").html()));
+                                }
+                            },
+                            cache: false,
+                            dataType: 'json',
+                            data: JSON.stringify(dataForm),
+                            error: function (xhr, status, error) {
+                                UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
+                            },
+                            type: "POST",
+                            //data: JSON.stringify(dataForm),
+                            contentType: "application/json"
+                        });
+
+                    }
+                    else {
+                        alert('PLease Select a User or Groups Tab')
+                    }
+            });
+            $("#btnAdd").click (function () {
+                var selectedItems =  $("#tblUserGroupsResults input[type=checkbox]:checked");
+                if(selectedItems.length > 0 ){
+                    var data = [];
+                    var chkItemIdArray = null; //chkUser_
+                    var tdName = null;
+                    var chkItem = null;
+
+                    selectedItems.each(function (index) {
+                        chkItem = $(this);
+                        chkItemIdArray = chkItem.attr('id').split("_");
+                        data[index] = {};
+                        data[index].ItemId = chkItemIdArray[1];
+                        data[index].ItemType = chkItemIdArray[0] == "chkUser" ? 1 : 2; //"chkGroup" ? ;
+
+                        tdName = chkItem.closest("tr").find("td:nth-child(3)").text();
+
+                        data[index].Name = tdName;
+                    });
+
+                    window.parent.loadAddedUsersGroups(data);
+                } else
+                    alert("Please select at least one item to be added.");
+            });
+        });
+
+        function collectUserSearchData(isUser) {
+            if (isUser) {
+                //Collect User Data
+                var autocomplete = $("#autocOH").data("kendoAutoComplete");
+                if ($.trim(autocomplete.value()) == "")
+                    selectedOrgid = 0;
+
+                return usersSearchRequestView = {
+                    PFNo: $("#txtPF").val(),
+                    FirstName: $("#txtfirstName").val(),
+                    FamilyName: $("#txtlastName").val(),
+                    Title: $("#txtTitle").val(),
+                    Email: $("#txtEmail").val(),
+                    OrganizationId: selectedOrgid,
+                    PageIndex: $("#hdnPageIndex").val(),
+                };
+            }
+            else {
+                //Collect Groups Data
+                return GroupsSearchRequestView = {
+                    Name: $("#txtGroupName").val(),
+                    PageIndex: $("#hdnPageIndex").val()
+                };
+            }
+        }
+
+        function loadPagination(totalRecourds) {
+            $("#hdnPageIndex").val(1);
+
+            if (totalRecourds <= 10)
+                $("#pagination-UsersGroups").hide();
+            else {
+                var recordsPerPage = @ADMA.EWRS.BizDomain.Configurations.Instance.RecordsPerPage;
+                var totalPages = ((totalRecourds-1) / recordsPerPage)+1;
+                var currentPage = 1;
+
+                $("#pagination-UsersGroups").show();
+                $("#pagination-UsersGroups").twbsPagination({
+                    totalPages: totalPages,
+                    visiblePages: 10,
+                    href: '#page={{number}}',
+                    onPageClick: function (event, page) {
+                        currentPage = parseInt($("#hdnPageIndex").val())
+                        if(currentPage !== page)
+                        {
+                            $("#hdnPageIndex").val(page);
+                            $("#btnSearch").click();
+                        }
+                    }
+                });
+            }
+        }
+    </script>
 }
+
+<style type="text/css">
+    .k-autocomplete {
+        width: 100% !important;
+        appearance: none;
+        background-color: #FFFFFF !important;
+        background-image: none !important;
+        border: 1px solid #c8c7cc;
+        border-radius: 0;
+        color: #5b5b60 !important;
+        font-family: inherit !important;
+        font-size: 14px !important;
+        padding: 5px 4px !important;
+        box-shadow: none !important;
+    }
+
+    .k-itemx {
+        background-color: #e8f5ff !important;
+        padding: 5px !important;
+        padding-left: 0 !important;
+        font-weight: bolder;
+        width: 100%;
+    }
+</style>
