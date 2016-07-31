@@ -26,7 +26,7 @@ namespace EF6_ClassLibrary
 
         public bool IsUpdater { get; set; }
 
-        public bool IsProjectLevelUpdater { get; set; }
+        public bool IsProjectLevel { get; set; }
 
         [Required]
         [StringLength(50)]

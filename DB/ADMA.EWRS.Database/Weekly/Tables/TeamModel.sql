@@ -4,7 +4,7 @@
     [Group_Id]              INT            NULL,
     [Project_Id]            INT            NOT NULL,
     [IsUpdater]             BIT            NOT NULL,
-    [IsProjectLevelUpdater] BIT            NOT NULL,
+    [IsProjectLevel] BIT            NOT NULL,
     [CreatedBy]             VARCHAR (50)   NOT NULL,
     [CreatedDate]           DATETIME       NOT NULL,
     [UpdateBy]              VARCHAR (50)   NULL,

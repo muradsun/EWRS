@@ -75,41 +75,65 @@
     </div>
 </div>
 
-================================
-
-<div class="mix #= typeText # col-sm-6 col-md-3" data-my-order="#= SequenceNo #">
-    <div class="thumbnail thumbnail-#= typeText #">
-        <div class="row">
-            <div class="col-md-3 no-space text-right">
-                <button type="button" class="btn btn-red" onclick="deleteTM(this);">
-                    <i class="fa fa-user-times"></i>
-                </button>
-            </div>
-            <div class="col-md-6 " align="center">
-                <img class="img-responsive img-card" alt="" src="/images/form/#= IconText #.png">
-            </div>
-        </div>
-        <div class="padding-20 height-200 thumbnail-card">
-            <h4>#= Name #</h4>
-            <div class="form-group">
-                <select class="cs-select cs-skin-slide">
-                    <option value="Updater" data-class="fa fa-pencil-square-o">Updater</option>
-                    <option value="Viewer" data-class="ti-eye" selected="selected">Viewer</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <div class="radio clip-radio radio-primary no-space">
-                    <input name="vertical_1" id="radio_1" type="radio" value="radio3" checked="checked" class="radioElm">
-                    <label for="radio_1"> Project Level</label>
-                </div>
-                <div class="radio clip-radio radio-primary no-space">
-                    <input name="vertical_1" id="radio_2" type="radio" value="radio4" class="radioElm">
-                    <label data-TMSubjects="" for="radio_2" class="cl-effect-3 links block margin-top-10 uppercase text-dark text-uppercase text-bold text-extra-small" onclick="loadSubj4TeamModel(this);" aria-describedby="popover303618" data-original-title="" data-toggle="popover" data-placement="top" data-html="true">
-                        Specific Subject
-                        <i class="padding-left-5 fa fa-angle-right"></i>
-                    </label>
-                </div>
-            </div>
+<div class="panel panel-white min-height-100">
+    <div class="panel-heading">
+        <div class="panel-title no-items-pending-action" style="padding:10%">
+            <i class="fa fa-info-circle"></i> Click Add button to add Users or Groups
         </div>
     </div>
 </div>
+
+================================
+#if (IsUpdater) {#
+    <div class="mix updater col-sm-6 col-md-3" data-my-order="#= SequenceNo #">
+    <div class="thumbnail thumbnail-updater">
+#}else{#
+            <div class="mix viewer col-sm-6 col-md-3" data-my-order="#= SequenceNo #">
+            <div class="thumbnail thumbnail-updater">
+#}
+
+                    <div class="row">
+                        <div class="col-md-3 no-space text-right">
+                            <button type="button" class="btn btn-red" onclick="deleteTM(this);">
+                                <i class="fa fa-user-times"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-6 " align="center">
+                            <img class="img-responsive img-card" alt="" src="/images/form/#= IconText #.png">
+                        </div>
+                    </div>
+                    <div class="padding-20 height-200 thumbnail-card">
+                        <h4>#= Name #</h4>
+                        <input type="hidden" id="ugId" value="#= itemId #" />
+                        <input type="hidden" id="ugId" value="#= itemType #" />
+                        <input type="hidden" id="TeamModel_Id" value="#= TeamModel_Id #" />
+
+                        <div class="form-group">
+                            <select class="cs-select cs-skin-slide">
+                                <option value="Updater" data-class="fa fa-pencil-square-o">Updater</option>
+                                <option value="Viewer" data-class="ti-eye" selected="selected">Viewer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="radio clip-radio radio-primary no-space">
+                                <input name="vertical_1" id="radio_1" type="radio" value="radio3" checked="checked" class="radioElm">
+                                <label for="radio_1"> Project Level</label>
+                            </div>
+                            <div class="radio clip-radio radio-primary no-space">
+                                <input name="vertical_1" id="radio_2" type="radio" value="radio4" class="radioElm">
+                                <label data-TMSubjects="" for="radio_2" class="cl-effect-3 links block margin-top-10 uppercase text-dark text-uppercase text-bold text-extra-small" onclick="loadSubj4TeamModel(this);" aria-describedby="popover303618" data-original-title="" data-toggle="popover" data-placement="top" data-html="true">
+                                    Specific Subject
+                                    <i class="padding-left-5 fa fa-angle-right"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+    #if (Salutation === null || Salutation === '') {#
+    <h4>
+        #}else{#
+        <h4>
+            #=Salutation#
+            #}

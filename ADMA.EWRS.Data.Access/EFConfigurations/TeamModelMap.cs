@@ -37,7 +37,7 @@ namespace ADMA.EWRS.Data.Access.EFConfigurations
             this.Property(t => t.Group_Id).HasColumnName("Group_Id");
             this.Property(t => t.Project_Id).HasColumnName("Project_Id");
             this.Property(t => t.IsUpdater).HasColumnName("IsUpdater");
-            this.Property(t => t.IsProjectLevelUpdater).HasColumnName("IsProjectLevelUpdater");
+            this.Property(t => t.IsProjectLevel).HasColumnName("IsProjectLevel");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
             this.Property(t => t.UpdateBy).HasColumnName("UpdateBy");

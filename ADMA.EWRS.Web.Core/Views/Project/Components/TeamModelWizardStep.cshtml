@@ -66,63 +66,74 @@
                 </div>
             </div>
             <div class="row">
-                <div id="Container">
+                <div id="TeamContainer">
                     <div class="panel panel-white min-height-100">
                         <div class="panel-heading">
                             <div class="panel-title no-items-pending-action" style="padding:10%">
-                                <i class="fa fa-info-circle"></i> Click Add button to add Users or Groups 
+                                <i class="fa fa-info-circle"></i> Click Add button to add Users or Groups
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </fieldset>
     </div>
 </div>
 
 <!-- start: Template Area  -->
 <script id="team-template" type="text/x-kendo-template">
-    <div class="mix viewer col-sm-6 col-md-3" data-my-order="1">
-        <div class="thumbnail thumbnail-updater">
+    # for (var i = 0; i < data.length; i++) { #
+    <div class="mix ${ data[i].UpdateText } col-sm-6 col-md-3" data-my-order="1">
+        <div class="thumbnail thumbnail-${ data[i].UpdateText }">
             <div class="row">
                 <div class="col-md-3 no-space text-right">
-                    <button type="button" class="btn btn-red">
+                    <button type="button" class="btn btn-red" onclick="deleteTM(this);">
                         <i class="fa fa-user-times"></i>
                     </button>
                 </div>
                 <div class="col-md-6 " align="center">
-                    <img class="img-responsive img-card" alt="" src="/images/form/User_female.png">
+                    <img class="img-responsive img-card" alt="" src="${ data[i].Icon }">
                 </div>
             </div>
-            <div class="padding-20 height-200 thumbnail-card">
-                <h4>Murad Mahmoud</h4>
+            <div class="padding-20 height-180 thumbnail-card">
+                <h4 class="cut-text" title="${ data[i].Name }">${ data[i].Name }</h4>
                 <div class="form-group">
-                    <select class="cs-select cs-skin-slide" onselect="alert(1)">
-                        <option value="Updater" data-class="fa fa-dropbox">Updater</option>
-                        <option value="Viewer" data-class="fa fa-github">Viewer</option>
+                    <select class="cs-select cs-skin-slide">
+                        # if(data[i].IsUpdater) { #
+                        <option value="Updater" data-class="fa fa-pencil-square-o" selected="selected">Updater</option>
+                        <option value="Viewer" data-class="ti-eye">Viewer</option>
+                        # } else { #
+                        <option value="Updater" data-class="fa fa-pencil-square-o">Updater</option>
+                        <option value="Viewer" data-class="ti-eye" selected="selected">Viewer</option>
+                        # } #
                     </select>
                 </div>
                 <div class="form-group">
-                    <div class="radio clip-radio radio-primary no-space ">
-                        <input name="vertical" id="radio3" type="radio" value="radio3" checked="checked">
-                        <label for="radio3"> Project Level</label>
+                    <div class="radio clip-radio radio-primary no-space">
+                        # if(data[i].IsProjectLevel) { #
+                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo }" type="radio" checked="checked" class="radioElm">
+                        # } else { #
+                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo }" type="radio" class="radioElm">
+                        # } #
+                        <label for="radio_${ data[i].SequenceNo }"> Project Level</label>
                     </div>
-                    <div class="radio clip-radio radio-primary no-space ">
-                        <input name="vertical" id="radio4" type="radio" value="radio4">
-                        <label for="radio4">
-                            <span class="cl-effect-3 links block margin-top-10">
-                                <a href="#" class="uppercase text-dark text-uppercase text-bold text-extra-small">
-                                    Specific Subject
-                                    <i class="padding-left-5 fa fa-angle-right"></i>
-                                </a>
-                            </span>
+                    <div class="radio clip-radio radio-primary no-space">
+                        # if(! data[i].IsProjectLevel) { #
+                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo + 100 }" type="radio" value="radio4" class="radioElm" checked="checked">
+                        # } else { #
+                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo + 100 }" type="radio" value="radio4" class="radioElm">
+                        # } #
+                        <label onclick="loadSubj4TeamModel(this, ${ data[i].SequenceNo });" data-TMSubjects="" for="radio_${ data[i].SequenceNo + 100 }" class="cl-effect-3 links block margin-top-10 uppercase text-dark text-uppercase text-bold text-extra-small" aria-describedby="popover303618" data-original-title="" data-toggle="popover" data-placement="top" data-html="true">
+                            Specific Subject
+                            <i class="padding-left-5 fa fa-angle-right"></i>
+                            <input type="hidden" id="hdnSubjectArray" value="${ data[i].SubjectsArray }" />
                         </label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    # } #
 </script>
 <script id="teamSubjects-template" type="text/x-kendo-template">
     <div style="width:350px">
@@ -150,7 +161,42 @@
     var mainWindow = null;
 
     $(document).ready(function () {
-        $('#Container').mixItUp({
+        MixDataUp();
+
+        $("#dilgWndow").kendoWindow({
+            width: "1024px",
+            height: "500px",
+            title: "Search for Users/Groups",
+            visible: false,
+            content: "/Account/SearchUsersGroups",
+            actions: [
+                "Maximize",
+                "Close"
+            ],
+            modal: true,
+            close: onWinClose,
+            iframe: true
+        });
+        //Cache it
+        mainWindow = $("#dilgWndow").data("kendoWindow");
+
+        //Unit Test 1
+        //var data = [];
+        //for (var i = 0; i < 20; i++) {
+        //    data[i] = {};
+        //    data[i].ItemId = i;
+        //    data[i].ItemType = i == 0 ? 1 : 2;
+        //    data[i].Name = "Murad " + i;
+        //    data[i].Icon = "/images/form/User_male.png";
+        //}
+        //loadAddedUsersGroups(data);
+    });
+
+    function onWinClose() {
+    }
+
+    function MixDataUp() {
+        $('#TeamContainer').mixItUp({
             animation: {
                 enable: false
             },
@@ -167,41 +213,77 @@
                 }
             }
         });
-
-        $("#dilgWndow").kendoWindow({
-            width: "1024px",
-            height: "500px",
-            title: "Search for Users/Groups",
-            visible: false,
-            content: "/Account/SearchUsersGroups",
-            actions: [
-                "Maximize",
-                "Close"
-            ],
-            modal: true,
-            close: onWinClose,
-            iframe: true
-        });
-
-        //Cache it
-        mainWindow = $("#dilgWndow").data("kendoWindow");
-    });
-
-    function onWinClose() {
-       
     }
 
     function loadAddedUsersGroups(addUsersGroupsView) {
-        alert(addUsersGroupsView.length);
-        //alert(addUsersGroupsView.length);
+        var teamCont = $('#TeamContainer');
+
+        if (teamCont.find(".panel-heading").length > 0)
+            teamCont.html("");
+
+        $('#TeamContainer').mixItUp('destroy');
+        var scriptTemplate = kendo.template($("#team-template").html());
+
+        //Construct Data Object
+        var data = [];
+        $.each(addUsersGroupsView, function (index, value) {
+            data[index] = {};
+            data[index].TeamModel_Id = 0;
+            if (value.ItemType == 1) //"chkUser" ? 1
+            {
+                data[index].User_Id = value.ItemId;
+            } else {
+                data[index].Group_Id = value.ItemId;
+            }
+            data[index].IsUpdater = false;
+            data[index].UpdateText = "viewer"; //viewer OR updater
+            data[index].SequenceNo = index;
+            data[index].Project_Id = 0;
+            data[index].IsProjectLevel = true;
+            data[index].SubjectsArray = "aaaa";
+            data[index].Icon = value.Icon;
+            data[index].Name = value.Name;
+        });
+
+        var addedElm = $(scriptTemplate(data));
+        $("#TeamContainer").append(addedElm);
+
+        //Reload Custom selected
+        addedElm.find('.cs-select').each(function( index ) {
+            var el = $( this )
+            new SelectFx(el[0], {
+                stickyPlaceholder: false,
+                onChange: function (val) {
+                    selectChange(el, val);
+                }
+            });
+        });
+        
+        addedElm.find('[data-toggle="popover"]').popover();
+
+        MixDataUp();
+
+        var myWindow = null;
+
+        if (mainWindow)
+            myWindow = mainWindow;
+        else
+            myWindow = $("#dilgWndow").data("kendoWindow");
+
+        //Main.init();
+
+        myWindow.close();
     }
 
     function selectChange(eld, val) {
-        var xElm = $(eld).closest('.thumbnail');
-        if (val == "Updater")
-            xElm.removeClass("thumbnail-viewer").addClass("thumbnail-updater");
-        else
-            xElm.removeClass("thumbnail-updater").addClass("thumbnail-viewer");
+        var xElm = $(eld).closest('.mix');
+        if (val == "Updater"){
+            xElm.removeClass("viewer").addClass("updater");
+            xElm.find(".thumbnail").removeClass("thumbnail-viewer").addClass("thumbnail-updater");
+        } else{
+            xElm.removeClass("updater").addClass("viewer");
+            xElm.find(".thumbnail").removeClass("thumbnail-updater").addClass("thumbnail-viewer");
+        }
     }
 
     function deleteTM(itemClicked) {
@@ -212,7 +294,7 @@
         }
     }
 
-    function loadSubj4TeamModel(elm) {
+    function loadSubj4TeamModel(elm, seqNo) {
         var jElm = $(elm);
         activeElm = jElm;
         //var rElm = jElm.closest(".radio").find("input");
@@ -241,7 +323,7 @@
     }
 </script>
 <style>
-    #Container .mix {
+    #TeamContainer .mix {
         display: none;
     }
 </style>

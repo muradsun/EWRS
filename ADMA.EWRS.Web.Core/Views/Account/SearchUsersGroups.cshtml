@@ -369,10 +369,11 @@
             $("#btnAdd").click (function () {
                 var selectedItems =  $("#tblUserGroupsResults input[type=checkbox]:checked");
                 if(selectedItems.length > 0 ){
-                    var data = [];
-                    var chkItemIdArray = null; //chkUser_
-                    var tdName = null;
-                    var chkItem = null;
+                    var data = [],
+                        chkItemIdArray = null, //chkUser_
+                        tdName = null,
+                        chkItem = null,
+                        sex = null;
 
                     selectedItems.each(function (index) {
                         chkItem = $(this);
@@ -382,7 +383,9 @@
                         data[index].ItemType = chkItemIdArray[0] == "chkUser" ? 1 : 2; //"chkGroup" ? ;
 
                         tdName = chkItem.closest("tr").find("td:nth-child(3)").text();
+                        sex = chkItem.closest("tr").find("td:nth-child(2) img").attr("src");
 
+                        data[index].Icon = sex;
                         data[index].Name = tdName;
                     });
 

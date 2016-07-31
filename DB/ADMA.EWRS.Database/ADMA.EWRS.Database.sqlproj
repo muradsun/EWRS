@@ -251,4 +251,7 @@
     <None Include="Compares\MuradHomeCompare.scmp" />
     <None Include="Scripts\HR_EMP_INFO_V_Data_Script.zip" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="ADMA.EWRS.Database.refactorlog" />
+  </ItemGroup>
 </Project>

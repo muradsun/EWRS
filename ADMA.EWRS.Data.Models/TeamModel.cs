@@ -15,7 +15,11 @@ namespace ADMA.EWRS.Data.Models
         public Nullable<int> Group_Id { get; set; }
         public int Project_Id { get; set; }
         public bool IsUpdater { get; set; }
-        public bool IsProjectLevelUpdater { get; set; }
+
+        /// <summary>
+        /// Is project level updater or viewer
+        /// </summary>
+        public bool IsProjectLevel { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string UpdateBy { get; set; }

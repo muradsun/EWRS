@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="d63d1fe8-e803-4079-8cfa-4e9fcd62ade1" ChangeDateTime="07/31/2016 17:55:26">
+    <Property Name="ElementName" Value="[Weekly].[TeamModel].[IsProjectLevelUpdater]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Weekly].[TeamModel]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsProjectLevel" />
+  </Operation>
+</Operations>
