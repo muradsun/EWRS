@@ -18197,3 +18197,17 @@ figure.effect-goliath {
     width: 175px;
     cursor: help;
 }
+
+.updater-item {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: left !important;
+    width: 100%;
+}
+
+.updater-title {
+    font-weight: bolder;
+    margin-top: 0;
+    color: #5b5b60;
+    font-size: 20px;
+}

@@ -148,10 +148,8 @@ var FormWizard = function () {
                 if (isStepValid & stepnumber == 1 & nextstep == 2)
                     return SaveProjectInfoWizardStep();
 
-
                 if (isStepValid & stepnumber == 2 & nextstep == 3)
                     return SaveTemplateWizardStep();
-
 
                 return true;
             };
