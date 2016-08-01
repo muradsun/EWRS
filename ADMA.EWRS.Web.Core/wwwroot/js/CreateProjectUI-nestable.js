@@ -1,8 +1,7 @@
 var UINestable = function () {
     "use strict";
     //function to initiate jquery.nestable
-    var updateOutput = function (e) {
-      
+    var updateOutputTemp = function (e) {
         var list = e.length ? e : $(e.target);
         var str = list.nestable('serialize');
         var elmItem;
@@ -11,21 +10,34 @@ var UINestable = function () {
             elmItem = list.find("[data-id='" + str[i].id + "']");
             elmItem.find("#hdnSequenceNo_" + str[i].id).val(i + 1);
         }
-        //    output = $('#nestable-output');
-        //if (window.JSON) {
-        //    output.text(window.JSON.stringify());
-        //    //, null, 2));
-        //} else {
-        //    output.text('JSON browser support required for this demo.');
-        //}
+    };
+
+    var updateOutputWf = function (e) {
+        var list = e.length ? e : $(e.target);
+        var str = list.nestable('serialize');
+        var elmItem;
+
+
+        //Skip originator 
+        for (var i = 1; i < str.length; i++) {
+            elmItem = list.find("[data-id='" + str[i].id + "']");
+
+            elmItem.find(".nstWf_hdnSequenceNo").val(i + 1);
+            elmItem.find(".btn-seq").text(i + 1);
+        }
     };
 
     var runNestable = function () {
+        //Templates Step
         // activate Nestable for list 1
         $('#nestable').nestable({
             maxDepth: 1
-        }).on('change', updateOutput);
+        }).on('change', updateOutputTemp);
 
+        //Workflow Step
+        $('#nestableWf').nestable({
+            maxDepth: 1
+        }).on('change', updateOutputWf);
     };
     return {
         //main function to initiate template pages
