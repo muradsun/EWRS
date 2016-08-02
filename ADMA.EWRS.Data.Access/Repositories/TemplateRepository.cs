@@ -19,7 +19,7 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         public Template GetTemplate(int projectId)
         {
-            return DbContext.Templates.Include("Subjects").Where(t => t.Project_Id == projectId).FirstOrDefault();
+            return DbContext.Templates.Include(t => t.Subjects).Where(t => t.Project_Id == projectId).FirstOrDefault();
         }
     }
 }

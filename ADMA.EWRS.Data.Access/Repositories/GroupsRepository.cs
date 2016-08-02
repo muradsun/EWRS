@@ -20,7 +20,7 @@ namespace ADMA.EWRS.Data.Access.Repositories
         public bool IsUserPartOfSuperAdminsGroup(int userId)
         {
             // _unitOfWork.Groups.Find( c => c.Name == SecurityConstants.SuperAdminsGroupName && c.GroupUsers.Any( gU => gU.User_Id == userObj.User_Id))
-            return DbContext.Groups.Include("GroupUsers").Any(
+            return DbContext.Groups.Include(g => g.GroupUsers).Any(
                                                                g => g.Name == SecurityConstants.SuperAdminsGroupName &&
                                                                g.GroupUsers.Any(gU => gU.User_Id == userId && gU.Group_Id == g.Group_Id)
                                                           );
@@ -28,11 +28,12 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         public List<ADMA.EWRS.Data.Models.Group> SearchGroups(string groupName, int Owner_UserId, int pageNumber, int recordsPerPage, ref int recordsCount)
         {
-            var q = DbContext.Groups.Include("GroupUsers").Include("GroupUsers.User").Where(g =>
+            //var q = DbContext.Groups.Include(g => g.GroupUsers).Include("GroupUsers.User").Where(g =>
+            var q = DbContext.Groups.Include(g => g.GroupUsers.Select(gu => gu.User)).Where(g =>
 
-                            (groupName == "" || g.Name.Contains(groupName)) &&
-                            g.IsSystemGoup == false &&
-                            g.Owner_UserId == Owner_UserId
+                           (groupName == "" || g.Name.Contains(groupName)) &&
+                           g.IsSystemGoup == false &&
+                           g.Owner_UserId == Owner_UserId
 
                         ).OrderBy(g => g.Group_Id);
 

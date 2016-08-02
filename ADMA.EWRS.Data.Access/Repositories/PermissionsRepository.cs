@@ -18,7 +18,7 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         public IEnumerable<Permission> GetUserPermissions(int userId)
         {
-            var gList = (from gP in DbContext.GroupPermissions.Include("Groups").Include("GroupUsers")
+            var gList = (from gP in DbContext.GroupPermissions.Include(gp => gp.Group.GroupUsers)
                          where gP.Group.IsSystemGoup == true &&
                                gP.Group.GroupUsers.Any(gU => gU.User_Id == userId)
                          select gP.Permission);
