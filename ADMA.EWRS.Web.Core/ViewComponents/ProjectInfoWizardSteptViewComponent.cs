@@ -49,6 +49,7 @@ namespace ADMA.EWRS.Web.Core.ViewComponents
             else
                 projView = new ProjectInfoWizardStepView();
 
+           
             //Build the Organization path
             projView.OrganizationHierarchyTree = new OrganizationsManager(_provider).ResolveOrganizationHierarchy(_currentUser.ORGANIZATION_ID).OrderBy(o => o.Sort).ToList();
             projView.ORGANIZATION_ID = _currentUser.ORGANIZATION_ID;

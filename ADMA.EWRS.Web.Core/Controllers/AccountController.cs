@@ -99,7 +99,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
             }).ToList();
 
             var responseView = new DataPagingResponseView() { Data = response, Count = recordsCount };
-            return GetJason(responseView);
+            return GetJSON(responseView);
         }
 
         [HttpPost]
@@ -117,7 +117,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
             }).ToList();
 
             var responseView = new DataPagingResponseView() { Data = response, Count = recordsCount };
-            return GetJason(responseView);
+            return GetJSON(responseView);
         }
 
         public IActionResult SearchUsersGroups()

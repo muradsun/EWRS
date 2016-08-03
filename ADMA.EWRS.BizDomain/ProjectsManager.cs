@@ -1,4 +1,5 @@
-﻿using ADMA.EWRS.Data.Access;
+﻿using ADMA.EWRS.BizDomain.Engine;
+using ADMA.EWRS.Data.Access;
 using ADMA.EWRS.Data.Models;
 using ADMA.EWRS.Data.Models.Security;
 using ADMA.EWRS.Data.Models.ViewModel;
@@ -19,7 +20,7 @@ namespace ADMA.EWRS.BizDomain
         public ProjectsManager(IServiceProvider _provider)
             : base(_provider)
         {
-
+            BusinessErrors = Enumerable.Empty<ADMA.EWRS.Data.Models.Validation.ValidationError>();
         }
 
         public List<Project> GetProjects(int Owner_UserId, List<int> Delegated_UsersList)
@@ -41,7 +42,6 @@ namespace ADMA.EWRS.BizDomain
             else
                 using (var unitOfWork = new UnitOfWork())
                     return unitOfWork.Templates.GetTemplate(projectId);
-
         }
 
         public List<TeamModel> GetTeamModelOrDefualt(int projectId)
@@ -57,13 +57,47 @@ namespace ADMA.EWRS.BizDomain
         {
             var escapOrgTypes = new List<string>(new string[] { "TC", "BG", null });
             using (var unitOfWork = new UnitOfWork())
-                return unitOfWork.OrganizationHierarchies.Find(o => o.ORGNAME.Contains(orgName) && ! escapOrgTypes.Contains(o.ORGTYPE) ).ToList();
+                return unitOfWork.OrganizationHierarchies.Find(o => o.ORGNAME.Contains(orgName) && !escapOrgTypes.Contains(o.ORGTYPE)).ToList();
         }
 
         public static OrganizationHierarchy GetOrganizationHierarchy(int orgId)
         {
             using (var unitOfWork = new UnitOfWork())
                 return unitOfWork.OrganizationHierarchies.Find(o => o.ORGID == orgId).FirstOrDefault();
+        }
+        public bool SaveProject(Project project)
+        {
+            try
+            {
+                var engine = new ProjectsEngine();
+                //Save Data//
+                using (var unitOfWork = new UnitOfWork())
+                {
+                    //Make Validation//
+                    var errors = engine.Validate(project, unitOfWork);
+                    if (errors != null && errors.Count() > 0)
+                    {
+                        base.BusinessErrors = errors;
+                        return false;
+                    }
+
+                    unitOfWork.Projects.SaveProject(project);
+                    unitOfWork.Save();
+                }
+                return true;
+            }
+            catch (Framework.ExceptionHandling.ValidationException ex)
+            {
+                base.BusinessErrors = ex.ValidationErrors;
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
 
         #region Private Members 
@@ -78,20 +112,10 @@ namespace ADMA.EWRS.BizDomain
                     new Subject() { Name = "Planning", IsMandatory= true, DueDate = null , SequenceNo = 2},
                     new Subject() { Name = "Problems", IsMandatory= true, DueDate = null , SequenceNo = 3}
                 }
-
             };
         }
 
-        public bool SaveProject(Project project)
-        {
-            using (var unitOfWork = new UnitOfWork())
-            {
-                unitOfWork.Projects.SaveProject(project);
-                unitOfWork.Save(); 
-            }
 
-            return true; 
-        }
 
         #endregion
 

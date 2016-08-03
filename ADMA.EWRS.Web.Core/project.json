@@ -45,6 +45,9 @@
         "ADMA.EWRS.Data.Models": {
           "target": "project"
         },
+        "ADMA.EWRS.Framework": {
+          "target": "project"
+        },
         "ADMA.EWRS.Security": {
           "target": "project"
         }

@@ -9,6 +9,6 @@ namespace ADMA.EWRS.Data.Models.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        List<User> SearchUsers(UsersSearchRequestView usersSearchRequestView, int pageIndex, int recordsPerPage, ref int recordsCount);
+        IEnumerable<User>  SearchUsers(UsersSearchRequestView usersSearchRequestView, int pageIndex, int recordsPerPage, ref int recordsCount);
     }
 }

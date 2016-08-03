@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ADMA.EWRS.Data.Models
 {
@@ -15,6 +16,8 @@ namespace ADMA.EWRS.Data.Models
         public int Project_Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [Range(0, 100)]
         public byte PercentComplete { get; set; }
         public Enums.ProjectStatusEnum ProjectStatus_Id { get; set; }
         public string StatusReason { get; set; }
@@ -25,10 +28,10 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public  User User { get; set; }
-        public  ProjectStatus ProjectStatus { get; set; }
-        public  ICollection<ReviewWorkflowsProject> ReviewWorkflowsProjects { get; set; }
-        public  ICollection<TeamModel> TeamModels { get; set; }
-        public  ICollection<Template> Templates { get; set; }
+        public User User { get; set; }
+        public ProjectStatus ProjectStatus { get; set; }
+        public ICollection<ReviewWorkflowsProject> ReviewWorkflowsProjects { get; set; }
+        public ICollection<TeamModel> TeamModels { get; set; }
+        public ICollection<Template> Templates { get; set; }
     }
 }

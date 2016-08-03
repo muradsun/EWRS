@@ -63,7 +63,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
             }
         }
 
-        internal JsonResult GetJason(object data)
+        internal JsonResult GetJSON(object data)
         {
             return Json(data, new JsonSerializerSettings()
             {

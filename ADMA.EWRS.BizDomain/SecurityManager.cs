@@ -42,7 +42,7 @@ namespace ADMA.EWRS.BizDomain
         public List<User> SearchUsers(UsersSearchRequestView usersSearchRequestView, int pageIndex, ref int recordsCount)
         {
             using (var unitOfWork = new UnitOfWork())
-                return unitOfWork.Users.SearchUsers(usersSearchRequestView, pageIndex, Configurations.Instance.RecordsPerPage, ref recordsCount);
+                return unitOfWork.Users.SearchUsers(usersSearchRequestView, pageIndex, Configurations.Instance.RecordsPerPage, ref recordsCount).ToList();
         }
 
         public List<ADMA.EWRS.Data.Models.Group> SearchGroups(string groupName, int owner_UserId, int pageIndex, ref int recordsCount)

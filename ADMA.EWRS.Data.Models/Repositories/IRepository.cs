@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADMA.EWRS.Data.Models.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ADMA.EWRS.Data.Models.Repositories
 {
-    public interface IRepository<TEntity> 
+    public interface IRepository<TEntity>
         where TEntity : class
     {
         TEntity Get(int id);
@@ -22,6 +23,8 @@ namespace ADMA.EWRS.Data.Models.Repositories
 
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
+
+        ICollection<ValidationError> GetDbValidationErrors();
     }
 
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ADMA.EWRS.Data.Access.EFConfigurations
+namespace ADMA.EWRS.Data.Access.EfConfigurations
 {
     internal class MuradConfiguration : EntityTypeConfiguration<Murad>
     {

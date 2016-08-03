@@ -2,7 +2,7 @@ using ADMA.EWRS.Data.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace ADMA.EWRS.Data.Access.EFConfigurations
+namespace ADMA.EWRS.Data.Access.EfConfigurations
 {
     public class WeeklyInputHistoryMap : EntityTypeConfiguration<WeeklyInputHistory>
     {

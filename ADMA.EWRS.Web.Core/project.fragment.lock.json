@@ -35,6 +35,23 @@
         }
       }
     },
+    "ADMA.EWRS.Framework/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/ADMA.EWRS.Framework.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/ADMA.EWRS.Framework.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/ADMA.EWRS.Framework.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
     "ADMA.EWRS.Security/1.0.0": {
       "type": "project",
       "framework": ".NETFramework,Version=v4.6.1",

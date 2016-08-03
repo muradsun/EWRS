@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ADMA.EWRS.Data.Access.EFConfigurations
+namespace ADMA.EWRS.Data.Access.EfConfigurations
 {
     // Migrations are considered configured for MyDbContext because this class implementation exists.
     internal sealed class DbConfiguration : DbMigrationsConfiguration<EWRSContext>

@@ -61,6 +61,10 @@ namespace ADMA.EWRS.Web.Core
                                  .RequireAuthenticatedUser()
                                  .RequireRole(Groups.ADMAUserGroupName)
                                  .Build();
+
+                // to be added
+                //config.Filters.Add(new AuthorizeFilter(GlobalExceptionFilter));
+
                 config.Filters.Add(new AuthorizeFilter(policy));
 
                 //Murad :: Info : https://damienbod.com/2015/09/15/asp-net-5-action-filters/

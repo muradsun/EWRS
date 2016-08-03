@@ -17,7 +17,7 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         }
 
-        public List<User> SearchUsers(UsersSearchRequestView usersSearchRequestView, int pageIndex, int recordsPerPage, ref int recordsCount)
+        public IEnumerable<User> SearchUsers(UsersSearchRequestView usersSearchRequestView, int pageIndex, int recordsPerPage, ref int recordsCount)
         {
             var q = DbContext.Users.Where(u =>
                   (usersSearchRequestView.FirstName.Trim() == "" || u.FIRST_NAME.Contains(usersSearchRequestView.FirstName)) &&
@@ -29,7 +29,7 @@ namespace ADMA.EWRS.Data.Access.Repositories
                ).OrderBy(u => u.User_Id);
 
             recordsCount = q.Count();
-            return q.Skip((pageIndex - 1) * recordsPerPage).Take(recordsPerPage).ToList();
+            return q.Skip((pageIndex - 1) * recordsPerPage).Take(recordsPerPage);
         }
 
        

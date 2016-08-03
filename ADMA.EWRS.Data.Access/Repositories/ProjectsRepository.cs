@@ -37,12 +37,11 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         public bool SaveProject(Project project)
         {
-            //Validate Entity
-
+            //Make ADD
             if (project.Project_Id == 0)
                 DbContext.Projects.Add(project);
 
-            return true; 
+            return true;
         }
     }
 }

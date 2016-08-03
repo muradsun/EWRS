@@ -44,7 +44,50 @@ namespace ADMA.EWRS.Web.Core.Controllers
                     new Breadcrumb { Text = "Project Wizard", Link = null },
                 });
             return View();
+        }
 
+        #region Web API
+        /// <summary>
+        /// Save the first step in Project Configuration Wizard
+        /// </summary>
+        /// <param name="projectInfoWizardStepView"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult SaveProjectWizardStep([FromBody] ProjectInfoWizardStepView projectInfoWizardStepView)
+        {
+            //Create Project Entity and send for Save
+            Project ptoj = new Project()
+            {
+                Project_Id = projectInfoWizardStepView.Project_Id,
+                Name = projectInfoWizardStepView.Name,
+                Description = projectInfoWizardStepView.Description,
+                ORGANIZATION_ID = projectInfoWizardStepView.ORGANIZATION_ID,
+
+                CreatedBy = CurrentUser.UserId.ToString(),
+                CreatedDate = DateTime.Now,
+                Owner_UserId = CurrentUser.UserId,
+
+            };
+
+            //If new Project then it is Draft 
+            if (projectInfoWizardStepView.Project_Id == 0)
+            {
+                ptoj.ProjectStatus_Id = Data.Models.Enums.ProjectStatusEnum.Draft;
+                ptoj.PercentComplete = 0;
+            }
+
+            if (_pm.SaveProject(ptoj))
+                //return this.Ok(); // Murad Create Save Response including ID and data 
+                return Json(new { ok = true });
+            else
+                return Json(new { ok = GetJSON(_pm.BusinessErrors) });
+
+        }
+
+        [HttpPost]
+        public JsonResult SaveTemplateWizardStep([FromBody] TemplateWizardStepView templateWizardStepView)
+        {
+            return Json(new { ok = true });
         }
 
         public JsonResult SearchOrganizationHierarchy(string filter)
@@ -62,35 +105,10 @@ namespace ADMA.EWRS.Web.Core.Controllers
                 SECTION_NAME = o.SECTION_NAME
             });
 
-            return Json(data, new JsonSerializerSettings()
-            {
-                ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver() //Murad : TODO :: CHnage this to lower 
-            });
-
+            return GetJSON(data);
         }
 
-        /// <summary>
-        /// Save the first step in Project Configuration Wizard
-        /// </summary>
-        /// <param name="projectInfoWizardStepView"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public IActionResult SaveProjectWizardStep([FromBody] ProjectInfoWizardStepView projectInfoWizardStepView)
-        {
-            //Create Project Entity and send for Save
-            Project ptoj = new Project();
-            _pm.SaveProject(ptoj); 
-             
-            return Json(new { Ok = true });
-        }
-
-        [HttpPost]
-        public IActionResult SaveTemplateWizardStep([FromBody] TemplateWizardStepView templateWizardStepView)
-        {
-            return Json(new { Ok = true });
-        }
-
-
+        #endregion
 
     }
 }

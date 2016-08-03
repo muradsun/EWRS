@@ -7,6 +7,8 @@ using ADMA.EWRS.Data.Access.Repositories;
 using ADMA.EWRS.Data.Models.Data;
 using ADMA.EWRS.Data.Models.Repositories;
 using ADMA.EWRS.Data.Models;
+using ADMA.EWRS.Data.Access.Utilities;
+using ADMA.EWRS.Framework.ExceptionHandling;
 
 namespace ADMA.EWRS.Data.Access
 {
@@ -46,7 +48,24 @@ namespace ADMA.EWRS.Data.Access
 
         public int Save()
         {
-            return _context.SaveChanges();
+            try
+            {
+                return _context.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var valErrors = ValidationHelpers.TransformDbEntityValidationResult(ex.EntityValidationErrors);
+                throw new ValidationException("Validation failed for one or more entities. See [ValidationErrors] property for more details", valErrors);
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+            {
+                //var decodedErrors = TryDecodeDbUpdateException(ex);
+                //if (decodedErrors == null)
+                //    throw;  //it isn't something we understand so rethrow
+                //return result.SetErrors(decodedErrors);
+
+                throw;
+            }
         }
 
         public void Dispose()

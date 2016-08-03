@@ -53,33 +53,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EFConfigurations\BusinessUnitesViewMap.cs" />
-    <Compile Include="EFConfigurations\ConfigurationMap.cs" />
-    <Compile Include="EFConfigurations\DbConfiguration.cs" />
-    <Compile Include="EFConfigurations\DelegationMap.cs" />
-    <Compile Include="EFConfigurations\EFDbConfiguration.cs" />
-    <Compile Include="EFConfigurations\GroupMap.cs" />
-    <Compile Include="EFConfigurations\GroupPermissionMap.cs" />
-    <Compile Include="EFConfigurations\GroupUserMap.cs" />
-    <Compile Include="EFConfigurations\MuradConfiguration.cs" />
-    <Compile Include="EFConfigurations\NotificationMap.cs" />
-    <Compile Include="EFConfigurations\NotificationsUserMap.cs" />
-    <Compile Include="EFConfigurations\OrganizationHierarchyMap.cs" />
-    <Compile Include="EFConfigurations\PermissionMap.cs" />
-    <Compile Include="EFConfigurations\PositionHierarchyMap.cs" />
-    <Compile Include="EFConfigurations\ProjectMap.cs" />
-    <Compile Include="EFConfigurations\ProjectStatusMap.cs" />
-    <Compile Include="EFConfigurations\ReviewWorkflowInstanceMap.cs" />
-    <Compile Include="EFConfigurations\ReviewWorkflowMap.cs" />
-    <Compile Include="EFConfigurations\ReviewWorkflowsProjectMap.cs" />
-    <Compile Include="EFConfigurations\SubjectMap.cs" />
-    <Compile Include="EFConfigurations\SubjectStatusMap.cs" />
-    <Compile Include="EFConfigurations\TeamModelMap.cs" />
-    <Compile Include="EFConfigurations\TeamModelSubjectMap.cs" />
-    <Compile Include="EFConfigurations\TemplateMap.cs" />
-    <Compile Include="EFConfigurations\UserMap.cs" />
-    <Compile Include="EFConfigurations\WeeklyInputHistoryMap.cs" />
-    <Compile Include="EFConfigurations\WeeklyInputMap.cs" />
+    <Compile Include="DbValidations\ProjectValidator.cs" />
+    <Compile Include="EfConfigurations\BusinessUnitesViewMap.cs" />
+    <Compile Include="EfConfigurations\ConfigurationMap.cs" />
+    <Compile Include="EfConfigurations\DbConfiguration.cs" />
+    <Compile Include="EfConfigurations\DelegationMap.cs" />
+    <Compile Include="EfConfigurations\EFDbConfiguration.cs" />
+    <Compile Include="EfConfigurations\EfExceptions\EfDbExceptionHandler.cs" />
+    <Compile Include="EfConfigurations\GroupMap.cs" />
+    <Compile Include="EfConfigurations\GroupPermissionMap.cs" />
+    <Compile Include="EfConfigurations\GroupUserMap.cs" />
+    <Compile Include="EfConfigurations\MuradConfiguration.cs" />
+    <Compile Include="EfConfigurations\NotificationMap.cs" />
+    <Compile Include="EfConfigurations\NotificationsUserMap.cs" />
+    <Compile Include="EfConfigurations\OrganizationHierarchyMap.cs" />
+    <Compile Include="EfConfigurations\PermissionMap.cs" />
+    <Compile Include="EfConfigurations\PositionHierarchyMap.cs" />
+    <Compile Include="EfConfigurations\ProjectMap.cs" />
+    <Compile Include="EfConfigurations\ProjectStatusMap.cs" />
+    <Compile Include="EfConfigurations\ReviewWorkflowInstanceMap.cs" />
+    <Compile Include="EfConfigurations\ReviewWorkflowMap.cs" />
+    <Compile Include="EfConfigurations\ReviewWorkflowsProjectMap.cs" />
+    <Compile Include="EfConfigurations\SubjectMap.cs" />
+    <Compile Include="EfConfigurations\SubjectStatusMap.cs" />
+    <Compile Include="EfConfigurations\TeamModelMap.cs" />
+    <Compile Include="EfConfigurations\TeamModelSubjectMap.cs" />
+    <Compile Include="EfConfigurations\TemplateMap.cs" />
+    <Compile Include="EfConfigurations\UserMap.cs" />
+    <Compile Include="EfConfigurations\WeeklyInputHistoryMap.cs" />
+    <Compile Include="EfConfigurations\WeeklyInputMap.cs" />
     <Compile Include="EWRSContext.cs" />
     <Compile Include="Repositories\DelegationsRepository.cs" />
     <Compile Include="Repositories\OrganizationHierarchiesRepository.cs" />
@@ -93,11 +95,16 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\TeamModelRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
+    <Compile Include="Utilities\ValidationHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ADMA.EWRS.Data.Models\ADMA.EWRS.Data.Models.csproj">
       <Project>{e34d8d37-f802-43e4-a49c-cbec785c69fc}</Project>
       <Name>ADMA.EWRS.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ADMA.EWRS.Framework\ADMA.EWRS.Framework.csproj">
+      <Project>{a6e5ff3a-ba76-4e40-ab9b-20e3ce6ba938}</Project>
+      <Name>ADMA.EWRS.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

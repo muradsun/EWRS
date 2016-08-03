@@ -6,6 +6,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using ADMA.EWRS.Data.Models.Repositories;
+using System.Data.Entity.Validation;
+using ADMA.EWRS.Data.Models.Validation;
+using ADMA.EWRS.Data.Access.Utilities;
 
 namespace ADMA.EWRS.Data.Access.Repositories
 {
@@ -76,6 +79,15 @@ namespace ADMA.EWRS.Data.Access.Repositories
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             Context.Set<TEntity>().RemoveRange(entities);
+        }
+
+        //https://www.simple-talk.com/dotnet/.net-framework/catching-bad-data-in-entity-framework/
+        // Summary:
+        //     Gets validation errors. Never null.
+        public ICollection<ValidationError> GetDbValidationErrors()
+        {
+            var valErrors = Context.GetValidationErrors();
+            return ValidationHelpers.TransformDbEntityValidationResult(valErrors);
         }
     }
 

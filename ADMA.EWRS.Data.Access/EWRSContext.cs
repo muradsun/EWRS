@@ -1,15 +1,19 @@
-﻿using ADMA.EWRS.Data.Access.EFConfigurations;
+﻿using ADMA.EWRS.Data.Access.EfConfigurations;
 using ADMA.EWRS.Data.Models;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using ADMA.EWRS.Data.Access.DbValidations;
 
 namespace ADMA.EWRS.Data.Access
 {
     [DbConfigurationType(typeof(EFDbConfiguration))]
     public class EWRSContext : DbContext
     {
-        //const string _connectionString = @"Data Source=MURAD-LP\SQL2K16;Initial Catalog=EWRSD;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        const string _connectionString = @"Data Source=DOTNET-DEV1\SQLEXPRESS2K16;Initial Catalog=EWRSD;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        const string _connectionString = @"Data Source=MURAD-LP\SQL2K16;Initial Catalog=EWRSD;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //const string _connectionString = @"Data Source=DOTNET-DEV1\SQLEXPRESS2K16;Initial Catalog=EWRSD;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         public EWRSContext()
             : base(_connectionString)
@@ -78,7 +82,21 @@ namespace ADMA.EWRS.Data.Access
             modelBuilder.Configurations.Add(new MuradConfiguration());
         }
 
+        //Add Db Custom validation Errors
+        protected override DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, IDictionary<object, object> items)
+        {
+            //validate Project Data Insertion
+            if (entityEntry.Entity is Project && (entityEntry.State == EntityState.Added || entityEntry.State == EntityState.Modified))
+            {
+                var dbErrors = new ProjectValidator().Validate(entityEntry);
+                if (dbErrors != null)
+                    return dbErrors;
+            }
 
+
+            return base.ValidateEntity(entityEntry, items);
+
+        }
 
 
     }

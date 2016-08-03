@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADMA.EWRS.Data.Models.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,8 @@ namespace ADMA.EWRS.BizDomain
         {
             _provider = provider;
         }
+
+        public IEnumerable<ADMA.EWRS.Data.Models.Validation.ValidationError> BusinessErrors { get; set; }
 
     }
 
