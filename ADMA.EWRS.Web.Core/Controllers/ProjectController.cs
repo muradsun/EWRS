@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ADMA.EWRS.Data.Models.ViewModel;
 using ADMA.EWRS.BizDomain;
 using Newtonsoft.Json;
+using ADMA.EWRS.Data.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,11 +14,11 @@ namespace ADMA.EWRS.Web.Core.Controllers
 {
     public class ProjectController : BaseController
     {
-        ProjectsManager pm;
+        ProjectsManager _pm;
         public ProjectController(IServiceProvider provider)
             : base(provider)
         {
-            pm = new ProjectsManager(provider);
+            _pm = new ProjectsManager(provider);
         }
 
         // GET: /<controller>/
@@ -29,7 +30,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
             PageInfoData.Breadcrumbs.Add(new Breadcrumb { Text = "Projects List", Link = null });
 
             //Get List of the projects created by logged in user and his delegated users
-            var projectsList = pm.GetProjects(CurrentUser.UserId, CurrentUser.DelegationSet);
+            var projectsList = _pm.GetProjects(CurrentUser.UserId, CurrentUser.DelegationSet);
             return View(projectsList);
         }
 
@@ -48,7 +49,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
 
         public JsonResult SearchOrganizationHierarchy(string filter)
         {
-            var orgList = pm.SearchOrganizationHierarchy(filter);
+            var orgList = _pm.SearchOrganizationHierarchy(filter);
             var data = orgList.Select(o => new OrganizationHierarchyAutoCompleteView()
             {
                 ORGID = o.ORGID,
@@ -76,6 +77,10 @@ namespace ADMA.EWRS.Web.Core.Controllers
         [HttpPost]
         public IActionResult SaveProjectWizardStep([FromBody] ProjectInfoWizardStepView projectInfoWizardStepView)
         {
+            //Create Project Entity and send for Save
+            Project ptoj = new Project();
+            _pm.SaveProject(ptoj); 
+             
             return Json(new { Ok = true });
         }
 

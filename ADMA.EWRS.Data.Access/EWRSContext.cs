@@ -8,8 +8,8 @@ namespace ADMA.EWRS.Data.Access
     [DbConfigurationType(typeof(EFDbConfiguration))]
     public class EWRSContext : DbContext
     {
-        const string _connectionString = @"Data Source=MURAD-LP\SQL2K16;Initial Catalog=EWRSD;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        //const string _connectionString = @"Data Source=DOTNET-DEV1\SQLEXPRESS2K16;Initial Catalog=EWRSD;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //const string _connectionString = @"Data Source=MURAD-LP\SQL2K16;Initial Catalog=EWRSD;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        const string _connectionString = @"Data Source=DOTNET-DEV1\SQLEXPRESS2K16;Initial Catalog=EWRSD;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         public EWRSContext()
             : base(_connectionString)

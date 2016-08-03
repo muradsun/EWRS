@@ -12,10 +12,11 @@ namespace ADMA.EWRS.BizDomain
         //private IClaimsSecurityManager _claimsSecurityManager;
 
         public BaseManager(IServiceProvider provider)
-            
+
         {
             _provider = provider;
         }
 
     }
+
 }

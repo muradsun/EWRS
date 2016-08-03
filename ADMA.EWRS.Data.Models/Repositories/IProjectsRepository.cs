@@ -9,8 +9,8 @@ namespace ADMA.EWRS.Data.Models.Repositories
     public interface IProjectsRepository : IRepository<Project>
     {
         IEnumerable<Project> GetTopNProjects(int count);
-        IEnumerable<Project> GetAllProjects(int Owner_UserId,  List<int> Delegated_UsersList);
-
+        IEnumerable<Project> GetAllProjects(int Owner_UserId, List<int> Delegated_UsersList);
+        bool SaveProject(Project project);
 
     }
 }

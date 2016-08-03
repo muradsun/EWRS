@@ -82,6 +82,17 @@ namespace ADMA.EWRS.BizDomain
             };
         }
 
+        public bool SaveProject(Project project)
+        {
+            using (var unitOfWork = new UnitOfWork())
+            {
+                unitOfWork.Projects.SaveProject(project);
+                unitOfWork.Save(); 
+            }
+
+            return true; 
+        }
+
         #endregion
 
     }
