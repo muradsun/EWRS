@@ -16,6 +16,12 @@ namespace ADMA.EWRS.BizDomain.Engine
             ICollection<ValidationError> dbError = unitOfWork.Projects.GetDbValidationErrors();
             //I have no business validations - proceed
 
+            if (dbError == null)
+                dbError = new List<ValidationError>();
+
+            if (string.IsNullOrWhiteSpace(project.Name))
+                dbError.Add(new ValidationError("Name", " Project Name is required, minimum 3 characters", project.GetType().ToString()));
+
             return dbError;
         }
     }

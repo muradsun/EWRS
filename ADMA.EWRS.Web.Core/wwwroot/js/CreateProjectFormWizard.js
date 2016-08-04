@@ -29,15 +29,6 @@ var FormWizard = function () {
 
     var initWizard = function () {
 
-        //If reload data will not be saved.
-        $(window).bind('beforeunload', function () {
-            return "You might have unsaved changes on this page. Do you want to leave this page and discard your changes if exists or stay on this page?";
-        });
-
-        $("#btnProjectInfoWizardStep").click(function (e) {
-            e.preventDefault();
-            SaveProjectInfoWizardStep();
-        });
 
         // function to initiate Wizard Form
         wizardContent.smartWizard({
@@ -52,6 +43,17 @@ var FormWizard = function () {
         });
         var numberOfSteps = 0;
         initValidator();
+        
+        //If reload data will not be saved.
+        $(window).bind('beforeunload', function () {
+            return "You might have unsaved changes on this page. Do you want to leave this page and discard your changes if exists or stay on this page?";
+        });
+
+        $("#btnProjectInfoWizardStep").click(function (e) {
+            e.preventDefault();
+            SaveProjectInfoWizardStep();
+        });
+
     }; //end initWizard
 
     var initValidator = function () {

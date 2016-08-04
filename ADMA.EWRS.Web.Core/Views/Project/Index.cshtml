@@ -28,8 +28,21 @@
                                                 <div class="row">
                                                     <div class="col-xs-4">
                                                         <a asp-action="CreateProjectWizard" asp-controller="Project" asp-route-projectId="@item.Project_Id">
-                                                            <div class="lettericon margin-right-10" data-text="P" data-size="sm" data-color="#947499"></div>
-                                                            @item.Name
+                                                            @if (item.ProjectStatus_Id == ADMA.EWRS.Data.Models.Enums.ProjectStatusEnum.Draft)
+                                                            {
+                                                                <div class="lettericon margin-right-10" data-text="D" data-custom-class="letter-custom"></div>
+                                                            }
+                                                            else
+                                                            if (item.ProjectStatus_Id == ADMA.EWRS.Data.Models.Enums.ProjectStatusEnum.Activate)
+                                                            {
+                                                                <div class="lettericon margin-right-10 letter-color-P" data-text="P" data-size="sm" data-color="#947499"></div>
+                                                            }
+                                                            else
+                                                            if (item.ProjectStatus_Id == ADMA.EWRS.Data.Models.Enums.ProjectStatusEnum.Closed)
+                                                            {
+                                                                <div class="lettericon margin-right-10 letter-color-C" data-text="P" data-size="sm" data-color="#947499"></div>
+                                                            }
+                                                            <strong>@item.Name</strong>
                                                         </a>
                                                     </div>
                                                     <div class="col-xs-3">

@@ -36,7 +36,7 @@ namespace ADMA.EWRS.Data.Access.EfConfigurations
             // Table & Column Mappings
             this.ToTable("Projects", "Weekly");
             this.Property(t => t.Project_Id).HasColumnName("Project_Id");
-            this.Property(t => t.Name).HasColumnName("Name");
+            this.Property(t => t.Name).HasColumnName("Name").IsRequired();
             this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.PercentComplete).HasColumnName("PercentComplete");
             this.Property(t => t.ProjectStatus_Id).HasColumnName("ProjectStatus_Id");

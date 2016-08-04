@@ -4,6 +4,10 @@
 //Validate and Save, return false if want to stay at step
 
 function SaveProjectInfoWizardStep() {
+    //Call validation 
+    if (!$('#form').valid())
+        return false;
+
     var pData = CollectProjInfoStepInfo();
     $.ajax({
         url: "/Project/SaveProjectWizardStep",
