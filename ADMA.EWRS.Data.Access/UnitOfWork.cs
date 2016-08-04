@@ -68,9 +68,19 @@ namespace ADMA.EWRS.Data.Access
             }
         }
 
+        public void Rollback()
+        {
+            _context
+                .ChangeTracker
+                .Entries()
+                .ToList()
+                .ForEach(x => x.Reload());
+        }
+
         public void Dispose()
         {
-            _context.Dispose();
+            if (_context != null)
+                _context.Dispose();
         }
     }
 }

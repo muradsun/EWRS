@@ -17,31 +17,43 @@ namespace ADMA.EWRS.BizDomain
     /// </summary>
     public class ProjectsManager : BaseManager
     {
+        private UnitOfWork UnitOfWork { get { return base._unitOfWork; } }
+
         public ProjectsManager(IServiceProvider _provider)
             : base(_provider)
         {
             BusinessErrors = Enumerable.Empty<ADMA.EWRS.Data.Models.Validation.ValidationError>();
         }
 
+        public ProjectsManager(IServiceProvider _provider, UnitOfWork unitOfWork)
+            : base(_provider, unitOfWork)
+        {
+            BusinessErrors = Enumerable.Empty<ADMA.EWRS.Data.Models.Validation.ValidationError>();
+        }
+
+
         public List<Project> GetProjects(int Owner_UserId, List<int> Delegated_UsersList)
         {
-            using (var unitOfWork = new UnitOfWork())
-                return unitOfWork.Projects.GetAllProjects(Owner_UserId, Delegated_UsersList).ToList();
+            return UnitOfWork.Projects.GetAllProjects(Owner_UserId, Delegated_UsersList).ToList();
         }
 
         public Project GetProject(int projectId)
         {
-            using (var unitOfWork = new UnitOfWork())
-                return unitOfWork.Projects.Find(p => p.Project_Id == projectId).FirstOrDefault();
+            return UnitOfWork.Projects.Find(p => p.Project_Id == projectId).FirstOrDefault();
         }
 
         public Template GetTemplateOrDefualt(int projectId)
         {
             if (projectId == 0)
-                return GetDefualtTemplate();
+                return GetDefualtTemplate(projectId);
             else
-                using (var unitOfWork = new UnitOfWork())
-                    return unitOfWork.Templates.GetTemplate(projectId);
+            {
+                var temp = UnitOfWork.Templates.GetTemplate(projectId);
+                if (temp != null)
+                    return temp;
+                else
+                    return GetDefualtTemplate(projectId);
+            }
         }
 
         public List<TeamModel> GetTeamModelOrDefualt(int projectId)
@@ -49,41 +61,37 @@ namespace ADMA.EWRS.BizDomain
             if (projectId == 0)
                 return new List<TeamModel>();
             else
-                using (var unitOfWork = new UnitOfWork())
-                    return unitOfWork.TeamModel.GetTeamModel(projectId).ToList();
+                return UnitOfWork.TeamModel.GetTeamModel(projectId).ToList();
         }
 
         public List<OrganizationHierarchy> SearchOrganizationHierarchy(string orgName)
         {
             var escapOrgTypes = new List<string>(new string[] { "TC", "BG", null });
-            using (var unitOfWork = new UnitOfWork())
-                return unitOfWork.OrganizationHierarchies.Find(o => o.ORGNAME.Contains(orgName) && !escapOrgTypes.Contains(o.ORGTYPE)).ToList();
+            return UnitOfWork.OrganizationHierarchies.Find(o => o.ORGNAME.Contains(orgName) && !escapOrgTypes.Contains(o.ORGTYPE)).ToList();
         }
 
-        public static OrganizationHierarchy GetOrganizationHierarchy(int orgId)
+        public OrganizationHierarchy GetOrganizationHierarchy(int orgId)
         {
-            using (var unitOfWork = new UnitOfWork())
-                return unitOfWork.OrganizationHierarchies.Find(o => o.ORGID == orgId).FirstOrDefault();
+            return UnitOfWork.OrganizationHierarchies.Find(o => o.ORGID == orgId).FirstOrDefault();
         }
         public bool SaveProject(Project project)
         {
             try
             {
-                var engine = new ProjectsEngine();
-                //Save Data//
-                using (var unitOfWork = new UnitOfWork())
-                {
-                    //Make Validation//
-                    var errors = engine.Validate(project, unitOfWork);
-                    if (errors != null && errors.Count() > 0)
-                    {
-                        base.BusinessErrors = errors;
-                        return false;
-                    }
+                UnitOfWork.Projects.MarkSaveProject(project);
 
-                    unitOfWork.Projects.SaveProject(project);
-                    unitOfWork.Save();
+                var engine = new ProjectsEngine();
+                //Make Validation//
+                var errors = engine.Validate(project, UnitOfWork);
+                if (errors != null && errors.Count() > 0)
+                {
+                    base.BusinessErrors = errors;
+                    return false;
                 }
+
+               
+                UnitOfWork.Save();
+
                 return true;
             }
             catch (Framework.ExceptionHandling.ValidationException ex)
@@ -103,15 +111,16 @@ namespace ADMA.EWRS.BizDomain
 
         #region Private Members 
 
-        private Template GetDefualtTemplate()
+        private Template GetDefualtTemplate(int projectId)
         {
             return new Template()
             {
+                Project_Id = projectId,
                 Name = "Default Template",
                 Subjects = new List<Subject>() {
-                    new Subject() { Name = "Progress", IsMandatory= true, DueDate = null , SequenceNo = 1},
-                    new Subject() { Name = "Planning", IsMandatory= true, DueDate = null , SequenceNo = 2},
-                    new Subject() { Name = "Problems", IsMandatory= true, DueDate = null , SequenceNo = 3}
+                    new Subject() { Name = "Progress", IsMandatory= true, DueDate = null , SequenceNo = 1, Project_Id = projectId},
+                    new Subject() { Name = "Planning", IsMandatory= true, DueDate = null , SequenceNo = 2,  Project_Id = projectId},
+                    new Subject() { Name = "Problems", IsMandatory= true, DueDate = null , SequenceNo = 3, Project_Id = projectId}
                 }
             };
         }

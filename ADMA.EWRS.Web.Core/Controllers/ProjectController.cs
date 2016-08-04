@@ -37,7 +37,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
         }
 
         [Authorize(Policy = PolicyNames.ProjectOwners)]
-        public IActionResult CreateProjectWizard()
+        public IActionResult CreateProjectWizard(int projectId)
         {
             PageInfoData.Title = "Project Configurations Wizard";
             PageInfoData.Description = "Use this Wizard to configure a Project, Project Template, Team Model and Review Workflow";
@@ -47,7 +47,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
                     new Breadcrumb { Text = "Project Wizard", Link = null },
                 });
 
-            ViewBag.ProjectId = 0;
+            ViewBag.ProjectId = projectId;
 
             return View();
         }
@@ -61,31 +61,34 @@ namespace ADMA.EWRS.Web.Core.Controllers
         [HttpPost]
         public JsonResult SaveProjectWizardStep([FromBody] ProjectInfoWizardStepView projectInfoWizardStepView)
         {
-            //Create Project Entity and send for Save
-            Project ptoj = new Project()
-            {
-                Project_Id = projectInfoWizardStepView.Project_Id,
-                Name = projectInfoWizardStepView.Name,
-                Description = projectInfoWizardStepView.Description,
-                ORGANIZATION_ID = projectInfoWizardStepView.ORGANIZATION_ID,
-
-                CreatedBy = CurrentUser.UserId.ToString(),
-                CreatedDate = DateTime.Now,
-                Owner_UserId = CurrentUser.UserId,
-
-            };
+            Project projItem;
 
             //If new Project then it is Draft 
             if (projectInfoWizardStepView.Project_Id == 0)
             {
-                ptoj.ProjectStatus_Id = Data.Models.Enums.ProjectStatusEnum.Draft;
-                ptoj.PercentComplete = 0;
+                projItem = new Project();
+                projItem.ProjectStatus_Id = Data.Models.Enums.ProjectStatusEnum.Draft;
+                projItem.PercentComplete = 0;
+                projItem.CreatedBy = CurrentUser.UserId.ToString();
+                projItem.CreatedDate = DateTime.Now;
+            }
+            else
+            {
+                projItem = _pm.GetProject(projectInfoWizardStepView.Project_Id);
+                projItem.UpdateBy = CurrentUser.UserId.ToString();
+                projItem.UpdatedDate = DateTime.Now;
             }
 
-            if (_pm.SaveProject(ptoj))
-                return GetJSONResult(ptoj.Project_Id);
+            projItem.Project_Id = projectInfoWizardStepView.Project_Id;
+            projItem.Name = projectInfoWizardStepView.Name;
+            projItem.Description = projectInfoWizardStepView.Description;
+            projItem.ORGANIZATION_ID = projectInfoWizardStepView.ORGANIZATION_ID;
+            projItem.Owner_UserId = CurrentUser.UserId;
+
+            if (_pm.SaveProject(projItem))
+                return GetJSONResult(projItem.Project_Id);
             else
-                return GetJSONResult(ptoj.Project_Id, false, _pm.BusinessErrors);
+                return GetJSONResult(projItem.Project_Id, false, _pm.BusinessErrors);
         }
 
         [HttpPost]

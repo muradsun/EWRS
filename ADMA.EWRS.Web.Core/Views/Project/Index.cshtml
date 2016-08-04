@@ -16,8 +16,9 @@
                                     <ul class="list-group">
                                         <li class="list-group-item no-radius no-margin no-border-top no-border-left no-border-right">
                                             <div class="row">
-                                                <div class="col-xs-5"><h4>Project Name</h4></div>
-                                                <div class="col-xs-5"><h4>Percentage Completed</h4></div>
+                                                <div class="col-xs-4"><h4>Project Name</h4></div>
+                                                <div class="col-xs-3"><h4>Description</h4></div>
+                                                <div class="col-xs-3"><h4>Percentage Completed</h4></div>
                                                 <div class="col-xs-2"><h4>Action</h4></div>
                                             </div>
                                         </li>
@@ -25,10 +26,16 @@
                                         {
                                             <li class="list-group-item no-radius no-margin no-border-top no-border-left no-border-right">
                                                 <div class="row">
-                                                    <div class="col-xs-5">
-                                                        <a href="#"> <div class="lettericon margin-right-5" data-text="Kappa" data-size="sm" data-color="#947499"></div> @item.Name</a>
+                                                    <div class="col-xs-4">
+                                                        <a asp-action="CreateProjectWizard" asp-controller="Project" asp-route-projectId="@item.Project_Id">
+                                                            <div class="lettericon margin-right-10" data-text="P" data-size="sm" data-color="#947499"></div>
+                                                            @item.Name
+                                                        </a>
                                                     </div>
-                                                    <div class="col-xs-5">
+                                                    <div class="col-xs-3">
+                                                        @item.Description
+                                                    </div>
+                                                    <div class="col-xs-3">
                                                         <span class="block padding-top-10">
                                                             <div class="progress progress-xs no-radius background-dark no-margin">
                                                                 <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="@item.PercentComplete" aria-valuemin="0" aria-valuemax="100" style="width: @item.PercentComplete%;">
@@ -43,7 +50,7 @@
                                                             <a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#"> Action <span class="caret"></span> </a>
                                                             <ul role="menu" class="dropdown-menu dropdown-light">
                                                                 <li>
-                                                                    <a href="#"> Edit </a>
+                                                                    <a asp-action="CreateProjectWizard" asp-controller="Project" asp-route-projectId="@item.Project_Id"> Edit </a>
                                                                 </li>
                                                                 <li>
                                                                     <a href="#"> Change Status </a>

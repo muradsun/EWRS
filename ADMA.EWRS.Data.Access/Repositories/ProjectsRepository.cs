@@ -35,11 +35,14 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         }
 
-        public bool SaveProject(Project project)
+        public bool MarkSaveProject(Project project)
         {
-            //Make ADD
             if (project.Project_Id == 0)
+                //Make ADD
                 DbContext.Projects.Add(project);
+            else
+                //Attach the entity 
+                DbContext.Entry(project).State = EntityState.Modified;
 
             return true;
         }

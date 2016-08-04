@@ -46,6 +46,7 @@ namespace ADMA.EWRS.Web.Core.ViewComponents
                 }).ToList()
             };
 
+
             return View("~/Views/Project/Components/TemplateWizardStep.cshtml", tempView);
         }
 

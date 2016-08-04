@@ -19,6 +19,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
     {
         private SecurityManager _secManager;
         private ClaimsManager _claimsManager;
+        private IServiceProvider _provider;
 
         //public AccountController()
         //{
@@ -32,6 +33,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
         {
             _secManager = new SecurityManager();
             _claimsManager = new ClaimsManager();
+            _provider = provider;
         }
 
         // GET: /<controller>/
@@ -84,8 +86,9 @@ namespace ADMA.EWRS.Web.Core.Controllers
         [HttpPost]
         public JsonResult SearchUsers([FromBody] UsersSearchRequestView usersSearchRequestView)
         {
+            ProjectsManager _pm = new ProjectsManager(_provider);
             int recordsCount = 0;
-            List<User> searchUsers = _secManager.SearchUsers(usersSearchRequestView, usersSearchRequestView.PageIndex,ref recordsCount);
+            List<User> searchUsers = _secManager.SearchUsers(usersSearchRequestView, usersSearchRequestView.PageIndex, ref recordsCount);
             List<UsersSearchResponseView> response = searchUsers.Select(u => new UsersSearchResponseView()
             {
                 Email = u.EMAIL,
@@ -94,7 +97,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
                 Title = u.POST_TITLE_LONG_DESC,
                 User_Id = u.User_Id,
                 OrganizationId = u.ORGANIZATION_ID,
-                OrganizationHierarchyText = ProjectsManager.GetOrganizationHierarchy(u.ORGANIZATION_ID).TransformToAutoCompleteView(),
+                OrganizationHierarchyText = _pm.GetOrganizationHierarchy(u.ORGANIZATION_ID).TransformToAutoCompleteView(),
                 Gender = u.GENDER,
             }).ToList();
 

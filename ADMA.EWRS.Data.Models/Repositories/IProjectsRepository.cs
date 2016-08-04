@@ -10,7 +10,6 @@ namespace ADMA.EWRS.Data.Models.Repositories
     {
         IEnumerable<Project> GetTopNProjects(int count);
         IEnumerable<Project> GetAllProjects(int Owner_UserId, List<int> Delegated_UsersList);
-        bool SaveProject(Project project);
-
+        bool MarkSaveProject(Project project);
     }
 }
