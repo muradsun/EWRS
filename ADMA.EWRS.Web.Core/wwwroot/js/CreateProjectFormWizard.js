@@ -1,9 +1,44 @@
+var FormWizardCommon = function () {
+    "use strict";
+    //Murad : Setup spinner later; for MYassin to understand what i want   https://api.jquery.com/Ajax_Events/
+    /*
+        beforeSend: function(){
+            // Handle the beforeSend event
+        },
+        complete: function(){
+            // Handle the complete event
+        }
+    */
+    return {
+        ShowAjaxModal: function (contentHTML) {
+            $('#notificationsModal .modal-body').html(contentHTML);
+            $('#notificationsModal').modal();
+        },
+        Sayhi: function (contentHTML) {
+            //Murad : Look they are f. as. people no f. body will understand what i wrote here.
+            alert(contentHTML)
+        },
+    };
+}();
+
 var FormWizard = function () {
     "use strict";
     var wizardContent = $('#wizard');
     var wizardForm = $('#form');
     var numberOfSteps = $('.swMain > ul > li').length;
+
     var initWizard = function () {
+
+        //If reload data will not be saved.
+        $(window).bind('beforeunload', function () {
+            return "You might have unsaved changes on this page. Do you want to leave this page and discard your changes if exists or stay on this page?";
+        });
+
+        $("#btnProjectInfoWizardStep").click(function (e) {
+            e.preventDefault();
+            SaveProjectInfoWizardStep();
+        });
+
         // function to initiate Wizard Form
         wizardContent.smartWizard({
             // Check this: jquery.smartWizard.js https://github.com/mstratman/jQuery-Smart-Wizard/blob/master/README.md
@@ -145,11 +180,11 @@ var FormWizard = function () {
                 //focus the invalid fields
                 isStepValid = true;
 
-                if (isStepValid & stepnumber == 1 & nextstep == 2)
-                    return SaveProjectInfoWizardStep();
+                //if (isStepValid & stepnumber == 1 & nextstep == 2)
+                //    return SaveProjectInfoWizardStep();
 
-                if (isStepValid & stepnumber == 2 & nextstep == 3)
-                    return SaveTemplateWizardStep();
+                //if (isStepValid & stepnumber == 2 & nextstep == 3)
+                //    return SaveTemplateWizardStep();
 
                 return true;
             };

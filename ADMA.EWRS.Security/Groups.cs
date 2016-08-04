@@ -9,7 +9,7 @@ namespace ADMA.EWRS.Web.Security
     {
         public const string SuperAdministratorsGroupName = "SuperAdmins";
         public const string ADMAUserGroupName = "ADMAUser";
-
+        public const string ProjectOwners = "ProjectOwners";
     }
 
 

@@ -9,6 +9,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using ADMA.EWRS.Data.Models.ViewModel;
 using Newtonsoft.Json;
+using ADMA.EWRS.Data.Models.Validation;
 
 namespace ADMA.EWRS.Web.Core.Controllers
 {
@@ -66,6 +67,16 @@ namespace ADMA.EWRS.Web.Core.Controllers
         internal JsonResult GetJSON(object data)
         {
             return Json(data, new JsonSerializerSettings()
+            {
+                ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver() //Murad : TODO :: Change this to lower 
+            });
+        }
+
+
+        internal JsonResult GetJSONResult(object data, bool isSuccess = true, IEnumerable<ValidationError> businessErrors = null)
+        {
+            var results = new JSONResultView() { Success = isSuccess, Data = data, BusinessErrors = businessErrors };
+            return Json(results, new JsonSerializerSettings()
             {
                 ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver() //Murad : TODO :: Change this to lower 
             });

@@ -1,5 +1,5 @@
-'use strict';
 var UIElements = function () {
+    'use strict';
     var paginationHandler = function () {
         $("#pagination-UsersGroups").twbsPagination({
             totalPages: 35,

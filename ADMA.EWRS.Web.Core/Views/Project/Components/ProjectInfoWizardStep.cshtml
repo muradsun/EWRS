@@ -69,37 +69,4 @@
         </fieldset>
     </div>
 </div>
-<script type="text/javascript">
-    //Validate and Save, return false if want to stay at step
-    function SaveProjectInfoWizardStep() {
-        var pData = CollectProjInfoStepInfo();
-        $.ajax({
-            url: "/Project/SaveProjectWizardStep",
-            success: function (result) {
-                UINotifications.ShowToast("success", "Your Projet [ " + pData.Name + " ] Saved Successfuly.", "Saved Successfuly");
-            },
-            cache: false,
-            error: function (xhr, status, error) {
-                UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Faild");
-            },
-            type: "POST",
-            data: JSON.stringify(pData),
-            contentType: "application/json"
-        });
-
-        return true;
-    }
-
-    function CollectProjInfoStepInfo() {
-        var projectInfoWizardStepView = {};
-        projectInfoWizardStepView.Project_Id = 0;
-        projectInfoWizardStepView.Name = $("#txtName").val();
-        projectInfoWizardStepView.Description = $("#txtDescription").val();
-        projectInfoWizardStepView.ORGANIZATION_ID = $("#hdnORGANIZATION_ID").val();
-        projectInfoWizardStepView.OrganizationHierarchyTree = null;
-
-        return projectInfoWizardStepView;
-    }
-
-
-</script>
+ 

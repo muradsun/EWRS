@@ -72,7 +72,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
                     ADMA.EWRS.Web.Security.Cookies.AuthenticationCookieName, userPrincipal,
                     new AuthenticationProperties
                     {
-                        ExpiresUtc = DateTime.UtcNow.AddDays(1),
+                        ExpiresUtc = DateTime.UtcNow.AddDays(7),
                         IsPersistent = true,
                         AllowRefresh = false
                     });

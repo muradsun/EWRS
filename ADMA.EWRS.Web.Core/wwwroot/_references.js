@@ -29,6 +29,7 @@
 /// <reference path="assets/js/ui-sliders.js" />
 /// <reference path="assets/js/ui-treeview.js" />
 /// <reference path="js/createprojectformwizard.js" />
+/// <reference path="js/createprojectscript.js" />
 /// <reference path="js/createprojectui-elements.js" />
 /// <reference path="js/createprojectui-nestable.js" />
 /// <reference path="js/createprojectui-notifications.js" />

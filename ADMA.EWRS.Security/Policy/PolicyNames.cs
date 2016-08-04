@@ -9,6 +9,7 @@ namespace ADMA.EWRS.Security.Policy
     public class PolicyNames
     {
         public const string SuperAdministrators = "SuperAdmins";
+        public const string ProjectOwners = "ProjectOwners";
         //public const string CanEditProject = "CanEditProject";
     }
 }

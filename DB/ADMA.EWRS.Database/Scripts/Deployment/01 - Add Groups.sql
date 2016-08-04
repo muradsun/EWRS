@@ -10,3 +10,15 @@
 		   )
 GO
 
+INSERT INTO [Sec].[Groups]
+           ([Name]
+           ,[IsSystemGoup]
+           ,[CreatedBy]
+)
+     VALUES
+           ('ProjectOwners'
+           ,1
+           ,'SysAdmin'
+		   )
+GO
+

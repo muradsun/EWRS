@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-body">
-
+                    <input type="hidden" value="@ViewBag.ProjectId" id="hdnProjectId" />
                     <!-- start: WIZARD FORM -->
                     <form action="#" role="form" class="smart-wizard" id="form">
                         <div id="wizard" class="swMain">
@@ -42,9 +42,9 @@
                             <!-- end: WIZARD SEPS -->
                             <!-- start: WIZARD STEP 1 : Project Information  -->
                             <div id="step-1">
-                                @await Component.InvokeAsync("ProjectInfoWizardStep", new { projectId = 0 })
+                                @await Component.InvokeAsync("ProjectInfoWizardStep", new { projectId = ViewBag.ProjectId })
                                 <div class="form-group">
-                                    <button class="btn btn-primary btn-o next-step btn-wide pull-right">
+                                    <button class="btn btn-primary btn-o @*next-step*@ btn-wide pull-right" id="btnProjectInfoWizardStep">
                                         Save & Move Next <i class="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </div>
@@ -52,7 +52,7 @@
                             <!-- end: WIZARD STEP 1 -->
                             <!-- start: WIZARD STEP 2 -->
                             <div id="step-2" style="display:none;">
-                                @await Component.InvokeAsync("TemplateWizardStep", new { projectId = 0 })
+                                @await Component.InvokeAsync("TemplateWizardStep", new { projectId = ViewBag.ProjectId })
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-o back-step btn-wide pull-left">
                                         <i class="fa fa-circle-arrow-left"></i> Back
@@ -65,7 +65,7 @@
                             <!-- end: WIZARD STEP 2 -->
                             <!-- start: WIZARD STEP 3 -->
                             <div id="step-3" style="display:none;">
-                                @await Component.InvokeAsync("TeamModelWizardStep", new { projectId = 0 })
+                                @await Component.InvokeAsync("TeamModelWizardStep", new { projectId = ViewBag.ProjectId })
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-o back-step btn-wide pull-left">
                                         <i class="fa fa-circle-arrow-left"></i> Back
@@ -78,13 +78,13 @@
                             <!-- end: WIZARD STEP 3 -->
                             <!-- start: WIZARD STEP 4 -->
                             <div id="step-4" style="display:none;">
-                                @await Component.InvokeAsync("ReviewWorkflowWizardStep", new { projectId = 0 })
-                                <div class="form-group"  style="padding-top:10px">
+                                @await Component.InvokeAsync("ReviewWorkflowWizardStep", new { projectId = ViewBag.ProjectId })
+                                <div class="form-group" style="padding-top:10px">
                                     <button class="btn btn-primary btn-o back-step btn-wide pull-left">
                                         <i class="fa fa-circle-arrow-left"></i> Back
                                     </button>
                                     <button class="btn btn-primary btn-o next-step btn-wide pull-right">
-                                        <i class="fa fa-check-circle"></i> Publish 
+                                        <i class="fa fa-check-circle"></i> Publish
                                     </button>
                                 </div>
 
@@ -99,7 +99,50 @@
     </div>
 </div>
 <!-- end: WIZARD DEMO -->
-
+@*
+    ****************
+    Helpers
+    ****************
+*@
+<!-- Up Aside -->
+<div class="modal fade modal-aside vertical top bs-example-modal-up" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="notificationsModal">
+    <div class="modal-dialog modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header modal-header-title">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><b>Save & Validations Errors </b></h4>
+            </div>
+            <div class="modal-body">
+                Modal Content
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-o" data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- start: Template Area  -->
+<script id="modal-template" type="text/x-kendo-template">
+    <ul class="timeline-xs margin-top-20 margin-bottom-20">
+        # for (var i = 0; i < data.length; i++) { #
+        <li class="timeline-    item danger">
+            <div class="margin-left-15">
+                <div class="text-muted text-small">
+                    <h4>  ${ data[i].entityName }</h4>
+                </div>
+                <p>
+                    <strong>  ${ data[i].propertyName } </strong>: <span class="text-danger"> ${ data[i].errorMessage }</span>
+                </p>
+            </div>
+        </li>
+        # } #
+    </ul>
+</script>
+<!-- /Up Aside -->
 
 @section CssStyle{
     <link rel="stylesheet" href="~/lib/toastr/toastr.min.css">
@@ -108,7 +151,6 @@
     <link href="~/css/_nestable.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" media="screen">
     <link href="~/lib/select2/dist/css/select2.min.css" rel="stylesheet" media="screen">
-
 }
 
 @section Scripts{
@@ -144,17 +186,28 @@
     <!-- end: JavaScript Event Handlers for this page -->
 
     <script type="text/javascript">
-        jQuery(document).ready(function () {
-            Main.init();
+        var _projectId = @ViewBag.ProjectId;
 
+        jQuery(document).ready(function () {
+            //FormWizardCommon.ShowAjaxModal();
+
+            _projectId = $("#hdnProjectId").val();
+            alert(_projectId);
+
+            Main.init();
             FormWizard.init();
             UINotifications.init();
             UINestable.init();
 
-            //Murad Teamp
+            //Murad Temp
             //var wizardContent = $('#wizard');
             //wizardContent.smartWizard("goToStep", 4);
         });
     </script>
+
+    <!-- start: JavaScript for other steps -->
+    <script src="~/js/CreateProjectScript.js"></script>
+    <!-- end: JavaScript for other steps -->
+
 }
 

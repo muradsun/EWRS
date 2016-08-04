@@ -7,6 +7,8 @@ using ADMA.EWRS.Data.Models.ViewModel;
 using ADMA.EWRS.BizDomain;
 using Newtonsoft.Json;
 using ADMA.EWRS.Data.Models;
+using Microsoft.AspNetCore.Authorization;
+using ADMA.EWRS.Security.Policy;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,6 +36,7 @@ namespace ADMA.EWRS.Web.Core.Controllers
             return View(projectsList);
         }
 
+        [Authorize(Policy = PolicyNames.ProjectOwners)]
         public IActionResult CreateProjectWizard()
         {
             PageInfoData.Title = "Project Configurations Wizard";
@@ -43,6 +46,9 @@ namespace ADMA.EWRS.Web.Core.Controllers
                     new Breadcrumb { Text = "Projects List", Link = "/Project" },
                     new Breadcrumb { Text = "Project Wizard", Link = null },
                 });
+
+            ViewBag.ProjectId = 0;
+
             return View();
         }
 
@@ -77,11 +83,9 @@ namespace ADMA.EWRS.Web.Core.Controllers
             }
 
             if (_pm.SaveProject(ptoj))
-                //return this.Ok(); // Murad Create Save Response including ID and data 
-                return Json(new { ok = true });
+                return GetJSONResult(ptoj.Project_Id);
             else
-                return Json(new { ok = GetJSON(_pm.BusinessErrors) });
-
+                return GetJSONResult(ptoj.Project_Id, false, _pm.BusinessErrors);
         }
 
         [HttpPost]

@@ -18211,3 +18211,11 @@ figure.effect-goliath {
     color: #5b5b60;
     font-size: 20px;
 }
+
+.text-danger {
+    color: #d43f3a;
+}
+
+.modal-header-title {
+    background-color: #e5e5e5;
+}

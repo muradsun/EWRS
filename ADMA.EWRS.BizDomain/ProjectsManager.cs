@@ -88,6 +88,7 @@ namespace ADMA.EWRS.BizDomain
             }
             catch (Framework.ExceptionHandling.ValidationException ex)
             {
+                //Business validation Error
                 base.BusinessErrors = ex.ValidationErrors;
                 return false;
 

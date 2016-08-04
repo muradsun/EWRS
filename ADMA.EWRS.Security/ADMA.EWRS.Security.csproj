@@ -52,6 +52,7 @@
     <Compile Include="Permissions.cs" />
     <Compile Include="Policy\PolicyNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Claims\" />

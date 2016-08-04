@@ -11,17 +11,29 @@ namespace ADMA.EWRS.Web.Security.Policy
     {
         public static void BuildSystemPolicies(AuthorizationOptions options)
         {
-            options.AddPolicy(PolicyNames.SuperAdministrators,
-                  policy => policy.RequireRole(Groups.SuperAdministratorsGroupName));
+            //Murad :: My workshop with Microsoft for MYassin ::  https://github.com/blowdart/AspNetAuthorizationWorkshop
+            //options.AddPolicy(PolicyNames.SuperAdministrators, policy => {
+            //policy => policy.RequireRole(Groups.SuperAdministratorsGroupName));
+            //}
 
-            //options.AddPolicy(PolicyNames.CanEditProject,
-            //    policy =>
-            //    {
-            //        policy.RequireAuthenticatedUser();
-            //        policy.RequireRole("Administrator");
-            //        policy.Requirements.Add(new ProjectOwnerRequirement());
-            //    }
-            //);
+            options.AddPolicy(PolicyNames.SuperAdministrators, policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireRole(Groups.SuperAdministratorsGroupName);
+            });
+
+            options.AddPolicy(PolicyNames.ProjectOwners, policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireRole(/*Groups.ProjectOwners,*/
+                                   Groups.SuperAdministratorsGroupName);
+
+                //policy.RequireClaim();
+                //policy.RequireAuthenticatedUser();
+                //policy.RequireRole("Administrator");
+                //policy.Requirements.Add(new AlbumOwnerRequirement());
+            });
+
         }
     }
 }
