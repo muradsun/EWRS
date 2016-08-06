@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseModel.cs" />
     <Compile Include="BusinessUnitesView.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Data\SecurityConstants.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="GroupPermission.cs" />
     <Compile Include="GroupUser.cs" />
     <Compile Include="ModelView\PagingResponseView.cs" />
+    <Compile Include="Repositories\ISubjectsRepository.cs" />
     <Compile Include="Repositories\ITeamModelsRepository.cs" />
     <Compile Include="ModelView\OrganizationHierarchyView.cs" />
     <Compile Include="Murad.cs" />

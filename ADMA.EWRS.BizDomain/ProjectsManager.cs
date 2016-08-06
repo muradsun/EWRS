@@ -42,6 +42,17 @@ namespace ADMA.EWRS.BizDomain
             return UnitOfWork.Projects.Find(p => p.Project_Id == projectId).FirstOrDefault();
         }
 
+        public Subject GetSubject(int subjectId)
+        {
+            return UnitOfWork.Subjects.GetSubject(subjectId);
+        }
+
+        public Template GetTemplate(int templteId)
+        {
+            return UnitOfWork.Templates.GetTemplate(templteId, true);
+        }
+
+
         public Template GetTemplateOrDefualt(int projectId)
         {
             if (projectId == 0)
@@ -61,7 +72,7 @@ namespace ADMA.EWRS.BizDomain
             if (projectId == 0)
                 return new List<TeamModel>();
             else
-                return UnitOfWork.TeamModel.GetTeamModel(projectId).ToList();
+                return UnitOfWork.TeamModels.GetTeamModel(projectId).ToList();
         }
 
         public List<OrganizationHierarchy> SearchOrganizationHierarchy(string orgName)
@@ -89,7 +100,151 @@ namespace ADMA.EWRS.BizDomain
                     return false;
                 }
 
-               
+
+                UnitOfWork.Save();
+
+                return true;
+            }
+            catch (Framework.ExceptionHandling.ValidationException ex)
+            {
+                //Business validation Error
+                base.BusinessErrors = ex.ValidationErrors;
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public Template ExtractTemplate(TemplateWizardStepView templateWizardStepView, LoggedInUser currentUser)
+        {
+            Template temp;
+
+            if (templateWizardStepView.Template_Id == 0)
+                temp = new Template();
+            else
+                temp = GetTemplate(templateWizardStepView.Template_Id);
+
+            temp.CreatedBy = temp.Template_Id > 0 ? temp.CreatedBy : currentUser.UserId.ToString();
+            temp.CreatedDate = temp.Template_Id > 0 ? temp.CreatedDate : DateTime.Now;
+
+            temp.UpdateBy = temp.Template_Id > 0 ? currentUser.UserId.ToString() : null;
+            temp.UpdatedDate = temp.Template_Id > 0 ? DateTime.Now : (DateTime?)null;
+            temp.Project_Id = templateWizardStepView.Project_Id;
+
+            temp.Name = templateWizardStepView.Name;
+
+            //Temp is old guy, has nothing to do with "Intercourse"...
+            SubjectWizardStepView uiSubj = null;
+            foreach (Subject sub in temp.Subjects)
+            {
+                //1. Get UI Subject 
+                uiSubj = templateWizardStepView.Subjects.FirstOrDefault(s => s.Subject_Id == sub.Subject_Id);
+
+                //2. If UI Subject Exists - Update the DB subject otherwise it has been deleted 
+                if (uiSubj != null)
+                {
+                    sub.DueDate = uiSubj.DueDate;
+                    sub.Name = uiSubj.Name;
+                    sub.IsMandatory = uiSubj.IsMandatory;
+                    sub.SequenceNo = uiSubj.SequenceNo;
+                    sub.UpdateBy = currentUser.UserId.ToString();
+                    sub.UpdatedDate = DateTime.Now;
+                    sub.EntityState = Data.Models.ModelState.Updated;
+                }
+                else
+                    sub.EntityState = ModelState.Deleted;
+            }
+            
+            //Add the new items 
+            temp.Subjects.AddRange(
+                    templateWizardStepView.Subjects.Where(s => s.Subject_Id == 0).Select(s => new Subject()
+                    {
+                        Template_Id = temp.Template_Id,
+                        Project_Id = temp.Project_Id,
+                        Subject_Id = s.Subject_Id,
+                        DueDate = s.DueDate,
+                        Name = s.Name,
+                        IsMandatory = s.IsMandatory,
+                        SequenceNo = s.SequenceNo,
+
+                        CreatedBy = currentUser.UserId.ToString(),
+                        CreatedDate = DateTime.Now,
+
+                        SubjectStatus_Id = (int)Data.Models.Enums.SubjectStatusEnum.Draft, // Murad Fix
+                        EntityState = Data.Models.ModelState.Added
+
+                    }).ToList()
+                );
+
+
+            //if (templateWizardStepView.Subjects != null && templateWizardStepView.Subjects.Count > 0)
+            //{
+            //    //Update the shared subject : Subjects in both UI and DB
+            //    if (temp.Template_Id > 0)
+            //    {
+            //        //Get Joined Query 
+            //        var query = from db_sub in temp.Subjects
+            //                    join ui_sub in templateWizardStepView.Subjects on db_sub.Subject_Id equals ui_sub.Subject_Id
+            //                    where db_sub.Subject_Id != 0 && ui_sub.Subject_Id != 0
+            //                    select new { db_sub, ui_sub };
+
+            //        query.All(
+            //            s =>
+            //            {
+            //                //s.db_sub.Template_Id = s.db_sub.Template_Id;
+            //                //s.db_sub.Project_Id = s.db_sub.Project_Id;
+            //                //s.db_sub.Subject_Id = s.db_sub.Subject_Id;
+            //                s.db_sub.DueDate = s.ui_sub.DueDate;
+            //                s.db_sub.Name = s.ui_sub.Name;
+            //                s.db_sub.IsMandatory = s.ui_sub.IsMandatory;
+            //                s.db_sub.SequenceNo = s.ui_sub.SequenceNo;
+
+            //                //s.db_sub.CreatedBy = s.db_sub.CreatedBy;
+            //                //s.db_sub.CreatedDate = s.db_sub.CreatedDate;
+
+            //                s.db_sub.UpdateBy = currentUser.UserId.ToString();
+            //                s.db_sub.UpdatedDate = DateTime.Now;
+
+            //                //s.db_sub.SubjectStatus_Id = s.db_sub.SubjectStatus_Id;
+            //                s.db_sub.EntityState = Data.Models.ModelState.Updated;
+
+            //                s.db_sub.PercentComplete = s.db_sub.PercentComplete;
+
+            //                return true;
+            //            }
+            //        );
+
+            //        //Deleted List: Subjects in DB not in UI
+            //        var uiSubjectIds = templateWizardStepView.Subjects.Where(s => s.Subject_Id != 0).Select(s => s.Subject_Id).Distinct().ToList();
+            //        temp.Subjects
+            //            .Where(s => !uiSubjectIds.Contains(s.Subject_Id) && s.Subject_Id != 0)
+            //            .ToList()
+            //            .ForEach(s => s.EntityState = Data.Models.ModelState.Deleted);
+            //    }
+
+            //}
+
+            return temp;
+        }
+
+        public bool SaveTemplate(Template template)
+        {
+            try
+            {
+                UnitOfWork.Templates.MarkSaveTemplateWithSubjects(template);
+
+                var engine = new TemplateEngine();
+                //Make Validation//
+                var errors = engine.Validate(template, UnitOfWork);
+                if (errors != null && errors.Count() > 0)
+                {
+                    base.BusinessErrors = errors;
+                    return false;
+                }
+
                 UnitOfWork.Save();
 
                 return true;

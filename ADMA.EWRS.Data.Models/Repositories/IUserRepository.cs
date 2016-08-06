@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ADMA.EWRS.Data.Models.Repositories
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUsersRepository : IRepository<User>
     {
         IEnumerable<User>  SearchUsers(UsersSearchRequestView usersSearchRequestView, int pageIndex, int recordsPerPage, ref int recordsCount);
     }

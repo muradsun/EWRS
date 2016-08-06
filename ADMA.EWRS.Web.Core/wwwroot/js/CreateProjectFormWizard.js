@@ -49,9 +49,17 @@ var FormWizard = function () {
             return "You might have unsaved changes on this page. Do you want to leave this page and discard your changes if exists or stay on this page?";
         });
 
+
+        //Create project : Step 1
         $("#btnProjectInfoWizardStep").click(function (e) {
             e.preventDefault();
             SaveProjectInfoWizardStep();
+        });
+
+        //Create Template  : Step 2
+        $("#btnTemplateWizardStep").click(function (e) {
+            e.preventDefault();
+            SaveTemplateWizardStep();
         });
 
     }; //end initWizard

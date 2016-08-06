@@ -57,7 +57,7 @@
                                     <button class="btn btn-primary btn-o back-step btn-wide pull-left">
                                         <i class="fa fa-circle-arrow-left"></i> Back
                                     </button>
-                                    <button class="btn btn-primary btn-o next-step btn-wide pull-right">
+                                    <button class="btn btn-primary btn-o btn-wide pull-right" id="btnTemplateWizardStep">
                                         Save & Move Next <i class="fa fa-arrow-circle-right"></i>
                                     </button>
                                 </div>
@@ -78,7 +78,7 @@
                             <!-- end: WIZARD STEP 3 -->
                             <!-- start: WIZARD STEP 4 -->
                             <div id="step-4" style="display:none;">
-                                @await Component.InvokeAsync("ReviewWorkflowWizardStep", new { projectId = ViewBag.ProjectId })
+                                await Component.InvokeAsync("ReviewWorkflowWizardStep", new { projectId = ViewBag.ProjectId })
                                 <div class="form-group" style="padding-top:10px">
                                     <button class="btn btn-primary btn-o back-step btn-wide pull-left">
                                         <i class="fa fa-circle-arrow-left"></i> Back

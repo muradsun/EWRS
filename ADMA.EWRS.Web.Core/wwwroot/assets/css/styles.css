@@ -8441,6 +8441,7 @@ fieldset {
 .form-control::-moz-placeholder {
     color: #9b9b9f;
     opacity: 1;
+
 }
 
 .form-control:-ms-input-placeholder {

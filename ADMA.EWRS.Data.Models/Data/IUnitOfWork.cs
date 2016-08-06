@@ -10,7 +10,7 @@ namespace ADMA.EWRS.Data.Models.Data
     public interface IUnitOfWork : IDisposable
     {
         IMuradRepository Muradies { get; }
-        IUserRepository Users { get; }
+        IUsersRepository Users { get; }
         int Save();
     }
 }

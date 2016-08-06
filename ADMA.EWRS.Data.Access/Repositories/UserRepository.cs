@@ -9,9 +9,9 @@ using ADMA.EWRS.Data.Models.ViewModel;
 
 namespace ADMA.EWRS.Data.Access.Repositories
 {
-    public class UserRepository : Repository<User, EWRSContext>, IUserRepository
+    public class UsersRepository : Repository<User, EWRSContext>, IUsersRepository
     {
-        public UserRepository(EWRSContext context)
+        public UsersRepository(EWRSContext context)
             : base(context)
         {
 

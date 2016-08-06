@@ -10,7 +10,7 @@ namespace ADMA.EWRS.Data.Models
             this.Subjects = new List<Subject>();
         }
 
-        public byte SubjectStatus_Id { get; set; }
+        public int SubjectStatus_Id { get; set; }
         public string Status { get; set; }
         public byte[] RowVersion { get; set; }
         public  ICollection<Subject> Subjects { get; set; }

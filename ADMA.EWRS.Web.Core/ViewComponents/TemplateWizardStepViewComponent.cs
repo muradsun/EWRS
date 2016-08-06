@@ -28,24 +28,24 @@ namespace ADMA.EWRS.Web.Core.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(int projectId)
         {
-            TemplateWizardStepView tempView;
             Template temp = _pm.GetTemplateOrDefualt(projectId);
-            tempView = new TemplateWizardStepView()
-            {
-                Name = temp.Name,
-                Project_Id = temp.Project_Id,
-                Template_Id = temp.Template_Id,
-                Subjects = temp.Subjects.Select(s => new SubjectWizardStepView()
-                {
-                    Template_Id = s.Template_Id,
-                    Subject_Id = s.Subject_Id,
-                    Name = s.Name,
-                    IsMandatory = s.IsMandatory,
-                    DueDate = s.DueDate,
-                    SequenceNo = s.SequenceNo
-                }).ToList()
-            };
+            TemplateWizardStepView tempView = temp.TransformToTemplateWizardStepView();
 
+            //tempView = new TemplateWizardStepView()
+            //{
+            //    Name = temp.Name,
+            //    Project_Id = temp.Project_Id,
+            //    Template_Id = temp.Template_Id,
+            //    Subjects = temp.Subjects.Select(s => new SubjectWizardStepView()
+            //    {
+            //        Template_Id = s.Template_Id,
+            //        Subject_Id = s.Subject_Id,
+            //        Name = s.Name,
+            //        IsMandatory = s.IsMandatory,
+            //        DueDate = s.DueDate,
+            //        SequenceNo = s.SequenceNo
+            //    }).ToList()
+            //};
 
             return View("~/Views/Project/Components/TemplateWizardStep.cshtml", tempView);
         }

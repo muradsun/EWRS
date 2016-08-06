@@ -16,4 +16,14 @@ namespace ADMA.EWRS.Data.Models.Enums
         Completed = 5,
         Closed = 6
     }
+
+    public enum SubjectStatusEnum
+    {
+        Draft = 1,
+        Deleted = 2,
+        Activate = 3,
+        Deactivate = 4,
+        Completed = 5,
+        Closed = 6
+    }
 }

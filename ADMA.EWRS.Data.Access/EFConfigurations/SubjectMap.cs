@@ -54,7 +54,7 @@ namespace ADMA.EWRS.Data.Access.EfConfigurations
             this.HasRequired(t => t.Template)
                 .WithMany(t => t.Subjects)
                 .HasForeignKey(d => d.Template_Id);
-
+                //.WillCascadeOnDelete(); //Murad Enable the cascade by default okay dude, f. 
         }
     }
 }

@@ -94,7 +94,11 @@ namespace ADMA.EWRS.Web.Core.Controllers
         [HttpPost]
         public JsonResult SaveTemplateWizardStep([FromBody] TemplateWizardStepView templateWizardStepView)
         {
-            return Json(new { ok = true });
+            var temp = _pm.ExtractTemplate(templateWizardStepView, CurrentUser);
+            if (_pm.SaveTemplate(temp))
+                return GetJSONResult(temp.TransformToTemplateWizardStepView());
+            else
+                return GetJSONResult(temp.TransformToTemplateWizardStepView(), false, _pm.BusinessErrors.Distinct());
         }
 
         public JsonResult SearchOrganizationHierarchy(string filter)

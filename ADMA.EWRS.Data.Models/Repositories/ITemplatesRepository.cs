@@ -9,5 +9,8 @@ namespace ADMA.EWRS.Data.Models.Repositories
     public interface ITemplatesRepository : IRepository<Template>
     {
         Template GetTemplate(int projectId);
+        Template GetTemplate(int templateId, bool includeSubjects);
+        bool MarkSaveTemplateWithSubjects(Template template);
+
     }
 }

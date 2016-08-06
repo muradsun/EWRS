@@ -26,25 +26,28 @@ namespace ADMA.EWRS.Data.Access
 #endif
 
             Muradies = new MuradRepository(_context);
-            Users = new UserRepository(_context);
+            Users = new UsersRepository(_context);
             Projects = new ProjectsRepository(_context);
             Groups = new GroupsRepository(_context);
             Permissions = new PermissionsRepository(_context);
             Delegations = new DelegationsRepository(_context);
             OrganizationHierarchies = new OrganizationHierarchiesRepository(_context);
             Templates = new TemplateRepository(_context);
-            TeamModel = new TeamModelRepository(_context);
+            TeamModels = new TeamModelRepository(_context);
+            Subjects = new SubjectsRepository(_context);
         }
 
         public IMuradRepository Muradies { get; private set; }
-        public IUserRepository Users { get; private set; }
+        public IUsersRepository Users { get; private set; }
         public IProjectsRepository Projects { get; private set; }
         public IGroupsRepository Groups { get; private set; }
         public IDelegationsRepository Delegations { get; private set; }
         public IPermissionsRepository Permissions { get; private set; }
         public IOrganizationHierarchiesRepository OrganizationHierarchies { get; private set; }
         public ITemplatesRepository Templates { get; private set; }
-        public ITeamModelsRepository TeamModel { get; private set; }
+        public ITeamModelsRepository TeamModels { get; private set; }
+        public ISubjectsRepository Subjects { get; private set; }
+
 
         public int Save()
         {
