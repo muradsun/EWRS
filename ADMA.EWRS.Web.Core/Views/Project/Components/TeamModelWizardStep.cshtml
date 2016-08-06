@@ -29,7 +29,7 @@
                 <button class="btn btn-success btn-scroll btn-scroll-left ti-user" type="button" onclick="showAddDlg();">
                     <span><i class="fa fa-user-plus"></i> Add </span>
                 </button>
-                <div class="btn-group">
+                <div class="btn-group" style="display:none">
                     <button type="button" class="btn btn-primary">
                         Sort
                     </button>
@@ -83,7 +83,7 @@
 <!-- start: Template Area  -->
 <script id="team-template" type="text/x-kendo-template">
     # for (var i = 0; i < data.length; i++) { #
-    <div class="mix ${ data[i].UpdateText } col-sm-6 col-md-3" data-my-order="1">
+    <div class="mix ${ data[i].UpdateText } col-sm-6 col-md-3" data-my-order="data[i].Name">
         <div class="thumbnail thumbnail-${ data[i].UpdateText }">
             <div class="row">
                 <div class="col-md-3 no-space text-right">
@@ -123,10 +123,10 @@
                         # } else { #
                         <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo + 100 }" type="radio" value="radio4" class="radioElm">
                         # } #
-                        <label onclick="loadSubj4TeamModel(this, ${ data[i].SequenceNo });" data-TMSubjects="" for="radio_${ data[i].SequenceNo + 100 }" class="cl-effect-3 links block margin-top-10 uppercase text-dark text-uppercase text-bold text-extra-small" aria-describedby="popover303618" data-original-title="" data-toggle="popover" data-placement="top" data-html="true">
+                        <label data-seqNo="${ data[i].SequenceNo }" onclick="loadSubj4TeamModel(this, ${ data[i].SequenceNo });" data-TMSubjects="" for="radio_${ data[i].SequenceNo + 100 }" class="cl-effect-3 links block margin-top-10 uppercase text-dark text-uppercase text-bold text-extra-small" aria-describedby="popover303618" data-original-title="" data-toggle="popover" data-placement="top" data-html="true">
                             Specific Subject
                             <i class="padding-left-5 fa fa-angle-right"></i>
-                            <input type="hidden" id="hdnSubjectArray" value="${ data[i].SubjectsArray }" />
+                            <input type="hidden" id="hdnSubjectArray_${ data[i].SequenceNo }" value="${ data[i].SubjectsArray }" />
                         </label>
                     </div>
                 </div>
@@ -135,28 +135,28 @@
     </div>
     # } #
 </script>
-<script id="teamSubjects-template" type="text/x-kendo-template">
+<script id="teamModelSubjects-template" type="text/x-kendo-template">
     <div style="width:350px">
-        <h3>Project Subjects</h3>
-        <div class="checkbox clip-check check-success">
-            <input id="checkbox61" type="checkbox" value="1">
-            <label for="checkbox61"> Checkbox 1 </label>
+        <div class="popover-header-title">
+            <span class="btn btn-red" style="float:right;" data-toggle="popover"><i class="fa fa-times fa fa-white" onclick="closeProjectSubjectpopup(this, ${ data[0].Seq });"></i></span>
+            <h3>Project Subjects</h3>
         </div>
+        # for (var i = 0; i < data.length; i++) { #
         <div class="checkbox clip-check check-success">
-            <input id="checkbox71" type="checkbox" value="1">
-            <label for="checkbox71"> Checkbox 2 </label>
+            # if (data[i].Selected ) { #
+            <input id="checkbox_${ data[i].Subject_Id }" type="checkbox" value="${ data[i].Subject_Id }" checked="checked" onclick="updateSubjectsArray(this, ${ data[i].Seq });">
+            # } else { #
+            <input id="checkbox_${ data[i].Subject_Id }" type="checkbox" value="${ data[i].Subject_Id }" onclick="updateSubjectsArray(this, ${ data[i].Seq });">
+            # } #
+            <label for="checkbox_${ data[i].Subject_Id }"> ${ data[i].Name } </label>
         </div>
-        <div class="checkbox clip-check check-success">
-            <input id="checkbox81" type="checkbox" value="1">
-            <label for="checkbox81"> Checkbox 3 </label>
-        </div>
+        # } #
+
     </div>
 </script>
 <div id="dilgWndow">
 </div>
 <!-- end: Template Area -->
-
-
 
 <style>
     #TeamContainer .mix {

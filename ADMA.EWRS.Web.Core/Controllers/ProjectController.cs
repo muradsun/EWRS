@@ -101,6 +101,17 @@ namespace ADMA.EWRS.Web.Core.Controllers
                 return GetJSONResult(temp.TransformToTemplateWizardStepView(), false, _pm.BusinessErrors.Distinct());
         }
 
+        [HttpPost]
+        public JsonResult SaveTeamModelWizardStep([FromBody] TemplateWizardStepView templateWizardStepView)
+        {
+            var temp = _pm.ExtractTemplate(templateWizardStepView, CurrentUser);
+            if (_pm.SaveTemplate(temp))
+                return GetJSONResult(temp.TransformToTemplateWizardStepView());
+            else
+                return GetJSONResult(temp.TransformToTemplateWizardStepView(), false, _pm.BusinessErrors.Distinct());
+        }
+
+
         public JsonResult SearchOrganizationHierarchy(string filter)
         {
             var orgList = _pm.SearchOrganizationHierarchy(filter);

@@ -65,7 +65,7 @@ function CollectProjInfoStepInfo() {
 //Start Template Wizard Step :: Step 2
 //===============================================
 
-function validateForm() {
+function validateTemplateForm() {
     var valElm = null;
     var isValidForm = true;
 
@@ -95,15 +95,13 @@ function validateForm() {
 }
 
 function SaveTemplateWizardStep() {
-    debugger;
-    if (!validateForm())
+    if (!validateTemplateForm())
         return false;
 
     var pData = CollectTempStepInfo();
     $.ajax({
         url: "/Project/SaveTemplateWizardStep",
         success: function (result) {
-            debugger;
             if (result.success) {
                 $("#hdnTemplateId").val(result.data.template_Id); //Template_Id
                 $.each(result.data.subjects, function (index, value) {
@@ -111,7 +109,6 @@ function SaveTemplateWizardStep() {
                 });
 
                 //Move forward
-                $('#wizard').smartWizard("goToStep", 3);
                 UINotifications.ShowToast("success", "Your Template [ " + result.data.name + " ] Saved Successful.", "Saved Successfully");
 
             } else {
@@ -202,8 +199,6 @@ function bindDatePicker(isNew) {
 }
 
 $(document).ready(function () {
-    $('#wizard').smartWizard("goToStep", 2);
-
     bindDatePicker(false);
 
     $("#btnstep2AddSubj").click(function () {
@@ -244,11 +239,9 @@ $(document).ready(function () {
 
 });
 
-
 //===============================================
 //End 
 //===============================================
-
 
 //===============================================
 //Start Team Model Wizard Step :: Step 3
@@ -257,6 +250,8 @@ var activeElm = null;
 var mainWindow = null;
 
 $(document).ready(function () {
+    $('#wizard').smartWizard("goToStep", 3);
+
     MixDataUp();
 
     $("#dilgWndow").kendoWindow({
@@ -271,22 +266,13 @@ $(document).ready(function () {
         ],
         modal: true,
         close: onWinClose,
-        iframe: true
+        iframe: true,
+
     });
 
     //Cache it
     mainWindow = $("#dilgWndow").data("kendoWindow");
 
-    //Unit Test 1
-    //var data = [];
-    //for (var i = 0; i < 20; i++) {
-    //    data[i] = {};
-    //    data[i].ItemId = i;
-    //    data[i].ItemType = i == 0 ? 1 : 2;
-    //    data[i].Name = "Murad " + i;
-    //    data[i].Icon = "/images/form/User_male.png";
-    //}
-    //loadAddedUsersGroups(data);
 });
 
 function onWinClose() {
@@ -337,7 +323,7 @@ function loadAddedUsersGroups(addUsersGroupsView) {
         data[index].SequenceNo = index;
         data[index].Project_Id = 0;
         data[index].IsProjectLevel = true;
-        data[index].SubjectsArray = "aaaa";
+        data[index].SubjectsArray = "";
         data[index].Icon = value.Icon;
         data[index].Name = value.Name;
     });
@@ -391,16 +377,72 @@ function deleteTM(itemClicked) {
     }
 }
 
+function updateSubjectsArray(chkSubject, seqNo) {
+    var hdnSubjectArray = $("#hdnSubjectArray_" + seqNo).val().split(",");
+
+    //Add it
+    if (chkSubject.checked) {
+        if (!$.inArray(chkSubject.value, hdnSubjectArray) > -1)
+            hdnSubjectArray[hdnSubjectArray.length] = chkSubject.value;
+    } else {
+        //Remove it 
+        if ($.inArray(chkSubject.value, hdnSubjectArray) > -1) {
+            hdnSubjectArray = jQuery.grep(hdnSubjectArray, function (value) {
+                return value != chkSubject.value;
+            });
+        }
+    }
+
+    $("#hdnSubjectArray_" + seqNo).val(hdnSubjectArray.join());
+}
+
+function closeProjectSubjectpopup(popupElm, seqNo) {
+    $("*[data-seqNo='" + seqNo + "']").click();
+
+    //$('body').on('click', function (e) {
+    //    $('[data-toggle=popover]').each(function () {
+    //        // hide any open popovers when the anywhere else in the body is clicked
+    //        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+    //            $(this).popover('hide');
+    //        }
+    //    });
+    //});
+}
+
+function isTeamModalSelected(subjectArray, subjectId) {
+    if (subjectArray.length > 0)
+        return jQuery.inArray(subjectId, subjectArray) > -1;
+    else
+        return false;
+}
+
 function loadSubj4TeamModel(elm, seqNo) {
-    var jElm = $(elm);
-    activeElm = jElm;
-    //var rElm = jElm.closest(".radio").find("input");
+    var specificSubjectElm = $(elm),
+        hdnSubjectArray = null,
+        subjectArray;
+
+    //get Selected Subjects List 
+    hdnSubjectArray = specificSubjectElm.find("#hdnSubjectArray_" + seqNo).val();
+    subjectArray = hdnSubjectArray.split(",");
+
+    //Get Subjects Data 
+    var subjectsList = [];
+    $(".txtSubject").each(function (index) {
+        subjElm = $(this);
+        subSeqNo = subjElm.attr("id").split("_")[1];
+        subjectsList[index] = {};
+        subjectsList[index].Subject_Id = $("#hdnSubjectId_" + subSeqNo).val();
+        subjectsList[index].Name = subjElm.val();
+        subjectsList[index].Selected = isTeamModalSelected(subjectArray, subjectsList[index].Subject_Id);
+        subjectsList[index].Seq = seqNo;
+
+    });
 
     //bind JSON to template
-    var scriptTemplate = kendo.template($("#teamSubjects-template").html());
-    var subjHTML = scriptTemplate({});
+    var scriptTemplate = kendo.template($("#teamModelSubjects-template").html());
+    var subjHTML = scriptTemplate(subjectsList);
 
-    jElm.attr("data-content", subjHTML);
+    specificSubjectElm.attr("data-content", subjHTML);
 }
 
 function tmSubjectSelect() {
@@ -416,7 +458,78 @@ function showAddDlg() {
     else
         myWindow = $("#dilgWndow").data("kendoWindow");
 
+    myWindow.refresh({
+        url: "/Account/SearchUsersGroups"
+    });
+
     myWindow.center().open();
+}
+
+function validateTeamModalForm() {
+    var updaterFound = false;
+    //At least one and the one is updater
+    $.each($(".mix .cs-select :checked"), function (i, v) {
+        if ($.trim(v.value.toLowerCase()) == "updater")
+            updaterFound = true;
+    });
+
+    if (!updaterFound) {
+        alert("At least one updater is required");
+    }
+
+    return updaterFound;
+}
+
+
+function SaveTeamModelWizardStep() {
+    if (!validateTeamModalForm())
+        return false;
+
+    var pData = CollectTeamModelData()();
+    //$.ajax({
+    //    url: "/Project/SaveTemplateWizardStep",
+    //    success: function (result) {
+    //        if (result.success) {
+    //            $("#hdnTemplateId").val(result.data.template_Id); //Template_Id
+    //            $.each(result.data.subjects, function (index, value) {
+    //                $("#hdnSubjectId_" + value.sequenceNo).val(value.subject_Id);
+    //            });
+
+    //            //Move forward
+    //            UINotifications.ShowToast("success", "Your Template [ " + result.data.name + " ] Saved Successful.", "Saved Successfully");
+
+    //        } else {
+    //            //Optimize error codes 
+    //            jQuery.each(result.businessErrors, function (i, val) {
+    //                result.businessErrors[i].entityName = val.entityName.indexOf("Models.Project") > 0 ? "Project Info Step" : val.entityName;
+    //                //result.businessErrors[i].errorMessage = 
+    //                result.businessErrors[i].propertyName = val.propertyName.indexOf("PercentComplete") > 0 ? "Percent Complete" : val.propertyName;
+    //            });
+
+    //            //Get Error Template and show it on dialog modal 
+    //            var scriptTemplate = kendo.template($("#modal-template").html());
+    //            var subjHTML = scriptTemplate(result.businessErrors);
+    //            FormWizardCommon.ShowAjaxModal(subjHTML);
+    //        }
+
+
+    //    },
+    //    cache: false,
+    //    error: function (xhr, status, error) {
+    //        UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Failed");
+    //    },
+    //    type: "POST",
+    //    data: JSON.stringify(pData),
+    //    contentType: "application/json"
+    //});
+
+    //return true;
+
+}
+
+function CollectTeamModelData() {
+    var templateWizardStepView = x.Subjects = [];
+
 }
 
 //===============================================

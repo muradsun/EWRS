@@ -28,8 +28,6 @@ var FormWizard = function () {
     var numberOfSteps = $('.swMain > ul > li').length;
 
     var initWizard = function () {
-
-
         // function to initiate Wizard Form
         wizardContent.smartWizard({
             // Check this: jquery.smartWizard.js https://github.com/mstratman/jQuery-Smart-Wizard/blob/master/README.md
@@ -61,6 +59,13 @@ var FormWizard = function () {
             e.preventDefault();
             SaveTemplateWizardStep();
         });
+
+        //Create Team Model  : Step 3
+        $("#btnTeamModelStep").click(function (e) {
+            e.preventDefault();
+            SaveTeamModelWizardStep();
+        });
+
 
     }; //end initWizard
 
@@ -216,7 +221,6 @@ var FormWizard = function () {
     return {
         init: function () {
             initWizard();
-
         }
     };
 }();

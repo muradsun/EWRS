@@ -8441,7 +8441,6 @@ fieldset {
 .form-control::-moz-placeholder {
     color: #9b9b9f;
     opacity: 1;
-
 }
 
 .form-control:-ms-input-placeholder {
@@ -18219,4 +18218,10 @@ figure.effect-goliath {
 
 .modal-header-title {
     background-color: #e5e5e5;
+}
+
+.popover-header-title {
+    background-color: #e5e5e5;
+    padding: 5px;
+    margin-right: 30%;
 }
