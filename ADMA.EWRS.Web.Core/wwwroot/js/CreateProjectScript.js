@@ -396,19 +396,6 @@ function updateSubjectsArray(chkSubject, seqNo) {
     $("#hdnSubjectArray_" + seqNo).val(hdnSubjectArray.join());
 }
 
-function closeProjectSubjectpopup(popupElm, seqNo) {
-    $("*[data-seqNo='" + seqNo + "']").click();
-
-    //$('body').on('click', function (e) {
-    //    $('[data-toggle=popover]').each(function () {
-    //        // hide any open popovers when the anywhere else in the body is clicked
-    //        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-    //            $(this).popover('hide');
-    //        }
-    //    });
-    //});
-}
-
 function isTeamModalSelected(subjectArray, subjectId) {
     if (subjectArray.length > 0)
         return jQuery.inArray(subjectId, subjectArray) > -1;
@@ -442,7 +429,7 @@ function loadSubj4TeamModel(elm, seqNo) {
     var scriptTemplate = kendo.template($("#teamModelSubjects-template").html());
     var subjHTML = scriptTemplate(subjectsList);
 
-    specificSubjectElm.attr("data-content", subjHTML);
+    $("#projSubjectsBody").html(subjHTML);
 }
 
 function tmSubjectSelect() {

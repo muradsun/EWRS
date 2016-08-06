@@ -123,7 +123,7 @@
                         # } else { #
                         <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo + 100 }" type="radio" value="radio4" class="radioElm">
                         # } #
-                        <label data-seqNo="${ data[i].SequenceNo }" onclick="loadSubj4TeamModel(this, ${ data[i].SequenceNo });" data-TMSubjects="" for="radio_${ data[i].SequenceNo + 100 }" class="cl-effect-3 links block margin-top-10 uppercase text-dark text-uppercase text-bold text-extra-small" aria-describedby="popover303618" data-original-title="" data-toggle="popover" data-placement="top" data-html="true">
+                        <label onclick="loadSubj4TeamModel(this, ${ data[i].SequenceNo });" for="radio_${ data[i].SequenceNo + 100 }" data-toggle="modal" data-target=".subjects-modal-right">
                             Specific Subject
                             <i class="padding-left-5 fa fa-angle-right"></i>
                             <input type="hidden" id="hdnSubjectArray_${ data[i].SequenceNo }" value="${ data[i].SubjectsArray }" />
@@ -136,26 +136,43 @@
     # } #
 </script>
 <script id="teamModelSubjects-template" type="text/x-kendo-template">
-    <div style="width:350px">
-        <div class="popover-header-title">
-            <span class="btn btn-red" style="float:right;" data-toggle="popover"><i class="fa fa-times fa fa-white" onclick="closeProjectSubjectpopup(this, ${ data[0].Seq });"></i></span>
-            <h3>Project Subjects</h3>
-        </div>
-        # for (var i = 0; i < data.length; i++) { #
-        <div class="checkbox clip-check check-success">
-            # if (data[i].Selected ) { #
-            <input id="checkbox_${ data[i].Subject_Id }" type="checkbox" value="${ data[i].Subject_Id }" checked="checked" onclick="updateSubjectsArray(this, ${ data[i].Seq });">
-            # } else { #
-            <input id="checkbox_${ data[i].Subject_Id }" type="checkbox" value="${ data[i].Subject_Id }" onclick="updateSubjectsArray(this, ${ data[i].Seq });">
-            # } #
-            <label for="checkbox_${ data[i].Subject_Id }"> ${ data[i].Name } </label>
-        </div>
+    # for (var i = 0; i < data.length; i++) { #
+    <div class="checkbox check-md  clip-check check-success">
+        # if (data[i].Selected ) { #
+        <input id="checkbox_${ data[i].Subject_Id }" type="checkbox" value="${ data[i].Subject_Id }" checked="checked" onclick="updateSubjectsArray(this, ${ data[i].Seq });">
+        # } else { #
+        <input id="checkbox_${ data[i].Subject_Id }" type="checkbox" value="${ data[i].Subject_Id }" onclick="updateSubjectsArray(this, ${ data[i].Seq });">
         # } #
-
+        <label for="checkbox_${ data[i].Subject_Id }"> <h4> ${ data[i].Name } </h4></label>
     </div>
+    # } #
 </script>
 <div id="dilgWndow">
 </div>
+
+<!-- Right Aside -->
+<div class="modal fade modal-aside horizontal right subjects-modal-right" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Project Subjects</h4>
+            </div>
+            <div class="modal-body" id="projSubjectsBody">
+                << Modal Content >>
+            </div>
+            <div class="modal-footer text-left">
+                <button type="button" class="btn btn-red btn-o" data-dismiss="modal">
+                    <i class="fa fa-times fa fa-white"></i>
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Right Aside -->
 <!-- end: Template Area -->
 
 <style>
