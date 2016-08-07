@@ -95,6 +95,7 @@
     <Compile Include="ViewModel\OrganizationHierarchyView.cs" />
     <Compile Include="ViewModel\PageInfo.cs" />
     <Compile Include="ViewModel\SubjectWizardStepView.cs" />
+    <Compile Include="ViewModel\TeamModelSubjectView.cs" />
     <Compile Include="ViewModel\TeamModeWizardStepView.cs" />
     <Compile Include="ViewModel\TemplateWizardStepView.cs" />
     <Compile Include="ViewModel\ProjectInfoWizardStepView.cs" />

@@ -83,7 +83,7 @@
 <!-- start: Template Area  -->
 <script id="team-template" type="text/x-kendo-template">
     # for (var i = 0; i < data.length; i++) { #
-    <div class="mix ${ data[i].UpdateText } col-sm-6 col-md-3" data-my-order="data[i].Name">
+    <div class="mix ${ data[i].UpdateText } col-sm-6 col-md-3" data-my-order="data[i].Name" data-tm-order="${ data[i].SequenceNo }">
         <div class="thumbnail thumbnail-${ data[i].UpdateText }">
             <div class="row">
                 <div class="col-md-3 no-space text-right">
@@ -93,6 +93,9 @@
                 </div>
                 <div class="col-md-6 " align="center">
                     <img class="img-responsive img-card" alt="" src="${ data[i].Icon }">
+                    <input type="hidden" class="hdnUserId" value="${ data[i].User_Id }" />
+                    <input type="hidden" class="hdnGroupId" value="${ data[i].Group_Id }" />
+                    <input type="hidden" class="hdnTeamModelId" value="${ data[i].TeamModel_Id }" />
                 </div>
             </div>
             <div class="padding-20 height-180 thumbnail-card">
@@ -111,22 +114,22 @@
                 <div class="form-group">
                     <div class="radio clip-radio radio-primary no-space">
                         # if(data[i].IsProjectLevel) { #
-                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo }" type="radio" checked="checked" class="radioElm">
+                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo }" type="radio" checked="checked" class="radioElm" value="PL">
                         # } else { #
-                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo }" type="radio" class="radioElm">
+                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo }" type="radio" class="radioElm" value="PL">
                         # } #
                         <label for="radio_${ data[i].SequenceNo }"> Project Level</label>
                     </div>
                     <div class="radio clip-radio radio-primary no-space">
                         # if(! data[i].IsProjectLevel) { #
-                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo + 100 }" type="radio" value="radio4" class="radioElm" checked="checked">
+                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo + 100 }" type="radio" value="SS" class="radioElm" checked="checked" >
                         # } else { #
-                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo + 100 }" type="radio" value="radio4" class="radioElm">
+                        <input name="vertical_${ data[i].SequenceNo }" id="radio_${ data[i].SequenceNo + 100 }" type="radio" value="SS" class="radioElm">
                         # } #
                         <label onclick="loadSubj4TeamModel(this, ${ data[i].SequenceNo });" for="radio_${ data[i].SequenceNo + 100 }" data-toggle="modal" data-target=".subjects-modal-right">
                             Specific Subject
                             <i class="padding-left-5 fa fa-angle-right"></i>
-                            <input type="hidden" id="hdnSubjectArray_${ data[i].SequenceNo }" value="${ data[i].SubjectsArray }" />
+                            <input type="hidden" class="hdnSubjectArray" id="hdnSubjectArray_${ data[i].SequenceNo }" value="${ data[i].SubjectsArray }" />
                         </label>
                     </div>
                 </div>

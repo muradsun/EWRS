@@ -102,13 +102,16 @@ namespace ADMA.EWRS.Web.Core.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveTeamModelWizardStep([FromBody] TemplateWizardStepView templateWizardStepView)
+        public JsonResult SaveTeamModelWizardStep([FromBody] List<TeamModeWizardStepView> teamModeWizardStepView)
         {
-            var temp = _pm.ExtractTemplate(templateWizardStepView, CurrentUser);
-            if (_pm.SaveTemplate(temp))
-                return GetJSONResult(temp.TransformToTemplateWizardStepView());
-            else
-                return GetJSONResult(temp.TransformToTemplateWizardStepView(), false, _pm.BusinessErrors.Distinct());
+            var temp = _pm.ExtractTeamModel(teamModeWizardStepView, CurrentUser);
+            //if (_pm.SaveTemplate(temp))
+            //    return GetJSONResult(temp.TransformToTemplateWizardStepView());
+            //else
+            //    return GetJSONResult(temp.TransformToTemplateWizardStepView(), false, _pm.BusinessErrors.Distinct());
+
+            return GetJSONResult(1);
+
         }
 
 

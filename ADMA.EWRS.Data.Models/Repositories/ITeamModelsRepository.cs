@@ -8,6 +8,8 @@ namespace ADMA.EWRS.Data.Models.Repositories
 {
     public interface ITeamModelsRepository : IRepository<TeamModel>
     {
-        ICollection<TeamModel> GetTeamModel(int projectId);
+        ICollection<TeamModel> GetTeamModelByProjectId(int projectId);
+        TeamModel GetTeamModel(int teamModelId, bool inlcudeTeamModelSubjects);
+
     }
 }

@@ -200,9 +200,6 @@ function bindDatePicker(isNew) {
 }
 
 $(document).ready(function () {
-    $('#wizard').smartWizard("goToStep", 4);
-
-
     bindDatePicker(false);
 
     $("#btnstep2AddSubj").click(function () {
@@ -240,7 +237,6 @@ $(document).ready(function () {
         //    }
         //});
     })
-
 });
 
 //===============================================
@@ -254,7 +250,7 @@ var activeElm = null;
 var mainWindow = null;
 
 $(document).ready(function () {
-    //$('#wizard').smartWizard("goToStep", 3);
+   // $('#wizard').smartWizard("goToStep", 3);
 
     MixDataUp();
 
@@ -276,7 +272,6 @@ $(document).ready(function () {
 
     //Cache it
     mainWindow = $("#dilgWndow").data("kendoWindow");
-
 });
 
 function onWinClose() {
@@ -303,13 +298,21 @@ function MixDataUp() {
 }
 
 function loadAddedUsersGroups(addUsersGroupsView) {
-    var teamCont = $('#TeamContainer');
+    var teamCont = $('#TeamContainer'),
+        maxSeq = 0,
+        currentSeq;
 
     if (teamCont.find(".panel-heading").length > 0)
         teamCont.html("");
 
     $('#TeamContainer').mixItUp('destroy');
     var scriptTemplate = kendo.template($("#team-template").html());
+
+    $(".mix").each(function (i, el) {
+        currentSeq = parseInt($(el).attr("data-tm-order"));
+        if (currentSeq > maxSeq)
+            maxSeq = currentSeq;
+    });
 
     //Construct Data Object
     var data = [];
@@ -319,13 +322,18 @@ function loadAddedUsersGroups(addUsersGroupsView) {
         if (value.ItemType == 1) //"chkUser" ? 1
         {
             data[index].User_Id = value.ItemId;
+            data[index].Group_Id = -1;
+
         } else {
             data[index].Group_Id = value.ItemId;
+            data[index].User_Id = -1;
+
         }
         data[index].IsUpdater = false;
         data[index].UpdateText = "viewer"; //viewer OR updater
-        data[index].SequenceNo = index;
-        data[index].Project_Id = 0;
+        maxSeq = maxSeq + 1;
+        data[index].SequenceNo = maxSeq;
+        data[index].Project_Id = $("#hdnProjectId").val();
         data[index].IsProjectLevel = true;
         data[index].SubjectsArray = "";
         data[index].Icon = value.Icon;
@@ -426,7 +434,6 @@ function loadSubj4TeamModel(elm, seqNo) {
         subjectsList[index].Name = subjElm.val();
         subjectsList[index].Selected = isTeamModalSelected(subjectArray, subjectsList[index].Subject_Id);
         subjectsList[index].Seq = seqNo;
-
     });
 
     //bind JSON to template
@@ -434,11 +441,6 @@ function loadSubj4TeamModel(elm, seqNo) {
     var subjHTML = scriptTemplate(subjectsList);
 
     $("#projSubjectsBody").html(subjHTML);
-}
-
-function tmSubjectSelect() {
-    //data-TMSubjects
-
 }
 
 function showAddDlg() {
@@ -471,56 +473,86 @@ function validateTeamModalForm() {
     return updaterFound;
 }
 
-
 function SaveTeamModelWizardStep() {
     if (!validateTeamModalForm())
         return false;
 
-    var pData = CollectTeamModelData()();
-    //$.ajax({
-    //    url: "/Project/SaveTemplateWizardStep",
-    //    success: function (result) {
-    //        if (result.success) {
-    //            $("#hdnTemplateId").val(result.data.template_Id); //Template_Id
-    //            $.each(result.data.subjects, function (index, value) {
-    //                $("#hdnSubjectId_" + value.sequenceNo).val(value.subject_Id);
-    //            });
+    var pData = CollectTeamModelData();
+    $.ajax({
+        url: "/Project/SaveTeamModelWizardStep",
+        success: function (result) {
+            if (result.success) {
+                debugger;
 
-    //            //Move forward
-    //            UINotifications.ShowToast("success", "Your Template [ " + result.data.name + " ] Saved Successful.", "Saved Successfully");
+                //$("#hdnTemplateId").val(result.data.template_Id); //Template_Id
+                //$.each(result.data.subjects, function (index, value) {
+                //    $("#hdnSubjectId_" + value.sequenceNo).val(value.subject_Id);
+                //});
 
-    //        } else {
-    //            //Optimize error codes 
-    //            jQuery.each(result.businessErrors, function (i, val) {
-    //                result.businessErrors[i].entityName = val.entityName.indexOf("Models.Project") > 0 ? "Project Info Step" : val.entityName;
-    //                //result.businessErrors[i].errorMessage = 
-    //                result.businessErrors[i].propertyName = val.propertyName.indexOf("PercentComplete") > 0 ? "Percent Complete" : val.propertyName;
-    //            });
+                ////Move forward
+                //UINotifications.ShowToast("success", "Your Template [ " + result.data.name + " ] Saved Successful.", "Saved Successfully");
 
-    //            //Get Error Template and show it on dialog modal 
-    //            var scriptTemplate = kendo.template($("#modal-template").html());
-    //            var subjHTML = scriptTemplate(result.businessErrors);
-    //            FormWizardCommon.ShowAjaxModal(subjHTML);
-    //        }
+            } else {
+                //jQuery.each(result.businessErrors, function (i, val) {
+                //    result.businessErrors[i].entityName = val.entityName.indexOf("Models.Project") > 0 ? "Project Info Step" : val.entityName;
+                //    //result.businessErrors[i].errorMessage = 
+                //    result.businessErrors[i].propertyName = val.propertyName.indexOf("PercentComplete") > 0 ? "Percent Complete" : val.propertyName;
+                //});
 
+                //Get Error Template and show it on dialog modal 
+                var scriptTemplate = kendo.template($("#modal-template").html());
+                var subjHTML = scriptTemplate(result.businessErrors);
+                FormWizardCommon.ShowAjaxModal(subjHTML);
+            }
+        },
+        cache: false,
+        error: function (xhr, status, error) {
+            UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Failed");
+        },
+        type: "POST",
+        data: JSON.stringify(pData),
+        contentType: "application/json"
+    });
 
-    //    },
-    //    cache: false,
-    //    error: function (xhr, status, error) {
-    //        UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Failed");
-    //    },
-    //    type: "POST",
-    //    data: JSON.stringify(pData),
-    //    contentType: "application/json"
-    //});
-
-    //return true;
-
+    return true;
 }
 
 function CollectTeamModelData() {
-    var templateWizardStepView = x.Subjects = [];
+    var teamModeWizardStepView = [];
 
+    var mixDiv = null,
+        groupId,
+        userId;
+
+    $.each($(".mix"), function (i, vElm) {
+        mixDiv = $(vElm);
+
+        teamModeWizardStepView[i] = {};
+
+        groupId = mixDiv.find(".hdnGroupId").val();
+        userId = mixDiv.find(".hdnUserId").val();
+        teamModeWizardStepView[i].Group_Id = groupId;
+        teamModeWizardStepView[i].User_Id = userId;
+
+        teamModeWizardStepView[i].SequenceNo = 0;
+        teamModeWizardStepView[i].IsUpdater = $.trim(mixDiv.find(".cs-select :checked").val().toLowerCase()) == "updater";
+        teamModeWizardStepView[i].Project_Id = $("#hdnProjectId").val();
+        teamModeWizardStepView[i].TeamModel_Id = mixDiv.find(".hdnTeamModelId").val();
+        teamModeWizardStepView[i].IsProjectLevel = mixDiv.find("input[type=radio]:checked").val() == "PL";
+
+        teamModeWizardStepView[i].Subjects = [];
+
+        var iX = 0;
+        $.each(mixDiv.find(".hdnSubjectArray").val().split(","), function (index, item) {
+            if ($.trim(item) != "") {
+                teamModeWizardStepView[i].Subjects[iX] = {};
+                teamModeWizardStepView[i].Subjects[iX].Subject_Id = item;
+                iX = iX + 1;
+            }
+        });
+    });
+
+    return teamModeWizardStepView;
 }
 
 //===============================================

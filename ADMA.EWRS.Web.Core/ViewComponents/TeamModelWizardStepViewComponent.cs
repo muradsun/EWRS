@@ -28,6 +28,7 @@ namespace ADMA.EWRS.Web.Core.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(int projectId)
         {
+            //TeamModeWizardStepView
             List<TeamModel> team = _pm.GetTeamModelOrDefualt(projectId);
             uint seq = 0;
             return View("~/Views/Project/Components/TeamModelWizardStep.cshtml",
@@ -38,17 +39,19 @@ namespace ADMA.EWRS.Web.Core.ViewComponents
                         IsUpdater = t.IsUpdater,
                         Project_Id = t.Project_Id,
                         TeamModel_Id = t.TeamModel_Id,
-                        SequenceNo = ++seq
+                        SequenceNo = ++seq,
+                        IsProjectLevel = t.IsProjectLevel,
+                        Subjects = t.TeamModelSubjects.Select(
+                                        s => new TeamModelSubjectView()
+                                        {
+                                            Subject_Id = s.Subject_Id,
+                                            TeamModelSubjects_Id = s.TeamModelSubjects_Id,
+                                            TeamModel_Id = s.TeamModel_Id
+                                        }
+                                   ).ToList()
                     }).ToList<TeamModeWizardStepView>()
                 );
         }
-
-        //private Task<List<Project>> GetItemsAsync(int maxPriority, bool isDone)
-        //{
-        //    return await _pm.GetProjects(_currentUser.UserId, null);
-        //    //return db.ToDo.Where(x => x.IsDone == isDone &&
-        //    //                     x.Priority <= maxPriority).ToListAsync();
-        //}
 
     }
 }

@@ -52,6 +52,10 @@ namespace ADMA.EWRS.BizDomain
             return UnitOfWork.Templates.GetTemplate(templteId, true);
         }
 
+        public TeamModel GetTeamModel(int teamModelId)
+        {
+            return UnitOfWork.TeamModels.GetTeamModel(teamModelId, true);
+        }
 
         public Template GetTemplateOrDefualt(int projectId)
         {
@@ -72,7 +76,7 @@ namespace ADMA.EWRS.BizDomain
             if (projectId == 0)
                 return new List<TeamModel>();
             else
-                return UnitOfWork.TeamModels.GetTeamModel(projectId).ToList();
+                return UnitOfWork.TeamModels.GetTeamModelByProjectId(projectId).ToList();
         }
 
         public List<OrganizationHierarchy> SearchOrganizationHierarchy(string orgName)
@@ -157,7 +161,7 @@ namespace ADMA.EWRS.BizDomain
                 else
                     sub.EntityState = ModelState.Deleted;
             }
-            
+
             //Add the new items 
             temp.Subjects.AddRange(
                     templateWizardStepView.Subjects.Where(s => s.Subject_Id == 0).Select(s => new Subject()
@@ -263,6 +267,75 @@ namespace ADMA.EWRS.BizDomain
             }
 
         }
+
+        public List<TeamModel> ExtractTeamModel(List<TeamModeWizardStepView> teamModeWizardStepView, LoggedInUser currentUser)
+        {
+            List<TeamModel> teamList = new List<TeamModel>();
+            TeamModel team;
+
+            foreach (var item in teamModeWizardStepView)
+            {
+                if (item.TeamModel_Id == 0)
+                    team = new TeamModel();
+                else
+                    team = GetTeamModel(item.TeamModel_Id);
+            }
+
+            //temp.CreatedBy = temp.Template_Id > 0 ? temp.CreatedBy : currentUser.UserId.ToString();
+            //temp.CreatedDate = temp.Template_Id > 0 ? temp.CreatedDate : DateTime.Now;
+
+            //temp.UpdateBy = temp.Template_Id > 0 ? currentUser.UserId.ToString() : null;
+            //temp.UpdatedDate = temp.Template_Id > 0 ? DateTime.Now : (DateTime?)null;
+            //temp.Project_Id = templateWizardStepView.Project_Id;
+
+            //temp.Name = templateWizardStepView.Name;
+
+            ////Temp is old guy, has nothing to do with "Intercourse"...
+            //SubjectWizardStepView uiSubj = null;
+            //foreach (Subject sub in temp.Subjects)
+            //{
+            //    //1. Get UI Subject 
+            //    uiSubj = templateWizardStepView.Subjects.FirstOrDefault(s => s.Subject_Id == sub.Subject_Id);
+
+            //    //2. If UI Subject Exists - Update the DB subject otherwise it has been deleted 
+            //    if (uiSubj != null)
+            //    {
+            //        sub.DueDate = uiSubj.DueDate;
+            //        sub.Name = uiSubj.Name;
+            //        sub.IsMandatory = uiSubj.IsMandatory;
+            //        sub.SequenceNo = uiSubj.SequenceNo;
+            //        sub.UpdateBy = currentUser.UserId.ToString();
+            //        sub.UpdatedDate = DateTime.Now;
+            //        sub.EntityState = Data.Models.ModelState.Updated;
+            //    }
+            //    else
+            //        sub.EntityState = ModelState.Deleted;
+            //}
+
+            ////Add the new items 
+            //temp.Subjects.AddRange(
+            //        templateWizardStepView.Subjects.Where(s => s.Subject_Id == 0).Select(s => new Subject()
+            //        {
+            //            Template_Id = temp.Template_Id,
+            //            Project_Id = temp.Project_Id,
+            //            Subject_Id = s.Subject_Id,
+            //            DueDate = s.DueDate,
+            //            Name = s.Name,
+            //            IsMandatory = s.IsMandatory,
+            //            SequenceNo = s.SequenceNo,
+
+            //            CreatedBy = currentUser.UserId.ToString(),
+            //            CreatedDate = DateTime.Now,
+
+            //            SubjectStatus_Id = (int)Data.Models.Enums.SubjectStatusEnum.Draft, // Murad Fix
+            //            EntityState = Data.Models.ModelState.Added
+
+            //        }).ToList()
+            //    );
+
+            return teamList;
+        }
+
 
         #region Private Members 
 
