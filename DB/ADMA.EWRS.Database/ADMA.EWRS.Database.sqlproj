@@ -250,6 +250,7 @@
     <None Include="Scripts\Deployment\01 - Add Groups.sql" />
     <None Include="Compares\MuradHomeCompare.scmp" />
     <None Include="Scripts\HR_EMP_INFO_V_Data_Script.zip" />
+    <None Include="Scripts\Deployment\03 - Subject Statuses.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ADMA.EWRS.Database.refactorlog" />

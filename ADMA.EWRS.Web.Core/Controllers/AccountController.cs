@@ -128,5 +128,11 @@ namespace ADMA.EWRS.Web.Core.Controllers
             return View();
         }
 
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+
     }
 }

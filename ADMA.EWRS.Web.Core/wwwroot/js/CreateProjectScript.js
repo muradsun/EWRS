@@ -110,6 +110,7 @@ function SaveTemplateWizardStep() {
 
                 //Move forward
                 UINotifications.ShowToast("success", "Your Template [ " + result.data.name + " ] Saved Successful.", "Saved Successfully");
+                $('#wizard').smartWizard("goToStep", 3);
 
             } else {
                 //Optimize error codes 
@@ -199,6 +200,9 @@ function bindDatePicker(isNew) {
 }
 
 $(document).ready(function () {
+    $('#wizard').smartWizard("goToStep", 4);
+
+
     bindDatePicker(false);
 
     $("#btnstep2AddSubj").click(function () {
@@ -250,7 +254,7 @@ var activeElm = null;
 var mainWindow = null;
 
 $(document).ready(function () {
-    $('#wizard').smartWizard("goToStep", 3);
+    //$('#wizard').smartWizard("goToStep", 3);
 
     MixDataUp();
 
