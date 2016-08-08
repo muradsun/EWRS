@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ADMA.EWRS.Data.Models
 {
-    public partial class TeamModel
+    public partial class TeamModel: BaseModel
     {
         public TeamModel()
         {
@@ -29,6 +29,6 @@ namespace ADMA.EWRS.Data.Models
         public  User User { get; set; }
         public  Group Group { get; set; }
         public  Project Project { get; set; }
-        public  ICollection<TeamModelSubject> TeamModelSubjects { get; set; }
+        public  List<TeamModelSubject> TeamModelSubjects { get; set; }
     }
 }

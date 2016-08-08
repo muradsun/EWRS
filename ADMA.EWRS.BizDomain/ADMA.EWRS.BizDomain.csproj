@@ -48,6 +48,7 @@
     <Compile Include="BaseManager.cs" />
     <Compile Include="Configurations\ConfigurationsManager.cs" />
     <Compile Include="Configurations\Instance.cs" />
+    <Compile Include="Engine\TeamModelEngine.cs" />
     <Compile Include="Engine\TemplateEngine.cs" />
     <Compile Include="Engine\ProjectsEngine.cs" />
     <Compile Include="MuradManager.cs" />

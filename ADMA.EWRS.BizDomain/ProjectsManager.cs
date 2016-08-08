@@ -57,6 +57,11 @@ namespace ADMA.EWRS.BizDomain
             return UnitOfWork.TeamModels.GetTeamModel(teamModelId, true);
         }
 
+        public List<TeamModel> GetTeamModelCollection(int projectId)
+        {
+            return UnitOfWork.TeamModels.GetTeamModelCollection(projectId).ToList();
+        }
+
         public Template GetTemplateOrDefualt(int projectId)
         {
             if (projectId == 0)
@@ -76,7 +81,7 @@ namespace ADMA.EWRS.BizDomain
             if (projectId == 0)
                 return new List<TeamModel>();
             else
-                return UnitOfWork.TeamModels.GetTeamModelByProjectId(projectId).ToList();
+                return UnitOfWork.TeamModels.GetTeamModelCollection(projectId).ToList();
         }
 
         public List<OrganizationHierarchy> SearchOrganizationHierarchy(string orgName)
@@ -270,70 +275,132 @@ namespace ADMA.EWRS.BizDomain
 
         public List<TeamModel> ExtractTeamModel(List<TeamModeWizardStepView> teamModeWizardStepView, LoggedInUser currentUser)
         {
-            List<TeamModel> teamList = new List<TeamModel>();
-            TeamModel team;
+            //Load Project Team Models
+            List<TeamModel> dbTeamModel = GetTeamModelCollection(teamModeWizardStepView[0].Project_Id);
+            TeamModeWizardStepView teamView;
+            TeamModelSubjectView teamSubject;
 
-            foreach (var item in teamModeWizardStepView)
+            //Updated and Deleted
+            foreach (var item in dbTeamModel)
             {
-                if (item.TeamModel_Id == 0)
-                    team = new TeamModel();
+                teamView = teamModeWizardStepView.FirstOrDefault(t => t.TeamModel_Id == item.TeamModel_Id);
+                if (teamView == null) //Deleted 
+                    item.EntityState = ModelState.Deleted;
                 else
-                    team = GetTeamModel(item.TeamModel_Id);
+                {
+                    //Updated
+                    item.EntityState = ModelState.Updated;
+
+                    item.UpdateBy = currentUser.UserId.ToString();
+                    item.UpdatedDate = DateTime.Now;
+                    item.IsProjectLevel = teamView.IsProjectLevel;
+                    item.IsUpdater = teamView.IsUpdater;
+                    item.Name = "";
+
+                    foreach (TeamModelSubject tSub in item.TeamModelSubjects)
+                    {
+                        teamSubject = teamView.Subjects.FirstOrDefault(s => s.Subject_Id == tSub.Subject_Id);
+                        if (tSub == null) //Deleted 
+                            tSub.EntityState = ModelState.Deleted;
+                        else
+                        {
+                            //Updated
+                            tSub.UpdateBy = currentUser.UserId.ToString();
+                            tSub.UpdatedDate = DateTime.Now;
+                        }
+                    }
+
+                    //Add the added 
+                    item.TeamModelSubjects.AddRange(
+                        teamView.Subjects.Where(s =>
+                               !item.TeamModelSubjects.Select(sX => sX.Subject_Id).Distinct().ToList().Contains(s.Subject_Id)
+                        ).Select(
+                            s => new TeamModelSubject()
+                            {
+                                CreatedBy = currentUser.UserId.ToString(),
+                                CreatedDate = DateTime.Now,
+                                UpdatedDate = (DateTime?)null,
+                                UpdateBy = null,
+                                EntityState = ModelState.Added,
+                                Subject_Id = s.Subject_Id,
+                                TeamModelSubjects_Id = 0,
+                                TeamModel_Id = item.TeamModel_Id
+
+                            }).ToList()
+                    );
+
+                }
             }
 
-            //temp.CreatedBy = temp.Template_Id > 0 ? temp.CreatedBy : currentUser.UserId.ToString();
-            //temp.CreatedDate = temp.Template_Id > 0 ? temp.CreatedDate : DateTime.Now;
+            //Add the added 
+            dbTeamModel.AddRange(
+                teamModeWizardStepView.Where(t => t.TeamModel_Id == 0)
+                .Select(
+                    t => new TeamModel()
+                    {
+                        CreatedBy = currentUser.UserId.ToString(),
+                        CreatedDate = DateTime.Now,
+                        EntityState = ModelState.Added,
+                        Group_Id = t.Group_Id == -1 ? (int?)null : t.Group_Id,
+                        IsProjectLevel = t.IsProjectLevel,
+                        IsUpdater = t.IsUpdater,
+                        Name = "",
+                        Project_Id = t.Project_Id,
+                        TeamModel_Id = t.TeamModel_Id,
+                        UpdateBy = null,
+                        UpdatedDate = (DateTime?)null,
+                        User_Id = t.User_Id == -1 ? (int?)null : t.User_Id,
+                        TeamModelSubjects =
+                            t.Subjects.Select(s => new TeamModelSubject()
+                            {
+                                CreatedBy = currentUser.UserId.ToString(),
+                                CreatedDate = DateTime.Now,
+                                Subject_Id = s.Subject_Id,
+                                TeamModelSubjects_Id = 0,
+                                TeamModel_Id = 0,
+                                UpdateBy = null,
+                                UpdatedDate = (DateTime?)null
+                            }).ToList()
+                    }).ToList()
+                );
 
-            //temp.UpdateBy = temp.Template_Id > 0 ? currentUser.UserId.ToString() : null;
-            //temp.UpdatedDate = temp.Template_Id > 0 ? DateTime.Now : (DateTime?)null;
-            //temp.Project_Id = templateWizardStepView.Project_Id;
 
-            //temp.Name = templateWizardStepView.Name;
 
-            ////Temp is old guy, has nothing to do with "Intercourse"...
-            //SubjectWizardStepView uiSubj = null;
-            //foreach (Subject sub in temp.Subjects)
-            //{
-            //    //1. Get UI Subject 
-            //    uiSubj = templateWizardStepView.Subjects.FirstOrDefault(s => s.Subject_Id == sub.Subject_Id);
+            return dbTeamModel;
+        }
 
-            //    //2. If UI Subject Exists - Update the DB subject otherwise it has been deleted 
-            //    if (uiSubj != null)
-            //    {
-            //        sub.DueDate = uiSubj.DueDate;
-            //        sub.Name = uiSubj.Name;
-            //        sub.IsMandatory = uiSubj.IsMandatory;
-            //        sub.SequenceNo = uiSubj.SequenceNo;
-            //        sub.UpdateBy = currentUser.UserId.ToString();
-            //        sub.UpdatedDate = DateTime.Now;
-            //        sub.EntityState = Data.Models.ModelState.Updated;
-            //    }
-            //    else
-            //        sub.EntityState = ModelState.Deleted;
-            //}
+        public bool SaveTeamModel(List<TeamModel> teamModel)
+        {
+            try
+            {
+                UnitOfWork.TeamModels.MarkSaveTeamModelWithSubjects(teamModel);
 
-            ////Add the new items 
-            //temp.Subjects.AddRange(
-            //        templateWizardStepView.Subjects.Where(s => s.Subject_Id == 0).Select(s => new Subject()
-            //        {
-            //            Template_Id = temp.Template_Id,
-            //            Project_Id = temp.Project_Id,
-            //            Subject_Id = s.Subject_Id,
-            //            DueDate = s.DueDate,
-            //            Name = s.Name,
-            //            IsMandatory = s.IsMandatory,
-            //            SequenceNo = s.SequenceNo,
+                var engine = new TeamModelEngine();
+                //Make Validation//
+                var errors = engine.Validate(teamModel, UnitOfWork);
+                if (errors != null && errors.Count() > 0)
+                {
+                    base.BusinessErrors = errors;
+                    return false;
+                }
 
-            //            CreatedBy = currentUser.UserId.ToString(),
-            //            CreatedDate = DateTime.Now,
+                UnitOfWork.Save();
 
-            //            SubjectStatus_Id = (int)Data.Models.Enums.SubjectStatusEnum.Draft, // Murad Fix
-            //            EntityState = Data.Models.ModelState.Added
+                return true;
+            }
+            catch (Framework.ExceptionHandling.ValidationException ex)
+            {
+                //Business validation Error
+                base.BusinessErrors = ex.ValidationErrors;
+                return false;
 
-            //        }).ToList()
-            //    );
+            }
+            catch (Exception ex)
+            {
 
-            return teamList;
+                throw;
+            }
+
         }
 
 
