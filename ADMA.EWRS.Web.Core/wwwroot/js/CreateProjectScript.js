@@ -250,7 +250,6 @@ var activeElm = null;
 var mainWindow = null;
 
 $(document).ready(function () {
-   // $('#wizard').smartWizard("goToStep", 3);
 
     MixDataUp();
 
@@ -298,15 +297,8 @@ function MixDataUp() {
 }
 
 function loadAddedUsersGroups(addUsersGroupsView) {
-    var teamCont = $('#TeamContainer'),
-        maxSeq = 0,
+    var maxSeq = 0,
         currentSeq;
-
-    if (teamCont.find(".panel-heading").length > 0)
-        teamCont.html("");
-
-    $('#TeamContainer').mixItUp('destroy');
-    var scriptTemplate = kendo.template($("#team-template").html());
 
     $(".mix").each(function (i, el) {
         currentSeq = parseInt($(el).attr("data-tm-order"));
@@ -340,23 +332,7 @@ function loadAddedUsersGroups(addUsersGroupsView) {
         data[index].Name = value.Name;
     });
 
-    var addedElm = $(scriptTemplate(data));
-    $("#TeamContainer").append(addedElm);
-
-    //Reload Custom selected
-    addedElm.find('.cs-select').each(function (index) {
-        var el = $(this)
-        new SelectFx(el[0], {
-            stickyPlaceholder: false,
-            onChange: function (val) {
-                selectChange(el, val);
-            }
-        });
-    });
-
-    addedElm.find('[data-toggle="popover"]').popover();
-
-    MixDataUp();
+    binTeamModelData(data, true);
 
     var myWindow = null;
 
@@ -368,6 +344,40 @@ function loadAddedUsersGroups(addUsersGroupsView) {
     //Main.init();
 
     myWindow.close();
+}
+
+function binTeamModelData(tmData, iniSel) {
+    var teamCont = $('#TeamContainer');
+
+    if (teamCont.find(".panel-heading").length > 0)
+        teamCont.html("");
+
+    try {
+        $('#TeamContainer').mixItUp('destroy');
+    } catch (e) {
+
+    }
+
+    var scriptTemplate = kendo.template($("#team-template").html());
+
+    var addedElm = $(scriptTemplate(tmData));
+    teamCont.append(addedElm);
+
+    //Reload Custom selected
+    if (iniSel) //loaded by Main.ini() so iffalse no need to reload
+        addedElm.find('.cs-select').each(function (index) {
+            var el = $(this)
+            new SelectFx(el[0], {
+                stickyPlaceholder: false,
+                onChange: function (val) {
+                    selectChange(el, val);
+                }
+            });
+        });
+
+    addedElm.find('[data-toggle="popover"]').popover();
+
+    MixDataUp();
 }
 
 function selectChange(eld, val) {
@@ -482,15 +492,14 @@ function SaveTeamModelWizardStep() {
         url: "/Project/SaveTeamModelWizardStep",
         success: function (result) {
             if (result.success) {
-                debugger;
-
                 //$("#hdnTemplateId").val(result.data.template_Id); //Template_Id
                 //$.each(result.data.subjects, function (index, value) {
                 //    $("#hdnSubjectId_" + value.sequenceNo).val(value.subject_Id);
                 //});
 
-                ////Move forward
-                //UINotifications.ShowToast("success", "Your Template [ " + result.data.name + " ] Saved Successful.", "Saved Successfully");
+                //Move forward
+                UINotifications.ShowToast("success", "Your Template [ " + result.data.name + " ] Saved Successful.", "Saved Successfully");
+                $('#wizard').smartWizard("goToStep", 4);
 
             } else {
                 //jQuery.each(result.businessErrors, function (i, val) {

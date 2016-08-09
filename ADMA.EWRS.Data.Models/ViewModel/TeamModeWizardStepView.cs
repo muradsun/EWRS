@@ -17,5 +17,6 @@ namespace ADMA.EWRS.Data.Models.ViewModel
         public uint SequenceNo { get; set; }
         public bool IsProjectLevel { get; set; }
         public List<TeamModelSubjectView> Subjects { get; set; }
+        public string UserName { get; set; }
     }
 }

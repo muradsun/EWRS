@@ -17,10 +17,17 @@ namespace ADMA.EWRS.Data.Access.Repositories
 
         }
 
-        public ICollection<TeamModel> GetTeamModelCollection(int projectId)
+        public ICollection<TeamModel> GetTeamModelCollection(int projectId, bool includeUser, bool includeGroup)
         {
-            //return DbContext.TeamModels.Include(t => t.TeamModelSubjects).Where(t => t.Project_Id == projectId).ToList();
-            return DbContext.TeamModels.Include(t => t.TeamModelSubjects).Where(t => t.Project_Id == projectId).ToList();
+            IQueryable<TeamModel> q = DbContext.TeamModels.Include(t => t.TeamModelSubjects);
+
+            if (includeUser)
+                q = q.Include(t => t.User);
+
+            if (includeGroup)
+                q = q.Include(t => t.Group);
+
+            return q.Where(t => t.Project_Id == projectId).ToList();
         }
 
         public bool MarkSaveTeamModelWithSubjects(List<TeamModel> teamModel)

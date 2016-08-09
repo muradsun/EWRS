@@ -49,9 +49,11 @@ namespace ADMA.EWRS.Data.Access.EfConfigurations
             this.HasOptional(t => t.User)
                 .WithMany(t => t.TeamModels)
                 .HasForeignKey(d => d.User_Id);
+
             this.HasOptional(t => t.Group)
                 .WithMany(t => t.TeamModels)
                 .HasForeignKey(d => d.Group_Id);
+
             this.HasRequired(t => t.Project)
                 .WithMany(t => t.TeamModels)
                 .HasForeignKey(d => d.Project_Id);

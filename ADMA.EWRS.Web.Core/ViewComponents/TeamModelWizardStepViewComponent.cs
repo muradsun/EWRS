@@ -31,6 +31,7 @@ namespace ADMA.EWRS.Web.Core.ViewComponents
             //TeamModeWizardStepView
             List<TeamModel> team = _pm.GetTeamModelOrDefualt(projectId);
             uint seq = 0;
+
             return View("~/Views/Project/Components/TeamModelWizardStep.cshtml",
                     team.Select(t => new TeamModeWizardStepView()
                     {
@@ -41,6 +42,7 @@ namespace ADMA.EWRS.Web.Core.ViewComponents
                         TeamModel_Id = t.TeamModel_Id,
                         SequenceNo = ++seq,
                         IsProjectLevel = t.IsProjectLevel,
+                        UserName = t.User_Id.HasValue? t.User.EMPLOYEE_NAME : t.Group.Name, 
                         Subjects = t.TeamModelSubjects.Select(
                                         s => new TeamModelSubjectView()
                                         {
@@ -51,6 +53,8 @@ namespace ADMA.EWRS.Web.Core.ViewComponents
                                    ).ToList()
                     }).ToList<TeamModeWizardStepView>()
                 );
+
+
         }
 
     }

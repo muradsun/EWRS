@@ -8,7 +8,7 @@ namespace ADMA.EWRS.Data.Models.Repositories
 {
     public interface ITeamModelsRepository : IRepository<TeamModel>
     {
-        ICollection<TeamModel> GetTeamModelCollection(int projectId);
+        ICollection<TeamModel> GetTeamModelCollection(int projectId, bool includeUser, bool includeGroup);
         TeamModel GetTeamModel(int teamModelId, bool inlcudeTeamModelSubjects);
         bool MarkSaveTeamModelWithSubjects(List<TeamModel> teamModel);
 

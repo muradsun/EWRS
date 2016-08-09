@@ -499,7 +499,6 @@ var Main = function () {
     };
     var customSelectHandler = function () {
         [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-            debugger;
             new SelectFx(el, {
                 stickyPlaceholder: false,
                 onChange: function (val) {

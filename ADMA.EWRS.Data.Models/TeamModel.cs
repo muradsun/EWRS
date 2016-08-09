@@ -30,5 +30,7 @@ namespace ADMA.EWRS.Data.Models
         public  Group Group { get; set; }
         public  Project Project { get; set; }
         public  List<TeamModelSubject> TeamModelSubjects { get; set; }
+
+
     }
 }

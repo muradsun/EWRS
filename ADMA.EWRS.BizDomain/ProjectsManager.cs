@@ -57,9 +57,9 @@ namespace ADMA.EWRS.BizDomain
             return UnitOfWork.TeamModels.GetTeamModel(teamModelId, true);
         }
 
-        public List<TeamModel> GetTeamModelCollection(int projectId)
+        public List<TeamModel> GetTeamModelCollection(int projectId, bool includeUser, bool includeGroup)
         {
-            return UnitOfWork.TeamModels.GetTeamModelCollection(projectId).ToList();
+            return UnitOfWork.TeamModels.GetTeamModelCollection(projectId, includeUser, includeGroup).ToList();
         }
 
         public Template GetTemplateOrDefualt(int projectId)
@@ -81,7 +81,7 @@ namespace ADMA.EWRS.BizDomain
             if (projectId == 0)
                 return new List<TeamModel>();
             else
-                return UnitOfWork.TeamModels.GetTeamModelCollection(projectId).ToList();
+                return UnitOfWork.TeamModels.GetTeamModelCollection(projectId, true, true).ToList();
         }
 
         public List<OrganizationHierarchy> SearchOrganizationHierarchy(string orgName)
@@ -276,7 +276,7 @@ namespace ADMA.EWRS.BizDomain
         public List<TeamModel> ExtractTeamModel(List<TeamModeWizardStepView> teamModeWizardStepView, LoggedInUser currentUser)
         {
             //Load Project Team Models
-            List<TeamModel> dbTeamModel = GetTeamModelCollection(teamModeWizardStepView[0].Project_Id);
+            List<TeamModel> dbTeamModel = GetTeamModelCollection(teamModeWizardStepView[0].Project_Id, false, false);
             TeamModeWizardStepView teamView;
             TeamModelSubjectView teamSubject;
 
