@@ -1,3 +1,4 @@
+using ADMA.EWRS.Data.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 
@@ -15,5 +16,14 @@ namespace ADMA.EWRS.Data.Models
         public byte[] RowVersion { get; set; }
         public  Subject Subject { get; set; }
         public  TeamModel TeamModel { get; set; }
+
+        internal TeamModelSubjectView TransformToTeamModelSubjectView()
+        {
+            return new TeamModelSubjectView() {
+                Subject_Id = this.Subject_Id,
+                TeamModelSubjects_Id = this.TeamModelSubjects_Id,
+                TeamModel_Id = this.TeamModel_Id 
+            };
+        }
     }
 }

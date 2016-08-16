@@ -492,13 +492,16 @@ function SaveTeamModelWizardStep() {
         url: "/Project/SaveTeamModelWizardStep",
         success: function (result) {
             if (result.success) {
-                //$("#hdnTemplateId").val(result.data.template_Id); //Template_Id
-                //$.each(result.data.subjects, function (index, value) {
-                //    $("#hdnSubjectId_" + value.sequenceNo).val(value.subject_Id);
-                //});
+                $.each(result.data, function (index, value) {
+                    $(".mix[data-tm-order='" + value.sequenceNo + "'] .hdnTeamModelId").val(value.teamModel_Id);
+                });
 
                 //Move forward
-                UINotifications.ShowToast("success", "Your Template [ " + result.data.name + " ] Saved Successful.", "Saved Successfully");
+                UINotifications.ShowToast("success", "Your Team Model Saved Successful.", "Saved Successfully");
+
+                //Load Next Step:
+                loadWfInfo();
+
                 $('#wizard').smartWizard("goToStep", 4);
 
             } else {
@@ -543,11 +546,12 @@ function CollectTeamModelData() {
         teamModeWizardStepView[i].Group_Id = groupId;
         teamModeWizardStepView[i].User_Id = userId;
 
-        teamModeWizardStepView[i].SequenceNo = 0;
+        teamModeWizardStepView[i].SequenceNo = mixDiv.attr("data-tm-order");
         teamModeWizardStepView[i].IsUpdater = $.trim(mixDiv.find(".cs-select :checked").val().toLowerCase()) == "updater";
         teamModeWizardStepView[i].Project_Id = $("#hdnProjectId").val();
         teamModeWizardStepView[i].TeamModel_Id = mixDiv.find(".hdnTeamModelId").val();
         teamModeWizardStepView[i].IsProjectLevel = mixDiv.find("input[type=radio]:checked").val() == "PL";
+        teamModeWizardStepView[i].UserName = mixDiv.attr("data-my-order");
 
         teamModeWizardStepView[i].Subjects = [];
 
@@ -567,3 +571,48 @@ function CollectTeamModelData() {
 //===============================================
 //End 
 //===============================================
+
+//===============================================
+//Start Review Workflow Wizard Step :: Step 4
+//===============================================
+
+$(document).ready(function () {
+
+});
+
+function loadWfInfo() {
+    debugger;
+
+    var isUpdater = false,
+         mixDiv;
+
+    var updatersData = [];
+
+    updatersData[0] = {};
+    updatersData[0].Name = "Project Default Review";
+    updatersData[0].TeamModel_Id = -1;
+    updatersData[0].HasWf = true;
+
+    $.each($(".mix"), function (i, vElm) {
+        mixDiv = $(vElm);
+        isUpdater = $.trim(mixDiv.find(".cs-select :checked").val().toLowerCase()) == "updater";
+        if (isUpdater) {
+            updatersData[i + 1] = {};
+            updatersData[i + 1].Name = mixDiv.attr("data-my-order");
+            updatersData[i + 1].TeamModel_Id = mixDiv.find(".hdnTeamModelId").val();
+            updatersData[i + 1].HasWf = false;
+        }
+    });
+
+    var scriptTemplate = kendo.template($("#reviewWfUpdaters-template").html());
+    var subjHTML = scriptTemplate(updatersData);
+    $(".wf-updaterData").html(subjHTML);
+
+}
+
+
+
+//===============================================
+//End 
+//===============================================
+

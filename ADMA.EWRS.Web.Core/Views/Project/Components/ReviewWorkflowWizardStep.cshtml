@@ -29,30 +29,7 @@
                 <div class="row no-margin">
                     <div class="col-md-4 col-lg-3 no-padding">
                         <div class="panel panel-azure no-border no-radius no-margin">
-                            <div class="panel-body">
-                                <ct-paneltool class="panel-tools" tool-expand="tool-expand"></ct-paneltool>
-                                <h3 class="text-white padding-top-10">Project Updaters</h3>
-                                <nav class="links cl-effect-13 no-margin text-white" id="cl-effect-13">
-                                    <a href="" class="text-white updater-item">
-                                        Project Default Review
-                                        <span class="badge badge-default" style="float:right"> <i class="fa fa-flag"></i> </span>
-                                    </a>
-                                    <a href="" class="text-white updater-item">
-                                        Beleaguer
-                                        <span class="badge badge-default" style="float:right"> <i class="fa fa-flag"></i> </span>
-                                    </a>
-                                    <a href="" class="text-white updater-item">
-                                        Lassitude
-                                    </a>
-                                    <a href="" class="text-white updater-item">
-                                        Lassitude
-                                    </a>
-                                </nav>
-                                <hr class="text-white" />
-                                <div class="block text-dark text-center">
-                                    <span class="counter text-bold text-white" filter="number" duration="0.4" value="0" count-to="12">4</span>
-                                    <h4 class="text-uppercase text-white no-margin">Updaters</h4>
-                                </div>
+                            <div class="panel-body wf-updaterData">
                             </div>
                         </div>
                     </div>
@@ -178,82 +155,24 @@
     </div>
 </div>
 
-
-
-@*<a href="#newFullEvent" class="btn btn-primary btn-o add-event"><i class="fa fa-plus"></i> Add New Event</a>
-
-<!-- start: EVENTS ASIDE -->
-<div class="modal fade modal-aside horizontal right events-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog modal-sm">
-        <div class="modal-content">
-            <form class="form-full-event">
-                <div class="modal-body">
-                    <div class="form-group hidden">
-                        <label> ID </label>
-                        <input type="text" id="event-id">
-                    </div>
-                    <div class="form-group">
-                        <label> Event Title </label>
-                        <input type="text" id="event-name" placeholder="Enter title" class="form-control underline text-large" name="eventName">
-                    </div>
-                    <div class="form-group">
-                        <label> Start </label>
-                        <span class="input-icon">
-                            <input type="text" id="start-date-time" class="form-control underline" name="eventStartDate" />
-                            <i class="ti-calendar"></i>
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <label> End </label>
-                        <span class="input-icon">
-                            <input type="text" id="end-date-time" class="form-control underline" name="eventEndDate" />
-                            <i class="ti-calendar"></i>
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <label> Category </label>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div class="radio clip-radio radio-primary">
-                                    <input type="radio" id="job" name="optionsCategory" value="job" class="event-categories">
-                                    <label for="job"> <span class="fa fa-circle text-primary"></span> Job </label>
-                                </div>
-                                <div class="radio clip-radio radio-primary">
-                                    <input type="radio" id="home" name="optionsCategory" value="home" class="event-categories">
-                                    <label for="home"> <span class="fa fa-circle text-purple"></span> Home </label>
-                                </div>
-                                <div class="radio clip-radio radio-primary">
-                                    <input type="radio" id="off-site-work" name="optionsCategory" value="off-site-work" class="event-categories">
-                                    <label for="off-site-work"> <span class="fa fa-circle text-green"></span> Off site </label>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="radio clip-radio radio-primary">
-                                    <input type="radio" id="cancelled" name="optionsCategory" value="cancelled" class="event-categories">
-                                    <label for="cancelled"> <span class="fa fa-circle text-yellow"></span> Cancelled </label>
-                                </div>
-                                <div class="radio clip-radio radio-primary">
-                                    <input type="radio" id="generic" name="optionsCategory" value="generic" class="event-categories">
-                                    <label for="generic"> <span class="fa fa-circle text-info"></span> Generic </label>
-                                </div>
-                                <div class="radio clip-radio radio-primary">
-                                    <input type="radio" id="to-do" name="optionsCategory" value="to-do" class="event-categories">
-                                    <label for="to-do"> <span class="fa fa-circle text-orange"></span> ToDo </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger btn-o delete-event">
-                        Delete
-                    </button>
-                    <button class="btn btn-primary btn-o save-event" type="submit">
-                        Save
-                    </button>
-                </div>
-            </form>
-        </div>
+<!-- start: Template Area  -->
+<script id="reviewWfUpdaters-template" type="text/x-kendo-template">
+    <ct-paneltool class="panel-tools" tool-expand="tool-expand"></ct-paneltool>
+    <h3 class="text-white padding-top-10">Project Updaters</h3>
+    <nav class="links cl-effect-13 no-margin text-white" id="cl-effect-13">
+        # for (var i = 0; i < data.length; i++) { #
+        <a href="" class="text-white updater-item" data-wf-tmId="${ data[i].TeamModel_Id }">
+            ${ data[i].Name }
+            # if (data[i].HasWf ) { #
+            <span class="badge badge-default" style="float:right"> <i class="fa fa-flag"></i> </span>
+            # } #
+        </a>
+        # } #
+    </nav>
+    <hr class="text-white" />
+    <div class="block text-dark text-center">
+        <span class="counter text-bold text-white" filter="number" duration="0.4" value="0" count-to="12">${ data.length - 1 }</span>
+        <h4 class="text-uppercase text-white no-margin">Updaters</h4>
     </div>
-</div>
-<!-- start: EVENTS ASIDE -->*@
+</script>
+<!-- end: Template Area -->

@@ -106,9 +106,9 @@ namespace ADMA.EWRS.Web.Core.Controllers
         {
             List<TeamModel> teamModel = _pm.ExtractTeamModel(teamModeWizardStepView, CurrentUser);
             if (_pm.SaveTeamModel(teamModel))
-                return GetJSONResult(teamModel); // Murad :: Make transforms 
+                return GetJSONResult(teamModel.Select( t => t.TransferToTeamModeWizardStepView()).ToList()); // Murad :: Make transforms 
             else
-                return GetJSONResult(teamModel, false, _pm.BusinessErrors.Distinct());
+                return GetJSONResult(teamModel.Select(t => t.TransferToTeamModeWizardStepView()).ToList(), false, _pm.BusinessErrors.Distinct());
         }
 
 

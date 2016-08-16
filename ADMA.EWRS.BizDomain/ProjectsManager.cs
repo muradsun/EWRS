@@ -295,7 +295,8 @@ namespace ADMA.EWRS.BizDomain
                     item.UpdatedDate = DateTime.Now;
                     item.IsProjectLevel = teamView.IsProjectLevel;
                     item.IsUpdater = teamView.IsUpdater;
-                    item.Name = "";
+                    item.Name = teamView.UserName;
+                    item.Sequance = teamView.SequenceNo;
 
                     foreach (TeamModelSubject tSub in item.TeamModelSubjects)
                     {
@@ -311,7 +312,7 @@ namespace ADMA.EWRS.BizDomain
                     }
 
                     //Add the added 
-                    item.TeamModelSubjects.AddRange(
+                    item.TeamModelSubjects.ToList().AddRange(
                         teamView.Subjects.Where(s =>
                                !item.TeamModelSubjects.Select(sX => sX.Subject_Id).Distinct().ToList().Contains(s.Subject_Id)
                         ).Select(
@@ -344,7 +345,8 @@ namespace ADMA.EWRS.BizDomain
                         Group_Id = t.Group_Id == -1 ? (int?)null : t.Group_Id,
                         IsProjectLevel = t.IsProjectLevel,
                         IsUpdater = t.IsUpdater,
-                        Name = "",
+                        Name = t.UserName,
+                        Sequance= t.SequenceNo,
                         Project_Id = t.Project_Id,
                         TeamModel_Id = t.TeamModel_Id,
                         UpdateBy = null,

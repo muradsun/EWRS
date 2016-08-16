@@ -1,9 +1,11 @@
+using ADMA.EWRS.Data.Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ADMA.EWRS.Data.Models
 {
-    public partial class TeamModel: BaseModel
+    public partial class TeamModel : BaseModel
     {
         public TeamModel()
         {
@@ -26,11 +28,29 @@ namespace ADMA.EWRS.Data.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
         public string Name { get; set; }
-        public  User User { get; set; }
-        public  Group Group { get; set; }
-        public  Project Project { get; set; }
-        public  List<TeamModelSubject> TeamModelSubjects { get; set; }
+        public User User { get; set; }
+        public Group Group { get; set; }
+        public Project Project { get; set; }
+        public ICollection<TeamModelSubject> TeamModelSubjects { get; set; }
 
+        //Ignored Properties
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public uint Sequance { get; set; }
 
+        public TeamModeWizardStepView TransferToTeamModeWizardStepView()
+        {
+            return new TeamModeWizardStepView()
+            {
+                Group_Id = this.Group_Id,
+                IsProjectLevel = this.IsProjectLevel,
+                IsUpdater = this.IsUpdater,
+                Project_Id = this.Project_Id,
+                SequenceNo = this.Sequance,
+                Subjects = this.TeamModelSubjects.Select(s => s.TransformToTeamModelSubjectView()).ToList(),
+                TeamModel_Id = this.TeamModel_Id,
+                UserName = this.Name, //t.User_Id.HasValue ? t.User.EMPLOYEE_NAME : t.Group.Name,
+                User_Id = this.User_Id
+            };
+        }
     }
 }
