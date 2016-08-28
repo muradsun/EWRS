@@ -38,7 +38,7 @@
                             <div class="panel-heading border-light padding-30">
                                 <div class="row">
                                     <div class="col-lg-8 col-xs-7">
-                                        <h3><strong> Project Default Review</strong> Workflow</h3>
+                                        <h3><strong id="strWfTitleName"> Project Default Review</strong> Workflow</h3>
                                     </div>
                                     <div class="col-lg-4 col-xs-5 text-right">
                                         <div class="btn-group margin-top-5">
@@ -51,7 +51,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li role="menuitem">
-                                                    <a href="#"> <i class="fa fa-user-plus"></i>  Add User/Group</a>
+                                                    <a href="#"> <i class="fa fa-user-plus"></i>  Create Custom Workflow</a>
                                                 </li>
                                                 <li role="menuitem">
                                                     <a href="#"> <i class="fa fa-cloud-download"></i> Load from HRMS </a>
@@ -69,79 +69,7 @@
                                 </div>
                             </div>
                             <div class="panel-body dd padding-20" id="nestableWf">
-
-                                <fieldset id="TextBoxesGroup">
-                                    <legend>
-                                        Subject(s)
-                                    </legend>
-
-                                    <div class="form-group">
-                                        <label> Workflow Name <span class="symbol required"></span> </label>
-                                        <input id="txtWorkflowName" type="text" placeholder="Enter Subject Title" class="form-control" value="" />
-                                    </div>
-
-                                    <ol class="list-group dd-list">
-                                        <li class="dd-item list-group-item no-radius no-margin no-border-top no-border-left no-border-right" data-id="1">
-                                            <div class="row">
-                                                <div class="col-md-1" style="width:20px !important; height:95px">
-                                                    <input type="hidden" class="nstWf_hdnSequenceNo" value="1" />
-                                                </div>
-                                                <div class="col-md-11">
-                                                    <div class="pull-left padding-right-10" style="font-size:60px"> <i class="fa fa-street-view"></i></div>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right text-light"><span class="label partition-blue">Originator</span></small>
-                                                        <strong class="updater-title"> Originator </strong>
-                                                        <br>
-                                                        <small class="text-light"></small>
-                                                        <div class="pull-right">
-                                                            <span class="btn btn-xs btn-default"> 1 </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="dd-item list-group-item no-radius no-margin no-border-top no-border-left no-border-right" data-id="2">
-                                            <div class="row">
-                                                <div class="col-md-1 dd-handle">
-                                                    <i class="fa fa-sort"></i>
-                                                    <input type="hidden" class="nstWf_hdnSequenceNo" value="2" />
-                                                </div>
-                                                <div class="col-md-11">
-                                                    <div class="pull-left padding-right-10"> <img class="img-circle" alt="image" src="/assets/images/avatar-2.jpg"> </div>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right text-light">5 mins ago</small>
-                                                        <strong> [[ Name  2]] </strong> (<strong> [[ PF No.]] </PF></strong>)
-                                                        <br>
-                                                        <small class="text-light">  [[ Title ]] </small>
-                                                        <div class="pull-right">
-                                                            <span class="btn btn-xs btn-default btn-seq"> 2 </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="dd-item list-group-item no-radius no-margin no-border-top no-border-left no-border-right" data-id="3">
-                                            <div class="row">
-                                                <div class="col-md-1 dd-handle">
-                                                    <i class="fa fa-sort"></i>
-                                                    <input type="hidden" class="nstWf_hdnSequenceNo" value="3" />
-                                                </div>
-                                                <div class="col-md-11">
-                                                    <div class="pull-left padding-right-10"> <img class="img-circle" alt="image" src="/assets/images/avatar-2.jpg"> </div>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right text-light">5 mins ago</small>
-                                                        <strong> [[ Name 3 ]] </strong> (<strong> [[ PF No.]] </PF></strong>)
-                                                        <br>
-                                                        <small class="text-light">  [[ Title ]] </small>
-                                                        <div class="pull-right">
-                                                            <span class="btn btn-xs btn-default btn-seq"> 3 </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ol>
-                                </fieldset>
+                                <fieldset id="fsetWf"></fieldset>
                             </div>
                         </div>
                         <div class="panel-footer no-border">
@@ -159,9 +87,10 @@
 <script id="reviewWfUpdaters-template" type="text/x-kendo-template">
     <ct-paneltool class="panel-tools" tool-expand="tool-expand"></ct-paneltool>
     <h3 class="text-white padding-top-10">Project Updaters</h3>
-    <nav class="links cl-effect-13 no-margin text-white" id="cl-effect-13">
+    <nav class="links cl-effect-13 no-margin" id="cl-effect-13">
         # for (var i = 0; i < data.length; i++) { #
-        <a href="" class="text-white updater-item" data-wf-tmId="${ data[i].TeamModel_Id }">
+        <a href="javascript:void(0);" onclick="showWF(this);" class="updater-item ${ data[i].ActiveClass }"
+           data-wf-tmId="${ data[i].TeamModel_Id }" data-wf-ReviewWfId="${ data[i].ReviewWorkflow_Id }">
             ${ data[i].Name }
             # if (data[i].HasWf ) { #
             <span class="badge badge-default" style="float:right"> <i class="fa fa-flag"></i> </span>
@@ -174,5 +103,58 @@
         <span class="counter text-bold text-white" filter="number" duration="0.4" value="0" count-to="12">${ data.length - 1 }</span>
         <h4 class="text-uppercase text-white no-margin">Updaters</h4>
     </div>
+</script>
+<script id="reviewWfUpdaters-template" type="text/x-kendo-template">
+    <legend>
+        <i class="fa fa-info-circle"></i> Workflow Information
+    </legend>
+
+    <div class="form-group">
+        Workflow Name: ${ data.WorkflowName}
+    </div>
+
+    <ol class="list-group dd-list">
+        <li class="dd-item list-group-item no-radius no-margin no-border-top no-border-left no-border-right" data-id="1">
+            <div class="row">
+                <div class="col-md-1" style="width:20px !important; height:95px">
+                    <input type="hidden" class="nstWf_hdnSequenceNo" value="1" />
+                </div>
+                <div class="col-md-11">
+                    <div class="pull-left padding-right-10" style="font-size:60px"> <i class="fa fa-street-view"></i></div>
+                    <div class="media-body ">
+                        <small class="pull-right text-light"><span class="label partition-blue">Originator</span></small>
+                        <strong class="updater-title"> Originator </strong>
+                        <br>
+                        <small class="text-light"></small>
+                        <div class="pull-right">
+                            <span class="btn btn-xs btn-default"> 1 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        # for (var i = 0; i < data.length; i++) { #
+        <li class="dd-item list-group-item no-radius no-margin no-border-top no-border-left no-border-right" data-id="2">
+            <div class="row">
+                <div class="col-md-1 dd-handle">
+                    <i class="fa fa-sort"></i>
+                    <input type="hidden" class="nstWf_hdnSequenceNo" value="2" />
+                </div>
+                <div class="col-md-11">
+                    <div class="pull-left padding-right-10"> <img class="img-circle" alt="image" src="/assets/images/avatar-2.jpg"> </div>
+                    <div class="media-body ">
+                        <small class="pull-right text-light">5 mins ago</small>
+                        <strong> [[ Name  2]] </strong> (<strong> [[ PF No.]] </PF></strong>)
+                        <br>
+                        <small class="text-light">  [[ Title ]] </small>
+                        <div class="pull-right">
+                            <span class="btn btn-xs btn-default btn-seq"> 2 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        # } #
+    </ol>
 </script>
 <!-- end: Template Area -->

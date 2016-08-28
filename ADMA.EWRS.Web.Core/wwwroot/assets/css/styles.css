@@ -18203,7 +18203,12 @@ figure.effect-goliath {
     margin-right: 0 !important;
     text-align: left !important;
     width: 100%;
+    color: #c8c7cc !important;
 }
+
+    .updater-item:hover {
+        color: #ffffff !important;
+    }
 
 .updater-title {
     font-weight: bolder;
@@ -18224,4 +18229,8 @@ figure.effect-goliath {
     background-color: #e5e5e5;
     padding: 5px;
     margin-right: 30%;
+}
+
+.Active-Updater {
+    color: #ffffff !important;
 }

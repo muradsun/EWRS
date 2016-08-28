@@ -1,29 +1,72 @@
-﻿<script>
+﻿<fieldset id="TextBoxesGroup">
+    <legend>
+        Subject(s)
+    </legend>
 
-    data[index] = {};
-    data[index].TeamModel_Id = 2;
-    data[index].User_Id = 20;
-    data[index].Group_Id = -1;
-    data[index].IsUpdater = True;
-    data[index].UpdateText = updater; //viewer OR updater
-    data[index].SequenceNo = 1;
-    data[index].Project_Id = 11;
-    data[index].IsProjectLevel = False;
-    data[index].SubjectsArray = 30,29;
-    data[index].Icon = /images/form/User_male.png;
-    data[index].Name = "ALi Man";
+    <div class="form-group">
+        <label> Workflow Name <span class="symbol required"></span> </label>
+        <input id="txtWorkflowName" type="text" placeholder="Enter Subject Title" class="form-control" value="" />
+    </div>
 
-    data[index] = {};
-    data[index].TeamModel_Id = 3;
-    data[index].User_Id = -1;
-    data[index].Group_Id = 3;
-    data[index].IsUpdater = False;
-    data[index].UpdateText = viewer; //viewer OR updater
-    data[index].SequenceNo = 2;
-    data[index].Project_Id = 11;
-    data[index].IsProjectLevel = True;
-    data[index].SubjectsArray = ;
-    data[index].Icon = /images/form/User-Group.png;
-    data[index].Name = "ALi Man";
-
-</script>   
+    <ol class="list-group dd-list">
+        <li class="dd-item list-group-item no-radius no-margin no-border-top no-border-left no-border-right" data-id="1">
+            <div class="row">
+                <div class="col-md-1" style="width:20px !important; height:95px">
+                    <input type="hidden" class="nstWf_hdnSequenceNo" value="1" />
+                </div>
+                <div class="col-md-11">
+                    <div class="pull-left padding-right-10" style="font-size:60px"> <i class="fa fa-street-view"></i></div>
+                    <div class="media-body ">
+                        <small class="pull-right text-light"><span class="label partition-blue">Originator</span></small>
+                        <strong class="updater-title"> Originator </strong>
+                        <br>
+                        <small class="text-light"></small>
+                        <div class="pull-right">
+                            <span class="btn btn-xs btn-default"> 1 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="dd-item list-group-item no-radius no-margin no-border-top no-border-left no-border-right" data-id="2">
+            <div class="row">
+                <div class="col-md-1 dd-handle">
+                    <i class="fa fa-sort"></i>
+                    <input type="hidden" class="nstWf_hdnSequenceNo" value="2" />
+                </div>
+                <div class="col-md-11">
+                    <div class="pull-left padding-right-10"> <img class="img-circle" alt="image" src="/assets/images/avatar-2.jpg"> </div>
+                    <div class="media-body ">
+                        <small class="pull-right text-light">5 mins ago</small>
+                        <strong> [[ Name  2]] </strong> (<strong> [[ PF No.]] </PF></strong>)
+                        <br>
+                        <small class="text-light">  [[ Title ]] </small>
+                        <div class="pull-right">
+                            <span class="btn btn-xs btn-default btn-seq"> 2 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="dd-item list-group-item no-radius no-margin no-border-top no-border-left no-border-right" data-id="3">
+            <div class="row">
+                <div class="col-md-1 dd-handle">
+                    <i class="fa fa-sort"></i>
+                    <input type="hidden" class="nstWf_hdnSequenceNo" value="3" />
+                </div>
+                <div class="col-md-11">
+                    <div class="pull-left padding-right-10"> <img class="img-circle" alt="image" src="/assets/images/avatar-2.jpg"> </div>
+                    <div class="media-body ">
+                        <small class="pull-right text-light">5 mins ago</small>
+                        <strong> [[ Name 3 ]] </strong> (<strong> [[ PF No.]] </PF></strong>)
+                        <br>
+                        <small class="text-light">  [[ Title ]] </small>
+                        <div class="pull-right">
+                            <span class="btn btn-xs btn-default btn-seq"> 3 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ol>
+</fieldset>

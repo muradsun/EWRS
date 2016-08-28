@@ -405,6 +405,8 @@ namespace ADMA.EWRS.BizDomain
 
         }
 
+       
+
 
         #region Private Members 
 
@@ -421,8 +423,6 @@ namespace ADMA.EWRS.BizDomain
                 }
             };
         }
-
-
 
         #endregion
 

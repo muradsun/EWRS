@@ -577,11 +577,13 @@ function CollectTeamModelData() {
 //===============================================
 
 $(document).ready(function () {
-
+    $('#wizard').smartWizard("goToStep", 4);
+    loadWfInfo()
 });
 
+var _activeWfTm = -1;
 function loadWfInfo() {
-    debugger;
+    //Load Updaters 
 
     var isUpdater = false,
          mixDiv;
@@ -590,8 +592,11 @@ function loadWfInfo() {
 
     updatersData[0] = {};
     updatersData[0].Name = "Project Default Review";
-    updatersData[0].TeamModel_Id = -1;
-    updatersData[0].HasWf = true;
+    updatersData[0].TeamModel_Id = null;
+    updatersData[0].HasWf = false;
+    updatersData[0].ActiveClass = "Active-Updater";
+    updatersData[0].ReviewWorkflow_Id = null;
+
 
     $.each($(".mix"), function (i, vElm) {
         mixDiv = $(vElm);
@@ -599,18 +604,107 @@ function loadWfInfo() {
         if (isUpdater) {
             updatersData[i + 1] = {};
             updatersData[i + 1].Name = mixDiv.attr("data-my-order");
-            updatersData[i + 1].TeamModel_Id = mixDiv.find(".hdnTeamModelId").val();
+            updatersData[i + 1].TeamModel_Id = parseInt(mixDiv.find(".hdnTeamModelId").val());
             updatersData[i + 1].HasWf = false;
+            updatersData[i + 1].ActiveClass = "";
+            updatersData[i + 1].ReviewWorkflow_Id = null;
         }
     });
 
-    var scriptTemplate = kendo.template($("#reviewWfUpdaters-template").html());
-    var subjHTML = scriptTemplate(updatersData);
-    $(".wf-updaterData").html(subjHTML);
-
+    //Get workflow flag and load workflow id for direct table access performance enhancements... 
+    loadWfFlags(updatersData);
 }
 
+function loadWfFlags(updatersData) {
+    $.ajax({
+        url: "/Project/GetProjectReviewWorkflowsFlag?projectId=" + $("#hdnProjectId").val(),
+        success: function (result) {
+            if (result.success) {
+                //Process Input
+                $.each(result.data, function (index, value) {
+                    for (var i = 0; i < updatersData.length; i++)
+                        if (updatersData[i].TeamModel_Id === value.teamModel_Id) {
+                            updatersData[i].HasWf = true;
+                            updatersData[i].ReviewWorkflow_Id = value.reviewWorkflow_Id;
+                        }
+                });
 
+                //Bind Data
+                var scriptTemplate = kendo.template($("#reviewWfUpdaters-template").html());
+                var subjHTML = scriptTemplate(updatersData);
+                $(".wf-updaterData").html(subjHTML);
+
+                //Show first item selected... 
+                showWF($(".wf-updaterData a:first"));
+
+            } else {
+                //Get Error Template and show it on dialog modal 
+                var scriptTemplate = kendo.template($("#modal-template").html());
+                var subjHTML = scriptTemplate(result.businessErrors);
+                FormWizardCommon.ShowAjaxModal(subjHTML);
+            }
+        },
+        cache: false,
+        error: function (xhr, status, error) {
+            UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Loading WF Failed");
+        },
+        type: "POST",
+        contentType: "application/json"
+    });
+}
+
+function showWF(elm) {
+    var jElm = $(elm),
+        tm_id = jElm.attr("data-wf-tmId"),
+        wf_id = jElm.attr("data-wf-ReviewWfId");
+
+    //Fill the title 
+    $("#strWfTitleName").text(jElm.text());
+
+    if (_activeWfTm != parseInt(tm_id)) {
+        //Load workflow from DB 
+        _activeWfTm = parseInt(tm_id);
+
+        jElm.parents("nav").find("a").removeClass("Active-Updater");
+        jElm.addClass("Active-Updater");
+
+        loadWFbyTeamModelId(tm_id, wf_id);
+    }
+}
+
+function loadWFbyTeamModelId(tm_id, wf_id) {
+    debugger;
+
+    //Not null and not string null - read property as string
+    if (wf_id != null && wf_id != "null") {
+        $.ajax({
+            url: "/Project/GetWorkflow?reviewWorkflowId=" + wf_id,
+            success: function (result) {
+                if (result.success) {
+                    debugger;
+
+
+
+                } else {
+                    //Get Error Template and show it on dialog modal 
+                    var scriptTemplate = kendo.template($("#modal-template").html());
+                    var subjHTML = scriptTemplate(result.businessErrors);
+                    FormWizardCommon.ShowAjaxModal(subjHTML);
+                }
+            },
+            cache: false,
+            error: function (xhr, status, error) {
+                UINotifications.ShowToast("error", "Error Message: [ " + error + " ]", "Save Failed");
+            },
+            type: "POST",
+            contentType: "application/json"
+        });
+
+    } else {
+        $("#fsetWf").html('<div class="panel-title no-items-pending-action"><i class="fa fa-info-circle"></i> No Workflow Defined for Selected Team Model</div>');
+    }
+
+}
 
 //===============================================
 //End 

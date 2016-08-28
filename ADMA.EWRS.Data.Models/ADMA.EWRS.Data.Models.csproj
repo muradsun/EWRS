@@ -57,6 +57,7 @@
     <Compile Include="GroupPermission.cs" />
     <Compile Include="GroupUser.cs" />
     <Compile Include="ModelView\PagingResponseView.cs" />
+    <Compile Include="Repositories\IReviewWorkflowsRepository.cs" />
     <Compile Include="Repositories\ISubjectsRepository.cs" />
     <Compile Include="Repositories\ITeamModelsRepository.cs" />
     <Compile Include="ModelView\OrganizationHierarchyView.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="ReviewWorkflow.cs" />
+    <Compile Include="ReviewWorkflowActor.cs" />
     <Compile Include="ReviewWorkflowInstance.cs" />
     <Compile Include="ReviewWorkflowsProject.cs" />
     <Compile Include="Security\IClaimsSecurityManager.cs" />
@@ -94,6 +96,8 @@
     <Compile Include="ViewModel\JSONResultView.cs" />
     <Compile Include="ViewModel\OrganizationHierarchyView.cs" />
     <Compile Include="ViewModel\PageInfo.cs" />
+    <Compile Include="ViewModel\ReviewWorkflowView.cs" />
+    <Compile Include="ViewModel\ReviewWorkflowsProjectView.cs" />
     <Compile Include="ViewModel\SubjectWizardStepView.cs" />
     <Compile Include="ViewModel\TeamModelSubjectView.cs" />
     <Compile Include="ViewModel\TeamModeWizardStepView.cs" />

@@ -79,7 +79,9 @@ namespace ADMA.EWRS.Data.Access
             modelBuilder.Configurations.Add(new WeeklyInputMap());
             modelBuilder.Configurations.Add(new WeeklyInputHistoryMap());
             modelBuilder.Configurations.Add(new BusinessUnitesViewMap());
-            modelBuilder.Configurations.Add(new MuradConfiguration());
+            modelBuilder.Configurations.Add(new MuradConfigurationMap());
+            modelBuilder.Configurations.Add(new ReviewWorkflowActorMap());
+
         }
 
         //Add Db Custom validation Errors

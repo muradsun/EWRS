@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using ADMA.EWRS.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using ADMA.EWRS.Security.Policy;
+using ADMA.EWRS.Data.Models.Validation;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,10 +18,14 @@ namespace ADMA.EWRS.Web.Core.Controllers
     public class ProjectController : BaseController
     {
         ProjectsManager _pm;
+        WorkflowManager _wf;
+
+
         public ProjectController(IServiceProvider provider)
             : base(provider)
         {
             _pm = new ProjectsManager(provider);
+            _wf = new WorkflowManager(provider);
         }
 
         // GET: /<controller>/
@@ -106,11 +111,10 @@ namespace ADMA.EWRS.Web.Core.Controllers
         {
             List<TeamModel> teamModel = _pm.ExtractTeamModel(teamModeWizardStepView, CurrentUser);
             if (_pm.SaveTeamModel(teamModel))
-                return GetJSONResult(teamModel.Select( t => t.TransferToTeamModeWizardStepView()).ToList()); // Murad :: Make transforms 
+                return GetJSONResult(teamModel.Select(t => t.TransferToTeamModeWizardStepView()).ToList()); // Murad :: Make transforms 
             else
                 return GetJSONResult(teamModel.Select(t => t.TransferToTeamModeWizardStepView()).ToList(), false, _pm.BusinessErrors.Distinct());
         }
-
 
         public JsonResult SearchOrganizationHierarchy(string filter)
         {
@@ -129,6 +133,50 @@ namespace ADMA.EWRS.Web.Core.Controllers
 
             return GetJSON(data);
         }
+
+        public JsonResult GetProjectReviewWorkflowsFlag(int projectId)
+        {
+            ICollection<ReviewWorkflowsProjectView> projectWF =
+                _wf.GetProjectWorkflowFlags(null, projectId).Select(t => t.TransformToReviewWorkflowsProjectView()).ToList();
+
+            if (projectWF != null)
+                return GetJSONResult(projectWF);
+            else
+            {
+                var errors = new List<ValidationError>();
+                errors.Add(new ValidationError("Gen", "Error While Getting Data", ""));
+
+                return GetJSONResult(projectWF, false, errors);
+            }
+        }
+
+        public JsonResult GetWorkflow(int reviewWorkflowId)
+        {
+            ReviewWorkflowView wf = _wf.GetWorkflowWithActors(reviewWorkflowId).TransformToReviewWorkflowView();
+            var usersArray = wf.ReviewWorkflowActors.Select(r => r.User_Id).Distinct();
+            var groupsAray = wf.ReviewWorkflowActors.Select(r => r.Group_Id).Distinct();
+
+
+
+            //wf.ReviewWorkflowActors.All(
+            //    r =>
+            //    {
+            //        r.Group_Name = r.User_Id.HasValue? "";
+            //        r.User_Name = ""; 
+            //        return true;
+            //    });
+
+            if (wf != null)
+                return GetJSONResult(wf);
+            else
+            {
+                var errors = new List<ValidationError>();
+                errors.Add(new ValidationError("Gen", "Error While Getting Data", ""));
+
+                return GetJSONResult(wf, false, errors);
+            }
+        }
+
 
         #endregion
 

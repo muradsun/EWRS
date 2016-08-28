@@ -1,3 +1,4 @@
+using ADMA.EWRS.Data.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 
@@ -20,7 +21,7 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public  ReviewWorkflowsProject ReviewWorkflowsProject { get; set; }
-        public  WeeklyInput WeeklyInput { get; set; }
+        public virtual ReviewWorkflowsProject ReviewWorkflowsProject { get; set; }
+        public virtual WeeklyInput WeeklyInput { get; set; }
     }
 }

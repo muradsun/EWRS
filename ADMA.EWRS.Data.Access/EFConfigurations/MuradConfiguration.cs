@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ADMA.EWRS.Data.Access.EfConfigurations
 {
-    internal class MuradConfiguration : EntityTypeConfiguration<Murad>
+    internal class MuradConfigurationMap : EntityTypeConfiguration<Murad>
     {
-        public MuradConfiguration()
+        public MuradConfigurationMap()
         {
             Property(c => c.ID)
                 .IsRequired();

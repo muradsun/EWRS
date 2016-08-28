@@ -33,10 +33,7 @@ namespace ADMA.EWRS.Data.Access.EfConfigurations
             // Table & Column Mappings
             this.ToTable("ReviewWorkflows", "Weekly");
             this.Property(t => t.ReviewWorkflow_Id).HasColumnName("ReviewWorkflow_Id");
-            this.Property(t => t.SequenceNo).HasColumnName("SequenceNo");
             this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.User_Id).HasColumnName("User_Id");
-            this.Property(t => t.Group_Id).HasColumnName("Group_Id");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
             this.Property(t => t.CreatedDate).HasColumnName("CreatedDate");
             this.Property(t => t.UpdateBy).HasColumnName("UpdateBy");
@@ -45,18 +42,9 @@ namespace ADMA.EWRS.Data.Access.EfConfigurations
             this.Property(t => t.Owner_UserId).HasColumnName("Owner_UserId");
 
             // Relationships
-            this.HasOptional(t => t.User)
+            this.HasRequired(t => t.User)
                 .WithMany(t => t.ReviewWorkflows)
-                .HasForeignKey(d => d.User_Id);
-            
-            //Murad :: TODO : Check This relation
-            //this.HasRequired(t => t.User1)
-            //    .WithMany(t => t.ReviewWorkflows1)
-            //    .HasForeignKey(d => d.Owner_UserId);
-
-            this.HasOptional(t => t.Group)
-                .WithMany(t => t.ReviewWorkflows)
-                .HasForeignKey(d => d.Group_Id);
+                .HasForeignKey(d => d.Owner_UserId);
 
         }
     }

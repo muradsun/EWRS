@@ -245,6 +245,10 @@
     <Build Include="Security\Temp.sql" />
     <Build Include="Temp\Tables\Murad.sql" />
     <None Include="Scripts\Deployment\02 - Project Statuses.sql" />
+    <Build Include="Weekly\Tables\ReviewWorkflowActors.sql">
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Deployment\01 - Add Groups.sql" />

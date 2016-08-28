@@ -33,6 +33,7 @@
 /// <reference path="js/createprojectui-elements.js" />
 /// <reference path="js/createprojectui-nestable.js" />
 /// <reference path="js/createprojectui-notifications.js" />
+/// <reference path="js/ewrs-utilities.js" />
 /// <reference path="js/site.js" />
 /// <reference path="kendo/js/angular.min.js" />
 /// <reference path="kendo/js/cultures/kendo.culture.af.min.js" />

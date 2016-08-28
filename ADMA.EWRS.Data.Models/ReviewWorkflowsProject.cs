@@ -1,3 +1,4 @@
+using ADMA.EWRS.Data.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 
@@ -20,8 +21,19 @@ namespace ADMA.EWRS.Data.Models
         public string UpdateBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] RowVersion { get; set; }
-        public  Project Project { get; set; }
-        public  ICollection<ReviewWorkflowInstance> ReviewWorkflowInstances { get; set; }
-        public  ReviewWorkflow ReviewWorkflow { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual ICollection<ReviewWorkflowInstance> ReviewWorkflowInstances { get; set; }
+        public virtual ReviewWorkflow ReviewWorkflow { get; set; }
+
+        public ReviewWorkflowsProjectView TransformToReviewWorkflowsProjectView() {
+            return new ReviewWorkflowsProjectView()
+            {
+                IsProjectDefaultWorkflow = this.IsProjectDefaultWorkflow,
+                ReviewWorkflowsProjects_Id = this.ReviewWorkflowsProjects_Id,
+                ReviewWorkflow_Id = this.ReviewWorkflow_Id,
+                TeamModel_Id = this.TeamModel_Id
+            };
+
+        }
     }
 }

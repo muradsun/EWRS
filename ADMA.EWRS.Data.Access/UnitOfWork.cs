@@ -35,6 +35,7 @@ namespace ADMA.EWRS.Data.Access
             Templates = new TemplateRepository(_context);
             TeamModels = new TeamModelRepository(_context);
             Subjects = new SubjectsRepository(_context);
+            ReviewWorkflows = new ReviewWorkflowsRepository(_context);
         }
 
         public IMuradRepository Muradies { get; private set; }
@@ -47,6 +48,7 @@ namespace ADMA.EWRS.Data.Access
         public ITemplatesRepository Templates { get; private set; }
         public ITeamModelsRepository TeamModels { get; private set; }
         public ISubjectsRepository Subjects { get; private set; }
+        public IReviewWorkflowsRepository ReviewWorkflows { get; private set; }
 
 
         public int Save()
